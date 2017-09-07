@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Listener 监听器 | 我的记忆</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Listener的定义与作用 监听器Listener就是在application,session,request三个对象创建、销毁或者往其中添加修改删除属性时自动执行代码的功能组件。Listener是Servlet的监听器，可以监听客户端的请求，服务端的操作等。  Listener的分类与使用主要有以下三类： ServletContext监听ServletContextListener：用于对Se">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Listener 监听器">
+<meta property="og:url" content="http://yoursite.com/2016/01/27/Listener 监听器/index.html">
+<meta property="og:site_name" content="我的记忆">
+<meta property="og:description" content="Listener的定义与作用 监听器Listener就是在application,session,request三个对象创建、销毁或者往其中添加修改删除属性时自动执行代码的功能组件。Listener是Servlet的监听器，可以监听客户端的请求，服务端的操作等。  Listener的分类与使用主要有以下三类： ServletContext监听ServletContextListener：用于对Se">
+<meta property="og:updated_time" content="2016-01-27T08:16:11.096Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Listener 监听器">
+<meta name="twitter:description" content="Listener的定义与作用 监听器Listener就是在application,session,request三个对象创建、销毁或者往其中添加修改删除属性时自动执行代码的功能组件。Listener是Servlet的监听器，可以监听客户端的请求，服务端的操作等。  Listener的分类与使用主要有以下三类： ServletContext监听ServletContextListener：用于对Se">
+  
+    <link rel="alternate" href="/atom.xml" title="我的记忆" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">我的记忆</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">点点滴滴</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Listener 监听器" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/01/27/Listener 监听器/" class="article-date">
+  <time datetime="2016-01-27T06:00:38.000Z" itemprop="datePublished">2016-01-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Listener 监听器
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Listener的定义与作用"><a href="#Listener的定义与作用" class="headerlink" title="Listener的定义与作用"></a>Listener的定义与作用</h3><blockquote>
+<p>监听器Listener就是在application,session,request三个对象创建、销毁或者往其中添加修改删除属性时自动执行代码的功能组件。<br>Listener是Servlet的监听器，可以监听客户端的请求，服务端的操作等。</p>
+</blockquote>
+<h3 id="Listener的分类与使用"><a href="#Listener的分类与使用" class="headerlink" title="Listener的分类与使用"></a>Listener的分类与使用</h3><p>主要有以下三类：</p>
+<h4 id="ServletContext监听"><a href="#ServletContext监听" class="headerlink" title="ServletContext监听"></a>ServletContext监听</h4><p>ServletContextListener：用于对Servlet整个上下文进行监听（创建、销毁）。</p>
+<pre><code>public void contextInitialized(ServletContextEvent sce);//上下文初始化
+public void contextDestroyed(ServletContextEvent sce);//上下文销毁
+
+public ServletContext getServletContext();//ServletContextEvent事件：取得一个ServletContext（application）对象
+</code></pre><p>ServletContextAttributeListener：对Servlet上下文属性的监听（增删改属性）。</p>
+<pre><code>public void attributeAdded(ServletContextAttributeEvent scab);//增加属性
+public void attributeRemoved(ServletContextAttributeEvent scab);//属性删除
+public void attributeRepalced(ServletContextAttributeEvent scab);//属性替换（第二次设置同一属性）
+
+//ServletContextAttributeEvent事件：能取得设置属性的名称与内容
+public String getName();//得到属性名称
+public Object getValue();//取得属性的值
+</code></pre><h4 id="Session监听"><a href="#Session监听" class="headerlink" title="Session监听"></a>Session监听</h4><p>Session属于http协议下的内容，接口位于javax.servlet.http.*包下。</p>
+<p>HttpSessionListener接口：对Session的整体状态的监听。</p>
+<pre><code>public void sessionCreated(HttpSessionEvent se);//session创建
+public void sessionDestroyed(HttpSessionEvent se);//session销毁
+
+//HttpSessionEvent事件：
+public HttpSession getSession();//取得当前操作的session
+</code></pre><p>HttpSessionAttributeListener接口：对session的属性监听。</p>
+<pre><code>public void attributeAdded(HttpSessionBindingEvent se);//增加属性
+public void attributeRemoved(HttpSessionBindingEvent se);//删除属性
+public void attributeReplaced(HttpSessionBindingEvent se);//替换属性
+
+//HttpSessionBindingEvent事件：
+public String getName();//取得属性的名称
+public Object getValue();//取得属性的值
+public HttpSession getSession();//取得当前的session
+</code></pre><p>session的销毁有两种情况：</p>
+<ul>
+<li>session超时，web.xml配置：</li>
+</ul>
+<pre><code>&lt;session-config&gt;
+    &lt;session-timeout&gt;120&lt;/session-timeout&gt;&lt;!--session120分钟后超时销毁--&gt;
+&lt;/session-config&gt;
+</code></pre><ul>
+<li>手工使session失效</li>
+</ul>
+<pre><code>public void invalidate();//使session失效方法。session.invalidate();
+</code></pre><h4 id="Request监听"><a href="#Request监听" class="headerlink" title="Request监听"></a>Request监听</h4><p>ServletRequestListener：用于对Request请求进行监听（创建、销毁）。</p>
+<pre><code>public void requestInitialized(ServletRequestEvent sre);//request初始化
+public void requestDestroyed(ServletRequestEvent sre);//request销毁
+
+//ServletRequestEvent事件：
+public ServletRequest getServletRequest();//取得一个ServletRequest对象
+public ServletContext getServletContext();//取得一个ServletContext（application）对象
+</code></pre><p>ServletRequestAttributeListener：对Request属性的监听（增删改属性）。</p>
+<pre><code>public void attributeAdded(ServletRequestAttributeEvent srae);//增加属性
+public void attributeRemoved(ServletRequestAttributeEvent srae);//属性删除
+public void attributeReplaced(ServletRequestAttributeEvent srae);//属性替换（第二次设置同一属性）
+
+//ServletRequestAttributeEvent事件：能取得设置属性的名称与内容
+public String getName();//得到属性名称
+public Object getValue();//取得属性的值
+</code></pre><h4 id="在web-xml中配置"><a href="#在web-xml中配置" class="headerlink" title="在web.xml中配置"></a>在web.xml中配置</h4><p>Listener配置信息必须在Filter和Servlet配置之前，Listener的初始化（ServletContentListener初始化）比Servlet和Filter都优先，而销毁比Servlet和Filter都慢。</p>
+<pre><code>&lt;listener&gt;
+    &lt;listener-class&gt;com.listener.class&lt;/listener-class&gt;
+&lt;/listener&gt;
+</code></pre><h3 id="Listener应用实例"><a href="#Listener应用实例" class="headerlink" title="Listener应用实例"></a>Listener应用实例</h3><h4 id="利用HttpSessionListener统计最多在线用户人数"><a href="#利用HttpSessionListener统计最多在线用户人数" class="headerlink" title="利用HttpSessionListener统计最多在线用户人数"></a>利用HttpSessionListener统计最多在线用户人数</h4><pre><code>import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSessionEvent;
+import javax.servlet.http.HttpSessionListener;
+
+public class HttpSessionListenerImpl implements HttpSessionListener {
+
+    public void sessionCreated(HttpSessionEvent event) {
+        ServletContext app = event.getSession().getServletContext();
+        int count = Integer.parseInt(app.getAttribute(&quot;onLineCount&quot;).toString());
+        count++;
+        app.setAttribute(&quot;onLineCount&quot;, count);
+        int maxOnLineCount = Integer.parseInt(app.getAttribute(&quot;maxOnLineCount&quot;).toString());
+        if (count &gt; maxOnLineCount) {
+            //记录最多人数是多少
+            app.setAttribute(&quot;maxOnLineCount&quot;, count);
+            DateFormat df = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);
+            //记录在那个时刻达到上限
+            app.setAttribute(&quot;date&quot;, df.format(new Date()));
+        }
+    }
+    //session注销、超时时候调用，停止tomcat不会调用
+    public void sessionDestroyed(HttpSessionEvent event) {
+        ServletContext app = event.getSession().getServletContext();
+        int count = Integer.parseInt(app.getAttribute(&quot;onLineCount&quot;).toString());
+        count--;
+        app.setAttribute(&quot;onLineCount&quot;, count);    
+
+    }
+}
+</code></pre><h4 id="Spring使用ContextLoaderListener加载ApplicationContext配置信息"><a href="#Spring使用ContextLoaderListener加载ApplicationContext配置信息" class="headerlink" title="Spring使用ContextLoaderListener加载ApplicationContext配置信息"></a>Spring使用ContextLoaderListener加载ApplicationContext配置信息</h4><p>ContextLoaderListener的作用就是启动Web容器时，自动装配ApplicationContext的配置信息。因为它实现了ServletContextListener这个接口，在web.xml配置这个监听器，启动容器时，就会默认执行它实现的方法。</p>
+<p>ContextLoaderListener如何查找ApplicationContext.xml的配置位置以及配置多个xml：如果在web.xml中不写任何参数配置信息，默认的路径是”/WEB-INF/applicationContext.xml”，在WEB-INF目录下创建的xml文件的名称必须是applicationContext.xml（在MyEclipse中把xml文件放置在src目录下）。如果是要自定义文件名可以在web.xml里加入contextConfigLocation这个context参数。</p>
+<pre><code>&lt;context-param&gt;
+    &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+    &lt;param-value&gt;classpath:spring/applicationContext-*.xml&lt;/param-value&gt;&lt;!-- 采用的是通配符方式，查找WEB-INF/spring目录下xml文件。如有多个xml文件，以“,”分隔。 --&gt;
+&lt;/context-param&gt;
+
+&lt;listener&gt;
+    &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
+&lt;/listener&gt;
+</code></pre><h4 id="Spring使用Log4jConfigListener配置Log4j日志"><a href="#Spring使用Log4jConfigListener配置Log4j日志" class="headerlink" title="Spring使用Log4jConfigListener配置Log4j日志"></a>Spring使用Log4jConfigListener配置Log4j日志</h4><p>Spring使用Log4jConfigListener的好处：</p>
+<ol>
+<li>动态的改变记录级别和策略，不需要重启Web应用。</li>
+<li>把log文件定在 /WEB-INF/logs/ 而不需要写绝对路径。因为系统把web目录的路径压入一个叫webapp.root的系统变量。这样写log文件路径时不用写绝对路径了。</li>
+<li>可以把log4j.properties和其他properties一起放在/WEB-INF/ ，而不是Class-Path。</li>
+<li><p>设置log4jRefreshInterval时间，开一条watchdog线程每隔段时间扫描一下配置文件的变化。</p>
+<p><context-param></context-param></p>
+<pre><code>&lt;param-name&gt;webAppRootKey&lt;/param-name&gt;
+&lt;param-value&gt;project.root&lt;/param-value&gt;&lt;!-- 用于定位log文件输出位置在web应用根目录下，log4j配置文件中写输出位置：log4j.appender.FILE.File=${project.root}/logs/project.log --&gt;
+</code></pre><p><br><context-param></context-param></p>
+<pre><code>&lt;param-name&gt;log4jConfigLocation&lt;/param-name&gt;
+&lt;param-value&gt;classpath:log4j.properties&lt;/param-value&gt;&lt;!-- 载入log4j配置文件 --&gt;
+</code></pre><p><br><context-param></context-param></p>
+<pre><code>&lt;param-name&gt;log4jRefreshInterval&lt;/param-name&gt;
+&lt;param-value&gt;60000&lt;/param-value&gt;&lt;!--Spring刷新Log4j配置文件的间隔60秒,单位为millisecond--&gt;
+</code></pre><p></p>
+<listener><br>    <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class><br></listener>
+
+</li>
+</ol>
+<h4 id="Spring使用IntrospectorCleanupListener清理缓存"><a href="#Spring使用IntrospectorCleanupListener清理缓存" class="headerlink" title="Spring使用IntrospectorCleanupListener清理缓存"></a>Spring使用IntrospectorCleanupListener清理缓存</h4><p>这个监听器的作用是在web应用关闭时刷新JDK的JavaBeans的Introspector缓存，以确保Web应用程序的类加载器以及其加载的类正确的释放资源。</p>
+<p>如果JavaBeans的Introspector已被用来分析应用程序类，系统级的Introspector缓存将持有这些类的一个硬引用。因此，这些类和Web应用程序的类加载器在Web应用程序关闭时将不会被垃圾收集器回收！而IntrospectorCleanupListener则会对其进行适当的清理，已使其能够被垃圾收集器回收。</p>
+<p>唯一能够清理Introspector的方法是刷新整个Introspector缓存，没有其他办法来确切指定应用程序所引用的类。这将删除所有其他应用程序在服务器的缓存的Introspector结果。</p>
+<p>在使用Spring内部的bean机制时，不需要使用此监听器，因为Spring自己的introspection results cache将会立即刷新被分析过的JavaBeans Introspector cache，而仅仅会在应用程序自己的ClassLoader里面持有一个cache。虽然Spring本身不产生泄漏，注意，即使在Spring框架的类本身驻留在一个“共同”类加载器（如系统的ClassLoader）的情况下，也仍然应该使用使用IntrospectorCleanupListener。在这种情况下，这个IntrospectorCleanupListener将会妥善清理Spring的introspection cache。</p>
+<p>　　应用程序类，几乎不需要直接使用JavaBeans Introspector，所以，通常都不是Introspector resource造成内存泄露。相反，许多库和框架，不清理Introspector，例如： Struts和Quartz。</p>
+<p>　　需要注意的是一个简单Introspector泄漏将会导致整个Web应用程序的类加载器不会被回收！这样做的结果，将会是在web应用程序关闭时，该应用程序所有的静态类资源（比如：单实例对象）都没有得到释放。而导致内存泄露的根本原因其实并不是这些未被回收的类！</p>
+<p>　　注意：IntrospectorCleanupListener应该注册为web.xml中的第一个Listener，在任何其他Listener之前注册，比如在Spring’s ContextLoaderListener注册之前，才能确保IntrospectorCleanupListener在Web应用的生命周期适当时机生效。</p>
+<pre><code>&lt;!-- memory clean --&gt;
+&lt;listener&gt;
+    &lt;listener-class&gt;org.springframework.web.util.IntrospectorCleanupListener&lt;/listener-class&gt;
+&lt;/listener&gt;
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/01/27/Listener 监听器/" data-id="cj7a8gbwk000icggi50xoe5ab" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/01/27/web.xml详解/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          web.xml详解
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/01/26/Log4J配置/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">Log4j配置</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Error/">Error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Extjs/">Extjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerDesigner/">PowerDesigner</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebService/">WebService</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/myeclipse插件/">myeclipse插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日记/">日记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂记/">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架/">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Extjs/" style="font-size: 10px;">Extjs</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/PowerDesigner/" style="font-size: 12px;">PowerDesigner</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 16px;">java</a> <a href="/tags/linux/" style="font-size: 18px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/myeclipse插件/" style="font-size: 10px;">myeclipse插件</a> <a href="/tags/工具/" style="font-size: 14px;">工具</a> <a href="/tags/数据库/" style="font-size: 20px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/日记/" style="font-size: 18px;">日记</a> <a href="/tags/杂记/" style="font-size: 18px;">杂记</a> <a href="/tags/框架/" style="font-size: 12px;">框架</a> <a href="/tags/笔记/" style="font-size: 12px;">笔记</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/09/07/Hexo-github-搭建静态博客-新手入门/">Hexo+github搭建静态博客(新手入门)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/07/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/12/日记/">日记</a>
+          </li>
+        
+          <li>
+            <a href="/2016/05/13/常用解答/">学用解答</a>
+          </li>
+        
+          <li>
+            <a href="/2016/05/09/经典句子/">经典句子</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Dream<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>oracle左，右，全连接 | 我的记忆</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Oracle  外连接 左外连接 (左边的表不加限制) 右外连接(右边的表不加限制) 全外连接(左右两表都不加限制)  外连接(Outer Join) outer join则会返回每个满足第一个（顶端）输入与第二个（底端）输入的联接的行。它还返回任何在第二个输入中没有匹配行的第一个输入中的行。外连接分为三种： 左外连接，右外连接，全外连接。 对应SQL：LEFT/RIGHT/FULL OUTER">
+<meta name="keywords" content="数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="oracle左，右，全连接">
+<meta property="og:url" content="http://yoursite.com/2016/01/21/oracle左，右，全连接 /index.html">
+<meta property="og:site_name" content="我的记忆">
+<meta property="og:description" content="Oracle  外连接 左外连接 (左边的表不加限制) 右外连接(右边的表不加限制) 全外连接(左右两表都不加限制)  外连接(Outer Join) outer join则会返回每个满足第一个（顶端）输入与第二个（底端）输入的联接的行。它还返回任何在第二个输入中没有匹配行的第一个输入中的行。外连接分为三种： 左外连接，右外连接，全外连接。 对应SQL：LEFT/RIGHT/FULL OUTER">
+<meta property="og:updated_time" content="2016-04-05T03:20:47.041Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="oracle左，右，全连接">
+<meta name="twitter:description" content="Oracle  外连接 左外连接 (左边的表不加限制) 右外连接(右边的表不加限制) 全外连接(左右两表都不加限制)  外连接(Outer Join) outer join则会返回每个满足第一个（顶端）输入与第二个（底端）输入的联接的行。它还返回任何在第二个输入中没有匹配行的第一个输入中的行。外连接分为三种： 左外连接，右外连接，全外连接。 对应SQL：LEFT/RIGHT/FULL OUTER">
+  
+    <link rel="alternate" href="/atom.xml" title="我的记忆" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">我的记忆</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">点点滴滴</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-oracle左，右，全连接 " class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/01/21/oracle左，右，全连接 /" class="article-date">
+  <time datetime="2016-01-21T09:58:42.000Z" itemprop="datePublished">2016-01-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      oracle左，右，全连接
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Oracle-外连接"><a href="#Oracle-外连接" class="headerlink" title="Oracle  外连接"></a>Oracle  外连接</h2><ul>
+<li>左外连接 (左边的表不加限制)</li>
+<li>右外连接(右边的表不加限制)</li>
+<li>全外连接(左右两表都不加限制)</li>
+</ul>
+<p>外连接(Outer Join)</p>
+<p>outer join则会返回每个满足第一个（顶端）输入与第二个（底端）输入的联接的行。它还返回任何在第二个输入中没有匹配行的第一个输入中的行。外连接分为三种： 左外连接，右外连接，全外连接。 对应SQL：LEFT/RIGHT/FULL OUTER JOIN。 通常我们省略outer 这个关键字。 写成：LEFT/RIGHT/FULL JOIN。</p>
+<p>在左外连接和右外连接时都会以一张表为基表，该表的内容会全部显示，然后加上两张表匹配的内容。 如果基表的数据在另一张表没有记录。 那么在相关联的结果集行中列显示为空值（NULL）。</p>
+<p>对于外连接， 也可以使用“(+) ”来表示。 关于使用（+）的一些注意事项：</p>
+<hr>
+<ul>
+<li>（+）操作符只能出现在where子句中，并且不能与outer join语法同时使用。</li>
+<li>当使用（+）操作符执行外连接时，如果在where子句中包含有多个条件，则必须在所有条件中都包含（+）操作符<br>-（+）操作符只适用于列，而不能用在表达式上。</li>
+<li>（+）操作符不能与or和in操作符一起使用。</li>
+<li>（+）操作符只能用于实现左外连接和右外连接，而不能用于实现完全外连接。</li>
+</ul>
+<p>在做实验之前，我们先将dave表和bl里加一些不同的数据。 以方便测试。</p>
+<pre><code>SQL&gt; select * from bl;
+
+    ID NAME
+
+     1 dave
+
+     2 bl
+
+     3 big bird
+
+     4 exc
+
+     9 怀宁
+
+SQL&gt; select * from dave;
+
+    ID NAME
+
+     8 安庆
+
+     1 dave
+
+     2 bl
+
+     1 bl
+
+     2 dave
+
+     3 dba
+
+     4 sf-express
+
+     5 dmm
+</code></pre><h3 id="左外连接（Left-outer-join-left-join）"><a href="#左外连接（Left-outer-join-left-join）" class="headerlink" title="左外连接（Left outer join/ left join）"></a>左外连接（Left outer join/ left join）</h3><p> left join是以左表的记录为基础的,示例中Dave可以看成左表,BL可以看成右表,它的结果集是Dave表中的数据，在加上Dave表和BL表匹配的数据。换句话说,左表(Dave)的记录将会全部表示出来,而右表(BL)只会显示符合搜索条件的记录。BL表记录不足的地方均为NULL.</p>
+<pre><code>示例：
+
+SQL&gt; select * from dave a left join bl b on a.id = b.id;
+
+   ID NAME               ID NAME
+
+    1 bl                  1 dave
+
+    1 dave                1 dave
+
+    2 dave                2 bl
+
+    2 bl                  2 bl
+
+    3 dba                 3 big bird
+
+    4 sf-express          4 exc
+
+    5 dmm                             -- 此处B表为null，因为没有匹配到
+
+    8 安庆                             -- 此处B表为null，因为没有匹配到
+
+SQL&gt; select * from dave a left outer join bl b on a.id = b.id;
+
+    ID NAME               ID NAME
+
+     1 bl                  1 dave
+
+     1 dave                1 dave
+
+     2 dave                2 bl
+
+     2 bl                  2 bl
+
+     3 dba                 3 big bird
+
+     4 sf-express          4 exc
+
+     5 dmm
+
+     8 安庆
+</code></pre><p>用（+）来实现， 这个+号可以这样来理解： + 表示补充，即哪个表有加号，这个表就是匹配表。所以加号写在右表，左表就是全部显示，故是左连接。</p>
+<pre><code>SQL&gt; Select * from dave a,bl b where a.id=b.id(+);    -- 注意： 用（+） 就要用关键字where
+
+    ID NAME               ID NAME
+
+     1 bl                  1 dave
+
+     1 dave                1 dave
+
+     2 dave                2 bl
+
+     2 bl                  2 bl
+
+     3 dba                 3 big bird
+
+     4 sf-express          4 exc
+
+     5 dmm
+
+     8 安庆
+</code></pre><h3 id="右外连接（right-outer-join-right-join）"><a href="#右外连接（right-outer-join-right-join）" class="headerlink" title="右外连接（right outer join/ right join）"></a>右外连接（right outer join/ right join）</h3><p>和left join的结果刚好相反,是以右表(BL)为基础的, 显示BL表的所以记录，在加上Dave和BL 匹配的结果。 Dave表不足的地方用NULL填充.</p>
+<pre><code>示例：
+
+SQL&gt; select * from dave a right join bl b on a.id = b.id;
+
+    ID NAME               ID NAME
+
+     1 dave                1 dave
+
+     2 bl                  2 bl
+
+     1 bl                  1 dave
+
+     2 dave                2 bl
+
+     3 dba                 3 big bird
+
+     4 sf-express          4 exc
+
+                           9 怀宁    --此处左表不足用Null 填充
+
+SQL&gt; select * from dave a right outer join bl b on a.id = b.id;
+
+    ID NAME               ID NAME
+
+     1 dave                1 dave
+
+     2 bl                  2 bl
+
+     1 bl                  1 dave
+
+     2 dave                2 bl
+
+     3 dba                 3 big bird
+
+     4 sf-express          4 exc
+
+                           9 怀宁  --此处左表不足用Null 填充
+</code></pre><p>用（+）来实现， 这个+号可以这样来理解： + 表示补充，即哪个表有加号，这个表就是匹配表。所以加号写在左表，右表就是全部显示，故是右连接。</p>
+<pre><code>SQL&gt; Select * from dave a,bl b where a.id(+)=b.id;
+
+    ID NAME               ID NAME
+
+     1 dave                1 dave
+
+     2 bl                  2 bl
+
+     1 bl                  1 dave
+
+     2 dave                2 bl
+
+     3 dba                 3 big bird
+
+     4 sf-express          4 exc
+
+                           9 怀宁
+</code></pre><h3 id="全外连接（full-outer-join-full-join）"><a href="#全外连接（full-outer-join-full-join）" class="headerlink" title="全外连接（full outer join/ full join）"></a>全外连接（full outer join/ full join）</h3><p>左表和右表都不做限制，所有的记录都显示，两表不足的地方用null 填充。 全外连接不支持（+）这种写法。</p>
+<pre><code>示例：
+
+SQL&gt; select * from dave a full join bl b on a.id = b.id;
+
+    ID NAME               ID NAME
+
+     8 安庆
+
+     1 dave                1 dave
+
+     2 bl                  2 bl
+
+     1 bl                  1 dave
+
+     2 dave                2 bl
+
+     3 dba                 3 big bird
+
+     4 sf-express          4 exc
+
+     5 dmm
+
+                           9 怀宁
+
+SQL&gt; select * from dave a full outer join bl b on a.id = b.id;
+
+    ID NAME               ID NAME
+
+     8 安庆
+
+     1 dave                1 dave
+
+     2 bl                  2 bl
+
+     1 bl                  1 dave
+
+     2 dave                2 bl
+
+     3 dba                 3 big bird
+
+     4 sf-express          4 exc
+
+     5 dmm      
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/01/21/oracle左，右，全连接 /" data-id="cj7a8gc010025cggir8ub2bcy" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/01/21/spring四种注入方式/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          spring四种注入
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/01/21/抽象类和接口/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">抽象类和接口</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Error/">Error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Extjs/">Extjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerDesigner/">PowerDesigner</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebService/">WebService</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/myeclipse插件/">myeclipse插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日记/">日记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂记/">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架/">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/笔记/">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Extjs/" style="font-size: 10px;">Extjs</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/PowerDesigner/" style="font-size: 12px;">PowerDesigner</a> <a href="/tags/Spring/" style="font-size: 14px;">Spring</a> <a href="/tags/WebService/" style="font-size: 10px;">WebService</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 16px;">java</a> <a href="/tags/linux/" style="font-size: 18px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/myeclipse插件/" style="font-size: 10px;">myeclipse插件</a> <a href="/tags/工具/" style="font-size: 14px;">工具</a> <a href="/tags/数据库/" style="font-size: 20px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 10px;">数据结构</a> <a href="/tags/日记/" style="font-size: 18px;">日记</a> <a href="/tags/杂记/" style="font-size: 18px;">杂记</a> <a href="/tags/框架/" style="font-size: 12px;">框架</a> <a href="/tags/笔记/" style="font-size: 12px;">笔记</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/09/07/Hexo-github-搭建静态博客-新手入门/">Hexo+github搭建静态博客(新手入门)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/07/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/12/日记/">日记</a>
+          </li>
+        
+          <li>
+            <a href="/2016/05/13/常用解答/">学用解答</a>
+          </li>
+        
+          <li>
+            <a href="/2016/05/09/经典句子/">经典句子</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Dream<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
