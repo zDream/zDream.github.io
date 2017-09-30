@@ -100,7 +100,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/01/06/20160127/" data-id="cj7anstsj0003y0gifvwhh2le" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/01/06/20160127/" data-id="cj7fzhwfb0009nkgiw4lya39e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/日记/">日记</a></li></ul>
@@ -138,7 +138,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/01/06/错误集中营/" data-id="cj7anstzy003ey0gi3ygrude5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/01/06/错误集中营/" data-id="cj7fzhwnw003knkgi3nfyl7xx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Error/">Error</a></li></ul>
@@ -177,7 +177,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/01/06/关于Intellij IDEA菜单项中Compile、Make和Build的区别/" data-id="cj7anstyu002ny0gifjtlaayf" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/01/06/关于Intellij IDEA菜单项中Compile、Make和Build的区别/" data-id="cj7fzhwmj002xnkgie4evo5d3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/杂记/">杂记</a></li></ul>
@@ -241,7 +241,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/01/06/oracle语句的分类/" data-id="cj7ansty9002cy0gissgz9rgs" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/01/06/oracle语句的分类/" data-id="cj7fzhwm2002nnkgidcgo1zoe" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -317,10 +317,163 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/01/06/oracle事务/" data-id="cj7anstxq0025y0giy90f3rqz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/01/06/oracle事务/" data-id="cj7fzhwl9002dnkgigtxzi7o4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Spring AOP" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/01/05/Spring AOP/" class="article-date">
+  <time datetime="2016-01-05T05:46:44.000Z" itemprop="datePublished">2016-01-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/05/Spring AOP/">Spring AOP</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p><strong>本文来源于官方文档</strong></p>
+</blockquote>
+<h3 id="Aspect-Oriented-Programming-with-Spring-面向切面编程"><a href="#Aspect-Oriented-Programming-with-Spring-面向切面编程" class="headerlink" title="Aspect Oriented Programming with Spring 面向切面编程"></a>Aspect Oriented Programming with Spring 面向切面编程</h3><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><blockquote>
+<ul>
+<li>面向切面编程（AOP）弥补面向对象编程（OOP）通过提供思考程序结构的另一种方式。在OOP中模块化的关键单元是类，而在AOP模块为单位的切面。面对关注点，如事务管理跨多个类型和对象切模块化。（这些关注经常被称为横切在AOP文学的关注。）</li>
+<li>Spring的一个关键组件就是AOP框架。虽然Spring IoC容器并不依赖于AOP，这意味着你不需要使用AOP，如果你不想，AOP补充Spring IoC容器提供了非常强大的中间件解决方案。</li>
+</ul>
+</blockquote>
+<h5 id="AOP概念"><a href="#AOP概念" class="headerlink" title="AOP概念"></a>AOP概念</h5><ul>
+<li><strong>切面(Aspect)</strong>: 横切关注点(跨越应用程序多个模块的功能)被模块化的特殊对象</li>
+<li><strong>连接点(Join point)</strong>： 一个程序，在执行过程中的一个点，如方法的执行或异常的处理。在Spring AOP中，一个连接点总是 代表一个方法的执行。</li>
+<li><strong>通知(Advice)</strong>： 在某个特定的一个方面动作的连接点。不同类型的建议包括“around”，“before”和“after”的建议。（advice 的类型将在下面讨论）。许多AOP框架，包括Spring，Model 中的Advice 作为拦截器，保持了拦截器链周围的<strong>连接点(Joinpoint)</strong>。</li>
+<li><strong>切点(pointcut)</strong>： 每个类都拥有多个连接点：例如 ArithmethicCalculator 的所有方法实际上都是连接点，即连接点是程序类中客观存在的事务。AOP 通过切点定位到特定的连接点。类比：连接点相当于数据库中的记录，切点相当于查询条件。切点和连接点不是一对一的关系，一个切点匹配多个连接点，切点通过 org.springframework.aop.Pointcut 接口进行描述，它使用类和方法作为连接点的查询条件</li>
+<li><strong>代理(AOP proxy)</strong>： AOP框架，以实现Aspect契约（例如通知方法执行等等）创建的对象。在Spring中，AOP代理可以是JDK动态代理或者CGLIB代理。</li>
+</ul>
+<p><strong>advice的类型</strong> :</p>
+<ul>
+<li>Before advice: 建议一个执行一个 Join point 之前，但它不具有防止执行流程的连接点（除非它抛出一个异常）的能力。</li>
+<li>After returning advice: 连接点(Join point)正常完成后,方法没有抛出异常后执行</li>
+<li>After throwing advice: advice抛出一个异常时执行。</li>
+<li>After (finally) advice: 结果都会执行，</li>
+<li>Around advice: 环绕通知, 围绕着方法执行</li>
+</ul>
+<h5 id="Spring-使用-AspectJ-注解-实现AOP-编程-、"><a href="#Spring-使用-AspectJ-注解-实现AOP-编程-、" class="headerlink" title="Spring 使用 AspectJ 注解 实现AOP 编程#####、"></a>Spring 使用 AspectJ 注解 实现AOP 编程#####、</h5><pre><code>需导入 aop,aspects 相关jar包
+
+AtithmeticCalculatorImpl.java实现类
+package com.dream.apo.impl;
+import org.springframework.stereotype.Component;
+@Component(&quot;atithmeticCalculator1&quot;)
+public class AtithmeticCalculatorImpl implements AtithmeticCalculator {
+@Override
+public int add(int i, int j) {
+    int result=i+j;
+    return result;
+}
+@Override
+public int sub(int i, int j) {
+    int result=i-j;
+    return result;
+}
+@Override
+public int mul(int i, int j) {
+    int result=i*j;
+    return result;
+}
+@Override
+public int div(int i, int j) {
+    int result=i/j;
+    return result;
+}
+}
+
+AOP实现代码 LoginAspect.java 
+package com.dream.apo.impl;
+
+import java.util.Arrays;
+
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.springframework.stereotype.Component;    
+@Aspect
+@Component
+public class LoginAspect {
+@Before(&quot;execution(public int com.dream.apo.impl.AtithmeticCalculator.*(..) )&quot;)
+public void beforeMethod(JoinPoint joinPoint){
+    String methodName=joinPoint.getSignature().getName();
+    Object []args=joinPoint.getArgs();
+    System.out.println(&quot;the method is &quot;+methodName+&quot;begin with &quot;+Arrays.asList(args));        
+}    
+@After(&quot;execution(public int com.dream.apo.impl.AtithmeticCalculator.*(..) )&quot;)
+public void after(JoinPoint joinPoint){
+    String methodName=joinPoint.getSignature().getName();
+    System.out.println(&quot;the method is &quot;+methodName+&quot; ends &quot;);        
+}    
+@AfterReturning(value=&quot;execution(public int com.dream.apo.impl.AtithmeticCalculator.*(..) )&quot;,
+        returning=&quot;result&quot;)
+public void afterReturning(JoinPoint joinPoint,Object result){
+    String methodName=joinPoint.getSignature().getName();
+    System.out.println(&quot;the method is &quot;+methodName+&quot; return ends &quot;+result);
+}    
+@AfterThrowing(value=&quot;execution(public int com.dream.apo.impl.AtithmeticCalculator.*(..) )&quot;,
+        throwing=&quot;ex&quot;)
+public void afterThrowing(JoinPoint joinPoint,Exception ex){        
+    String methodName=joinPoint.getSignature().getName();
+    System.out.println(&quot;the method is &quot;+methodName+&quot; occurs exception  &quot;+ex);
+}
+}
+
+主方法
+package com.dream.apo.impl;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+public class Main {
+public static void main(String[] args) {
+    ApplicationContext ac=new ClassPathXmlApplicationContext(&quot;applicationContext.xml&quot;);
+    AtithmeticCalculator act= (AtithmeticCalculator) ac.getBean(&quot;atithmeticCalculator1&quot;);
+
+    int result=act.add(3, 4);
+    System.out.println(&quot;result=&quot;+result);
+
+    result=act.div(6, 1);
+    System.out.println(&quot;result=&quot;+result);
+}
+}
+
+applicationContext.xml 配置文件 
+&lt;context:component-scan base-package=&quot;com.dream.apo.impl&quot;&gt;&lt;/context:component-scan&gt;
+
+&lt;aop:aspectj-autoproxy&gt;&lt;/aop:aspectj-autoproxy&gt;
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/01/05/Spring AOP/" data-id="cj7fzhwh8000unkgicvt2cv1z" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
 
     </footer>
   </div>
@@ -504,160 +657,7 @@ public void test2(){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/01/05/Spring入门/" data-id="cj7anstvm0013y0gij58cbbgl" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Spring AOP" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/01/05/Spring AOP/" class="article-date">
-  <time datetime="2016-01-05T05:46:44.000Z" itemprop="datePublished">2016-01-05</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/05/Spring AOP/">Spring AOP</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p><strong>本文来源于官方文档</strong></p>
-</blockquote>
-<h3 id="Aspect-Oriented-Programming-with-Spring-面向切面编程"><a href="#Aspect-Oriented-Programming-with-Spring-面向切面编程" class="headerlink" title="Aspect Oriented Programming with Spring 面向切面编程"></a>Aspect Oriented Programming with Spring 面向切面编程</h3><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><blockquote>
-<ul>
-<li>面向切面编程（AOP）弥补面向对象编程（OOP）通过提供思考程序结构的另一种方式。在OOP中模块化的关键单元是类，而在AOP模块为单位的切面。面对关注点，如事务管理跨多个类型和对象切模块化。（这些关注经常被称为横切在AOP文学的关注。）</li>
-<li>Spring的一个关键组件就是AOP框架。虽然Spring IoC容器并不依赖于AOP，这意味着你不需要使用AOP，如果你不想，AOP补充Spring IoC容器提供了非常强大的中间件解决方案。</li>
-</ul>
-</blockquote>
-<h5 id="AOP概念"><a href="#AOP概念" class="headerlink" title="AOP概念"></a>AOP概念</h5><ul>
-<li><strong>切面(Aspect)</strong>: 横切关注点(跨越应用程序多个模块的功能)被模块化的特殊对象</li>
-<li><strong>连接点(Join point)</strong>： 一个程序，在执行过程中的一个点，如方法的执行或异常的处理。在Spring AOP中，一个连接点总是 代表一个方法的执行。</li>
-<li><strong>通知(Advice)</strong>： 在某个特定的一个方面动作的连接点。不同类型的建议包括“around”，“before”和“after”的建议。（advice 的类型将在下面讨论）。许多AOP框架，包括Spring，Model 中的Advice 作为拦截器，保持了拦截器链周围的<strong>连接点(Joinpoint)</strong>。</li>
-<li><strong>切点(pointcut)</strong>： 每个类都拥有多个连接点：例如 ArithmethicCalculator 的所有方法实际上都是连接点，即连接点是程序类中客观存在的事务。AOP 通过切点定位到特定的连接点。类比：连接点相当于数据库中的记录，切点相当于查询条件。切点和连接点不是一对一的关系，一个切点匹配多个连接点，切点通过 org.springframework.aop.Pointcut 接口进行描述，它使用类和方法作为连接点的查询条件</li>
-<li><strong>代理(AOP proxy)</strong>： AOP框架，以实现Aspect契约（例如通知方法执行等等）创建的对象。在Spring中，AOP代理可以是JDK动态代理或者CGLIB代理。</li>
-</ul>
-<p><strong>advice的类型</strong> :</p>
-<ul>
-<li>Before advice: 建议一个执行一个 Join point 之前，但它不具有防止执行流程的连接点（除非它抛出一个异常）的能力。</li>
-<li>After returning advice: 连接点(Join point)正常完成后,方法没有抛出异常后执行</li>
-<li>After throwing advice: advice抛出一个异常时执行。</li>
-<li>After (finally) advice: 结果都会执行，</li>
-<li>Around advice: 环绕通知, 围绕着方法执行</li>
-</ul>
-<h5 id="Spring-使用-AspectJ-注解-实现AOP-编程-、"><a href="#Spring-使用-AspectJ-注解-实现AOP-编程-、" class="headerlink" title="Spring 使用 AspectJ 注解 实现AOP 编程#####、"></a>Spring 使用 AspectJ 注解 实现AOP 编程#####、</h5><pre><code>需导入 aop,aspects 相关jar包
-
-AtithmeticCalculatorImpl.java实现类
-package com.dream.apo.impl;
-import org.springframework.stereotype.Component;
-@Component(&quot;atithmeticCalculator1&quot;)
-public class AtithmeticCalculatorImpl implements AtithmeticCalculator {
-@Override
-public int add(int i, int j) {
-    int result=i+j;
-    return result;
-}
-@Override
-public int sub(int i, int j) {
-    int result=i-j;
-    return result;
-}
-@Override
-public int mul(int i, int j) {
-    int result=i*j;
-    return result;
-}
-@Override
-public int div(int i, int j) {
-    int result=i/j;
-    return result;
-}
-}
-
-AOP实现代码 LoginAspect.java 
-package com.dream.apo.impl;
-
-import java.util.Arrays;
-
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.springframework.stereotype.Component;    
-@Aspect
-@Component
-public class LoginAspect {
-@Before(&quot;execution(public int com.dream.apo.impl.AtithmeticCalculator.*(..) )&quot;)
-public void beforeMethod(JoinPoint joinPoint){
-    String methodName=joinPoint.getSignature().getName();
-    Object []args=joinPoint.getArgs();
-    System.out.println(&quot;the method is &quot;+methodName+&quot;begin with &quot;+Arrays.asList(args));        
-}    
-@After(&quot;execution(public int com.dream.apo.impl.AtithmeticCalculator.*(..) )&quot;)
-public void after(JoinPoint joinPoint){
-    String methodName=joinPoint.getSignature().getName();
-    System.out.println(&quot;the method is &quot;+methodName+&quot; ends &quot;);        
-}    
-@AfterReturning(value=&quot;execution(public int com.dream.apo.impl.AtithmeticCalculator.*(..) )&quot;,
-        returning=&quot;result&quot;)
-public void afterReturning(JoinPoint joinPoint,Object result){
-    String methodName=joinPoint.getSignature().getName();
-    System.out.println(&quot;the method is &quot;+methodName+&quot; return ends &quot;+result);
-}    
-@AfterThrowing(value=&quot;execution(public int com.dream.apo.impl.AtithmeticCalculator.*(..) )&quot;,
-        throwing=&quot;ex&quot;)
-public void afterThrowing(JoinPoint joinPoint,Exception ex){        
-    String methodName=joinPoint.getSignature().getName();
-    System.out.println(&quot;the method is &quot;+methodName+&quot; occurs exception  &quot;+ex);
-}
-}
-
-主方法
-package com.dream.apo.impl;
-
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-public class Main {
-public static void main(String[] args) {
-    ApplicationContext ac=new ClassPathXmlApplicationContext(&quot;applicationContext.xml&quot;);
-    AtithmeticCalculator act= (AtithmeticCalculator) ac.getBean(&quot;atithmeticCalculator1&quot;);
-
-    int result=act.add(3, 4);
-    System.out.println(&quot;result=&quot;+result);
-
-    result=act.div(6, 1);
-    System.out.println(&quot;result=&quot;+result);
-}
-}
-
-applicationContext.xml 配置文件 
-&lt;context:component-scan base-package=&quot;com.dream.apo.impl&quot;&gt;&lt;/context:component-scan&gt;
-
-&lt;aop:aspectj-autoproxy&gt;&lt;/aop:aspectj-autoproxy&gt;
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/01/05/Spring AOP/" data-id="cj7anstv6000xy0gixrv9mlx4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/01/05/Spring入门/" data-id="cj7fzhwo9003rnkgifahrqnch" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
@@ -726,7 +726,7 @@ reboot
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/01/04/linux基本命令/" data-id="cj7anstwo001ly0gix6uc56tj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/01/04/linux基本命令/" data-id="cj7fzhwk8001ynkgilj2eum48" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
