@@ -1,0 +1,102 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="生命的足迹"><title>（二）java集合源码解析 | 我的记忆</title><link rel="stylesheet" type="text/css" href="//fonts.networld.org/css?family=Source+Code+Pro"><link rel="stylesheet" type="text/css" href="/css/style.css?v=2.0.1"><link rel="stylesheet" type="text/css" href="/css/highlight.css?v=2.0.1"><link rel="Shortcut Icon" href="/favicon.ico"><link rel="bookmark" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">（二）java集合源码解析</h1><a id="logo" href="/.">我的记忆</a><p class="description">点点滴滴</p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div><div id="search-form"><div id="result-mask" class="hide"></div><label><input id="search-key" type="text" autocomplete="off" placeholder="Arama"></label><div id="result-wrap" class="hide"><div id="search-result"></div></div><div class="hide"><template id="search-tpl"><div class="item"><a href="/{path}" title="{title}"><div class="title">{title}</div><div class="time">{date}</div><div class="tags">{tags}</div></a></div></template></div></div></div><div id="layout" class="layout-g"><div class="layout-l"><div class="content_container"><div class="post"><h1 class="post-title">（二）java集合源码解析</h1><div class="post-meta"><a href="/2018/03/13/(二) java集合源码解析/#comments" class="comment-count"></a><p><span class="date">Mar 13, 2018</span><span><i id="busuanzi_container_page_pv"><i id="busuanzi_value_page_pv"></i><i>点击</i></i></span></p></div><div class="post-content"><h2 id="一、ArrayList数据结构"><a href="#一、ArrayList数据结构" class="headerlink" title="一、ArrayList数据结构"></a>一、ArrayList数据结构</h2><p>分析一个类的时候，数据结构往往是它的灵魂所在，理解底层的数据结构其实就理解了该类的实现思路，具体的实现细节再具体分析。</p>
+<p>　　ArrayList的数据结构如下：</p>
+<pre><code> 1 2 3 4 5 6 7 8 
+| | | | | | | | |
+</code></pre><p>说明：底层的数据结构就是数组，数组元素类型为Object类型，即可以存放所有类型数据。我们对ArrayList类的实例的所有的操作底层都是基于数组的。下面我们来分析通过数组是如何保证库函数的正确实现的。</p>
+<h2 id="二、ArrayList源码分析"><a href="#二、ArrayList源码分析" class="headerlink" title="二、ArrayList源码分析"></a>二、ArrayList源码分析</h2><h3 id="2-1-类的继承关系"><a href="#2-1-类的继承关系" class="headerlink" title="2.1 类的继承关系"></a>2.1 类的继承关系</h3><pre><code>public class ArrayList&lt;E&gt; extends AbstractList&lt;E&gt; 
+implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable
+</code></pre><p>说明：ArrayList继承AbstractList抽象父类，实现了List接口（规定了List的操作规范）、RandomAccess（可随机访问）、Cloneable（可拷贝）、Serializable（可序列化）。</p>
+<h3 id="2-2-类的属性"><a href="#2-2-类的属性" class="headerlink" title="2.2 类的属性"></a>2.2 类的属性</h3><pre><code>public class ArrayList&lt;E&gt; extends AbstractList&lt;E&gt;
+        implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable
+{
+    // 版本号
+    private static final long serialVersionUID = 8683452581122892189L;
+    // 缺省容量
+    private static final int DEFAULT_CAPACITY = 10;
+    // 空对象数组
+    private static final Object[] EMPTY_ELEMENTDATA = {};
+    // 缺省空对象数组
+    private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = {};
+    // 元素数组
+    transient Object[] elementData;
+    // 实际元素大小，默认为0
+    private int size;
+    // 最大数组容量
+    private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
+}
+</code></pre><p>说明：类的属性中核心的属性为elementData，类型为Object[]，用于存放实际元素，并且被标记为transient，也就意味着在序列化的时候，此字段是不会被序列化的。</p>
+<h3 id="2-3-类的构造函数"><a href="#2-3-类的构造函数" class="headerlink" title="2.3 类的构造函数"></a>2.3 类的构造函数</h3><h4 id="ArrayList-int-型构造函数"><a href="#ArrayList-int-型构造函数" class="headerlink" title="ArrayList(int)型构造函数"></a>ArrayList(int)型构造函数</h4><pre><code>public ArrayList(int initialCapacity) {
+    if (initialCapacity &gt; 0) { // 初始容量大于0
+        this.elementData = new Object[initialCapacity]; // 初始化元素数组
+    } else if (initialCapacity == 0) { // 初始容量为0
+        this.elementData = EMPTY_ELEMENTDATA; // 为空对象数组
+    } else { // 初始容量小于0，抛出异常
+        throw new IllegalArgumentException(&quot;Illegal Capacity: &quot;+
+                                           initialCapacity);
+    }
+}
+</code></pre><p>说明：指定elementData数组的大小，不允许初始化大小小于0，否则抛出异常。</p>
+<h4 id="ArrayList-型构造函数"><a href="#ArrayList-型构造函数" class="headerlink" title="ArrayList()型构造函数"></a>ArrayList()型构造函数</h4><pre><code>public ArrayList() { 
+    // 无参构造函数，设置元素数组为空 
+    this.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;
+}
+</code></pre><p>说明：当未指定初始化大小时，会给elementData赋值为空集合。</p>
+<h4 id="ArrayList-Collection-lt-extends-E-gt-型构造函数"><a href="#ArrayList-Collection-lt-extends-E-gt-型构造函数" class="headerlink" title="ArrayList(Collection&lt;? extends E&gt;)型构造函数 ####　"></a>ArrayList(Collection&lt;? extends E&gt;)型构造函数 ####　</h4><pre><code>public ArrayList(Collection&lt;? extends E&gt; c) { // 集合参数构造函数
+    elementData = c.toArray(); // 转化为数组
+    if ((size = elementData.length) != 0) { // 参数为非空集合
+        if (elementData.getClass() != Object[].class) // 是否成功转化为Object类型数组
+            elementData = Arrays.copyOf(elementData, size, Object[].class); // 不为Object数组的话就进行复制
+    } else { // 集合大小为空，则设置元素数组为空
+        this.elementData = EMPTY_ELEMENTDATA;
+    }
+}
+</code></pre><p>说明：当传递的参数为集合类型时，会把集合类型转化为数组类型，并赋值给elementData。</p>
+<h3 id="2-4-核心函数分析"><a href="#2-4-核心函数分析" class="headerlink" title="2.4 核心函数分析"></a>2.4 核心函数分析</h3><h4 id="add函数"><a href="#add函数" class="headerlink" title="add函数"></a>add函数</h4><pre><code> public boolean add(E e) { // 添加元素
+    ensureCapacityInternal(size + 1);  // Increments modCount!!
+    elementData[size++] = e;
+    return true;
+}
+</code></pre><p>说明：在add函数我们发现还有其他的函数ensureCapacityInternal，此函数可以理解为确保elementData数组有合适的大小。ensureCapacityInternal的具体函数如下</p>
+<pre><code>private void ensureCapacityInternal(int minCapacity) {
+    if (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) { // 判断元素数组是否为空数组
+        minCapacity = Math.max(DEFAULT_CAPACITY, minCapacity); // 取较大值
+    }
+
+    ensureExplicitCapacity(minCapacity);
+}
+</code></pre><p>说明：在ensureCapacityInternal函数中我们又发现了ensureExplicitCapacity函数，这个函数也是为了确保elemenData数组有合适的大小。ensureExplicitCapacity的具体函数如下</p>
+<pre><code>private void ensureExplicitCapacity(int minCapacity) {
+    // 结构性修改加1
+    modCount++;
+    if (minCapacity - elementData.length &gt; 0)
+        grow(minCapacity);
+}
+</code></pre><p>说明：在ensureExplicitCapacity函数我们又发现了grow函数，grow函数才会对数组进行扩容，ensureCapacityInternal、ensureExplicitCapacity都只是过程，最后完成实际扩容操作还是得看grow函数，grow函数的具体函数如下　</p>
+<pre><code>private void grow(int minCapacity) {
+    int oldCapacity = elementData.length; // 旧容量
+    int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1); // 新容量为旧容量的1.5倍
+    if (newCapacity - minCapacity &lt; 0) // 新容量小于参数指定容量，修改新容量
+        newCapacity = minCapacity;
+    if (newCapacity - MAX_ARRAY_SIZE &gt; 0) // 新容量大于最大容量
+        newCapacity = hugeCapacity(minCapacity); // 指定新容量
+    // 拷贝扩容
+    elementData = Arrays.copyOf(elementData, newCapacity);
+}
+</code></pre><p>说明：正常情况下会扩容1.5倍，特殊情况下（新扩展数组大小已经达到了最大值）则只取最大值。</p>
+</div><div class="tags"><a href="/tags/java/">java</a></div><div class="post-share"><div class="bdsharebuttonbox"><span style="float:left;line-height: 28px;height: 28px;font-size:16px;font-weight:blod">分享到：</span><a href="#" data-cmd="more" class="bds_more"></a><a href="#" data-cmd="mshare" title="分享到一键分享" class="bds_mshare"></a><a href="#" data-cmd="fbook" title="分享到Facebook" class="bds_fbook"></a><a href="#" data-cmd="twi" title="分享到Twitter" class="bds_twi"></a><a href="#" data-cmd="linkedin" title="分享到linkedin" class="bds_linkedin"></a><a href="#" data-cmd="youdao" title="分享到有道云笔记" class="bds_youdao"></a><a href="#" data-cmd="evernotecn" title="分享到印象笔记" class="bds_evernotecn"></a><a href="#" data-cmd="weixin" title="分享到微信" class="bds_weixin"></a><a href="#" data-cmd="qzone" title="分享到QQ空间" class="bds_qzone"></a><a href="#" data-cmd="tsina" title="分享到新浪微博" class="bds_tsina"></a></div></div><div class="post-nav"><a href="/2018/03/13/一. Java内存区域与内存溢出异常/" class="pre">一. Java内存区域与内存溢出异常</a><a href="/2018/03/12/(一) java集合基础知识/" class="next">（一）java集合</a></div><div id="comments"><div id="lv-container" data-id="city" data-uid="MTAyMC8zNDY5Mi8xMTIyOQ=="></div></div></div></div></div><div class="layout-r"><div id="sidebar"><div class="search-pla"></div><div id="toc" class="widget"><div class="widget-title"><i class="fa fa-fei">文章目录</i></div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、ArrayList数据结构"><span class="toc-text">一、ArrayList数据结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、ArrayList源码分析"><span class="toc-text">二、ArrayList源码分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-类的继承关系"><span class="toc-text">2.1 类的继承关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-类的属性"><span class="toc-text">2.2 类的属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-类的构造函数"><span class="toc-text">2.3 类的构造函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ArrayList-int-型构造函数"><span class="toc-text">ArrayList(int)型构造函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ArrayList-型构造函数"><span class="toc-text">ArrayList()型构造函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ArrayList-Collection-lt-extends-E-gt-型构造函数"><span class="toc-text">ArrayList(Collection<? extends E>)型构造函数 ####　</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-核心函数分析"><span class="toc-text">2.4 核心函数分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#add函数"><span class="toc-text">add函数</span></a></li></ol></li></ol></li></ol></div><div class="widget"><div class="widget-title"><i class="fa fa-xie"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/03/14/计算机书籍旅行/">计算机书籍旅行</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/13/一. Java内存区域与内存溢出异常/">一. Java内存区域与内存溢出异常</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/13/(二) java集合源码解析/">（二）java集合源码解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/12/(一) java集合基础知识/">（一）java集合</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/08/spring REST之 RestTemplate的使用/">spring REST之 RestTemplate的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/05/Http解析/">HTTP解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/03/多线程编程/">多线程编程技术</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/07/Hexo-github-搭建静态博客-新手入门/">Hexo+github搭建静态博客(新手入门)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/09/经典句子/">经典句子</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/24/IBM rose 工具的使用/">IBM rose工具的使用</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-biao"> 标签</i></div><div class="tagcloud"><a href="/tags/框架/" style="font-size: 15px;">框架</a> <a href="/tags/java/" style="font-size: 15px;">java</a> <a href="/tags/日记/" style="font-size: 15px;">日记</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/IDEA/" style="font-size: 15px;">IDEA</a> <a href="/tags/工具/" style="font-size: 15px;">工具</a> <a href="/tags/PowerDesigner/" style="font-size: 15px;">PowerDesigner</a> <a href="/tags/Spring/" style="font-size: 15px;">Spring</a> <a href="/tags/杂记/" style="font-size: 15px;">杂记</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/Extjs/" style="font-size: 15px;">Extjs</a> <a href="/tags/数据库/" style="font-size: 15px;">数据库</a> <a href="/tags/myeclipse插件/" style="font-size: 15px;">myeclipse插件</a> <a href="/tags/maven/" style="font-size: 15px;">maven</a> <a href="/tags/java虚拟机/" style="font-size: 15px;">java虚拟机</a> <a href="/tags/笔记/" style="font-size: 15px;">笔记</a> <a href="/tags/生活文化与素养/" style="font-size: 15px;">生活文化与素养</a> <a href="/tags/Error/" style="font-size: 15px;">Error</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-archive"> 归档</i></div><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-you"> 友情链接</i></div><ul></ul><a href="https://www.gehaowu.com/" title="葛文豪" target="_blank">葛文豪</a><ul></ul><a href="http://mritd.github.io/" title="漠然屌丝" target="_blank">漠然屌丝</a></div></div></div></div><a id="totop" href="#top"></a><div id="footer"><div class="footer-info"><p><a href="/baidusitemap.xml">Baidu Site Haritası</a> |  <a href="/atom.xml">订阅</a> |  <a href="/about/">关于</a></p><p>本站总访问量：<i id="busuanzi_container_site_pv"><i id="busuanzi_value_site_pv"></i></i>次</p><p><span> Copyright &copy;<a href="/." rel="nofollow">Dream.</a></span><span> Theme by<a rel="nofollow" target="_blank" href="https://github.com/chaooo/hexo-theme-BlueLake"> BlueLake.</a></span><span> Count by<a href="http://busuanzi.ibruce.info/"> busuanzi.</a></span><span> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a></span></p></div></div></div><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?ab4a249d036f6daef69ed1437586116c";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script><script type="text/javascript" src="/js/search.json.js?v=2.0.1"></script><script type="text/javascript" src="/js/toctotop.js?v=2.0.1" async></script><script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","qzone","linkedin","fbook","twi","print","renren","sqq","evernotecn","bdysc","tqq","tqf","bdxc","kaixin001","tieba","douban","bdhome","thx","ibaidu","meilishuo","mogujie","diandian","huaban","duitang","hx","fx","youdao","sdo","qingbiji","people","xinhua","mail","isohu","yaolan","wealink","ty","iguba","h163","copy"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{},"image":{"viewList":["tsina","qzone","weixin","fbook","twi","linkedin","youdao","evernotecn","mshare"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","qzone","weixin","fbook","twi","linkedin","youdao","evernotecn","mshare"]}};with(document)0[(getElementsByTagName('head')[0]||head).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script><script>(function(d, s) {
+  var j, e = d.getElementsByTagName('body')[0];
+  if (typeof LivereTower === 'function') { return; }
+  j = d.createElement(s);
+  j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+  j.async = true;
+  e.appendChild(j);
+})(document, 'script');
+</script></body></html>
