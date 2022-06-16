@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>二. 垃圾算法和HotSpot算法实现 | 记忆时光</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="一，对象已死吗?在堆里存放着所有的java对象实例。如下算法判断哪个对象存活，哪个已经死去。 1. 引用计数算法概念：给对象添加一个引用计数器，每当有一个地方引用它时，计数器值就加1；当引用时，计数器就减1；任何计数器为0的对象就是不可能再被使用的。 算法实现简单，效率最高。 2. 可达性分析算法基本思想是通过一系统称为“GC Roots”的对象作为起始点，从这些节点开始向下搜索，搜索所走的路径称">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二. 垃圾算法和HotSpot算法实现">
+<meta property="og:url" content="http://example.com/2018/03/21/%E4%BA%8C.%20%E5%9E%83%E5%9C%BE%E7%AE%97%E6%B3%95%E5%92%8CHotSpot%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/index.html">
+<meta property="og:site_name" content="记忆时光">
+<meta property="og:description" content="一，对象已死吗?在堆里存放着所有的java对象实例。如下算法判断哪个对象存活，哪个已经死去。 1. 引用计数算法概念：给对象添加一个引用计数器，每当有一个地方引用它时，计数器值就加1；当引用时，计数器就减1；任何计数器为0的对象就是不可能再被使用的。 算法实现简单，效率最高。 2. 可达性分析算法基本思想是通过一系统称为“GC Roots”的对象作为起始点，从这些节点开始向下搜索，搜索所走的路径称">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-03-21T15:00:30.000Z">
+<meta property="article:modified_time" content="2022-06-16T07:22:10.425Z">
+<meta property="article:author" content="Zhutongtong">
+<meta property="article:tag" content="java虚拟机">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="记忆时光" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">记忆时光</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-二. 垃圾算法和HotSpot算法实现" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/03/21/%E4%BA%8C.%20%E5%9E%83%E5%9C%BE%E7%AE%97%E6%B3%95%E5%92%8CHotSpot%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/" class="article-date">
+  <time class="dt-published" datetime="2018-03-21T15:00:30.000Z" itemprop="datePublished">2018-03-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      二. 垃圾算法和HotSpot算法实现
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="一，对象已死吗"><a href="#一，对象已死吗" class="headerlink" title="一，对象已死吗?"></a>一，对象已死吗?</h2><p>在堆里存放着所有的java对象实例。如下算法判断哪个对象存活，哪个已经死去。</p>
+<h3 id="1-引用计数算法"><a href="#1-引用计数算法" class="headerlink" title="1. 引用计数算法"></a>1. 引用计数算法</h3><p>概念：给对象添加一个引用计数器，每当有一个地方引用它时，计数器值就加1；当引用时，计数器就减1；任何计数器为0的对象就是不可能再被使用的。</p>
+<p>算法实现简单，效率最高。</p>
+<h3 id="2-可达性分析算法"><a href="#2-可达性分析算法" class="headerlink" title="2. 可达性分析算法"></a>2. 可达性分析算法</h3><p>基本思想是通过一系统称为“GC Roots”的对象作为起始点，从这些节点开始向下搜索，搜索所走的路径称为引用链，当一个对象到 GC Roots 没有任何引用链相连时，则证明对象是不可用的。<br>在java语言中，可作为GC Roots的对象包括下面几种：</p>
+<ul>
+<li>虚拟机栈（栈帧中的本地变量表）中引用的对象。</li>
+<li>方法区中的类静态属性引用的对象</li>
+<li>方法区中常量引用的对象</li>
+<li>本地方法栈中JNI(即一般说的Native方法)引用的对象</li>
+</ul>
+<h3 id="3-再谈引用"><a href="#3-再谈引用" class="headerlink" title="3. 再谈引用"></a>3. 再谈引用</h3><p>无论是引用计数还是可达性分析，判定对象是否存活都与<strong>引用</strong>有关。<br>在jdk1.2以前，java对引用的定义：如果reference类型的数据中存储的数值代表的是另外一块内存的起始地址，则称为这块内存代表着一个引用。然尔这样有一些缺点：我们希望能描述这样一种对象：当内存空间还足够时，则能保存在内存这中；如果内存空间在进行垃圾收集后还是非常紧张，则可以抛弃这些对象。很多系统的缓存功能都符合这样的应用场景。</p>
+<p>所以在jdk1.2之后，java对这些引用进行了扩充。分为如下类型，引用强度逐渐减弱：</p>
+<ul>
+<li><strong>强引用</strong>(Strong Reference):<strong>是指在程序代码中普遍存在的</strong>，只要强引用还存在，就永远不会回收到被引用的对象。比如 Object obj &#x3D; new Object();</li>
+<li><strong>软引用</strong>(Soft Reference):<strong>用来描述一些还有用但并非必须的对象</strong>。在发生内存溢出异常之前，将会把这些对象列进回收范围之中进行第二次回收。如果这次还没有足够的内存，才会抛出内存溢出异常</li>
+<li><strong>弱引用</strong>(Weak Reference):<strong>用来描述非必须的对象</strong>。比软引用更弱一些。被弱引用关联的对象只能生存到下一次垃圾收集发生之前。当垃圾收集器工作时，无论当前内存是否足够，都会回收掉只被弱引用关联的对象。</li>
+<li><strong>虚引用</strong>(Phantom Reference):<strong>称为幽灵引用或者幻影引用</strong>，是最弱的一种引用。为一个对象设置虚引用关联的唯一目的就是能在这个对象被收集器回收时收到一个系统通知。</li>
+</ul>
+<h3 id="4-回收方法区"><a href="#4-回收方法区" class="headerlink" title="4. 回收方法区"></a>4. 回收方法区</h3><p>方法区又被人称为永久代</p>
+<p>在方法区中进行垃圾收集的性价比比较低；在堆中尤其是在新生代中，一次垃圾收集一般可以 回收70%-95%的空间。</p>
+<p>永久代垃圾收集主要回收两部分内容：废弃常量和无用的类。判定一个常量是否废弃比较简单。而要判定一个类是否是无用的类的条件相对苛刻许多。类需要满足以下3个条件：</p>
+<ol>
+<li>该类所有的实例都已经被回收，也就是java堆 中不存在该类的任何实例</li>
+<li>加载该类的ClassLoader已经被回收</li>
+<li>该类对应的java.lang.Class对象没有在任何地方被引用，无法在任何地方通过反射访问该类的方法。</li>
+</ol>
+<h2 id="二-垃圾收集算法"><a href="#二-垃圾收集算法" class="headerlink" title="二. 垃圾收集算法"></a>二. 垃圾收集算法</h2><h3 id="1-标记-清除算法"><a href="#1-标记-清除算法" class="headerlink" title="1. 标记-清除算法"></a>1. 标记-清除算法</h3><p>算法分为标记和清除两个阶段：首先标记出需要回收的对象，在标记完成后统一回收所有被标记的对象。</p>
+<p>缺点：  </p>
+<ol>
+<li>效率不高</li>
+<li>空间问题。标记清除后会产生大量不连续的内存碎片，碎片太多可能会导致程序在运行过程中需要分配较大对象时，无法找到足够的连续内存而不得不提前触发一次垃圾收集动作。</li>
+</ol>
+<h3 id="2-复制算法"><a href="#2-复制算法" class="headerlink" title="2. 复制算法"></a>2. 复制算法</h3><p>为解决效率问题，复制算法出现了：将内存按容量划分为大小相等的现场，每次只使用其中的一块，当这一块用完了，就将还存活的对象复制到另外一块上面，然后再把已使用过的内存空间一次清理掉。这样使得每次都是对整个半区进行回收，内存分配时也不用考虑内存碎片等复杂情况，只要移动堆顶指针，按顺序分配内存即可，实现简单，运行高效。只是这种算法的代价将内存缩小为了原来的一半，未免太高了一点。现在的商业模式都采用这种收集算法来回收新生代。</p>
+<h3 id="3-标记-整理算法"><a href="#3-标记-整理算法" class="headerlink" title="3. 标记-整理算法"></a>3. 标记-整理算法</h3><p>复制收集算法在对象存活率较高时就要进行较多我的复制操作，效率将会变低。更关键的是，如果不想浪费50%的空间，就需要额外的空间进行分配担保，以应对被使用的内存中所有对象都100%戚的极端情况，所以在老年代一般不能直接选用这种算法。</p>
+<p>根据老年代的特点，提出了标记-整理算法，与标记清除算法一样，但后续步骤不是直接对可回收对象进行清理，而是让所有对象都向一端移动，然后直接清理掉端边界以外的内存。</p>
+<h3 id="4-分代收集算法"><a href="#4-分代收集算法" class="headerlink" title="4. 分代收集算法"></a>4. 分代收集算法</h3><p>当前商业虚拟机的垃圾收集都采用分代收集算法，没有什么新的思想，一般把java堆分为新生代和老年代，这样就可以 根据各个年代的特点采用合适的收集算法。   在新生代中每次垃圾收集时都发现有大批对象死去，少量存活，就选用<strong>复制算法</strong>。而老年代中因为对象存活率高，没有额外空间对它进行担保，就必须使用 <strong>标记-清理算法</strong>，或者<strong>标记整理算法</strong>。</p>
+<h2 id="三-HotSpot算法实现"><a href="#三-HotSpot算法实现" class="headerlink" title="三. HotSpot算法实现"></a>三. HotSpot算法实现</h2><h3 id="1-枚举根节点"><a href="#1-枚举根节点" class="headerlink" title="1. 枚举根节点"></a>1. 枚举根节点</h3><h3 id="2-安全点"><a href="#2-安全点" class="headerlink" title="2. 安全点"></a>2. 安全点</h3><h3 id="3-安全区域"><a href="#3-安全区域" class="headerlink" title="3. 安全区域"></a>3. 安全区域</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/03/21/%E4%BA%8C.%20%E5%9E%83%E5%9C%BE%E7%AE%97%E6%B3%95%E5%92%8CHotSpot%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/" data-id="cl4gp6u2o002y9cvc46h8037l" data-title="二. 垃圾算法和HotSpot算法实现" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">java虚拟机</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/19/%E5%9B%9B.%20synchronized%E5%90%8C%E6%AD%A5%E8%AF%AD%E5%8F%A5%E5%9D%97/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          四. synchronized同步语句块
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/21/%E4%B8%89.%20synchronized%E5%90%8C%E6%AD%A5%E8%AF%AD%E5%8F%A5%E5%9D%97/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">三. synchronized同步语句块</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Error/" rel="tag">Error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Extjs/" rel="tag">Extjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerDesigner/" rel="tag">PowerDesigner</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">java虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/" rel="tag">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" rel="tag">myeclipse插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E8%AE%B0/" rel="tag">日记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" rel="tag">生活文化与素养</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Extjs/" style="font-size: 10px;">Extjs</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/PowerDesigner/" style="font-size: 12.86px;">PowerDesigner</a> <a href="/tags/Spring/" style="font-size: 14.29px;">Spring</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 12.86px;">java虚拟机</a> <a href="/tags/linux/" style="font-size: 17.14px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">myeclipse插件</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 14.29px;">工具</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 18.57px;">数据库</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 15.71px;">日记</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 14.29px;">杂记</a> <a href="/tags/%E6%A1%86%E6%9E%B6/" style="font-size: 14.29px;">框架</a> <a href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" style="font-size: 11.43px;">生活文化与素养</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 12.86px;">笔记</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/06/16/Hexo-github-%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2-%E6%96%B0%E6%89%8B%E5%85%A5%E9%97%A8/">Hexo+github搭建静态博客(新手入门)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/test/">test</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/20/%E4%BA%94.%20volatile%20%E5%85%B3%E9%94%AE%E5%AD%97/">五. volatile关键字</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/19/%E4%B8%89.%20%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/">三. 垃圾收集器</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Zhutongtong<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

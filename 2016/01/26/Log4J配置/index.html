@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Log4j配置 | 记忆时光</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="简介 Log4J的配置文件(Configuration File)就是用来设置记录器的级别、存放器和布局的，它可接key&#x3D;value格式的设置或xml格式的设置信息。通过配置，可以创建出Log4J的运行环境。  配置文件Log4J配置文件的基本格式如下： #配置根Logger log4j.rootLogger  &#x3D;   [ level ]   ,  appenderName1 ,  ap">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Log4j配置">
+<meta property="og:url" content="http://example.com/2016/01/26/Log4J%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="记忆时光">
+<meta property="og:description" content="简介 Log4J的配置文件(Configuration File)就是用来设置记录器的级别、存放器和布局的，它可接key&#x3D;value格式的设置或xml格式的设置信息。通过配置，可以创建出Log4J的运行环境。  配置文件Log4J配置文件的基本格式如下： #配置根Logger log4j.rootLogger  &#x3D;   [ level ]   ,  appenderName1 ,  ap">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2016-01-26T08:27:30.000Z">
+<meta property="article:modified_time" content="2022-06-16T07:22:10.416Z">
+<meta property="article:author" content="Zhutongtong">
+<meta property="article:tag" content="工具">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="记忆时光" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">记忆时光</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Log4J配置" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/01/26/Log4J%E9%85%8D%E7%BD%AE/" class="article-date">
+  <time class="dt-published" datetime="2016-01-26T08:27:30.000Z" itemprop="datePublished">2016-01-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Log4j配置
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><blockquote>
+<p>Log4J的配置文件(Configuration File)就是用来设置记录器的级别、存放器和布局的，它可接key&#x3D;value格式的设置或xml格式的设置信息。通过配置，可以创建出Log4J的运行环境。</p>
+</blockquote>
+<h4 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h4><p>Log4J配置文件的基本格式如下：</p>
+<pre><code>#配置根Logger
+log4j.rootLogger  =   [ level ]   ,  appenderName1 ,  appenderName2 ,  …
+
+#配置日志信息输出目的地Appender
+log4j.appender.appenderName  =  fully.qualified.name.of.appender.class 
+    log4j.appender.appenderName.option1  =  value1
+    ...
+    log4j.appender.appenderName.optionN  =  valueN 
+
+#配置日志信息的格式（布局）
+log4j.appender.appenderName.layout  =  fully.qualified.name.of.layout.class 
+    log4j.appender.appenderName.layout.option1  =  value1
+    ...
+    log4j.appender.appenderName.layout.optionN  =  valueN 
+</code></pre>
+<h4 id="其中-level-是日志输出级别，共有5级："><a href="#其中-level-是日志输出级别，共有5级：" class="headerlink" title="其中 [level] 是日志输出级别，共有5级："></a>其中 [level] 是日志输出级别，共有5级：</h4><pre><code>FATAL       0  
+ERROR       3  
+WARN        4  
+INFO        6  
+DEBUG       7 
+</code></pre>
+<h4 id="Appender-为日志输出目的地，Log4j提供的appender有以下几种："><a href="#Appender-为日志输出目的地，Log4j提供的appender有以下几种：" class="headerlink" title="Appender 为日志输出目的地，Log4j提供的appender有以下几种："></a>Appender 为日志输出目的地，Log4j提供的appender有以下几种：</h4><pre><code>org.apache.log4j.ConsoleAppender（控制台），
+org.apache.log4j.FileAppender（文件），
+org.apache.log4j.DailyRollingFileAppender（每天产生一个日志文件），
+org.apache.log4j.RollingFileAppender（文件大小到达指定尺寸的时候产生一个新的文件），
+org.apache.log4j.WriterAppender（将日志信息以流格式发送到任意指定的地方）
+</code></pre>
+<h4 id="Layout：日志输出格式，Log4j提供的layout有以下几种："><a href="#Layout：日志输出格式，Log4j提供的layout有以下几种：" class="headerlink" title="Layout：日志输出格式，Log4j提供的layout有以下几种："></a>Layout：日志输出格式，Log4j提供的layout有以下几种：</h4><pre><code>org.apache.log4j.HTMLLayout（以HTML表格形式布局），
+org.apache.log4j.PatternLayout（可以灵活地指定布局模式），
+org.apache.log4j.SimpleLayout（包含日志信息的级别和信息字符串），
+org.apache.log4j.TTCCLayout（包含日志产生的时间、线程、类别等等信息）
+</code></pre>
+<h4 id="打印参数-Log4J采用类似C语言中的printf函数的打印格式格式化日志信息，如下"><a href="#打印参数-Log4J采用类似C语言中的printf函数的打印格式格式化日志信息，如下" class="headerlink" title="打印参数: Log4J采用类似C语言中的printf函数的打印格式格式化日志信息，如下:"></a>打印参数: Log4J采用类似C语言中的printf函数的打印格式格式化日志信息，如下:</h4><pre><code>%m   输出代码中指定的消息
+%p   输出优先级，即DEBUG，INFO，WARN，ERROR，FATAL 
+%r   输出自应用启动到输出该log信息耗费的毫秒数 
+%c   输出所属的类目，通常就是所在类的全名 
+%t   输出产生该日志事件的线程名 
+%n   输出一个回车换行符，Windows平台为“\r\n”，Unix平台为“\n” 
+%d   输出日志时间点的日期或时间，默认格式为ISO8601，也可以在其后指定格式，比如：%d&#123;yyy MMM dd HH:mm:ss , SSS&#125;，输出类似：2002年10月18日  22 ： 10 ： 28 ， 921  
+%l   输出日志事件的发生位置，包括类目名、发生的线程，以及在代码中的行数。举例：Testlog4.main(TestLog4.java: 10 ) 
+</code></pre>
+<h4 id="在代码中初始化Logger"><a href="#在代码中初始化Logger" class="headerlink" title="在代码中初始化Logger:"></a>在代码中初始化Logger:</h4><pre><code>- 在程序中调用BasicConfigurator.configure()方法：给根记录器增加一个ConsoleAppender，输出格式通过PatternLayout设为&quot;%-4r [%t] %-5p %c %x - %m%n&quot;，还有根记录器的默认级别是Level.DEBUG. 
+- 配置放在文件里，通过命令行参数传递文件名字，通过PropertyConfigurator.configure(args[x])解析并配置；
+- 配置放在文件里，通过环境变量传递文件名等信息，利用log4j默认的初始化过程解析并配置；
+- 配置放在文件里，通过应用服务器配置传递文件名等信息，利用一个特殊的servlet来完成配置。
+</code></pre>
+<h4 id="为不同的-Appender-设置日志输出级别："><a href="#为不同的-Appender-设置日志输出级别：" class="headerlink" title="为不同的 Appender 设置日志输出级别："></a>为不同的 Appender 设置日志输出级别：</h4><p>当调试系统时，我们往往注意的只是异常级别的日志输出，但是通常所有级别的输出都是放在一个文件里的，如果日志输出的级别是BUG！？那就慢慢去找吧。<br>这时我们也许会想要是能把异常信息单独输出到一个文件里该多好啊。当然可以，Log4j已经提供了这样的功能，我们只需要在配置中修改Appender的Threshold 就能实现,比如下面的例子：</p>
+<h4 id="配置文件-1"><a href="#配置文件-1" class="headerlink" title="配置文件"></a>配置文件</h4><pre><code>### set log levels ###
+log4j.rootLogger = debug ,  stdout ,  D ,  E
+
+### 输出到控制台 ###
+log4j.appender.stdout = org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.Target = System.out
+log4j.appender.stdout.layout = org.apache.log4j.PatternLayout
+log4j.appender.stdout.layout.ConversionPattern =  %d&#123;ABSOLUTE&#125; %5p %c&#123; 1 &#125;:%L - %m%n
+
+### 输出到日志文件 ###
+log4j.appender.D = org.apache.log4j.DailyRollingFileAppender
+log4j.appender.D.File = logs/log.log
+log4j.appender.D.Append = true
+log4j.appender.D.Threshold = DEBUG ## 输出DEBUG级别以上的日志
+log4j.appender.D.layout = org.apache.log4j.PatternLayout
+log4j.appender.D.layout.ConversionPattern = %-d&#123;yyyy-MM-dd HH:mm:ss&#125;  [ %t:%r ] - [ %p ]  %m%n
+
+### 保存异常信息到单独文件 ###
+log4j.appender.D = org.apache.log4j.DailyRollingFileAppender
+log4j.appender.D.File = logs/error.log ## 异常日志文件名
+log4j.appender.D.Append = true
+log4j.appender.D.Threshold = ERROR ## 只输出ERROR级别以上的日志!!!
+log4j.appender.D.layout = org.apache.log4j.PatternLayout
+log4j.appender.D.layout.ConversionPattern = %-d&#123;yyyy-MM-dd HH:mm:ss&#125;  [ %t:%r ] - [ %p ]  %m%n
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/01/26/Log4J%E9%85%8D%E7%BD%AE/" data-id="cl4gp6u1p000q9cvcglik49dz" data-title="Log4j配置" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/01/27/Listener%20%E7%9B%91%E5%90%AC%E5%99%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Listener 监听器
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/01/26/mybatis/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">mybatis</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Error/" rel="tag">Error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Extjs/" rel="tag">Extjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerDesigner/" rel="tag">PowerDesigner</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">java虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/" rel="tag">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" rel="tag">myeclipse插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E8%AE%B0/" rel="tag">日记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" rel="tag">生活文化与素养</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Extjs/" style="font-size: 10px;">Extjs</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/PowerDesigner/" style="font-size: 12.86px;">PowerDesigner</a> <a href="/tags/Spring/" style="font-size: 14.29px;">Spring</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 12.86px;">java虚拟机</a> <a href="/tags/linux/" style="font-size: 17.14px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">myeclipse插件</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 14.29px;">工具</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 18.57px;">数据库</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 15.71px;">日记</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 14.29px;">杂记</a> <a href="/tags/%E6%A1%86%E6%9E%B6/" style="font-size: 14.29px;">框架</a> <a href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" style="font-size: 11.43px;">生活文化与素养</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 12.86px;">笔记</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/06/16/Hexo-github-%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2-%E6%96%B0%E6%89%8B%E5%85%A5%E9%97%A8/">Hexo+github搭建静态博客(新手入门)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/test/">test</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/20/%E4%BA%94.%20volatile%20%E5%85%B3%E9%94%AE%E5%AD%97/">五. volatile关键字</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/19/%E4%B8%89.%20%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/">三. 垃圾收集器</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Zhutongtong<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

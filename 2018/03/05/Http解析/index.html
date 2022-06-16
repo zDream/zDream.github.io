@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>HTTP解析 | 记忆时光</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="一直对请求响应不太明白，做下总结，分析。原理机制先不说了，先对用法，注意事项做下梳理 一. HTTP 无状态性HTTP 协议是无状态的(stateless)。也就是说，同一个客户端第二次访问同一个服务器上的页面时，服务器无法知道这个客户端曾经访问过，服务器也无法分辨不同的客户端。HTTP 的无状态特性简化了服务器的设计，使服务器更容易支持大量并发的HTTP 请求。 二. HTTP 持久连接HTTP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP解析">
+<meta property="og:url" content="http://example.com/2018/03/05/Http%E8%A7%A3%E6%9E%90/index.html">
+<meta property="og:site_name" content="记忆时光">
+<meta property="og:description" content="一直对请求响应不太明白，做下总结，分析。原理机制先不说了，先对用法，注意事项做下梳理 一. HTTP 无状态性HTTP 协议是无状态的(stateless)。也就是说，同一个客户端第二次访问同一个服务器上的页面时，服务器无法知道这个客户端曾经访问过，服务器也无法分辨不同的客户端。HTTP 的无状态特性简化了服务器的设计，使服务器更容易支持大量并发的HTTP 请求。 二. HTTP 持久连接HTTP">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-03-05T13:13:33.000Z">
+<meta property="article:modified_time" content="2022-06-16T07:22:10.415Z">
+<meta property="article:author" content="Zhutongtong">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="记忆时光" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">记忆时光</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Http解析" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/03/05/Http%E8%A7%A3%E6%9E%90/" class="article-date">
+  <time class="dt-published" datetime="2018-03-05T13:13:33.000Z" itemprop="datePublished">2018-03-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      HTTP解析
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>一直对请求响应不太明白，做下总结，分析。原理机制先不说了，先对用法，注意事项做下梳理</p>
+<h2 id="一-HTTP-无状态性"><a href="#一-HTTP-无状态性" class="headerlink" title="一. HTTP 无状态性"></a>一. HTTP 无状态性</h2><p>HTTP 协议是无状态的(stateless)。也就是说，同一个客户端第二次访问同一个服务器上的页面时，服务器无法知道这个客户端曾经访问过，服务器也无法分辨不同的客户端。HTTP 的无状态特性简化了服务器的设计，使服务器更容易支持大量并发的HTTP 请求。</p>
+<h2 id="二-HTTP-持久连接"><a href="#二-HTTP-持久连接" class="headerlink" title="二. HTTP 持久连接"></a>二. HTTP 持久连接</h2><p>HTTP1.0 使用的是非持久连接，主要缺点是客户端必须为每一个待请求的对象建立并维护一个新的连接，即每请求一个文档就要有两倍RTT 的开销。因为同一个页面可能存在多个对象，所以非持久连接可能使一个页面的下载变得十分缓慢，而且这种短连接增加了网络传输的负担。HTTP1.1 使用持久连接keepalive，所谓持久连接，就是服务器在发送响应后仍然在一段时间内保持这条连接，允许在同一个连接中存在多次数据请求和响应，即在持久连接情况下，服务器在发送完响应后并不关闭TCP 连接，而客户端可以通过这个连接继续请求其他对象。</p>
+<h3 id="1-HTTP-x2F-1-1-协议的持久连接有两种方式："><a href="#1-HTTP-x2F-1-1-协议的持久连接有两种方式：" class="headerlink" title="1. HTTP&#x2F;1.1 协议的持久连接有两种方式："></a>1. HTTP&#x2F;1.1 协议的持久连接有两种方式：</h3><ol>
+<li>非流水线方式：客户在收到前一个响应后才能发出下一个请求;</li>
+<li>流水线方式：客户在收到 HTTP 的响应报文之前就能接着发送新的请求报文;</li>
+</ol>
+<h2 id="三-常见的HTTP请求头"><a href="#三-常见的HTTP请求头" class="headerlink" title="三. 常见的HTTP请求头"></a>三. 常见的HTTP请求头</h2><ul>
+<li>Accept-Charset		用于指定客户端接受的字符集</li>
+<li>Accept-Encoding   用于指定可接受的内容编码</li>
+<li>Accept-Language	用于指定一种自然语言，</li>
+<li>Host 	用户指定被请求资源的Internet主机和端口号</li>
+<li>User-Agent 	客户端将它的操作系统，浏览器和其他属性告诉服务器</li>
+<li>Connection	当前连接是否保持</li>
+</ul>
+<h2 id="四-常见的HTTP响应头"><a href="#四-常见的HTTP响应头" class="headerlink" title="四. 常见的HTTP响应头"></a>四. 常见的HTTP响应头</h2><ul>
+<li>Server 	使用的服务器名称 </li>
+<li>Content-Type 	用来指明发送给接收者的实体正文的媒体类型。如Content-Type:text&#x2F;html:charset&#x3D;GBK</li>
+<li>Content-Encoding	与请求报头Accept-Encoding对应，告诉浏览器服务端采用的是什么压缩编码</li>
+<li>Content-Language 描述了资源所有的自然语言，与Accent-Language 相对应 </li>
+<li>Content-Length 指明实体正文的长度，用以字节方式存储的十进制数字来表示</li>
+<li>Keep-Alive	保持连接的时间</li>
+</ul>
+<h2 id="五-常见的HTTP状态码"><a href="#五-常见的HTTP状态码" class="headerlink" title="五. 常见的HTTP状态码"></a>五. 常见的HTTP状态码</h2><ul>
+<li>200 请求已成功，请求所希望的响应头或数据体将随此响应返回。</li>
+<li>302 请求的资源现在临时从不同的 URI 响应请求。由于这样的重定向是临时的，客户端应当继续向原有地址发送以后的请求。</li>
+<li>400 1、语义有误，当前请求无法被服务器理解。除非进行修改，否则客户端不应该重复提交这个请求。 　　2、请求参数有误。</li>
+<li>403 服务器已经理解请求，但是拒绝执行它</li>
+<li>404 请求失败，请求所希望得到的资源未被在服务器上发现。</li>
+<li>500 服务器遇到了一个未曾预料的状况，导致了它无法完成对请求的处理。一般来说，这个问题都会在服务器的程序码出错时出现</li>
+</ul>
+<h2 id="六-HTTP请求信息由3部分组成"><a href="#六-HTTP请求信息由3部分组成" class="headerlink" title="六. HTTP请求信息由3部分组成"></a>六. HTTP请求信息由3部分组成</h2><ol>
+<li>请求方法（GET&#x2F;POST）、URI、协议&#x2F;版本</li>
+<li>请求头(Request Header)</li>
+<li>请求正文</li>
+</ol>
+<p>以上图做例进行分析：</p>
+<pre><code>POST http://xg.mediportal.com.cn/health/sms/verify/telephone HTTP/1.1
+
+User-Agent: DGroupPatient/1.052701.230/Dalvik/2.1.0 (Linux; U; Android 5.1.1; KIW-AL10 Build/HONORKIW-AL10)
+Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+Host: xg.mediportal.com.cn
+Connection: Keep-Alive
+Accept-Encoding: gzip
+Content-Length: 33
+
+username=zhangsan&amp;password=admin
+</code></pre>
+<h3 id="1-请求方法、URI、协议-x2F-版本"><a href="#1-请求方法、URI、协议-x2F-版本" class="headerlink" title="1.请求方法、URI、协议&#x2F;版本"></a>1.请求方法、URI、协议&#x2F;版本</h3><p>请求的第一行是“方法、URL、协议&#x2F;版本”<br>根据HTTP标准，HTTP请求可以使用多种请求方法。<br>例如：HTTP1.1目前支持7种请求方法：GET、POST、HEAD、OPTIONS、PUT、DELETE和TARCE。</p>
+<ul>
+<li>GET 请求获取由Request-URI所标识的资源</li>
+<li>POST 在Request-URI所标识的资源后附加新的数据</li>
+<li>HEAD 请求获取由Request-URI所标识的资源的响应消息报头</li>
+<li>OPTIONS 请求查询服务器的性能，或查询与资源相关的选项和需求</li>
+<li>PUT 请求服务器存储一个资源，并用Request-URI作为其标识</li>
+<li>DELETE 请求服务器删除由Request-URI	所标识的资源</li>
+<li>TRACE 请求服务器回送收到的请求信息，主要用语测试或诊断</li>
+</ul>
+<h3 id="2-请求头"><a href="#2-请求头" class="headerlink" title="2.请求头"></a>2.请求头</h3><ul>
+<li>Content-Type 内容类型，专业术语叫“媒体类型”，即MediaType，也叫MIME类型，用来指明报文主体部分内容属于何种类型。</li>
+</ul>
+<blockquote>
+<p>但是content-type一般只存在于Post方法中，因为Get方法是不含“body”的，它的请求参数都会被编码到url后面，所以在Get方法中加Content-type是无用的。</p>
+</blockquote>
+<p>常见的<strong>MIME类型</strong>如下：</p>
+<ul>
+<li>text&#x2F;html ： HTML格式</li>
+<li>text&#x2F;plain ：纯文本格式      </li>
+<li>text&#x2F;xml ：  XML格式</li>
+<li>image&#x2F;gif ：gif图片格式    </li>
+<li>image&#x2F;jpeg ：jpg图片格式 </li>
+<li>image&#x2F;png：png图片格式</li>
+</ul>
+<p>以application开头的媒体格式类型：</p>
+<ul>
+<li>application&#x2F;xhtml+xml ：XHTML格式</li>
+<li>application&#x2F;xml     ： XML数据格式</li>
+<li>application&#x2F;atom+xml  ：Atom XML聚合格式    </li>
+<li>application&#x2F;json    ： JSON数据格式</li>
+<li>application&#x2F;pdf       ：pdf格式  </li>
+<li>application&#x2F;msword  ： Word文档格式</li>
+<li>application&#x2F;octet-stream ： 二进制流数据（如常见的文件下载）</li>
+<li>application&#x2F;x-www-form-urlencoded ： <form encType=””>中默认的encType，form表单数据被编码为key&#x2F;value格式发送到服务器（表单默认的提交数据的格式）</li>
+</ul>
+<p>另外一种常见的媒体格式是上传文件之时使用的：</p>
+<ul>
+<li>multipart&#x2F;form-data ： 需要在表单中进行文件上传时，就需要使用该格式</li>
+</ul>
+<h3 id="3-请求正文"><a href="#3-请求正文" class="headerlink" title="3. 请求正文"></a>3. 请求正文</h3><p>请求头和请求正文之间是一个空行，这个行非常重要，它表示请求头已经结束，接下来的是请求正文。请求正文中可以包含客户提交的查询字符串信息：</p>
+<pre><code>telephone=15527177736&amp;userType=1&amp;
+</code></pre>
+<h2 id="七-HTTP响应格式"><a href="#七-HTTP响应格式" class="headerlink" title="七. HTTP响应格式"></a>七. HTTP响应格式</h2><p>HTTP应答与HTTP请求相似，HTTP响应也由3个部分构成，分别是：</p>
+<ol>
+<li><p>状态行</p>
+</li>
+<li><p>响应头(Response Header)</p>
+</li>
+<li><p>响应正文</p>
+<p>HTTP&#x2F;1.1 200 OK   &#x2F;&#x2F;状态行<br>Server: nginx<br>Date: Tue, 31 May 2016 02:09:24 GMT<br>Content-Type: application&#x2F;json;charset&#x3D;UTF-8<br>Connection: keep-alive<br>Vary: Accept-Encoding<br>Access-Control-Allow-Origin: *<br>Access-Control-Allow-Headers: X-Requested-With,access_token,access-token,content-type,multipart&#x2F;form-data,application&#x2F;x-www-form-urlencoded<br>Access-Control-Allow-Methods: GET,POST,OPTIONS<br>Content-Length: 49  </p>
+<p>{“resultCode”:1,”resultMsg”:”手机号未注册”}   &#x2F;&#x2F;正文</p>
+</li>
+</ol>
+<h3 id="1-状态行"><a href="#1-状态行" class="headerlink" title="1.状态行"></a>1.状态行</h3><p>由<strong>协议版本</strong>、数字形式的<strong>状态代码</strong>、及相应的<strong>状态描述</strong>，各元素之间以空格分隔。</p>
+<ul>
+<li>状态描述： 状态描述给出了关于状态代码的简短的文字描述。</li>
+<li>状态代码：  状态代码由3位数字组成，表示请求是否被理解或被满足。</li>
+</ul>
+<p>状态代码的第一个数字定义了响应的类别，后面两位没有具体的分类。<br>第一个数字有五种可能的取值：</p>
+<ul>
+<li>1xx:   指示信息—表示请求已接收，继续处理。</li>
+<li>2xx:   成功—表示请求已经被成功接收、理解、接受。</li>
+<li>3xx:   重定向—要完成请求必须进行更进一步的操作。</li>
+<li>4xx:   客户端错误—请求有语法错误或请求无法实现。</li>
+<li>5xx: 服务器端错误—服务器未能实现合法的请求。</li>
+</ul>
+<p>状态代码 状态描述    说明</p>
+<ul>
+<li>200  OK    客户端请求成功  </li>
+<li>400  Bad Request   由于客户端请求有语法错误，不能被服务器所理解。  </li>
+<li>401  Unauthonzed   请求未经授权。这个状态代码必须和WWW-Authenticate报头域一起使用  </li>
+<li>403   Forbidden   服务器收到请求，但是拒绝提供服务。服务器通常会在响应正文中给出不提供服务的原因  </li>
+<li>404   Not Found   请求的资源不存在，例如，输入了错误的URL。  </li>
+<li>500  Internal Server Error 服务器发生不可预期的错误，导致无法完成客户端的请求。  </li>
+<li>503  Service Unavailable   服务器当前不能够处理客户端的请求，在一段时间之后，服务器可能会恢复正常</li>
+</ul>
+<h3 id="2-响应头"><a href="#2-响应头" class="headerlink" title="2.响应头"></a>2.响应头</h3><p>响应头可能包括：</p>
+<ul>
+<li>Content-Type :指明发送给接收者的实体正文的媒体类型。如：Content-Type: text&#x2F;html;charset&#x3D;ISO-8859-1Content-Type: text&#x2F;html;charset&#x3D;GB2312  </li>
+<li>Content-Language：源所用的自然语言</li>
+<li>Content-Length：指明正文的长度，</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/03/05/Http%E8%A7%A3%E6%9E%90/" data-id="cl4gp6u1n000k9cvcgayd0k3q" data-title="HTTP解析" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/08/spring%20REST%E4%B9%8B%20RestTemplate%E7%9A%84%E4%BD%BF%E7%94%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          spring REST之 RestTemplate的使用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/03/%E4%B8%80.%20%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">多线程编程技术</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Error/" rel="tag">Error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Extjs/" rel="tag">Extjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerDesigner/" rel="tag">PowerDesigner</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">java虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/" rel="tag">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" rel="tag">myeclipse插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E8%AE%B0/" rel="tag">日记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" rel="tag">生活文化与素养</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Extjs/" style="font-size: 10px;">Extjs</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/PowerDesigner/" style="font-size: 12.86px;">PowerDesigner</a> <a href="/tags/Spring/" style="font-size: 14.29px;">Spring</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 12.86px;">java虚拟机</a> <a href="/tags/linux/" style="font-size: 17.14px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">myeclipse插件</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 14.29px;">工具</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 18.57px;">数据库</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 15.71px;">日记</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 14.29px;">杂记</a> <a href="/tags/%E6%A1%86%E6%9E%B6/" style="font-size: 14.29px;">框架</a> <a href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" style="font-size: 11.43px;">生活文化与素养</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 12.86px;">笔记</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/06/16/Hexo-github-%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2-%E6%96%B0%E6%89%8B%E5%85%A5%E9%97%A8/">Hexo+github搭建静态博客(新手入门)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/test/">test</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/20/%E4%BA%94.%20volatile%20%E5%85%B3%E9%94%AE%E5%AD%97/">五. volatile关键字</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/19/%E4%B8%89.%20%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/">三. 垃圾收集器</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Zhutongtong<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

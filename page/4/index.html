@@ -1,0 +1,2173 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>记忆时光</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="描述">
+<meta property="og:type" content="website">
+<meta property="og:title" content="记忆时光">
+<meta property="og:url" content="http://example.com/page/4/index.html">
+<meta property="og:site_name" content="记忆时光">
+<meta property="og:description" content="描述">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="Zhutongtong">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="记忆时光" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">记忆时光</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-Spring MVC" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/02/17/Spring%20MVC/" class="article-date">
+  <time class="dt-published" datetime="2016-02-17T02:13:05.000Z" itemprop="datePublished">2016-02-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/02/17/Spring%20MVC/">Spring MVC笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="struts和spring-mvc"><a href="#struts和spring-mvc" class="headerlink" title="struts和spring mvc"></a>struts和spring mvc</h2><blockquote>
+<p>Struts创建的action类是多例模式，当刷新页面的时候会重新new Action类<br>spring mvc  是单例模式，只创建一个</p>
+</blockquote>
+<p>Spring mvc Bean配置文件 name的表示请求路径</p>
+<h2 id="Controller类中方法参数，返回值-的处理"><a href="#Controller类中方法参数，返回值-的处理" class="headerlink" title="Controller类中方法参数，返回值 的处理"></a>Controller类中方法参数，返回值 的处理</h2><ol>
+<li>返回string(建议)<br>a)         根据返回值找对应的显示页面。路径规则为：prefix前缀+返回值+suffix后缀组成<br>b)         代码如下：</li>
+</ol>
+<pre><code>@RequestMapping(params=&quot;method=reg4&quot;)
+public String reg4(ModelMap map) &#123;
+   System.out.println(&quot;HelloController.handleRequest()&quot;);
+   return&quot;index&quot;;
+&#125;
+</code></pre>
+<p> 前缀为：&#x2F;WEB-INF&#x2F;jsp&#x2F;    后缀是：.jsp<br> 在转发到：&#x2F;WEB-INF&#x2F;jsp&#x2F;index.jsp</p>
+<ol start="2">
+<li>也可以返回ModelMap、ModelAndView、map、List、Set、Object、无返回值。一般建议返回字符串！</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/02/17/Spring%20MVC/" data-id="cl4gp6u1u00149cvc09mt4s3b" data-title="Spring MVC笔记" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-20160130" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/01/30/20160130/" class="article-date">
+  <time class="dt-published" datetime="2016-01-30T09:50:29.000Z" itemprop="datePublished">2016-01-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/01/30/20160130/">20160130</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="http://7xpw00.com1.z0.glb.clouddn.com/image1390811658.jpg"></p>
+<p>我想回家了，第一次想家，</p>
+<p><img src="http://7xpw00.com1.z0.glb.clouddn.com/image11.jpg"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/01/30/20160130/" data-id="cl4gp6u1f00099cvc851l8zxd" data-title="20160130" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%97%A5%E8%AE%B0/" rel="tag">日记</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-extjs学习" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/01/30/extjs%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time class="dt-published" datetime="2016-01-30T05:19:25.000Z" itemprop="datePublished">2016-01-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/01/30/extjs%E5%AD%A6%E4%B9%A0/">extjs学习</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>本文引自<a target="_blank" rel="noopener" href="http://www.cnblogs.com/iamlilinfeng/archive/2012/06/18/2553481.html">李林峰的园子</a></p>
+</blockquote>
+<blockquote>
+<p>注：本教程的讲解是基于ExtJs3.0版本<a target="_blank" rel="noopener" href="http://7xpw00.com1.z0.glb.clouddn.com/imageExt3.0.rar">Ext3.0下载</a>,<a target="_blank" rel="noopener" href="http://7xpw00.com1.z0.glb.clouddn.com/imageExt3.0.API.rar">Ext3.0API下载</a>。</p>
+</blockquote>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><a target="_blank" rel="noopener" href="http://7xpw00.com1.z0.glb.clouddn.com/image%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86.txt"></a></p>
+<blockquote>
+<p>ExtJS是一种主要用于创建前端用户界面，是一个与后台技术无关的前端ajax框架。<br>功能丰富，无人能出其右<br>无论是界面之美，还是功能之强，ext的表格控件都高居榜首。<br>单选行，多选行，高亮显示选中的行，推拽改变列宽度，按列排序，这些基本功能咱们就不提了。<br>自动生成行号，支持checkbox全选，动态选择显示哪些列，支持本地以及远程分页，可以对单元格按照自己的想法进行渲染，这些也算可以想到的功能。<br>再加上可编辑grid，添加新行，删除一或多行，提示脏数据，推拽改变grid大小，grid之间推拽一或多行，甚至可以在tree和grid之间进行拖拽，啊，这些功能实在太神奇了。更令人惊叹的是，这些功能竟然都在ext表格控件里实现了。</p>
+</blockquote>
+<h2 id="什么是ext"><a href="#什么是ext" class="headerlink" title="什么是ext"></a>什么是ext</h2><blockquote>
+<ul>
+<li>1、ExtJS可以用来开发RIA也即富客户端的AJAX应用，是一个用javascript写的，主要用于创建前端用户界面，是一个与后台技术无关的前端ajax框架。因此，可以把ExtJS用在.Net、Java、Php等各种开发语言开发的应用中。ExtJs最开始基于YUI技术，由开发人员JackSlocum开发，通过参考JavaSwing等机制来组织可视化组件，无论从UI界面上CSS样式的应用，到数据解析上的异常处理，都可算是一款不可多得的JavaScript客户端技术的精品。</li>
+<li>2、Ext的UI组件模型和开发理念脱胎、成型于Yahoo组件库YUI和Java平台上Swing两者，并为开发者屏蔽了大量跨浏览器方面的处理。相对来说，EXT要比开发者直接针对DOM、W3C对象模型开发UI组件轻松。</li>
+</ul>
+</blockquote>
+<h2 id="Hello-word"><a href="#Hello-word" class="headerlink" title="Hello word"></a>Hello word</h2><p>目录结构，把 Ext 文件夹放入你的项目中<br><img src="http://7xpw00.com1.z0.glb.clouddn.com/imageQQ%E6%88%AA%E5%9B%BE20160130160124.png"></p>
+<p>index.jsp代码</p>
+<pre><code>&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;!--ExtJs框架开始--&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;/Ext/adapter/ext/ext-base.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;/Ext/ext-all.js&quot;&gt;&lt;/script&gt;
+&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/Ext/resources/css/ext-all.css&quot;/&gt;
+&lt;!--ExtJs框架结束--&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+    Ext.onReady(function () &#123;
+        Ext.MessageBox.alert(&#39;标题&#39;, &#39;Hello World!&#39;);
+    &#125;);
+&lt;/script&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;!--
+18 说明：
+19 (1)Ext.onReady():ExtJS Application的入口...就相当于Java或C#的main函数.
+20 (2)Ext.MessageBox.alert()：弹出对话框。
+21 --&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h2 id="Extjs-窗体-：-Window组件"><a href="#Extjs-窗体-：-Window组件" class="headerlink" title="Extjs 窗体 ： Window组件"></a>Extjs 窗体 ： Window组件</h2><h3 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下"></a>代码如下</h3><pre><code>&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;!--ExtJs框架开始--&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;/Ext/adapter/ext/ext-base.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;/Ext/ext-all.js&quot;&gt;&lt;/script&gt;
+&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/Ext/resources/css/ext-all.css&quot;/&gt;
+  &lt;!--ExtJs框架结束--&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+    Ext.onReady(function () &#123;
+      var win = new Ext.Window(&#123;
+        title: &#39;窗口&#39;,
+        width: 476,
+        height: 374,
+        html: &#39;&lt;div&gt;这里显示内容&lt;/div&gt;&#39;,
+        resizable: true,
+        modal: true,
+        closable: true,
+        maximizable: true,
+        minimizable: true
+      &#125;);
+      win.show();
+    &#125;);
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;!--
+说明：
+(1)var win = new Ext.Window(&#123;&#125;):创建一个新的Window窗体对象。
+(2)title: &#39;窗口&#39;：窗体的标题。
+(3)width: 476,height: 374：宽度及高度。
+(4)html: &#39;&lt;div&gt;这里是窗体内容&lt;/div&gt;&#39;：窗体内部显示的html内容。
+(5)resizable: true：是否可以调整窗体的大小，这里设置为 true。
+(6)modal: true：是否为模态窗体[什么是模态窗体？当你打开这个窗体以后，如果不能对其他的窗体进行操作，那么这个窗体就是模态窗体，否则为非模态窗体]。
+(7)closable:true：是否可以关闭，也可以理解为是否显示关闭按钮。
+(8)maximizable: true：是否可以最大化，也可以理解为是否显示最大化按钮。
+(9)minimizable: true：是否可以最小化，也可以理解为是否显示最小化按钮。
+(10)win.show()：窗体展示。
+--&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h3 id="window-组件常用的：属性、方法及事件"><a href="#window-组件常用的：属性、方法及事件" class="headerlink" title="window 组件常用的：属性、方法及事件"></a>window 组件常用的：属性、方法及事件</h3><p>一、属性</p>
+<p>plain：布尔类型，true表示强制与背景色保持协调，默认值为false。<br>resizable：布尔类型，用户是否可以调整窗体大小，默认值为true表示可以调整大小。<br>maxinizable：布尔类型，true表示显示最大化按钮，默认值为false。<br>maximized：布尔类型，true表示显示窗体时将窗体最大化，默认值为false。<br>closable：布尔类型，true表示显示关闭按钮，默认值为true。<br>bodyStyle：与边框的间距，如：bodyStyle:”padding:3px”。<br>buttonAlign：窗体中button的对齐方式(left、center、right)，默认值为right。<br>closeAction：”close”释放窗体所占内存，”hide”隐藏窗体，建议使用”hide”。</p>
+<p>二、方法 </p>
+<p>show：打开窗体。<br>hide：隐藏窗体。<br>close：关闭窗体。</p>
+<p>三、事件 </p>
+<p>show：打开窗体时触法。<br>hide：隐藏窗体时触法。<br>close：关闭窗体时触法。</p>
+<h2 id="Extjs-表单-FormPanel"><a href="#Extjs-表单-FormPanel" class="headerlink" title="Extjs 表单 : FormPanel"></a>Extjs 表单 : FormPanel</h2><h3 id="代码如下-1"><a href="#代码如下-1" class="headerlink" title="代码如下"></a>代码如下</h3><pre><code>&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;&lt;/title&gt;
+&lt;!--ExtJs框架开始--&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;/Ext/adapter/ext/ext-base.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;/Ext/ext-all.js&quot;&gt;&lt;/script&gt;
+ &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/Ext/resources/css/ext-all.css&quot; /&gt;
+&lt;!--ExtJs框架结束--&gt;
+      &lt;script type=&quot;text/javascript&quot;&gt;
+      Ext.onReady(function () &#123;
+            var form = new Ext.form.FormPanel(&#123;
+              frame: true,
+             title: &#39;表单标题&#39;,
+              style: &#39;margin:10px&#39;,
+                html: &#39;&lt;div style=&quot;padding:10px&quot;&gt;这里表单内容&lt;/div&gt;&#39;
+           &#125;);
+          var win = new Ext.Window(&#123;
+                title: &#39;窗口&#39;,
+                width: 476,
+               height: 374,
+                html: &#39;&lt;div&gt;这里是窗体内容&lt;/div&gt;&#39;,
+               resizable: true,
+               modal: true,
+               closable: true,
+               maximizable: true,
+               minimizable: true,
+                items: form
+           &#125;);
+           win.show();
+        &#125;);
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;!--
+36 说明：
+37 (1)var form = new Ext.form.FormPanel(&#123;&#125;):创建一个新的form表单对象。
+38 (2)title: &#39;表单标题&#39;：表单的标题，如果不加的话，不会出现上面的浅色表单标题栏。
+39 (3)style: &#39;margin:10px&#39;:表单的样式，加了个外10px的外边距。
+40 (4)html: &#39;&lt;div style=&quot;padding:10px&quot;&gt;这里表单内容&lt;/div&gt;&#39;：表单内显示html的内容。
+41 --&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h3 id="form-组件常用的：属性、方法及事件"><a href="#form-组件常用的：属性、方法及事件" class="headerlink" title="form 组件常用的：属性、方法及事件"></a>form 组件常用的：属性、方法及事件</h3><p>一、属性</p>
+<p>width:整型，表单宽度。<br>height:整型，表单高度。<br>url:字符串，表单提交地址。</p>
+<p>二、方法</p>
+<p>reset:表单重置。<br>isValid:表单是否验证全部通过。<br>submit:表单提交。</p>
+<h2 id="Extjs-文本框-TextField"><a href="#Extjs-文本框-TextField" class="headerlink" title="Extjs 文本框 : TextField"></a>Extjs 文本框 : TextField</h2><h3 id="代码如下-2"><a href="#代码如下-2" class="headerlink" title="代码如下"></a>代码如下</h3><pre><code>&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;&lt;/title&gt;
+    &lt;!--ExtJs框架开始--&gt;
+    &lt;script type=&quot;text/javascript&quot; src=&quot;/Ext/adapter/ext/ext-base.js&quot;&gt;&lt;/script&gt;
+    &lt;script type=&quot;text/javascript&quot; src=&quot;/Ext/ext-all.js&quot;&gt;&lt;/script&gt;
+    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/Ext/resources/css/ext-all.css&quot;/&gt;
+    &lt;!--ExtJs框架结束--&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+        Ext.onReady(function () &#123;
+            //初始化标签中的Ext:Qtip属性。
+            Ext.QuickTips.init();
+            Ext.form.Field.prototype.msgTarget = &#39;side&#39;;
+            //用户名input
+            var txtusername = new Ext.form.TextField(&#123;
+                width: 140,
+                allowBlank: false,
+                maxLength: 20,
+                name: &#39;username&#39;,
+                fieldLabel: &#39;用户名称&#39;,
+                blankText: &#39;请输入用户名&#39;,
+                maxLengthText: &#39;用户名不能超过20个字符&#39;
+            &#125;);
+            //密码input
+            var txtpassword = new Ext.form.TextField(&#123;
+                width: 140,
+                allowBlank: false,
+                maxLength: 20,
+                inputType: &#39;password&#39;,
+                name: &#39;password&#39;,
+                fieldLabel: &#39;密码&#39;,
+                blankText: &#39;请输入密码&#39;,
+                maxLengthText: &#39;密码不能超过20个字符&#39;
+            &#125;);
+            //表单
+            var form = new Ext.form.FormPanel(&#123;
+                frame: true,
+                title: &#39;表单标题&#39;,
+                style: &#39;margin:10px&#39;,
+                html: &#39;&lt;div style=&quot;padding:10px&quot;&gt;这里表单内容&lt;/div&gt;&#39;,
+                items: [txtusername, txtpassword]
+            &#125;);
+            //窗体
+            var win = new Ext.Window(&#123;
+                title: &#39;窗口&#39;,
+                width: 476,
+                height: 374,
+                html: &#39;&lt;div&gt;这里是窗体内容&lt;/div&gt;&#39;,
+                resizable: true,
+                modal: true,
+                closable: true,
+                maximizable: true,
+                minimizable: true,
+                items: form
+            &#125;);
+            win.show();
+        &#125;);
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;!--
+说明：
+(1)Ext.QuickTips.init()：QuickTips的作用是初始化标签中的Ext:Qtip属性，并为它赋予显示提示的动作。
+(2)Ext.form.Field.prototype.msgTarget = &#39;side&#39;：TextField的提示方式为：在右边缘，如上图所示，参数枚举值为&quot;qtip&quot;,&quot;title&quot;,&quot;under&quot;,&quot;side&quot;,id(元素id)，
+   side方式用的较多，右边出现红色感叹号，鼠标上去出现错误提示。
+(3)var txtusername = new Ext.form.TextField():创建一个新的TextField文本框对象。
+(4)allowBlank: false：不允许文本框为空。
+(5)maxLength: 20：文本框的最大长度为20个字符，当超过20个字符时仍然可以继续输入，但是Ext会提示警告信息。
+(6)name: &#39;password&#39;：表单名称，这个比较重要，因为我们在与服务器交互的时候，服务端是按name接收post的参数值。
+(7)fieldLabel: &#39;用户名&#39;：文本框前面显示的文字标题，如“用户名”，“密码”等。
+(8)blankText: &#39;请输入用户名&#39;：当非空校验没有通过时的提示信息。
+(9) maxLengthText: &#39;用户不能超过20个字符&#39;：当最大长度校验没有通过时的提示信息。
+--&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h3 id="textfield组件常用的：属性、方法及事件"><a href="#textfield组件常用的：属性、方法及事件" class="headerlink" title="textfield组件常用的：属性、方法及事件"></a>textfield组件常用的：属性、方法及事件</h3><p>一、属性</p>
+<p>allowBlank：是否允许为空，默认为true<br>blankText：空验证失败后显示的提示信息<br>emptyText：在一个空字段中默认显示的信息<br>grow：字段是否自动伸展和收缩，默认为false<br>growMin：收缩的最小宽度<br>growMax：伸展的最大宽度<br>inputType：字段类型：默认为text<br>maskRe：用于过滤不匹配字符输入的正则表达式<br>maxLength：字段允许输入的最大长度<br>maxLengthText：最大长度验证失败后显示的提示信息<br>minLength：字段允许输入的最小长度<br>minLengthText：最小长度验证失败后显示的提示信息</p>
+<h2 id="Extjs-按钮-：-Button"><a href="#Extjs-按钮-：-Button" class="headerlink" title="Extjs 按钮 ： Button"></a>Extjs 按钮 ： Button</h2><h3 id="代码如下-3"><a href="#代码如下-3" class="headerlink" title="代码如下"></a>代码如下</h3><pre><code>&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;&lt;/title&gt;
+  &lt;!--ExtJs框架开始--&gt;
+  &lt;script type=&quot;text/javascript&quot; src=&quot;/Ext/adapter/ext/ext-base.js&quot;&gt;&lt;/script&gt;
+  &lt;script type=&quot;text/javascript&quot; src=&quot;/Ext/ext-all.js&quot;&gt;&lt;/script&gt;
+  &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/Ext/resources/css/ext-all.css&quot; /&gt;
+  &lt;!--ExtJs框架结束--&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+    Ext.onReady(function () &#123;
+      //初始化标签中的Ext:Qtip属性。
+      Ext.QuickTips.init();
+      Ext.form.Field.prototype.msgTarget = &#39;side&#39;;
+      //提交按钮处理方法
+      var btnsubmitclick = function () &#123;
+        Ext.MessageBox.alert(&#39;提示&#39;, &#39;你点了确定按钮!&#39;);
+      &#125;
+      //重置按钮&quot;点击时&quot;处理方法
+      var btnresetclick = function () &#123;
+        Ext.MessageBox.alert(&#39;提示&#39;, &#39;你点了重置按钮!&#39;);
+      &#125;
+      //重置按钮&quot;鼠标悬停&quot;处理方法
+      var btnresetmouseover = function () &#123;
+        Ext.MessageBox.alert(&#39;提示&#39;, &#39;你鼠标悬停在重置按钮之上!&#39;);
+      &#125;
+      //提交按钮
+      var btnsubmit = new Ext.Button(&#123;
+        text: &#39;提交&#39;,
+        handler: btnsubmitclick
+      &#125;);
+      //重置按钮
+      var btnreset = new Ext.Button(&#123;
+        text: &#39;重置&#39;,
+        listeners: &#123;
+          &#39;mouseover&#39;: btnresetmouseover,
+          &#39;click&#39;: btnresetclick
+        &#125;
+      &#125;);
+      //用户名input
+      var txtusername = new Ext.form.TextField(&#123;
+        width: 140,
+        allowBlank: false,
+        maxLength: 20,
+        name: &#39;username&#39;,
+        fieldLabel: &#39;用户名称&#39;,
+        blankText: &#39;请输入用户名&#39;,
+        maxLengthText: &#39;用户名不能超过20个字符&#39;
+      &#125;);
+      //密码input
+      var txtpassword = new Ext.form.TextField(&#123;
+        width: 140,
+        allowBlank: false,
+        maxLength: 20,
+        inputType: &#39;password&#39;,
+        name: &#39;password&#39;,
+        fieldLabel: &#39;密码&#39;,
+        blankText: &#39;请输入密码&#39;,
+        maxLengthText: &#39;密码不能超过20个字符&#39;
+      &#125;);
+      //表单
+      var form = new Ext.form.FormPanel(&#123;
+        frame: true,
+        title: &#39;表单标题&#39;,
+        style: &#39;margin:10px&#39;,
+        html: &#39;&lt;div style=&quot;padding:10px&quot;&gt;这里表单内容&lt;/div&gt;&#39;,
+        items: [txtusername, txtpassword],
+        buttons: [btnsubmit, btnreset]
+      &#125;);
+      //窗体
+      var win = new Ext.Window(&#123;
+        title: &#39;窗口&#39;,
+        width: 476,
+        height: 374,
+        html: &#39;&lt;div&gt;这里是窗体内容&lt;/div&gt;&#39;,
+        resizable: true,
+        modal: true,
+        closable: true,
+        maximizable: true,
+        minimizable: true,
+        buttonAlign: &#39;center&#39;,
+        items: form
+      &#125;);
+      win.show();
+    &#125;);
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;!--
+说明：
+(1)var btnsubmit = new Ext.Button():创建一个新的Button按钮对象。
+(2)handler: btnsubmitclick：当用户点击的时候[即js中的onclick事件]执行方法btnsubmitclick。
+(3)listeners: &#123;&#39;mouseover&#39;: btnresetmouseover,&#39;click&#39;: btnresetclick&#125;：当用户点击的时候[即js中的onclick事件]执行方法btnresetclick，
+    鼠标悬停时执行方法btnresetmouseover。
+(4)handler与listeners的区别：
+    handler:执行的是首发事件，click是button这个组件的首发事件。这就是handler的运行方式：被某个组件的首要event所触发。
+            handler是一个特殊的listener。
+    listener：是一个事件名 + 处理函数的组合，事件监听，如上例代码所示，我们监听了两个事件&quot;click&quot;，与&quot;mouseover&quot;事件，并且会顺序执行。
+--&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h3 id="button组件常用的：属性、方法及事件"><a href="#button组件常用的：属性、方法及事件" class="headerlink" title="button组件常用的：属性、方法及事件"></a>button组件常用的：属性、方法及事件</h3><p>一、属性</p>
+<p>text:字符串，显示在按钮上的文字。<br>minWidth: 整型，最小宽度。</p>
+<p>二、事件</p>
+<p>handler:首发方法处理事件。<br>listeners:事件监听。</p>
+<h2 id="Extjs-登录窗体：login"><a href="#Extjs-登录窗体：login" class="headerlink" title="Extjs 登录窗体：login"></a>Extjs 登录窗体：login</h2><h3 id="代码如下-4"><a href="#代码如下-4" class="headerlink" title="代码如下"></a>代码如下</h3><pre><code>&lt;%--
+  Created by IntelliJ IDEA.
+  User: Dreamer
+  Date: 2016/1/30
+  Time: 18:11
+  To change this template use File | Settings | File Templates.
+--%&gt;
+&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;&lt;/title&gt;
+  &lt;!--ExtJs框架开始--&gt;
+  &lt;script type=&quot;text/javascript&quot; src=&quot;/Ext/adapter/ext/ext-base.js&quot;&gt;&lt;/script&gt;
+  &lt;script type=&quot;text/javascript&quot; src=&quot;/Ext/ext-all.js&quot;&gt;&lt;/script&gt;
+  &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/Ext/resources/css/ext-all.css&quot; /&gt;
+  &lt;style type=&quot;text/css&quot;&gt;
+    .loginicon
+    &#123;
+      background-image: url(image/login.gif) !important;
+    &#125;
+  &lt;/style&gt;
+  &lt;!--ExtJs框架结束--&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+    Ext.onReady(function () &#123;
+      //初始化标签中的Ext:Qtip属性。
+      Ext.QuickTips.init();
+      Ext.form.Field.prototype.msgTarget = &#39;side&#39;;
+      //提交按钮处理方法
+      var btnsubmitclick = function () &#123;
+        if (form.getForm().isValid()) &#123;
+          //通常发送到服务器端获取返回值再进行处理，我们在以后的教程中再讲解表单与服务器的交互问题。
+          Ext.Msg.alert(&quot;提示&quot;, &quot;登陆成功!&quot;);
+        &#125;
+      &#125;
+      //重置按钮&quot;点击时&quot;处理方法
+      var btnresetclick = function () &#123;
+        form.getForm().reset();
+      &#125;
+      //提交按钮
+      var btnsubmit = new Ext.Button(&#123;
+        text: &#39;提 交&#39;,
+        handler: btnsubmitclick
+      &#125;);
+      //重置按钮
+      var btnreset = new Ext.Button(&#123;
+        text: &#39;重 置&#39;,
+        handler: btnresetclick
+      &#125;);
+      //用户名input
+      var txtusername = new Ext.form.TextField(&#123;
+        width: 140,
+        allowBlank: false,
+        maxLength: 20,
+        name: &#39;username&#39;,
+        fieldLabel: &#39;用户名&#39;,
+        blankText: &#39;请输入用户名&#39;,
+        maxLengthText: &#39;用户名不能超过20个字符&#39;
+      &#125;);
+      //密码input
+      var txtpassword = new Ext.form.TextField(&#123;
+        width: 140,
+        allowBlank: false,
+        maxLength: 20,
+        inputType: &#39;password&#39;,
+        name: &#39;password&#39;,
+        fieldLabel: &#39;密　码&#39;,
+        blankText: &#39;请输入密码&#39;,
+        maxLengthText: &#39;密码不能超过20个字符&#39;
+      &#125;);
+      //验证码input
+      var txtcheckcode = new Ext.form.TextField(&#123;
+        fieldLabel: &#39;验证码&#39;,
+        id: &#39;checkcode&#39;,
+        allowBlank: false,
+        width: 76,
+        blankText: &#39;请输入验证码！&#39;,
+        maxLength: 4,
+        maxLengthText: &#39;验证码不能超过4个字符!&#39;
+      &#125;);
+      //表单
+      var form = new Ext.form.FormPanel(&#123;
+        url: &#39;******&#39;,
+        labelAlign: &#39;right&#39;,
+        labelWidth: 45,
+        frame: true,
+        cls: &#39;loginform&#39;,
+        buttonAlign: &#39;center&#39;,
+        bodyStyle: &#39;padding:6px 0px 0px 15px&#39;,
+        items: [txtusername, txtpassword, txtcheckcode],
+        buttons: [btnsubmit, btnreset]
+      &#125;);
+      //窗体
+      var win = new Ext.Window(&#123;
+        title: &#39;用户登陆&#39;,
+        iconCls: &#39;loginicon&#39;,
+        plain: true,
+        width: 276,
+        height: 174,
+        resizable: false,
+        shadow: true,
+        modal: true,
+        closable: false,
+        animCollapse: true,
+        items: form
+      &#125;);
+      win.show();
+      //创建验证码
+      var checkcode = Ext.getDom(&#39;checkcode&#39;);
+      var checkimage = Ext.get(checkcode.parentNode);
+      checkimage.createChild(&#123;
+        tag: &#39;img&#39;,
+        src: &#39;image/checkcode.gif&#39;,
+        align: &#39;absbottom&#39;,
+        style: &#39;padding-left:23px;cursor:pointer;&#39;
+      &#125;);
+    &#125;);
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;!--
+说明：
+(1)88行，iconCls: &#39;loginicon&#39;:给窗体加上小图标，样式在第12行定义。
+(2)Ext.getDom(&#39;checkcode&#39;)：根据ID获取Dom。
+(3)Ext.get(checkcode.parentNode)：根据Dom获取父节点。
+(4)checkimage.createChild()：创建子节点，标签为&lt;img src=&#39;image/checkcode.gif&#39;..../&gt;。
+(5)form.getForm().isValid()：校验表单的验证项是否全部通过。
+(6)form.getForm().reset()：重置表单。
+--&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/01/30/extjs%E5%AD%A6%E4%B9%A0/" data-id="cl4gp6u1v00159cvcaq4c73o9" data-title="extjs学习" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Extjs/" rel="tag">Extjs</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-web.xml详解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/01/27/web.xml%E8%AF%A6%E8%A7%A3/" class="article-date">
+  <time class="dt-published" datetime="2016-01-27T06:11:54.000Z" itemprop="datePublished">2016-01-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/01/27/web.xml%E8%AF%A6%E8%A7%A3/">web.xml详解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="web-xml的作用"><a href="#web-xml的作用" class="headerlink" title="web.xml的作用"></a>web.xml的作用</h3><p>web.xml，一个Tomcat工程中最重要的配置文件。web.xml没有其实也可以—-只要你确定你的项目里面不需要任何过滤器、监听器、Servlet等等。我试了一下，没有web.xml对那些已经编译成Servlet的jsp页面来说，是不影响正常显示的，但是那些没有编译成Servlet的jsp页面，访问的时候就会报500的错误了。下面逐一看一下web.xml里常用标签的作用。</p>
+<h3 id="welcome-file-list"><a href="#welcome-file-list" class="headerlink" title="welcome-file-list"></a>welcome-file-list</h3><p>这个标签是用来配置首页用的：</p>
+<pre><code>&lt;welcome-file-list&gt;
+    &lt;welcome-file&gt;index1.jsp&lt;/welcome-file&gt;
+    &lt;welcome-file&gt;index2.jsp&lt;/welcome-file&gt;
+    &lt;welcome-file&gt;index3.jsp&lt;/welcome-file&gt;
+    &lt;welcome-file&gt;index4.jsp&lt;/welcome-file&gt;
+    &lt;welcome-file&gt;/target/redirectAndFoward.jsp&lt;/welcome-file&gt;
+&lt;/welcome-file-list&gt;
+</code></pre>
+<p>这么配置的意思，就是当用户访问<a href="http://ip:port/工程名的时候，会根据welcome-file-list配置的页面列表，从项目的根目录开始找页面：">http://ip:port/工程名的时候，会根据welcome-file-list配置的页面列表，从项目的根目录开始找页面：</a></p>
+<ul>
+<li>第一个配置的index1.jsp能找到，就展示index1.jsp</li>
+<li>找不到index1.jsp，则去找第二个index2.jsp，index2.jsp能找到就展示index2.jsp，</li>
+<li>找不到index3.jsp，则去找第三个index3.jsp，以此类推，如果所有的页面都找不到则报HTTP Status 404即页面找不到</li>
+</ul>
+<p><strong>注意一下</strong>，像配置的最后一个welcome-file这种写法也是支持的，我试了一下最前面的那个”&#x2F;“可加可不加</p>
+<h3 id="error-page"><a href="#error-page" class="headerlink" title="error-page"></a>error-page</h3><p>error-page表示当HTTP返回指定状态码的时候，容器将此次请求转发到配置的指定页面： </p>
+<pre><code>&lt;error-page&gt;
+    &lt;error-code&gt;400&lt;/error-code&gt;
+    &lt;location&gt;/filter/error.jsp&lt;/location&gt;
+&lt;/error-page&gt;
+  
+&lt;error-page&gt;
+    &lt;error-code&gt;404&lt;/error-code&gt;
+    &lt;location&gt;/filter/error.jsp&lt;/location&gt;
+&lt;/error-page&gt;
+  
+&lt;error-page&gt;
+    &lt;error-code&gt;500&lt;/error-code&gt;
+    &lt;location&gt;/filter/error.jsp&lt;/location&gt;
+&lt;/error-page&gt;
+</code></pre>
+<p>这表示HTTP状态码为400、404、500的时候，此次请求都会被转发到<a href="http://ip:port/工程名/filter/error.jsp这个页面上去。注意一下这里是error-code，所以如果是200的话，是没有效果的">http://ip:port/工程名/filter/error.jsp这个页面上去。注意一下这里是error-code，所以如果是200的话，是没有效果的</a></p>
+<h3 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h3><p>走filter的顺序就是filter定义的顺序</p>
+<h3 id="servlet"><a href="#servlet" class="headerlink" title="servlet"></a>servlet</h3><p>servlet开发者比较熟悉，先匹配规则，匹配到路径后走相应的Servlet类，就不说了。下面配一个相对不那么常用的，只是相对而已，这种servlet的写法很常见：</p>
+<pre><code>&lt;servlet&gt;
+    &lt;servlet-name&gt;startUpServlet&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;com.xrq.servlet.StartUpServlet&lt;/servlet-class&gt;
+    &lt;init-param&gt;
+        &lt;param-name&gt;Name&lt;/param-name&gt;
+        &lt;param-value&gt;123&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    &lt;init-param&gt;
+        &lt;param-name&gt;Age&lt;/param-name&gt;
+        &lt;param-value&gt;456&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    &lt;load-on-startup&gt;8&lt;/load-on-startup&gt;
+&lt;/servlet&gt;
+</code></pre>
+<p>这是一个启动servlet，表示容器启动的时候servlet启动，调用其init()方法，所以首先第一个标签load-on-start，分几点说：</p>
+<ul>
+<li>load-on-startup元素标记容器是否在启动的时候就加载这个servlet（实例化并调用其init方法）</li>
+<li>它的值必须是一个整数，表示servlet应该被载入的顺序</li>
+<li>当值为0或者大于0时，表示容器在应用启动时就加载并初始化这个servlet</li>
+<li>当值小于0或者没有指定时，表示这个容器在该servlet被选择时才会去加载</li>
+<li>正数值越小，该servlet的优先级就越高，应用启动时就越先加载</li>
+<li>当值相同时，容器自己选择顺序来加载</li>
+</ul>
+<p>所以，load-on-startup中配置了一个大于等于0的正整数时，该servlet可以当作一个普通的servlet来用，无非是这个servlet启动的时候会加载其init()方法罢了。</p>
+<p>另外一个就是init-param了，表示一个键值对，只能在本servlet里面被使用，通过ServletConfig获取，StartUpServlet的写法是：</p>
+<pre><code>public class StartUpServlet extends HttpServlet&#123;
+    /**
+     * 序列化
+     */
+    private static final long serialVersionUID = 1L;
+    
+    public void init() throws ServletException
+    &#123;
+        System.out.println(&quot;StartUpServlet.init()&quot;);
+        System.out.println(&quot;Name：&quot; + getServletConfig().getInitParameter(&quot;Name&quot;));
+        System.out.println(&quot;Age：&quot; + getServletConfig().getInitParameter(&quot;Age&quot;));
+    &#125;
+    
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException
+    &#123;
+        
+    &#125;
+    
+    public void destroy()
+    &#123;
+        System.out.println(&quot;StartUpServlet.destory()&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p>servlet只能取到配置在自己的<servlet>标签内的<init-param></p>
+<h3 id="listener"><a href="#listener" class="headerlink" title="listener"></a>listener</h3><p>listener即监听器，是Servlet的监听器，它可以监听客户端的请求、服务器端的操作等，在事情发生前后做一些必要的处理。通过监听器，可以自动激发一些操作，比如监听在线用户数量，下面就写一个监听用户数量的监听器，首先web.xml配置很简单：</p>
+<pre><code>&lt;listener&gt;
+    &lt;listener-class&gt;com.xrq.listener.UserCounterListener&lt;/listener-class&gt;
+&lt;/listener&gt;
+</code></pre>
+<p>写一个监听器，监听用户数量一般都是以session创建和session失效为依据的，所以实现HttpSessionListener：</p>
+<pre><code>public class UserCounterListener implements HttpSessionListener&#123;
+    private AtomicInteger ai = new AtomicInteger(0);
+    
+    public void sessionCreated(HttpSessionEvent se)
+    &#123;
+        ai.incrementAndGet();
+    &#125;
+    
+    public void sessionDestroyed(HttpSessionEvent se)
+    &#123;
+        ai.decrementAndGet();
+    &#125;
+    
+    public int getUserCount()
+    &#123;
+        return ai.get();
+    &#125;
+&#125;
+</code></pre>
+<p>除了监听session的监听器外，再介绍一些别的监听器接口：</p>
+<h4 id="ServletContextListener"><a href="#ServletContextListener" class="headerlink" title="ServletContextListener"></a>ServletContextListener</h4><p>用于监听WEB引用启动和销毁的事件，SevletContextListener是ServletContext的监听者，如果ServletContext发生变化，如服务器启动、服务器关闭，都会被ServletContextListener监听到。监听事件为ServletContextEvent</p>
+<h4 id="ServletContextAttributeListener"><a href="#ServletContextAttributeListener" class="headerlink" title="ServletContextAttributeListener"></a>ServletContextAttributeListener</h4><p>用于监听WEB应用属性改变的事件，包括添加属性、删除属性、修改属性。监听时间为ServletContextAttributeEvent</p>
+<h4 id="HttpSessionBindingListener"><a href="#HttpSessionBindingListener" class="headerlink" title="HttpSessionBindingListener"></a>HttpSessionBindingListener</h4><p>HttpSessionBindingListener是唯一一个不需要在web.xml中配置的Listener，当我们的类实现了HttpSessionBindListener接口后，只要对象加入session或者从session中移除，容器会分别自动调用以下两个方法：</p>
+<ul>
+<li>void valueBound(HttpSesssionBindEvent event)</li>
+<li>void valueUnbound(HttpSessionBindingEvent event)</li>
+</ul>
+<p><strong>注意</strong>，这个监听器的触发是针对于实现了该监听器的类的，只有把实现了该监听器的类set进session或从session中remove才会触发这个监听器</p>
+<h4 id="HttpSessionAttributeListener"><a href="#HttpSessionAttributeListener" class="headerlink" title="HttpSessionAttributeListener"></a>HttpSessionAttributeListener</h4><p>用于监听HttpSession中的属性的操作，当session里面增加一个属性时，触发attributeAdded(HttpSessionBindEvent se)方法；当在session中删除一个属性时，触发attributeRemoved(HttpSessionBindEvent se)方法；当session属性被重新设置时，触发attributeReplaced(HttpSessionBindingEvent se)方法。</p>
+<p><strong>注意</strong>，这个监听器的触发是针对所有的session的，只要session的属性发生变化，都会触发这个监听器</p>
+<h4 id="HttpSessionListener"><a href="#HttpSessionListener" class="headerlink" title="HttpSessionListener"></a>HttpSessionListener</h4><p>这个上面已经写过了，监听HttpSession。当创建一个session时，触发sessionCreated(HttpSessionEvent se)方法；当销毁一个session时，会触发sessionDestoryed(HttpSessionEvent se)方法</p>
+<h4 id="HttpSessionActivationListener"><a href="#HttpSessionActivationListener" class="headerlink" title="HttpSessionActivationListener"></a>HttpSessionActivationListener</h4><p>这个用得不太多，主要监听同一个session转移至不同的JVM的情形</p>
+<h4 id="ServletRequestListener和ServletRequestAttributeListener"><a href="#ServletRequestListener和ServletRequestAttributeListener" class="headerlink" title="ServletRequestListener和ServletRequestAttributeListener"></a>ServletRequestListener和ServletRequestAttributeListener</h4><p>和ServletContextListener和ServletContextAttributeListener类似，前者监听Request的创建和销毁、后者监听Request中属性的增删改</p>
+<h3 id="context-param"><a href="#context-param" class="headerlink" title="context-param"></a>context-param</h3><p>context-param里面配置的键值对是全局共享的，整个web项目都能取到这个上下文，比方说我在web.xml里面配置了一个HTTP端口和一个HTTPS端口：</p>
+<pre><code>&lt;context-param&gt;
+    &lt;param-name&gt;NotSSLPort&lt;/param-name&gt;
+    &lt;param-value&gt;8080&lt;/param-value&gt;
+&lt;/context-param&gt;
+&lt;context-param&gt;
+    &lt;param-name&gt;SSLPort&lt;/param-name&gt;
+    &lt;param-value&gt;8443&lt;/param-value&gt;
+&lt;/context-param&gt;
+</code></pre>
+<p>servlet可以这么取：</p>
+<pre><code>protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException
+&#123;
+    System.out.println(&quot;NotSSLPort：&quot; + getServletContext().getInitParameter(&quot;NotSSLPort&quot;));
+    System.out.println(&quot;SSLPort：&quot; + getServletContext().getInitParameter(&quot;SSLPort&quot;));
+&#125;
+</code></pre>
+<p>filter可以这么取：</p>
+<pre><code>public void doFilter(ServletRequest request, ServletResponse response,
+        FilterChain chain) throws IOException, ServletException
+&#123;
+    HttpServletRequest req = (HttpServletRequest)request;
+    ServletContext sc = req.getSession().getServletContext();
+    System.out.println(&quot;NotSSLPort：&quot; + sc.getInitParameter(&quot;NotSSLPort&quot;));
+    System.out.println(&quot;SSLPort：&quot; + sc.getInitParameter(&quot;SSLPort&quot;));
+    chain.doFilter(request, response);
+&#125;
+</code></pre>
+<p>listener可以这么取，以ServletContextListener为例：</p>
+<pre><code>public void contextInitialized(ServletContextEvent sce)
+&#123;
+    System.out.println(&quot;Enter SCListener.contextInitialized&quot;);
+    System.out.println(&quot;NotSSLPort：&quot; + sce.getServletContext().getInitParameter(&quot;NotSSLPort&quot;));
+    System.out.println(&quot;SSLPort：&quot; + sce.getServletContext().getInitParameter(&quot;SSLPort&quot;));
+&#125;
+</code></pre>
+<p>反正最终的目的就是取到一个ServletContext就对了。是不是感觉ServletContext很熟悉呢？没错，看一下jsp默认的内置对象，随便打开一个转换成Servlet的jsp页面，里面都有内置对象的定义：</p>
+<pre><code>PageContext pageContext = null;
+HttpSession session = null;
+ServletContext application = null;
+ServletConfig config = null;
+JspWriter out = null;
+Object page = this;
+JspWriter _jspx_out = null;
+PageContext _jspx_page_context = null;
+</code></pre>
+<p>ServletContext也就是我们常说的Application</p>
+<h3 id=""><a href="#" class="headerlink" title=""></a><mime-mapping></h3><p><mime-mapping>可能不太常见，这个标签是用来指定对应的格式的浏览器处理方式的，添加mime-type的映射，就可以避免某些类型的文件直接在浏览器中打开了。</p>
+<p>举个例子：</p>
+<pre><code>&lt;mime-mapping&gt;
+    &lt;extension&gt;doc&lt;/extension&gt;
+    &lt;mime-type&gt;application/msword&lt;/mime-type&gt;
+&lt;/mime-mapping&gt;
+&lt;mime-mapping&gt;
+    &lt;extension&gt;pdf&lt;/extension&gt;
+    &lt;mime-type&gt;application/pdf&lt;/mime-type&gt;
+&lt;/mime-mapping&gt;
+&lt;mime-mapping&gt;
+    &lt;extension&gt;rar&lt;/extension&gt;
+    &lt;mime-type&gt;application/x-rar-compressed&lt;/mime-type&gt;
+&lt;/mime-mapping&gt;
+&lt;mime-mapping&gt;
+    &lt;extension&gt;txt&lt;/extension&gt;
+    &lt;mime-type&gt;text/plain&lt;/mime-type&gt;
+&lt;/mime-mapping&gt;
+&lt;mime-mapping&gt;
+    &lt;extension&gt;xls&lt;/extension&gt;
+    &lt;mime-type&gt;application/vnd.ms-excel&lt;/mime-type&gt;
+&lt;/mime-mapping&gt;
+</code></pre>
+<h3 id="session-config"><a href="#session-config" class="headerlink" title="session-config"></a>session-config</h3><p>session-config是用来配置session失效时间的，因为session-config里面只有一个子标签：</p>
+<pre><code>&lt;session-config&gt;
+    &lt;session-timeout&gt;30&lt;/session-timeout&gt;
+&lt;/session-config&gt;
+</code></pre>
+<p>以分钟为单位。当然，代码里面也可以设置：</p>
+<p>“request.getSession.setMaxInactiveInterval(30 * 60);”就可以了，单位为秒</p>
+<h3 id="元素加载顺序"><a href="#元素加载顺序" class="headerlink" title="元素加载顺序"></a>元素加载顺序</h3><p>首先可以肯定，加载顺序与它们在web.xml文件中的先后顺序无关，即不会因为filter写在listener前面就先加载filter。最终得出的结论是listener-&gt;filter-&gt;servlet。</p>
+<p>然后是context-param，用于向ServletContext提供键值对，即应用程序上下文信息，listener、filter、servlet都可能会用到这些上下文中的信息，那么context-param是否应该写在listener、filter、servlet前面呢？未必，context-param可以写在任何位置，因此真正的加载顺序应该是：context-param-&gt;listener-&gt;filter-&gt;servlet。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/01/27/web.xml%E8%AF%A6%E8%A7%A3/" data-id="cl4gp6u2b002f9cvc4nq15vp5" data-title="web.xml详解" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Listener 监听器" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/01/27/Listener%20%E7%9B%91%E5%90%AC%E5%99%A8/" class="article-date">
+  <time class="dt-published" datetime="2016-01-27T06:00:38.000Z" itemprop="datePublished">2016-01-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/01/27/Listener%20%E7%9B%91%E5%90%AC%E5%99%A8/">Listener 监听器</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="Listener的定义与作用"><a href="#Listener的定义与作用" class="headerlink" title="Listener的定义与作用"></a>Listener的定义与作用</h3><blockquote>
+<p>监听器Listener就是在application,session,request三个对象创建、销毁或者往其中添加修改删除属性时自动执行代码的功能组件。<br>Listener是Servlet的监听器，可以监听客户端的请求，服务端的操作等。</p>
+</blockquote>
+<h3 id="Listener的分类与使用"><a href="#Listener的分类与使用" class="headerlink" title="Listener的分类与使用"></a>Listener的分类与使用</h3><p>主要有以下三类：</p>
+<h4 id="ServletContext监听"><a href="#ServletContext监听" class="headerlink" title="ServletContext监听"></a>ServletContext监听</h4><p>ServletContextListener：用于对Servlet整个上下文进行监听（创建、销毁）。</p>
+<pre><code>public void contextInitialized(ServletContextEvent sce);//上下文初始化
+public void contextDestroyed(ServletContextEvent sce);//上下文销毁
+
+public ServletContext getServletContext();//ServletContextEvent事件：取得一个ServletContext（application）对象
+</code></pre>
+<p>ServletContextAttributeListener：对Servlet上下文属性的监听（增删改属性）。</p>
+<pre><code>public void attributeAdded(ServletContextAttributeEvent scab);//增加属性
+public void attributeRemoved(ServletContextAttributeEvent scab);//属性删除
+public void attributeRepalced(ServletContextAttributeEvent scab);//属性替换（第二次设置同一属性）
+
+//ServletContextAttributeEvent事件：能取得设置属性的名称与内容
+public String getName();//得到属性名称
+public Object getValue();//取得属性的值
+</code></pre>
+<h4 id="Session监听"><a href="#Session监听" class="headerlink" title="Session监听"></a>Session监听</h4><p>Session属于http协议下的内容，接口位于javax.servlet.http.*包下。</p>
+<p>HttpSessionListener接口：对Session的整体状态的监听。</p>
+<pre><code>public void sessionCreated(HttpSessionEvent se);//session创建
+public void sessionDestroyed(HttpSessionEvent se);//session销毁
+
+//HttpSessionEvent事件：
+public HttpSession getSession();//取得当前操作的session
+</code></pre>
+<p>HttpSessionAttributeListener接口：对session的属性监听。</p>
+<pre><code>public void attributeAdded(HttpSessionBindingEvent se);//增加属性
+public void attributeRemoved(HttpSessionBindingEvent se);//删除属性
+public void attributeReplaced(HttpSessionBindingEvent se);//替换属性
+
+//HttpSessionBindingEvent事件：
+public String getName();//取得属性的名称
+public Object getValue();//取得属性的值
+public HttpSession getSession();//取得当前的session
+</code></pre>
+<p>session的销毁有两种情况：</p>
+<ul>
+<li><p>session超时，web.xml配置：</p>
+ <session-config>
+     <session-timeout>120</session-timeout><!--session120分钟后超时销毁-->
+ </session-config>
+
+</li>
+<li><p>手工使session失效</p>
+<p> public void invalidate();&#x2F;&#x2F;使session失效方法。session.invalidate();</p>
+</li>
+</ul>
+<h4 id="Request监听"><a href="#Request监听" class="headerlink" title="Request监听"></a>Request监听</h4><p>ServletRequestListener：用于对Request请求进行监听（创建、销毁）。</p>
+<pre><code>public void requestInitialized(ServletRequestEvent sre);//request初始化
+public void requestDestroyed(ServletRequestEvent sre);//request销毁
+
+//ServletRequestEvent事件：
+public ServletRequest getServletRequest();//取得一个ServletRequest对象
+public ServletContext getServletContext();//取得一个ServletContext（application）对象
+</code></pre>
+<p>ServletRequestAttributeListener：对Request属性的监听（增删改属性）。</p>
+<pre><code>public void attributeAdded(ServletRequestAttributeEvent srae);//增加属性
+public void attributeRemoved(ServletRequestAttributeEvent srae);//属性删除
+public void attributeReplaced(ServletRequestAttributeEvent srae);//属性替换（第二次设置同一属性）
+
+//ServletRequestAttributeEvent事件：能取得设置属性的名称与内容
+public String getName();//得到属性名称
+public Object getValue();//取得属性的值
+</code></pre>
+<h4 id="在web-xml中配置"><a href="#在web-xml中配置" class="headerlink" title="在web.xml中配置"></a>在web.xml中配置</h4><p>Listener配置信息必须在Filter和Servlet配置之前，Listener的初始化（ServletContentListener初始化）比Servlet和Filter都优先，而销毁比Servlet和Filter都慢。</p>
+<pre><code>&lt;listener&gt;
+    &lt;listener-class&gt;com.listener.class&lt;/listener-class&gt;
+&lt;/listener&gt;
+</code></pre>
+<h3 id="Listener应用实例"><a href="#Listener应用实例" class="headerlink" title="Listener应用实例"></a>Listener应用实例</h3><h4 id="利用HttpSessionListener统计最多在线用户人数"><a href="#利用HttpSessionListener统计最多在线用户人数" class="headerlink" title="利用HttpSessionListener统计最多在线用户人数"></a>利用HttpSessionListener统计最多在线用户人数</h4><pre><code>import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSessionEvent;
+import javax.servlet.http.HttpSessionListener;
+
+public class HttpSessionListenerImpl implements HttpSessionListener &#123;
+
+    public void sessionCreated(HttpSessionEvent event) &#123;
+        ServletContext app = event.getSession().getServletContext();
+        int count = Integer.parseInt(app.getAttribute(&quot;onLineCount&quot;).toString());
+        count++;
+        app.setAttribute(&quot;onLineCount&quot;, count);
+        int maxOnLineCount = Integer.parseInt(app.getAttribute(&quot;maxOnLineCount&quot;).toString());
+        if (count &gt; maxOnLineCount) &#123;
+            //记录最多人数是多少
+            app.setAttribute(&quot;maxOnLineCount&quot;, count);
+            DateFormat df = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);
+            //记录在那个时刻达到上限
+            app.setAttribute(&quot;date&quot;, df.format(new Date()));
+        &#125;
+    &#125;
+    //session注销、超时时候调用，停止tomcat不会调用
+    public void sessionDestroyed(HttpSessionEvent event) &#123;
+        ServletContext app = event.getSession().getServletContext();
+        int count = Integer.parseInt(app.getAttribute(&quot;onLineCount&quot;).toString());
+        count--;
+        app.setAttribute(&quot;onLineCount&quot;, count);    
+        
+    &#125;
+&#125;
+</code></pre>
+<h4 id="Spring使用ContextLoaderListener加载ApplicationContext配置信息"><a href="#Spring使用ContextLoaderListener加载ApplicationContext配置信息" class="headerlink" title="Spring使用ContextLoaderListener加载ApplicationContext配置信息"></a>Spring使用ContextLoaderListener加载ApplicationContext配置信息</h4><p>ContextLoaderListener的作用就是启动Web容器时，自动装配ApplicationContext的配置信息。因为它实现了ServletContextListener这个接口，在web.xml配置这个监听器，启动容器时，就会默认执行它实现的方法。</p>
+<p>ContextLoaderListener如何查找ApplicationContext.xml的配置位置以及配置多个xml：如果在web.xml中不写任何参数配置信息，默认的路径是”&#x2F;WEB-INF&#x2F;applicationContext.xml”，在WEB-INF目录下创建的xml文件的名称必须是applicationContext.xml（在MyEclipse中把xml文件放置在src目录下）。如果是要自定义文件名可以在web.xml里加入contextConfigLocation这个context参数。</p>
+<pre><code>&lt;context-param&gt;
+    &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+    &lt;param-value&gt;classpath:spring/applicationContext-*.xml&lt;/param-value&gt;&lt;!-- 采用的是通配符方式，查找WEB-INF/spring目录下xml文件。如有多个xml文件，以“,”分隔。 --&gt;
+&lt;/context-param&gt;
+
+&lt;listener&gt;
+    &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
+&lt;/listener&gt;
+</code></pre>
+<h4 id="Spring使用Log4jConfigListener配置Log4j日志"><a href="#Spring使用Log4jConfigListener配置Log4j日志" class="headerlink" title="Spring使用Log4jConfigListener配置Log4j日志"></a>Spring使用Log4jConfigListener配置Log4j日志</h4><p>Spring使用Log4jConfigListener的好处：</p>
+<ol>
+<li><p>动态的改变记录级别和策略，不需要重启Web应用。</p>
+</li>
+<li><p>把log文件定在 &#x2F;WEB-INF&#x2F;logs&#x2F; 而不需要写绝对路径。因为系统把web目录的路径压入一个叫webapp.root的系统变量。这样写log文件路径时不用写绝对路径了。</p>
+</li>
+<li><p>可以把log4j.properties和其他properties一起放在&#x2F;WEB-INF&#x2F; ，而不是Class-Path。</p>
+</li>
+<li><p>设置log4jRefreshInterval时间，开一条watchdog线程每隔段时间扫描一下配置文件的变化。</p>
+<context-param>
+    <param-name>webAppRootKey</param-name>
+    <param-value>project.root</param-value><!-- 用于定位log文件输出位置在web应用根目录下，log4j配置文件中写输出位置：log4j.appender.FILE.File=${project.root}/logs/project.log -->
+</context-param>
+<context-param>
+    <param-name>log4jConfigLocation</param-name>
+    <param-value>classpath:log4j.properties</param-value><!-- 载入log4j配置文件 -->
+</context-param>
+<context-param>
+    <param-name>log4jRefreshInterval</param-name>
+    <param-value>60000</param-value><!--Spring刷新Log4j配置文件的间隔60秒,单位为millisecond-->
+</context-param>
+
+<listener>
+    <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+</listener></li>
+</ol>
+<h4 id="Spring使用IntrospectorCleanupListener清理缓存"><a href="#Spring使用IntrospectorCleanupListener清理缓存" class="headerlink" title="Spring使用IntrospectorCleanupListener清理缓存"></a>Spring使用IntrospectorCleanupListener清理缓存</h4><p>这个监听器的作用是在web应用关闭时刷新JDK的JavaBeans的Introspector缓存，以确保Web应用程序的类加载器以及其加载的类正确的释放资源。</p>
+<p>如果JavaBeans的Introspector已被用来分析应用程序类，系统级的Introspector缓存将持有这些类的一个硬引用。因此，这些类和Web应用程序的类加载器在Web应用程序关闭时将不会被垃圾收集器回收！而IntrospectorCleanupListener则会对其进行适当的清理，已使其能够被垃圾收集器回收。</p>
+<p>唯一能够清理Introspector的方法是刷新整个Introspector缓存，没有其他办法来确切指定应用程序所引用的类。这将删除所有其他应用程序在服务器的缓存的Introspector结果。</p>
+<p>在使用Spring内部的bean机制时，不需要使用此监听器，因为Spring自己的introspection results cache将会立即刷新被分析过的JavaBeans Introspector cache，而仅仅会在应用程序自己的ClassLoader里面持有一个cache。虽然Spring本身不产生泄漏，注意，即使在Spring框架的类本身驻留在一个“共同”类加载器（如系统的ClassLoader）的情况下，也仍然应该使用使用IntrospectorCleanupListener。在这种情况下，这个IntrospectorCleanupListener将会妥善清理Spring的introspection cache。</p>
+<p>　　应用程序类，几乎不需要直接使用JavaBeans Introspector，所以，通常都不是Introspector resource造成内存泄露。相反，许多库和框架，不清理Introspector，例如： Struts和Quartz。</p>
+<p>　　需要注意的是一个简单Introspector泄漏将会导致整个Web应用程序的类加载器不会被回收！这样做的结果，将会是在web应用程序关闭时，该应用程序所有的静态类资源（比如：单实例对象）都没有得到释放。而导致内存泄露的根本原因其实并不是这些未被回收的类！</p>
+<p>　　注意：IntrospectorCleanupListener应该注册为web.xml中的第一个Listener，在任何其他Listener之前注册，比如在Spring’s ContextLoaderListener注册之前，才能确保IntrospectorCleanupListener在Web应用的生命周期适当时机生效。</p>
+<pre><code>&lt;!-- memory clean --&gt;
+&lt;listener&gt;
+    &lt;listener-class&gt;org.springframework.web.util.IntrospectorCleanupListener&lt;/listener-class&gt;
+&lt;/listener&gt;
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/01/27/Listener%20%E7%9B%91%E5%90%AC%E5%99%A8/" data-id="cl4gp6u1o000o9cvcbqbzhi6b" data-title="Listener 监听器" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Log4J配置" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/01/26/Log4J%E9%85%8D%E7%BD%AE/" class="article-date">
+  <time class="dt-published" datetime="2016-01-26T08:27:30.000Z" itemprop="datePublished">2016-01-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/01/26/Log4J%E9%85%8D%E7%BD%AE/">Log4j配置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><blockquote>
+<p>Log4J的配置文件(Configuration File)就是用来设置记录器的级别、存放器和布局的，它可接key&#x3D;value格式的设置或xml格式的设置信息。通过配置，可以创建出Log4J的运行环境。</p>
+</blockquote>
+<h4 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h4><p>Log4J配置文件的基本格式如下：</p>
+<pre><code>#配置根Logger
+log4j.rootLogger  =   [ level ]   ,  appenderName1 ,  appenderName2 ,  …
+
+#配置日志信息输出目的地Appender
+log4j.appender.appenderName  =  fully.qualified.name.of.appender.class 
+    log4j.appender.appenderName.option1  =  value1
+    ...
+    log4j.appender.appenderName.optionN  =  valueN 
+
+#配置日志信息的格式（布局）
+log4j.appender.appenderName.layout  =  fully.qualified.name.of.layout.class 
+    log4j.appender.appenderName.layout.option1  =  value1
+    ...
+    log4j.appender.appenderName.layout.optionN  =  valueN 
+</code></pre>
+<h4 id="其中-level-是日志输出级别，共有5级："><a href="#其中-level-是日志输出级别，共有5级：" class="headerlink" title="其中 [level] 是日志输出级别，共有5级："></a>其中 [level] 是日志输出级别，共有5级：</h4><pre><code>FATAL       0  
+ERROR       3  
+WARN        4  
+INFO        6  
+DEBUG       7 
+</code></pre>
+<h4 id="Appender-为日志输出目的地，Log4j提供的appender有以下几种："><a href="#Appender-为日志输出目的地，Log4j提供的appender有以下几种：" class="headerlink" title="Appender 为日志输出目的地，Log4j提供的appender有以下几种："></a>Appender 为日志输出目的地，Log4j提供的appender有以下几种：</h4><pre><code>org.apache.log4j.ConsoleAppender（控制台），
+org.apache.log4j.FileAppender（文件），
+org.apache.log4j.DailyRollingFileAppender（每天产生一个日志文件），
+org.apache.log4j.RollingFileAppender（文件大小到达指定尺寸的时候产生一个新的文件），
+org.apache.log4j.WriterAppender（将日志信息以流格式发送到任意指定的地方）
+</code></pre>
+<h4 id="Layout：日志输出格式，Log4j提供的layout有以下几种："><a href="#Layout：日志输出格式，Log4j提供的layout有以下几种：" class="headerlink" title="Layout：日志输出格式，Log4j提供的layout有以下几种："></a>Layout：日志输出格式，Log4j提供的layout有以下几种：</h4><pre><code>org.apache.log4j.HTMLLayout（以HTML表格形式布局），
+org.apache.log4j.PatternLayout（可以灵活地指定布局模式），
+org.apache.log4j.SimpleLayout（包含日志信息的级别和信息字符串），
+org.apache.log4j.TTCCLayout（包含日志产生的时间、线程、类别等等信息）
+</code></pre>
+<h4 id="打印参数-Log4J采用类似C语言中的printf函数的打印格式格式化日志信息，如下"><a href="#打印参数-Log4J采用类似C语言中的printf函数的打印格式格式化日志信息，如下" class="headerlink" title="打印参数: Log4J采用类似C语言中的printf函数的打印格式格式化日志信息，如下:"></a>打印参数: Log4J采用类似C语言中的printf函数的打印格式格式化日志信息，如下:</h4><pre><code>%m   输出代码中指定的消息
+%p   输出优先级，即DEBUG，INFO，WARN，ERROR，FATAL 
+%r   输出自应用启动到输出该log信息耗费的毫秒数 
+%c   输出所属的类目，通常就是所在类的全名 
+%t   输出产生该日志事件的线程名 
+%n   输出一个回车换行符，Windows平台为“\r\n”，Unix平台为“\n” 
+%d   输出日志时间点的日期或时间，默认格式为ISO8601，也可以在其后指定格式，比如：%d&#123;yyy MMM dd HH:mm:ss , SSS&#125;，输出类似：2002年10月18日  22 ： 10 ： 28 ， 921  
+%l   输出日志事件的发生位置，包括类目名、发生的线程，以及在代码中的行数。举例：Testlog4.main(TestLog4.java: 10 ) 
+</code></pre>
+<h4 id="在代码中初始化Logger"><a href="#在代码中初始化Logger" class="headerlink" title="在代码中初始化Logger:"></a>在代码中初始化Logger:</h4><pre><code>- 在程序中调用BasicConfigurator.configure()方法：给根记录器增加一个ConsoleAppender，输出格式通过PatternLayout设为&quot;%-4r [%t] %-5p %c %x - %m%n&quot;，还有根记录器的默认级别是Level.DEBUG. 
+- 配置放在文件里，通过命令行参数传递文件名字，通过PropertyConfigurator.configure(args[x])解析并配置；
+- 配置放在文件里，通过环境变量传递文件名等信息，利用log4j默认的初始化过程解析并配置；
+- 配置放在文件里，通过应用服务器配置传递文件名等信息，利用一个特殊的servlet来完成配置。
+</code></pre>
+<h4 id="为不同的-Appender-设置日志输出级别："><a href="#为不同的-Appender-设置日志输出级别：" class="headerlink" title="为不同的 Appender 设置日志输出级别："></a>为不同的 Appender 设置日志输出级别：</h4><p>当调试系统时，我们往往注意的只是异常级别的日志输出，但是通常所有级别的输出都是放在一个文件里的，如果日志输出的级别是BUG！？那就慢慢去找吧。<br>这时我们也许会想要是能把异常信息单独输出到一个文件里该多好啊。当然可以，Log4j已经提供了这样的功能，我们只需要在配置中修改Appender的Threshold 就能实现,比如下面的例子：</p>
+<h4 id="配置文件-1"><a href="#配置文件-1" class="headerlink" title="配置文件"></a>配置文件</h4><pre><code>### set log levels ###
+log4j.rootLogger = debug ,  stdout ,  D ,  E
+
+### 输出到控制台 ###
+log4j.appender.stdout = org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.Target = System.out
+log4j.appender.stdout.layout = org.apache.log4j.PatternLayout
+log4j.appender.stdout.layout.ConversionPattern =  %d&#123;ABSOLUTE&#125; %5p %c&#123; 1 &#125;:%L - %m%n
+
+### 输出到日志文件 ###
+log4j.appender.D = org.apache.log4j.DailyRollingFileAppender
+log4j.appender.D.File = logs/log.log
+log4j.appender.D.Append = true
+log4j.appender.D.Threshold = DEBUG ## 输出DEBUG级别以上的日志
+log4j.appender.D.layout = org.apache.log4j.PatternLayout
+log4j.appender.D.layout.ConversionPattern = %-d&#123;yyyy-MM-dd HH:mm:ss&#125;  [ %t:%r ] - [ %p ]  %m%n
+
+### 保存异常信息到单独文件 ###
+log4j.appender.D = org.apache.log4j.DailyRollingFileAppender
+log4j.appender.D.File = logs/error.log ## 异常日志文件名
+log4j.appender.D.Append = true
+log4j.appender.D.Threshold = ERROR ## 只输出ERROR级别以上的日志!!!
+log4j.appender.D.layout = org.apache.log4j.PatternLayout
+log4j.appender.D.layout.ConversionPattern = %-d&#123;yyyy-MM-dd HH:mm:ss&#125;  [ %t:%r ] - [ %p ]  %m%n
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/01/26/Log4J%E9%85%8D%E7%BD%AE/" data-id="cl4gp6u1p000q9cvcglik49dz" data-title="Log4j配置" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-mybatis" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/01/26/mybatis/" class="article-date">
+  <time class="dt-published" datetime="2016-01-26T03:28:48.000Z" itemprop="datePublished">2016-01-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/01/26/mybatis/">mybatis</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><blockquote>
+<p>MyBatis是支持普通SQL查询，存储过程和高级映射的优秀持久层框架。MyBatis消除了几乎所有的JDBC代码和参数的手工设置以及对结果集的检索封装。MyBatis可以使用简单的XML或注解用于配置和原始映射，将接口和Java的POJO（Plain Old Java Objects，普通的Java对象）映射成数据库中的记录</p>
+</blockquote>
+<h2 id="添加jar-包"><a href="#添加jar-包" class="headerlink" title="添加jar 包"></a>添加jar 包</h2><pre><code>【mybatis】
+    mybatis-3.1.1.jar
+【MYSQL驱动包】
+    mysql-connector-java-5.1.7-bin.jar
+</code></pre>
+<h2 id="添加Mybatis的配置文件conf-xml"><a href="#添加Mybatis的配置文件conf-xml" class="headerlink" title="添加Mybatis的配置文件conf.xml"></a>添加Mybatis的配置文件conf.xml</h2><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE configuration PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot; &quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;
+&lt;configuration&gt;
+    &lt;environments default=&quot;development&quot;&gt;
+        &lt;environment id=&quot;development&quot;&gt;
+            &lt;transactionManager type=&quot;JDBC&quot; /&gt;
+            &lt;dataSource type=&quot;POOLED&quot;&gt;
+                &lt;property name=&quot;driver&quot; value=&quot;oracle.jdbc.driver.OracleDriver&quot; /&gt;
+                &lt;property name=&quot;url&quot; value=&quot;jdbc:oracle:thin:@localhost:1521:orcl&quot; /&gt;
+                &lt;property name=&quot;username&quot; value=&quot;test&quot; /&gt;
+                &lt;property name=&quot;password&quot; value=&quot;ztt123456&quot; /&gt;
+            &lt;/dataSource&gt;
+        &lt;/environment&gt;
+    &lt;/environments&gt;
+    &lt;mappers&gt;
+        &lt;mapper resource=&quot;com/dream/bean/userMapper.xml&quot;/&gt;
+    &lt;/mappers&gt;
+&lt;/configuration&gt;
+</code></pre>
+<h2 id="定义表所对应的实体类"><a href="#定义表所对应的实体类" class="headerlink" title="定义表所对应的实体类"></a>定义表所对应的实体类</h2><pre><code>public class User &#123;
+private int id;
+private String name;
+private int age;
+//get,set方法
+&#125;
+</code></pre>
+<h2 id="定义操作users表的sql映射文件userMapper-xml"><a href="#定义操作users表的sql映射文件userMapper-xml" class="headerlink" title="定义操作users表的sql映射文件userMapper.xml"></a>定义操作users表的sql映射文件userMapper.xml</h2><pre><code>&lt;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE mapper PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot; &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
+&lt;mapper namespace=&quot;com.dream.bean.userMapper&quot;&gt;
+ &lt;insert id=&quot;insertUser&quot; parameterType=&quot;com.dream.bean.User&quot;&gt;
+    insert into user11(id,name,age) values(#&#123;id&#125;,#&#123;name&#125;,#&#123;age&#125;)
+&lt;/insert&gt;
+
+&lt;select id=&quot;getUser&quot; parameterType=&quot;int&quot;
+    resultType=&quot;com.dream.bean.User&quot;&gt;
+    select * from user11 where id=#&#123;id&#125;
+&lt;/select&gt;
+
+&lt;/mapper&gt;
+</code></pre>
+<h2 id="编写测试代码：执行定义的select语句"><a href="#编写测试代码：执行定义的select语句" class="headerlink" title="编写测试代码：执行定义的select语句"></a>编写测试代码：执行定义的select语句</h2><pre><code>package com.dream.test;
+
+import java.io.IOException;
+import java.io.Reader;
+
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.junit.Test;
+
+import com.dream.bean.User;
+
+public class myTest &#123;
+
+@Test
+public void mTest() throws IOException &#123;
+        String resource = &quot;conf.xml&quot;;
+        // 加载mybatis的配置文件（它也加载关联的映射文件）
+        Reader reader = Resources.getResourceAsReader(resource);
+        // 构建sqlSession的工厂
+        SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(reader);
+        // 创建能执行映射文件中sql的sqlSession
+        SqlSession session = sessionFactory.openSession();
+        System.out.println(session.getConnection());
+        // 映射sql的标识字符串
+        String statement = &quot;com.dream.bean.userMapper.insertUser&quot;;
+        // 执行查询返回一个唯一user对象的sql
+        int user = session.insert(statement, new User(1,&quot;zhansan&quot;,3));
+        // 提交
+        
+    //		String statement = &quot;com.dream.bean.userMapper.getUser&quot;;
+    //		User selectOne = session.selectOne(statement, 4);
+    //		System.out.println(selectOne.toString());
+            
+        session.commit();
+
+        session.close();
+
+        //System.out.println(user);
+    &#125;
+
+&#125;
+</code></pre>
+<p>至此例子写好了</p>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/01/26/mybatis/" data-id="cl4gp6u24001s9cvceklwbbj8" data-title="mybatis" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Spring Annotation依赖注入实现" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/01/22/Spring%20Annotation%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E5%AE%9E%E7%8E%B0/" class="article-date">
+  <time class="dt-published" datetime="2016-01-22T00:57:35.000Z" itemprop="datePublished">2016-01-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/01/22/Spring%20Annotation%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E5%AE%9E%E7%8E%B0/">Spring Acnotation</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="Spring-基于-Annotation-的依赖注入实现"><a href="#Spring-基于-Annotation-的依赖注入实现" class="headerlink" title="Spring  基于 Annotation 的依赖注入实现"></a>Spring  基于 Annotation 的依赖注入实现</h2><h3 id="基于注入的容器配置"><a href="#基于注入的容器配置" class="headerlink" title="基于注入的容器配置"></a>基于注入的容器配置</h3><p>注入比配置Spring xml 更好吗？</p>
+<blockquote>
+<p>引入基于注入的配置提出了一个问题，这种方法是否比 XML’更好’。简短的回答取决于。长期的回答是，每一种方法都有其优点和缺点，并且通常是由开发者决定哪些策略更适合他们。由于它们被定义的方式，注入提供了大量的背景下，使他们的声明，导致更短，更简洁的配置。然而，XML在连接部件不接触源代码或重新编译他们擅长。一些开发商宁愿有布线靠近源而另一些人则认为注释类不再是POJO，此外，使配置变得分散，难以控制。</p>
+</blockquote>
+<blockquote>
+<p>无论选择哪一个，Spring可以容纳两种风格，甚至将它们组合在一起。值得指出的是，通过其javaconfig选项，Spring允许注解中使用一种非侵入性的方式，不接触部件的目标源代码，从模具，所有的配置方式是由弹簧工具套件支持。</p>
+</blockquote>
+<p>Spring 自 2.0 版本开始，陆续引入了一些注解用于简化 Spring 的开发。@Repository 注解便属于最先引入的一批，它用于将数据访问层 (DAO 层 ) 的类标识为 Spring Bean。具体只需将该注解标注在 DAO 类上即可。同时，为了让 Spring 能够扫描类路径中的类并识别出 @Repository 注解，需要在 XML 配置文件中启用 Bean 的自动扫描功能，这可以通过 <a href="context:component-scan/">context:component-scan/</a> 实现。如下所示：</p>
+<pre><code> // 首先使用 @Repository 将 DAO 类声明为 Bean 
+ package bookstore.dao; 
+ @Repository 
+ public class UserDaoImpl implements UserDao&#123; …… &#125; 
+
+ // 其次，在 XML 配置文件中启动 Spring 的自动扫描功能
+ &lt;beans … &gt; 
+    ……
+ &lt;context:component-scan base-package=”bookstore.dao” /&gt; 
+……
+ &lt;/beans&gt;
+</code></pre>
+<p>如此，我们就不再需要在 XML 中显式使用 <bean/> 进行 Bean 的配置。Spring 在容器初始化时将自动扫描 base-package 指定的包及其子包下的所有 class 文件，所有标注了 @Repository 的类都将被注册为 Spring Bean。<br>为什么 @Repository 只能标注在 DAO 类上呢？这是因为该注解的作用不只是将类识别为 Bean，同时它还能将所标注的类中抛出的数据访问异常封装为 Spring 的数据访问异常类型。 Spring 本身提供了一个丰富的并且是与具体的数据访问技术无关的数据访问异常结构，用于封装不同的持久层框架抛出的异常，使得异常独立于底层的框架。</p>
+<p>Spring 2.5 在 @Repository 的基础上增加了功能类似的额外三个注解：@Component、@Service、@Constroller，它们分别用于软件系统的不同层次：</p>
+<ul>
+<li>@Component 是一个泛化的概念，仅仅表示一个组件 (Bean) ，可以作用在任何层次。</li>
+<li>@Service 通常作用在业务层，但是目前该功能与 @Component 相同。</li>
+<li>@Constroller 通常作用在控制层，但是目前该功能与 @Component 相同</li>
+</ul>
+<p>通过在类上使用 @Repository、@Component、@Service 和 @Constroller 注解，Spring 会自动创建相应的 BeanDefinition 对象，并注册到 ApplicationContext 中。这些类就成了 Spring 受管组件。这三个注解除了作用于不同软件层次的类，其使用方式与 @Repository 是完全相同的。</p>
+<p>另外，除了上面的四个注解外，用户可以创建自定义的注解，然后在注解上标注 @Component，那么，该自定义注解便具有了与所 @Component 相同的功能。不过这个功能并不常用。</p>
+<p>当一个 Bean 被自动检测到时，会根据那个扫描器的 BeanNameGenerator 策略生成它的 bean 名称。默认情况下，对于包含 name 属性的 @Component、@Repository、 @Service 和 @Controller，会把 name 取值作为 Bean 的名字。如果这个注解不包含 name 值或是其他被自定义过滤器发现的组件，默认 Bean 名称会是小写开头的非限定类名。如果你不想使用默认 bean 命名策略，可以提供一个自定义的命名策略。首先实现 BeanNameGenerator 接口，确认包含了一个默认的无参数构造方法。然后在配置扫描器时提供一个全限定类名，如下所示：</p>
+<pre><code>&lt;beans ...&gt; 
+ &lt;context:component-scan 
+base-package=&quot;a.b&quot; name-generator=&quot;a.SimpleNameGenerator&quot;/&gt; 
+ &lt;/beans&gt;
+</code></pre>
+<p>与通过 XML 配置的 Spring Bean 一样，通过上述注解标识的 Bean，其默认作用域是”singleton”，为了配合这四个注解，在标注 Bean 的同时能够指定 Bean 的作用域，Spring 2.5 引入了 @Scope 注解。使用该注解时只需提供作用域的名称就行了，如下所示：</p>
+<pre><code> @Scope(&quot;prototype&quot;) 
+ @Repository 
+ public class Demo &#123; … &#125;
+</code></pre>
+<p>如果你想提供一个自定义的作用域解析策略而不使用基于注解的方法，只需实现 ScopeMetadataResolver 接口，确认包含一个默认的没有参数的构造方法。然后在配置扫描器时提供全限定类名：</p>
+<pre><code>&lt;context:component-scan base-package=&quot;a.b&quot;
+ scope-resolver=&quot;footmark.SimpleScopeResolver&quot; /&gt;
+</code></pre>
+<h3 id="使用-PostConstruct-和-PreDestroy-指定生命周期回调方法"><a href="#使用-PostConstruct-和-PreDestroy-指定生命周期回调方法" class="headerlink" title="使用 @PostConstruct 和 @PreDestroy 指定生命周期回调方法"></a>使用 @PostConstruct 和 @PreDestroy 指定生命周期回调方法</h3><p>Spring Bean 是受 Spring IoC 容器管理，由容器进行初始化和销毁的（prototype 类型由容器初始化之后便不受容器管理），通常我们不需要关注容器对 Bean 的初始化和销毁操作，由 Spring 经过构造函数或者工厂方法创建的 Bean 就是已经初始化完成并立即可用的。然而在某些情况下，可能需要我们手工做一些额外的初始化或者销毁操作，这通常是针对一些资源的获取和释放操作。Spring 1.x 为此提供了两种方式供用户指定执行生命周期回调的方法。</p>
+<p>第一种方式是实现 Spring 提供的两个接口：InitializingBean 和 DisposableBean。如果希望在 Bean 初始化完成之后执行一些自定义操作，则可以让 Bean 实现 InitializingBean 接口，该接口包含一个 afterPropertiesSet() 方法，容器在为该 Bean 设置了属性之后，将自动调用该方法；如果 Bean 实现了 DisposableBean 接口，则容器在销毁该 Bean 之前，将调用该接口的 destroy() 方法。这种方式的缺点是，让 Bean 类实现 Spring 提供的接口，增加了代码与 Spring 框架的耦合度，因此不推荐使用。</p>
+<p>第二种方式是在 XML 文件中使用 <bean> 的 init-method 和 destroy-method 属性指定初始化之后和销毁之前的回调方法，代码无需实现任何接口。这两个属性的取值是相应 Bean 类中的初始化和销毁方法，方法名任意，但是方法不能有参数。示例如下：</p>
+<pre><code>&lt;bean id=”userService” 
+ class=”bookstore.service.UserService” 
+ init-method=”init” destroy-method=”destroy”&gt; 
+    …
+ &lt;/bean&gt;
+</code></pre>
+<p>Spring 2.5 在保留以上两种方式的基础上，提供了对 JSR-250 的支持。JSR-250 规范定义了两个用于指定声明周期方法的注解：@PostConstruct 和 @PreDestroy。这两个注解使用非常简单，只需分别将他们标注于初始化之后执行的回调方法或者销毁之前执行的回调方法上。由于使用了注解，因此需要配置相应的 Bean 后处理器，亦即在 XML 中增加如下一行：</p>
+<pre><code>&lt;context:annotation-config /&gt;
+</code></pre>
+<p>比较上述三种指定生命周期回调方法的方式，第一种是不建议使用的，不但其用法不如后两种方式灵活，而且无形中增加了代码与框架的耦合度。后面两种方式开发者可以根据使用习惯选择其中一种，但是最好不要混合使用，以免增加维护的难度。</p>
+<hr>
+<h3 id="使用-Required-进行-Bean-的依赖检查"><a href="#使用-Required-进行-Bean-的依赖检查" class="headerlink" title="使用 @Required 进行 Bean 的依赖检查"></a>使用 @Required 进行 Bean 的依赖检查</h3><p>依赖检查的作用是，判断给定 Bean 的相应 Setter 方法是否都在实例化的时候被调用了。而不是判断字段是否已经存在值了。Spring 进行依赖检查时，只会判断属性是否使用了 Setter 注入。如果某个属性没有使用 Setter 注入，即使是通过构造函数已经为该属性注入了值，Spring 仍然认为它没有执行注入，从而抛出异常。另外，Spring 只管是否通过 Setter 执行了注入，而对注入的值却没有任何要求，即使注入的 <null/>，Spring 也认为是执行了依赖注入</p>
+<p><bean> 标签提供了 dependency-check 属性用于进行依赖检查。该属性的取值包括以下几种：</p>
+<ul>
+<li>none – 默认不执行依赖检查。可以在 <beans> 标签上使用 default-dependency-check 属性改变默认值。</li>
+<li>simple – 对原始基本类型和集合类型进行检查。</li>
+<li>objects – 对复杂类型进行检查（除了 simple 所检查类型之外的其他类型）。</li>
+<li>all – 对所有类型进行检查。</li>
+</ul>
+<p>旧版本使用 dependency-check 在配置文件中设置，缺点是粒度较粗。使用 Spring2.0 提供的 @Required 注解，提供了更细粒度的控制。@Required 注解只能标注在 Setter 方法之上。因为依赖注入的本质是检查 Setter 方法是否被调用了，而不是真的去检查属性是否赋值了以及赋了什么样的值。如果将该注解标注在非 setXxxx() 类型的方法则被忽略。</p>
+<p>为了让 Spring 能够处理该注解，需要激活相应的 Bean 后处理器。要激活该后处理器，只需在 XML 中增加如下一行即可。</p>
+<pre><code>&lt;context:annotation-config/&gt;
+</code></pre>
+<p>当某个被标注了 @Required 的 Setter 方法没有被调用，则 Spring 在解析的时候会抛出异常，以提醒开发者对相应属性进行设置。</p>
+<hr>
+<h3 id="使用-Resource、-Autowired-和-Qualifier-指定-Bean-的自动装配策略"><a href="#使用-Resource、-Autowired-和-Qualifier-指定-Bean-的自动装配策略" class="headerlink" title="使用 @Resource、@Autowired 和 @Qualifier 指定 Bean 的自动装配策略"></a>使用 @Resource、@Autowired 和 @Qualifier 指定 Bean 的自动装配策略</h3><p>自动装配是指，Spring 在装配 Bean 的时候，根据指定的自动装配规则，将某个 Bean 所需要引用类型的 Bean 注入进来。<bean> 元素提供了一个指定自动装配类型的 autowire 属性，该属性有如下选项：</p>
+<ul>
+<li>no – 显式指定不使用自动装配。</li>
+<li>byName – 如果存在一个和当前属性名字一致的 Bean，则使用该 Bean 进行注入。如果名称匹配但是类型不匹配，则抛出异常。如果没有匹配的类型，则什么也不做。</li>
+<li>byType – 如果存在一个和当前属性类型一致的 Bean ( 相同类型或者子类型 )，则使用该 Bean 进行注入。byType 能够识别工厂方法，即能够识别 factory-method 的返回类型。如果存在多个类型一致的 Bean，则抛出异常。如果没有匹配的类型，则什么也不做。</li>
+<li>constructor – 与 byType 类似，只不过它是针对构造函数注入而言的。如果当前没有与构造函数的参数类型匹配的 Bean，则抛出异常。使用该种装配模式时，优先匹配参数最多的构造函数。</li>
+<li>autodetect – 根据 Bean 的自省机制决定采用 byType 还是 constructor 进行自动装配。如果 Bean 提供了默认的构造函数，则采用 byType；否则采用 constructor 进行自动装配。</li>
+</ul>
+<p>当使用 byType 或者 constructor 类型的自动装配的时候，自动装配也支持引用类型的数组或者使用了泛型的集合，这样，Spring 就会检查容器中所有类型匹配的 Bean，组成集合或者数组后执行注入。对于使用了泛型的 Map 类型，如果键是 String 类型，则 Spring 也会自动执行装配，将所有类型匹配的 Bean 作为值，Bean 的名字作为键。</p>
+<p>我们可以给 <beans> 增加 default-autowire 属性，设置默认的自动封装策略。默认值为”no”。如果使用自动装配的同时，也指定了 property 或者 constructor-arg 标签，则显式指定的值将覆盖自动装配的值。目前的自动封装不支持简单类型，比如基本类型、String、Class，以及它们的数组类型。</p>
+<p>在按类型匹配的时候 ( 可能是 byType、constructor、autodetect)，同一个类型可能存在多个 Bean，如果被注入的属性是数组、集合或者 Map，这可能没有问题，但是如果只是简单的引用类型，则会抛出异常。解决方法有如下几种：</p>
+<ul>
+<li>取消该 Bean 的自动装配特性，使用显式的注入。我们可能不希望某个 Bean 被当作其他 Bean 执行自动封装时的候选对象，我们可以给该 <bean> 增加 autowire-candidate&#x3D;”false”。(autowire-candidate 属性和 autowire 属性相互独立，互不相干。某个 Bean 可以将 autowire-candidate 设置为 false，同时使用 autowire 特性。) 另外，我们可以设置 <beans> 的 default-autowire-candidates 属性，可以在该属性中指定可以用于自动装配候选 Bean 的匹配模式，比如 default-autowire-candidates&#x3D;”*serv,*dao”，这表示所有名字以 serv 或者 dao 结尾的 Bean 被列为候选，其他则忽略，相当于其他 Bean 都指定为 autowire-candidate&#x3D;”false”，此时可以显式为 <bean> 指定 autowire-candidate&#x3D;”true”。在 <bean> 上指定的设置要覆盖 <beans> 上指定的设置。</li>
+<li>如果在多个类型相同的 Bean 中有首选的 Bean，那么可以将该 <bean> 的 primary 属性设置为 “true” ，这样自动装配时便优先使用该 Bean 进行装配。此时不能将 autowire-candidate 设为 false。</li>
+<li>如果使用的是 Java 5 以上版本，可以使用注解进行更细粒度的控制。</li>
+</ul>
+<h3 id="使用-Autowired-和-Qualifier-注解执行自动装配"><a href="#使用-Autowired-和-Qualifier-注解执行自动装配" class="headerlink" title="使用 @Autowired 和 @Qualifier 注解执行自动装配"></a>使用 @Autowired 和 @Qualifier 注解执行自动装配</h3><p>使用 @Autowired 注解进行装配，只能是根据类型进行匹配。@Autowired 注解可以用于 Setter 方法、构造函数、字段，甚至普通方法，前提是方法必须有至少一个参数。@Autowired 可以用于数组和使用泛型的集合类型。然后 Spring 会将容器中所有类型符合的 Bean 注入进来。@Autowired 标注作用于 Map 类型时，如果 Map 的 key 为 String 类型，则 Spring 会将容器中所有类型符合 Map 的 value 对应的类型的 Bean 增加进来，用 Bean 的 id 或 name 作为 Map 的 key。</p>
+<p>@Autowired 标注作用于普通方法时，会产生一个副作用，就是在容器初始化该 Bean 实例的时候就会调用该方法。当然，前提是执行了自动装配，对于不满足装配条件的情况，该方法也不会被执行。</p>
+<p>当标注了 @Autowired 后，自动注入不能满足，则会抛出异常。我们可以给 @Autowired 标注增加一个 required&#x3D;false 属性，以改变这个行为。另外，每一个类中只能有一个构造函数的 @Autowired.required() 属性为 true。否则就出问题了。如果用 @Autowired 同时标注了多个构造函数，那么，Spring 将采用贪心算法匹配构造函数 ( 构造函数最长 )。</p>
+<p>@Autowired 还有一个作用就是，如果将其标注在 BeanFactory 类型、ApplicationContext 类型、ResourceLoader 类型、ApplicationEventPublisher 类型、MessageSource 类型上，那么 Spring 会自动注入这些实现类的实例，不需要额外的操作。</p>
+<p>当容器中存在多个 Bean 的类型与需要注入的相同时，注入将不能执行，我们可以给 @Autowired 增加一个候选值，做法是在 @Autowired 后面增加一个 @Qualifier 标注，提供一个 String 类型的值作为候选的 Bean 的名字。举例如下：</p>
+<pre><code> @Autowired(required=false) 
+ @Qualifier(&quot;ppp&quot;) 
+ public void setPerson(person p)&#123;&#125;
+</code></pre>
+<p>@Qualifier 甚至可以作用于方法的参数 ( 对于方法只有一个参数的情况，我们可以将 @Qualifer 标注放置在方法声明上面，但是推荐放置在参数前面 )，举例如下：</p>
+<pre><code>@Autowired(required=false) 
+ public void sayHello(@Qualifier(&quot;ppp&quot;)Person p,String name)&#123;&#125;
+</code></pre>
+<p>我们可以在配置文件中指定某个 Bean 的 qualifier 名字，方法如下</p>
+<pre><code> &lt;bean id=&quot;person&quot; class=&quot;footmark.spring.Person&quot;&gt; 
+    &lt;qualifier value=&quot;ppp&quot;/&gt; 
+  &lt;/bean&gt;
+</code></pre>
+<p>如果没有明确指定 Bean 的 qualifier 名字，那么默认名字就是 Bean 的名字。通常，qualifier 应该是有业务含义的，例如 “domain”，”persistent” 等，而不应该是类似 “person” 方式。</p>
+<p>我们还可以将 @Qualifier 标注在集合类型上，那么所有 qualifier 名字与指定值相同的 Bean 都将被注入进来。</p>
+<p>最后，配置文件中需要指定每一个自定义注解的属性值。我们可以使用 <meta> 标签来代替 <qualifier/> 标签，如果 <meta> 标签和 <qualifier/> 标签同时出现，那么优先使用 <qualifier> 标签。如果没有 <qualifier> 标签，那么会用 <meta> 提供的键值对来封装 <qualifier> 标签。示例如下：</p>
+<pre><code>&lt;bean class=&quot;footmark.HelloWorld&quot;&gt; 
+     &lt;qualifier type=&quot;MovieQualifier&quot;&gt; 
+     &lt;attribute key=&quot;format&quot; value=&quot;VHS&quot;/&gt; 
+     &lt;attribute key=&quot;genre&quot; value=&quot;Comedy&quot;/&gt; 
+     &lt;/qualifier&gt; 
+ &lt;/bean&gt; 
+
+ &lt;bean class=&quot;footmark.HelloWorld&quot;&gt; 
+     &lt;meta key=&quot;format&quot; value=&quot;DVD&quot;/&gt; 
+     &lt;meta key=&quot;genre&quot; value=&quot;Action&quot;/&gt; 
+ &lt;/bean&gt;
+</code></pre>
+<p>@Autowired 注解对应的后处理注册与前面相似，只需在配置文件中增加如下一行即可：</p>
+<pre><code> &lt;context:annotation-config/&gt;
+</code></pre>
+<p>如果 @Autowired 注入的是 BeanFactory、ApplicationContext、ResourceLoader 等系统类型，那么则不需要 @Qualifier，此时即使提供了 @Qualifier 注解，也将会被忽略；而对于自定义类型的自动装配，如果使用了 @Qualifier 注解并且没有名字与之匹配的 Bean，则自动装配匹配失败。</p>
+<h3 id="使用-JSR-250-中的-Resource-和-Qualifier-注解"><a href="#使用-JSR-250-中的-Resource-和-Qualifier-注解" class="headerlink" title="使用 JSR-250 中的 @Resource 和 @Qualifier 注解"></a>使用 JSR-250 中的 @Resource 和 @Qualifier 注解</h3><p>如果希望根据 name 执行自动装配，那么应该使用 JSR-250 提供的 @Resource 注解，而不应该使用 @Autowired 与 @Qualifier 的组合。</p>
+<p>@Resource 使用 byName 的方式执行自动封装。@Resource 标注可以作用于带一个参数的 Setter 方法、字段，以及带一个参数的普通方法上。@Resource 注解有一个 name 属性，用于指定 Bean 在配置文件中对应的名字。如果没有指定 name 属性，那么默认值就是字段或者属性的名字。@Resource 和 @Qualifier 的配合虽然仍然成立，但是 @Qualifier 对于 @Resource 而言，几乎与 name 属性等效。</p>
+<p>如果 @Resource 没有指定 name 属性，那么使用 byName 匹配失败后，会退而使用 byType 继续匹配，如果再失败，则抛出异常。在没有为 @Resource 注解显式指定 name 属性的前提下，如果将其标注在 BeanFactory 类型、ApplicationContext 类型、ResourceLoader 类型、ApplicationEventPublisher 类型、MessageSource 类型上，那么 Spring 会自动注入这些实现类的实例，不需要额外的操作。此时 name 属性不需要指定 ( 或者指定为””)，否则注入失败；如果使用了 @Qualifier，则该注解将被忽略。而对于用户自定义类型的注入，@Qualifier 和 name 等价，并且不被忽略。</p>
+<p><bean> 的 primary 和 autowire-candidate 属性对 @Resource、@Autowired 仍然有效。</p>
+<hr>
+<h3 id="使用-Configuration-和-Bean-进行-Bean-的声明"><a href="#使用-Configuration-和-Bean-进行-Bean-的声明" class="headerlink" title="使用 @Configuration 和 @Bean 进行 Bean 的声明"></a>使用 @Configuration 和 @Bean 进行 Bean 的声明</h3><p>虽然 2.0 版本发布以来，Spring 陆续提供了十多个注解，但是提供的这些注解只是为了在某些情况下简化 XML 的配置，并非要取代 XML 配置方式。这一点可以从 Spring IoC 容器的初始化类可以看出：ApplicationContext 接口的最常用的实现类是 ClassPathXmlApplicationContext 和 FileSystemXmlApplicationContext，以及面向 Portlet 的 XmlPortletApplicationContext 和面向 web 的 XmlWebApplicationContext，它们都是面向 XML 的。Spring 3.0 新增了另外两个实现类：AnnotationConfigApplicationContext 和 AnnotationConfigWebApplicationContext。从名字便可以看出，它们是为注解而生，直接依赖于注解作为容器配置信息来源的 IoC 容器初始化类。由于 AnnotationConfigWebApplicationContext 是 AnnotationConfigApplicationContext 的 web 版本，其用法与后者相比几乎没有什么差别，因此本文将以 AnnotationConfigApplicationContext 为例进行讲解。</p>
+<p>AnnotationConfigApplicationContext 搭配上 @Configuration 和 @Bean 注解，自此，XML 配置方式不再是 Spring IoC 容器的唯一配置方式。两者在一定范围内存在着竞争的关系，但是它们在大多数情况下还是相互协作的关系，两者的结合使得 Spring IoC 容器的配置更简单，更强大。</p>
+<p>前，我们将配置信息集中写在 XML 中，如今使用注解，配置信息的载体由 XML 文件转移到了 Java 类中。我们通常将用于存放配置信息的类的类名以 “Config” 结尾，比如 AppDaoConfig.java、AppServiceConfig.java 等等。我们需要在用于指定配置信息的类上加上 @Configuration 注解，以明确指出该类是 Bean 配置的信息源。并且 Spring 对标注 Configuration 的类有如下要求：</p>
+<ul>
+<li>配置类不能是 final 的；</li>
+<li>配置类不能是本地化的，亦即不能将配置类定义在其他类的方法内部；</li>
+<li>配置类必须有一个无参构造函数。</li>
+</ul>
+<p>AnnotationConfigApplicationContext 将配置类中标注了 @Bean 的方法的返回值识别为 Spring Bean，并注册到容器中，受 IoC 容器管理。@Bean 的作用等价于 XML 配置中的 <bean/> 标签。示例如下：</p>
+<pre><code>@Configuration 
+ public class BookStoreDaoConfig&#123; 
+    @Bean 
+    public UserDao userDao()&#123; return new UserDaoImpl();&#125; 
+    @Bean 
+    public BookDao bookDao()&#123;return new BookDaoImpl();&#125; 
+ &#125;
+</code></pre>
+<p>Spring 在解析到以上文件时，将识别出标注 @Bean 的所有方法，执行之，并将方法的返回值 ( 这里是 UserDaoImpl 和 BookDaoImpl 对象 ) 注册到 IoC 容器中。默认情况下，Bean 的名字即为方法名。因此，与以上配置等价的 XML 配置如下：</p>
+<pre><code>&lt;bean id=”userDao” class=”bookstore.dao.UserDaoImpl”/&gt; 
+ &lt;bean id=”bookDao” class=”bookstore.dao.BookDaoImpl”/&gt;
+</code></pre>
+<p>@Bean 具有以下四个属性：</p>
+<ul>
+<li>name – 指定一个或者多个 Bean 的名字。这等价于 XML 配置中 <bean> 的 name 属性。</li>
+<li>initMethod – 容器在初始化完 Bean 之后，会调用该属性指定的方法。这等价于 XML 配置中 <bean> 的 init-method 属性。</li>
+<li>destroyMethod – 该属性与 initMethod 功能相似，在容器销毁 Bean 之前，会调用该属性指定的方法。这等价于 XML 配置中 <bean> 的 destroy-method 属性。</li>
+<li>autowire – 指定 Bean 属性的自动装配策略，取值是 Autowire 类型的三个静态属性。Autowire.BY_NAME，Autowire.BY_TYPE，Autowire.NO。与 XML 配置中的 autowire 属性的取值相比，这里少了 constructor，这是因为 constructor 在这里已经没有意义了。</li>
+</ul>
+<p>@Bean 没有直接提供指定作用域的属性，可以通过 @Scope 来实现该功能，关于 @Scope 的用法已在上文列举。<br>下面讲解基于注解的容器初始化。AnnotationConfigApplicationContext 提供了三个构造函数用于初始化容器。</p>
+<ul>
+<li>AnnotationConfigApplicationContext()：该构造函数初始化一个空容器，容器不包含任何 Bean 信息，需要在稍后通过调用其 register() 方法注册配置类，并调用 refresh() 方法刷新容器。</li>
+<li>AnnotationConfigApplicationContext(Class&lt;?&gt;… annotatedClasses)：这是最常用的构造函数，通过将涉及到的配置类传递给该构造函数，以实现将相应配置类中的 Bean 自动注册到容器中。</li>
+<li>AnnotationConfigApplicationContext(String… basePackages)：该构造函数会自动扫描以给定的包及其子包下的所有类，并自动识别所有的 Spring Bean，将其注册到容器中。它不但识别标注 @Configuration 的配置类并正确解析，而且同样能识别使用 @Repository、@Service、@Controller、@Component 标注的类。</li>
+</ul>
+<p>除了使用上面第三种类型的构造函数让容器自动扫描 Bean 的配置信息以外，AnnotationConfigApplicationContext 还提供了 scan() 方法，其功能与上面也类似，该方法主要用在容器初始化之后动态增加 Bean 至容器中。调用了该方法以后，通常需要立即手动调用 refresh() 刷新容器，以让变更立即生效。</p>
+<p>需要注意的是，AnnotationConfigApplicationContext 在解析配置类时，会将配置类自身注册为一个 Bean，因为 @Configuration 注解本身定义时被 @Component 标注了。因此可以说，一个 @Configuration 同时也是一个 @Component。大多数情况下，开发者用不到该 Bean，并且在理想情况下，该 Bean 应该是对开发者透明的。@Configuration 的定义如下所示：</p>
+<pre><code> @Target(&#123;ElementType.TYPE&#125;) 
+ @Retention(RetentionPolicy.RUNTIME) 
+ @Documented 
+ @Component 
+ public @interface Configuration &#123; 
+ 	String value() default &quot;&quot;; 
+ &#125;
+</code></pre>
+<p>在一般的项目中，为了结构清晰，通常会根据软件的模块或者结构定义多个 XML 配置文件，然后再定义一个入口的配置文件，该文件使用 <import/> 将其他的配置文件组织起来。最后只需将该文件传给 ClassPathXmlApplicationContext 的构造函数即可。针对基于注解的配置，Spring 也提供了类似的功能，只需定义一个入口配置类，并在该类上使用 @Import 注解引入其他的配置类即可，最后只需要将该入口类传递给 AnnotationConfigApplicationContext。具体示例如下：</p>
+<pre><code>@Configuration 
+ @Import(&#123;BookStoreServiceConfig.class,BookStoreDaoConfig.class&#125;) 
+ public class BookStoreConfig&#123; … &#125;
+</code></pre>
+<h3 id="混合使用-XML-与注解进行-Bean-的配置"><a href="#混合使用-XML-与注解进行-Bean-的配置" class="headerlink" title="混合使用 XML 与注解进行 Bean 的配置"></a>混合使用 XML 与注解进行 Bean 的配置</h3><p>设计 @Configuration 和 @Bean 的初衷，并不是为了完全取代 XML，而是为了在 XML 之外多一种可行的选择。由于 Spring 自发布以来，Spring 开发小组便不断简化 XML 配置，使得 XML 配置方式已经非常成熟，加上 Spring 2.0 以后出现了一系列命名空间的支持，使得 XML 配置方式成为了使用简单、功能强大的 Bean 定义方式。而且，XML 配置的一些高级功能目前还没有相关注解能够直接支持。因此，在目前的多数项目中，要么使用纯粹的 XML 配置方式进行 Bean 的配置，要么使用以注解为主，XML 为辅的配置方式进行 Bean 的配置。</p>
+<p>之所以会出现两者共存的情况，主要归结为三个原因：其一，目前绝大多数采用 Spring 进行开发的项目，几乎都是基于 XML 配置方式的，Spring 在引入注解的同时，必须保证注解能够与 XML 和谐共存，这是前提；其二，由于注解引入较晚，因此功能也没有发展多年的 XML 强大，因此，对于复杂的配置，注解还很难独当一面，在一段时间内仍然需要 XML 的配合才能解决问题。除此之外，Spring 的 Bean 的配置方式与 Spring 核心模块之间是解耦的，因此，改变配置方式对 Spring 的框架自身是透明的。Spring 可以通过使用 Bean 后处理器 (BeanPostProcessor) 非常方便的增加对于注解的支持。这在技术实现上非常容易的事情。</p>
+<p>要使用混合配置方式，首先需要判断以哪一种配置方式为主。对这个问题的不同回答将会直接影响到实现的方式。然而大可不必为此伤脑筋，因为不论是以 XML 为主，还是以注解为主，配置方式都是简单而且容易理解的。这里不存在错误的决定，因为仅仅是表现方式不一样。我们首先假设以 XML 配置为主的情况。</p>
+<p>对于已经存在的大型项目，可能初期是以 XML 进行 Bean 配置的，后续逐渐加入了注解的支持，这时我们只需在 XML 配置文件中将被 @Configuration 标注的类定义为普通的 <bean>，同时注册处理注解的 Bean 后处理器即可。示例如下：</p>
+<pre><code>// 假设存在如下的 @Configuration 类：
+ package bookstore.config; 
+ import bookstore.dao.*; 
+ @Configuration 
+ public class MyConfig&#123; 
+ 	@Bean 
+    public UserDao userDao()&#123; 
+        return new UserDaoImpl(); 
+    &#125; 
+ &#125; 
+此时，只需在 XML 中作如下声明即可：
+ &lt;beans … &gt; 
+……
+&lt;context:annotation-config /&gt; 
+&lt;bean class=”demo.config.MyConfig”/&gt; 
+ &lt;/beans&gt;
+</code></pre>
+<p>于启用了针对注解的 Bean 后处理器，因此在 ApplicationContext 解析到 MyConfig 类时，会发现该类标注了 @Configuration 注解，随后便会处理该类中标注 @Bean 的方法，将这些方法的返回值注册为容器总的 Bean。</p>
+<p>对于以上的方式，如果存在多个标注了 @Configuration 的类，则需要在 XML 文件中逐一列出。另一种方式是使用前面提到的自动扫描功能，配置如下：</p>
+<pre><code>&lt;context:component-scan base-package=”bookstore.config” /&gt;
+</code></pre>
+<p>如此，Spring 将扫描所有 demo.config 包及其子包中的类，识别所有标记了 @Component、@Controller、@Service、@Repository 注解的类，由于 @Configuration 注解本身也用 @Component 标注了，Spring 将能够识别出 @Configuration 标注类并正确解析之。</p>
+<p>对于以注解为中心的配置方式，只需使用 @ImportResource 注解引入存在的 XML 即可，如下所示：</p>
+<pre><code>@Configuration 
+ @ImportResource(“classpath:/bookstore/config/spring-beans.xml”) 
+ public class MyConfig&#123; 
+……
+ &#125; 
+ // 容器的初始化过程和纯粹的以配置为中心的方式一致：
+ AnnotationConfigApplicationContext ctx = 
+              new AnnotationConfigApplicationContext(MyConfig.class); 
+……
+</code></pre>
+<h3 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h3><p>从 2.0 版本开始，Spring 的每一次更新都会提供更多新的注解供开发者使用。这满足了注解爱好者的胃口。但是正如前面所说，Spring 提供更多的注解并不是为了有朝一日取代 XML 配置方式，而是为了给开发者多一种选择。两种声明 Bean 的方式各有特色，XML 方式更加灵活，并且发展的相对成熟，这种配置方式为大多数 Spring 开发者熟悉；注解方式使用起来非常简洁，但是尚处于发展阶段。我们很难说两种配置方式孰优孰劣，但是如果能够灵活搭配两种方式，一定能够进一步提升开发效率。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/01/22/Spring%20Annotation%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E5%AE%9E%E7%8E%B0/" data-id="cl4gp6u1t00119cvc8kedg2dk" data-title="Spring Acnotation" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-spring四种注入方式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/01/21/spring%E5%9B%9B%E7%A7%8D%E6%B3%A8%E5%85%A5%E6%96%B9%E5%BC%8F/" class="article-date">
+  <time class="dt-published" datetime="2016-01-21T13:51:31.000Z" itemprop="datePublished">2016-01-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/01/21/spring%E5%9B%9B%E7%A7%8D%E6%B3%A8%E5%85%A5%E6%96%B9%E5%BC%8F/">spring四种注入</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>平常的java开发中，程序员在某个类中需要依赖其它类的方法，则通常是new一个依赖类再调用类实例的方法，这种开发存在的问题是new的类实例不好统一管理，spring提出了依赖注入的思想，即依赖类不由程序员实例化，而是通过spring容器帮我们new指定实例并且将实例注入到需要该对象的类中。依赖注入的另一种说法是“控制反转”，通俗的理解是：平常我们new一个实例，这个实例的控制权是我们程序员，而控制反转是指new实例工作不由我们程序员来做而是交给spring容器来做。</p>
+</blockquote>
+<p>spring有多种依赖注入的形式，下面仅介绍spring通过xml进行IOC配置的方式：</p>
+<h2 id="Set注入"><a href="#Set注入" class="headerlink" title="Set注入"></a>Set注入</h2><p>这是最简单的注入方式，假设有一个SpringAction，类中需要实例化一个SpringDao对象，那么就可以定义一个private的SpringDao成员变量，然后创建SpringDao的set方法（这是ioc的注入入口）：</p>
+<p>java代码 ：</p>
+<pre><code> //注入对象springDao  
+private SpringDao springDao;  
+    //一定要写被注入对象的set方法  
+    public void setSpringDao(SpringDao springDao) &#123;  
+    this.springDao = springDao;  
+&#125;  
+
+    public void ok()&#123;  
+    springDao.ok();  
+&#125;  
+</code></pre>
+<p>随后编写spring的xml文件，<bean>中的name属性是class属性的一个别名，class属性指类的全名，因为在SpringAction中有一个公共属性Springdao，所以要在<bean>标签中创建一个<property>标签指定SpringDao。**<property>标签中的name就是SpringAction类中的SpringDao属性名，ref指下面&lt;bean name&#x3D;”springDao”…&gt;**，这样其实是spring将SpringDaoImpl对象实例化并且调用SpringAction的setSpringDao方法将SpringDao注入：</p>
+<p>xml代码：</p>
+<pre><code>&lt;!--配置bean,配置后该类由spring管理--&gt;  
+&lt;bean name=&quot;springAction&quot; class=&quot;com.bless.springdemo.action.SpringAction&quot;&gt;  
+    &lt;!--(1)依赖注入,配置当前类中相应的属性--&gt;  
+    &lt;property name=&quot;springDao&quot; ref=&quot;springDao&quot;&gt;&lt;/property&gt;  
+&lt;/bean&gt;  
+&lt;bean name=&quot;springDao&quot; class=&quot;com.bless.springdemo.dao.impl.SpringDaoImpl&quot;&gt;&lt;/bean&gt;  
+</code></pre>
+<h2 id="构造器注入"><a href="#构造器注入" class="headerlink" title="构造器注入"></a>构造器注入</h2><p>这种方式的注入是指带有参数的构造函数注入，看下面的例子，我创建了两个成员变量SpringDao和User，但是并未设置对象的set方法，所以就不能支持第一种注入方式，这里的注入方式是在SpringAction的构造函数中注入，也就是说在创建SpringAction对象时要将SpringDao和User两个参数值传进来：</p>
+<p>java代码 ：</p>
+<pre><code>public class SpringAction &#123;  
+//注入对象springDao  
+private SpringDao springDao;  
+private User user;  
+  
+public SpringAction(SpringDao springDao,User user)&#123;  
+    this.springDao = springDao;  
+    this.user = user;  
+    System.out.println(&quot;构造方法调用springDao和user&quot;);  
+&#125;  
+      
+    public void save()&#123;  
+    user.setName(&quot;卡卡&quot;);  
+    springDao.save(user);  
+&#125;  
+&#125;  
+</code></pre>
+<p>在XML文件中同样不用<property>的形式，而是使用<constructor-arg>标签，ref属性同样指向其它<bean>标签的name属性：</p>
+<p>xml代码:</p>
+<pre><code>&lt;!--配置bean,配置后该类由spring管理--&gt;  
+&lt;bean name=&quot;springAction&quot; class=&quot;com.bless.springdemo.action.SpringAction&quot;&gt;  
+    &lt;!--(2)创建构造器注入,如果主类有带参的构造方法则需添加此配置--&gt;  
+    &lt;constructor-arg ref=&quot;springDao&quot;&gt;&lt;/constructor-arg&gt;  
+    &lt;constructor-arg ref=&quot;user&quot;&gt;&lt;/constructor-arg&gt;  
+&lt;/bean&gt;  
+    &lt;bean name=&quot;springDao&quot; class=&quot;com.bless.springdemo.dao.impl.SpringDaoImpl&quot;&gt;&lt;/bean&gt;  
+    &lt;bean name=&quot;user&quot; class=&quot;com.bless.springdemo.vo.User&quot;&gt;&lt;/bean&gt; 
+</code></pre>
+<p>解决构造方法参数的不确定性，你可能会遇到构造方法传入的两参数都是同类型的，为了分清哪个该赋对应值，则需要进行一些小处理：<br>下面是设置index，就是参数位置：</p>
+<p>xml代码：</p>
+<pre><code>&lt;bean name=&quot;springAction&quot; class=&quot;com.bless.springdemo.action.SpringAction&quot;&gt;  
+    &lt;constructor-arg index=&quot;0&quot; ref=&quot;springDao&quot;&gt;&lt;/constructor-arg&gt;  
+    &lt;constructor-arg index=&quot;1&quot; ref=&quot;user&quot;&gt;&lt;/constructor-arg&gt;  
+&lt;/bean&gt;  
+</code></pre>
+<p>另一种是设置参数类型：</p>
+<p>xml代码 ：</p>
+<pre><code>&lt;constructor-arg type=&quot;java.lang.String&quot; ref=&quot;&quot;/&gt;  
+</code></pre>
+<h2 id="静态工厂的方法注入"><a href="#静态工厂的方法注入" class="headerlink" title="静态工厂的方法注入"></a>静态工厂的方法注入</h2><p>静态工厂顾名思义，就是通过调用静态工厂的方法来获取自己需要的对象，为了让spring管理所有对象，我们不能直接通过”工程类.静态方法()”来获取对象，而是依然通过spring注入的形式获取：</p>
+<pre><code>public class DaoFactory &#123;
+    //静态工厂  
+    public static final FactoryDao getStaticFactoryDaoImpl()&#123;
+        return new StaticFactoryDaoImpl();
+    &#125;
+&#125;
+
+public class StaticFactoryDaoImpl extends FactoryDao &#123;
+&#125;
+
+public class SpringAction &#123;
+//注入对象  
+private FactoryDao staticFactoryDao;  
+//注入对象的set方法  
+public void setStaticFactoryDao(FactoryDao staticFactoryDao) &#123;  
+    this.staticFactoryDao = staticFactoryDao;  
+&#125;  
+public void method()&#123;
+    staticFactoryDao.saveFactory();
+&#125;
+&#125;
+</code></pre>
+<p>Spring的IOC配置文件，注意看<bean name="staticFactoryDao">指向的class并不是FactoryDao的实现类，而是指向静态工厂DaoFactory，并且配置 factory-method&#x3D;”getStaticFactoryDaoImpl”指定调用哪个工厂方法：</p>
+<pre><code>&lt;!--配置bean,配置后该类由spring管理--&gt;  
+&lt;bean name=&quot;springAction&quot; class=&quot;com.dream.springtest.SpringAction&quot;&gt;
+    &lt;!--(3)使用静态工厂的方法注入对象,对应下面的配置文件(3)--&gt;  
+    &lt;property name=&quot;staticFactoryDao&quot; ref=&quot;staticFactoryDao&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
+
+&lt;!--(3)此处获取对象的方式是从工厂类中获取静态方法--&gt;  
+&lt;bean name=&quot;staticFactoryDao&quot; class=&quot;com.dream.springtest.DaoFactory&quot; factory-method=&quot;getStaticFactoryDaoImpl&quot;&gt;&lt;/bean&gt;
+
+
+@Test
+public void test() &#123;//测试方法
+    ApplicationContext application =new ClassPathXmlApplicationContext(&quot;application.xml&quot;);
+    SpringAction bean = application.getBean(SpringAction.class);
+    bean.method();
+&#125;
+</code></pre>
+<h2 id="实例工厂的方法注入"><a href="#实例工厂的方法注入" class="headerlink" title="实例工厂的方法注入"></a>实例工厂的方法注入</h2><p>实例工厂的意思是获取对象实例的方法不是静态的，所以你需要首先new工厂类，再调用普通的实例方法</p>
+<pre><code>public class DaoFactory &#123;
+//实例工厂  
+       public FactoryDao getFactoryDaoImpl()&#123;  
+        return new FactoryDaoImpl();  
+    &#125;  
+&#125;
+
+
+public class SpringAction &#123;
+
+    //注入对象  
+    private FactoryDao factoryDao;  
+    //注入对象的set方法  
+    public void setFactoryDao(FactoryDao factoryDao) &#123;  
+        this.factoryDao = factoryDao;  
+    &#125;  
+    public void method()&#123;
+    	factoryDao.saveFactory();
+    &#125;
+&#125;
+
+//最后配置文件
+&lt;!--配置bean,配置后该类由spring管理--&gt;  
+&lt;bean name=&quot;springAction&quot; class=&quot;com.bless.springdemo.action.SpringAction&quot;&gt;  
+    &lt;!--(4)使用实例工厂的方法注入对象,对应下面的配置文件(4)--&gt;  
+    &lt;property name=&quot;factoryDao&quot; ref=&quot;factoryDao&quot;&gt;&lt;/property&gt;  
+&lt;/bean&gt;  
+  
+&lt;!--(4)此处获取对象的方式是从工厂类中获取实例方法--&gt;  
+&lt;bean name=&quot;daoFactory&quot; class=&quot;com.bless.springdemo.factory.DaoFactory&quot;&gt;&lt;/bean&gt;  
+&lt;bean name=&quot;factoryDao&quot; factory-bean=&quot;daoFactory&quot; factory-method=&quot;getFactoryDaoImpl&quot;&gt;&lt;/bean&gt;  
+</code></pre>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Spring IOC注入方式用得最多的是(1)(2)种，多谢多练就会非常熟练。<br>另外注意：通过Spring创建的对象默认是单例的，如果需要创建多实例对象可以在<bean>标签后面添加一个属性：</p>
+<pre><code>&lt;bean name=&quot;...&quot; class=&quot;...&quot; scope=&quot;prototype&quot;&gt;  
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/01/21/spring%E5%9B%9B%E7%A7%8D%E6%B3%A8%E5%85%A5%E6%96%B9%E5%BC%8F/" data-id="cl4gp6u2800279cvc0dtj2io9" data-title="spring四种注入" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-oracle左，右，全连接 " class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/01/21/oracle%E5%B7%A6%EF%BC%8C%E5%8F%B3%EF%BC%8C%E5%85%A8%E8%BF%9E%E6%8E%A5%20/" class="article-date">
+  <time class="dt-published" datetime="2016-01-21T09:58:42.000Z" itemprop="datePublished">2016-01-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/01/21/oracle%E5%B7%A6%EF%BC%8C%E5%8F%B3%EF%BC%8C%E5%85%A8%E8%BF%9E%E6%8E%A5%20/">oracle左，右，全连接</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="Oracle-外连接"><a href="#Oracle-外连接" class="headerlink" title="Oracle  外连接"></a>Oracle  外连接</h2><ul>
+<li>左外连接 (左边的表不加限制)</li>
+<li>右外连接(右边的表不加限制)</li>
+<li>全外连接(左右两表都不加限制)</li>
+</ul>
+<p>外连接(Outer Join)</p>
+<p>outer join则会返回每个满足第一个（顶端）输入与第二个（底端）输入的联接的行。它还返回任何在第二个输入中没有匹配行的第一个输入中的行。外连接分为三种： 左外连接，右外连接，全外连接。 对应SQL：LEFT&#x2F;RIGHT&#x2F;FULL OUTER JOIN。 通常我们省略outer 这个关键字。 写成：LEFT&#x2F;RIGHT&#x2F;FULL JOIN。</p>
+<p>在左外连接和右外连接时都会以一张表为基表，该表的内容会全部显示，然后加上两张表匹配的内容。 如果基表的数据在另一张表没有记录。 那么在相关联的结果集行中列显示为空值（NULL）。</p>
+<p>对于外连接， 也可以使用“(+) ”来表示。 关于使用（+）的一些注意事项：</p>
+<hr>
+<ul>
+<li>（+）操作符只能出现在where子句中，并且不能与outer join语法同时使用。</li>
+<li>当使用（+）操作符执行外连接时，如果在where子句中包含有多个条件，则必须在所有条件中都包含（+）操作符<br> -（+）操作符只适用于列，而不能用在表达式上。</li>
+<li>（+）操作符不能与or和in操作符一起使用。</li>
+<li>（+）操作符只能用于实现左外连接和右外连接，而不能用于实现完全外连接。</li>
+</ul>
+<p>在做实验之前，我们先将dave表和bl里加一些不同的数据。 以方便测试。</p>
+<pre><code>SQL&gt; select * from bl;
+
+    ID NAME
+
+     1 dave
+
+     2 bl
+
+     3 big bird
+
+     4 exc
+
+     9 怀宁
+
+SQL&gt; select * from dave;
+
+    ID NAME
+
+     8 安庆
+
+     1 dave
+
+     2 bl
+
+     1 bl
+
+     2 dave
+
+     3 dba
+
+     4 sf-express
+
+     5 dmm
+</code></pre>
+<h3 id="左外连接（Left-outer-join-x2F-left-join）"><a href="#左外连接（Left-outer-join-x2F-left-join）" class="headerlink" title="左外连接（Left outer join&#x2F; left join）"></a>左外连接（Left outer join&#x2F; left join）</h3><p> left join是以左表的记录为基础的,示例中Dave可以看成左表,BL可以看成右表,它的结果集是Dave表中的数据，在加上Dave表和BL表匹配的数据。换句话说,左表(Dave)的记录将会全部表示出来,而右表(BL)只会显示符合搜索条件的记录。BL表记录不足的地方均为NULL.</p>
+<pre><code>示例：
+
+SQL&gt; select * from dave a left join bl b on a.id = b.id;
+
+   ID NAME               ID NAME
+
+    1 bl                  1 dave
+
+    1 dave                1 dave
+
+    2 dave                2 bl
+
+    2 bl                  2 bl
+
+    3 dba                 3 big bird
+
+    4 sf-express          4 exc
+
+    5 dmm                             -- 此处B表为null，因为没有匹配到
+
+    8 安庆                             -- 此处B表为null，因为没有匹配到
+
+SQL&gt; select * from dave a left outer join bl b on a.id = b.id;
+
+    ID NAME               ID NAME
+
+     1 bl                  1 dave
+
+     1 dave                1 dave
+
+     2 dave                2 bl
+
+     2 bl                  2 bl
+
+     3 dba                 3 big bird
+
+     4 sf-express          4 exc
+
+     5 dmm
+
+     8 安庆
+</code></pre>
+<p>用（+）来实现， 这个+号可以这样来理解： + 表示补充，即哪个表有加号，这个表就是匹配表。所以加号写在右表，左表就是全部显示，故是左连接。</p>
+<pre><code>SQL&gt; Select * from dave a,bl b where a.id=b.id(+);    -- 注意： 用（+） 就要用关键字where
+
+    ID NAME               ID NAME
+
+     1 bl                  1 dave
+
+     1 dave                1 dave
+
+     2 dave                2 bl
+
+     2 bl                  2 bl
+
+     3 dba                 3 big bird
+
+     4 sf-express          4 exc
+
+     5 dmm
+
+     8 安庆
+</code></pre>
+<h3 id="右外连接（right-outer-join-x2F-right-join）"><a href="#右外连接（right-outer-join-x2F-right-join）" class="headerlink" title="右外连接（right outer join&#x2F; right join）"></a>右外连接（right outer join&#x2F; right join）</h3><p>和left join的结果刚好相反,是以右表(BL)为基础的, 显示BL表的所以记录，在加上Dave和BL 匹配的结果。 Dave表不足的地方用NULL填充.</p>
+<pre><code>示例：
+
+SQL&gt; select * from dave a right join bl b on a.id = b.id;
+
+    ID NAME               ID NAME
+
+     1 dave                1 dave
+
+     2 bl                  2 bl
+
+     1 bl                  1 dave
+
+     2 dave                2 bl
+
+     3 dba                 3 big bird
+
+     4 sf-express          4 exc
+
+                           9 怀宁    --此处左表不足用Null 填充
+
+SQL&gt; select * from dave a right outer join bl b on a.id = b.id;
+
+    ID NAME               ID NAME
+
+     1 dave                1 dave
+
+     2 bl                  2 bl
+
+     1 bl                  1 dave
+
+     2 dave                2 bl
+
+     3 dba                 3 big bird
+
+     4 sf-express          4 exc
+
+                           9 怀宁  --此处左表不足用Null 填充
+</code></pre>
+<p>用（+）来实现， 这个+号可以这样来理解： + 表示补充，即哪个表有加号，这个表就是匹配表。所以加号写在左表，右表就是全部显示，故是右连接。</p>
+<pre><code>SQL&gt; Select * from dave a,bl b where a.id(+)=b.id;
+
+    ID NAME               ID NAME
+
+     1 dave                1 dave
+
+     2 bl                  2 bl
+
+     1 bl                  1 dave
+
+     2 dave                2 bl
+
+     3 dba                 3 big bird
+
+     4 sf-express          4 exc
+
+                           9 怀宁
+</code></pre>
+<h3 id="全外连接（full-outer-join-x2F-full-join）"><a href="#全外连接（full-outer-join-x2F-full-join）" class="headerlink" title="全外连接（full outer join&#x2F; full join）"></a>全外连接（full outer join&#x2F; full join）</h3><p>左表和右表都不做限制，所有的记录都显示，两表不足的地方用null 填充。 全外连接不支持（+）这种写法。</p>
+<pre><code>示例：
+
+SQL&gt; select * from dave a full join bl b on a.id = b.id;
+
+    ID NAME               ID NAME
+
+     8 安庆
+
+     1 dave                1 dave
+
+     2 bl                  2 bl
+
+     1 bl                  1 dave
+
+     2 dave                2 bl
+
+     3 dba                 3 big bird
+
+     4 sf-express          4 exc
+
+     5 dmm
+
+                           9 怀宁
+
+SQL&gt; select * from dave a full outer join bl b on a.id = b.id;
+
+    ID NAME               ID NAME
+
+     8 安庆
+
+     1 dave                1 dave
+
+     2 bl                  2 bl
+
+     1 bl                  1 dave
+
+     2 dave                2 bl
+
+     3 dba                 3 big bird
+
+     4 sf-express          4 exc
+
+     5 dmm      
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/01/21/oracle%E5%B7%A6%EF%BC%8C%E5%8F%B3%EF%BC%8C%E5%85%A8%E8%BF%9E%E6%8E%A5%20/" data-id="cl4gp6u2600229cvchkaoayhl" data-title="oracle左，右，全连接" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Error/" rel="tag">Error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Extjs/" rel="tag">Extjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerDesigner/" rel="tag">PowerDesigner</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">java虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/" rel="tag">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" rel="tag">myeclipse插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E8%AE%B0/" rel="tag">日记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" rel="tag">生活文化与素养</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Extjs/" style="font-size: 10px;">Extjs</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/PowerDesigner/" style="font-size: 12.86px;">PowerDesigner</a> <a href="/tags/Spring/" style="font-size: 14.29px;">Spring</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 12.86px;">java虚拟机</a> <a href="/tags/linux/" style="font-size: 17.14px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">myeclipse插件</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 14.29px;">工具</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 18.57px;">数据库</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 15.71px;">日记</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 14.29px;">杂记</a> <a href="/tags/%E6%A1%86%E6%9E%B6/" style="font-size: 14.29px;">框架</a> <a href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" style="font-size: 11.43px;">生活文化与素养</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 12.86px;">笔记</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/06/16/Hexo-github-%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2-%E6%96%B0%E6%89%8B%E5%85%A5%E9%97%A8/">Hexo+github搭建静态博客(新手入门)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/test/">test</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/20/%E4%BA%94.%20volatile%20%E5%85%B3%E9%94%AE%E5%AD%97/">五. volatile关键字</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/19/%E4%B8%89.%20%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/">三. 垃圾收集器</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Zhutongtong<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

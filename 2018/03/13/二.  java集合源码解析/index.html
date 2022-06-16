@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>二. java集合源码解析 | 记忆时光</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="一、ArrayList数据结构分析一个类的时候，数据结构往往是它的灵魂所在，理解底层的数据结构其实就理解了该类的实现思路，具体的实现细节再具体分析。 　　ArrayList的数据结构如下：  1 2 3 4 5 6 7 8  | | | | | | | | |  说明：底层的数据结构就是数组，数组元素类型为Object类型，即可以存放所有类型数据。我们对ArrayList类的实例的所有的操作底层都">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二. java集合源码解析">
+<meta property="og:url" content="http://example.com/2018/03/13/%E4%BA%8C.%20%20java%E9%9B%86%E5%90%88%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/index.html">
+<meta property="og:site_name" content="记忆时光">
+<meta property="og:description" content="一、ArrayList数据结构分析一个类的时候，数据结构往往是它的灵魂所在，理解底层的数据结构其实就理解了该类的实现思路，具体的实现细节再具体分析。 　　ArrayList的数据结构如下：  1 2 3 4 5 6 7 8  | | | | | | | | |  说明：底层的数据结构就是数组，数组元素类型为Object类型，即可以存放所有类型数据。我们对ArrayList类的实例的所有的操作底层都">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-03-13T03:01:59.000Z">
+<meta property="article:modified_time" content="2022-06-16T07:22:10.425Z">
+<meta property="article:author" content="Zhutongtong">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="记忆时光" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">记忆时光</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-二.  java集合源码解析" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/03/13/%E4%BA%8C.%20%20java%E9%9B%86%E5%90%88%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" class="article-date">
+  <time class="dt-published" datetime="2018-03-13T03:01:59.000Z" itemprop="datePublished">2018-03-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      二. java集合源码解析
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="一、ArrayList数据结构"><a href="#一、ArrayList数据结构" class="headerlink" title="一、ArrayList数据结构"></a>一、ArrayList数据结构</h2><p>分析一个类的时候，数据结构往往是它的灵魂所在，理解底层的数据结构其实就理解了该类的实现思路，具体的实现细节再具体分析。</p>
+<p>　　ArrayList的数据结构如下：</p>
+<pre><code> 1 2 3 4 5 6 7 8 
+| | | | | | | | |
+</code></pre>
+<p>说明：底层的数据结构就是数组，数组元素类型为Object类型，即可以存放所有类型数据。我们对ArrayList类的实例的所有的操作底层都是基于数组的。下面我们来分析通过数组是如何保证库函数的正确实现的。</p>
+<h2 id="二、ArrayList源码分析"><a href="#二、ArrayList源码分析" class="headerlink" title="二、ArrayList源码分析"></a>二、ArrayList源码分析</h2><h3 id="2-1-类的继承关系"><a href="#2-1-类的继承关系" class="headerlink" title="2.1 类的继承关系"></a>2.1 类的继承关系</h3><pre><code>public class ArrayList&lt;E&gt; extends AbstractList&lt;E&gt; 
+implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable
+</code></pre>
+<p>说明：ArrayList继承AbstractList抽象父类，实现了List接口（规定了List的操作规范）、RandomAccess（可随机访问）、Cloneable（可拷贝）、Serializable（可序列化）。</p>
+<h3 id="2-2-类的属性"><a href="#2-2-类的属性" class="headerlink" title="2.2 类的属性"></a>2.2 类的属性</h3><pre><code>public class ArrayList&lt;E&gt; extends AbstractList&lt;E&gt;
+        implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable
+&#123;
+    // 版本号
+    private static final long serialVersionUID = 8683452581122892189L;
+    // 缺省容量
+    private static final int DEFAULT_CAPACITY = 10;
+    // 空对象数组
+    private static final Object[] EMPTY_ELEMENTDATA = &#123;&#125;;
+    // 缺省空对象数组
+    private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = &#123;&#125;;
+    // 元素数组
+    transient Object[] elementData;
+    // 实际元素大小，默认为0
+    private int size;
+    // 最大数组容量
+    private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
+&#125;
+</code></pre>
+<p>说明：类的属性中核心的属性为elementData，类型为Object[]，用于存放实际元素，并且被标记为transient，也就意味着在序列化的时候，此字段是不会被序列化的。</p>
+<h3 id="2-3-类的构造函数"><a href="#2-3-类的构造函数" class="headerlink" title="2.3 类的构造函数"></a>2.3 类的构造函数</h3><h4 id="ArrayList-int-型构造函数"><a href="#ArrayList-int-型构造函数" class="headerlink" title="ArrayList(int)型构造函数"></a>ArrayList(int)型构造函数</h4><pre><code>public ArrayList(int initialCapacity) &#123;
+    if (initialCapacity &gt; 0) &#123; // 初始容量大于0
+        this.elementData = new Object[initialCapacity]; // 初始化元素数组
+    &#125; else if (initialCapacity == 0) &#123; // 初始容量为0
+        this.elementData = EMPTY_ELEMENTDATA; // 为空对象数组
+    &#125; else &#123; // 初始容量小于0，抛出异常
+        throw new IllegalArgumentException(&quot;Illegal Capacity: &quot;+
+                                           initialCapacity);
+    &#125;
+&#125;
+</code></pre>
+<p>说明：指定elementData数组的大小，不允许初始化大小小于0，否则抛出异常。</p>
+<h4 id="ArrayList-型构造函数"><a href="#ArrayList-型构造函数" class="headerlink" title="ArrayList()型构造函数"></a>ArrayList()型构造函数</h4><pre><code>public ArrayList() &#123; 
+    // 无参构造函数，设置元素数组为空 
+    this.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;
+&#125;
+</code></pre>
+<p>说明：当未指定初始化大小时，会给elementData赋值为空集合。</p>
+<h4 id="ArrayList-Collection-lt-extends-E-gt-型构造函数"><a href="#ArrayList-Collection-lt-extends-E-gt-型构造函数" class="headerlink" title="ArrayList(Collection&lt;? extends E&gt;)型构造函数"></a>ArrayList(Collection&lt;? extends E&gt;)型构造函数</h4><pre><code>public ArrayList(Collection&lt;? extends E&gt; c) &#123; // 集合参数构造函数
+    elementData = c.toArray(); // 转化为数组
+    if ((size = elementData.length) != 0) &#123; // 参数为非空集合
+        if (elementData.getClass() != Object[].class) // 是否成功转化为Object类型数组
+            elementData = Arrays.copyOf(elementData, size, Object[].class); // 不为Object数组的话就进行复制
+    &#125; else &#123; // 集合大小为空，则设置元素数组为空
+        this.elementData = EMPTY_ELEMENTDATA;
+    &#125;
+&#125;
+</code></pre>
+<p>说明：当传递的参数为集合类型时，会把集合类型转化为数组类型，并赋值给elementData。</p>
+<h3 id="2-4-核心函数分析"><a href="#2-4-核心函数分析" class="headerlink" title="2.4 核心函数分析"></a>2.4 核心函数分析</h3><h4 id="add函数"><a href="#add函数" class="headerlink" title="add函数"></a>add函数</h4><pre><code> public boolean add(E e) &#123; // 添加元素
+    ensureCapacityInternal(size + 1);  // Increments modCount!!
+    elementData[size++] = e;
+    return true;
+&#125;
+</code></pre>
+<p>说明：在add函数我们发现还有其他的函数ensureCapacityInternal，此函数可以理解为确保elementData数组有合适的大小。ensureCapacityInternal的具体函数如下</p>
+<pre><code>private void ensureCapacityInternal(int minCapacity) &#123;
+    if (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) &#123; // 判断元素数组是否为空数组
+        minCapacity = Math.max(DEFAULT_CAPACITY, minCapacity); // 取较大值
+    &#125;
+   
+    ensureExplicitCapacity(minCapacity);
+&#125;
+</code></pre>
+<p>说明：在ensureCapacityInternal函数中我们又发现了ensureExplicitCapacity函数，这个函数也是为了确保elemenData数组有合适的大小。ensureExplicitCapacity的具体函数如下</p>
+<pre><code>private void ensureExplicitCapacity(int minCapacity) &#123;
+    // 结构性修改加1
+    modCount++;
+    if (minCapacity - elementData.length &gt; 0)
+        grow(minCapacity);
+&#125;
+</code></pre>
+<p>说明：在ensureExplicitCapacity函数我们又发现了grow函数，grow函数才会对数组进行扩容，ensureCapacityInternal、ensureExplicitCapacity都只是过程，最后完成实际扩容操作还是得看grow函数，grow函数的具体函数如下　</p>
+<pre><code>private void grow(int minCapacity) &#123;
+    int oldCapacity = elementData.length; // 旧容量
+    int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1); // 新容量为旧容量的1.5倍
+    if (newCapacity - minCapacity &lt; 0) // 新容量小于参数指定容量，修改新容量
+        newCapacity = minCapacity;
+    if (newCapacity - MAX_ARRAY_SIZE &gt; 0) // 新容量大于最大容量
+        newCapacity = hugeCapacity(minCapacity); // 指定新容量
+    // 拷贝扩容
+    elementData = Arrays.copyOf(elementData, newCapacity);
+&#125;
+</code></pre>
+<p>说明：正常情况下会扩容1.5倍，特殊情况下（新扩展数组大小已经达到了最大值）则只取最大值。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/03/13/%E4%BA%8C.%20%20java%E9%9B%86%E5%90%88%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" data-id="cl4gp6u2o002v9cvc22y554lz" data-title="二. java集合源码解析" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/13/%E4%B8%80.%20Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          一. Java内存区域与内存溢出异常
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/12/%E4%B8%80.%20%20java%E9%9B%86%E5%90%88%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">一. java集合</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Error/" rel="tag">Error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Extjs/" rel="tag">Extjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerDesigner/" rel="tag">PowerDesigner</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">java虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/" rel="tag">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" rel="tag">myeclipse插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E8%AE%B0/" rel="tag">日记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" rel="tag">生活文化与素养</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Extjs/" style="font-size: 10px;">Extjs</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/PowerDesigner/" style="font-size: 12.86px;">PowerDesigner</a> <a href="/tags/Spring/" style="font-size: 14.29px;">Spring</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 12.86px;">java虚拟机</a> <a href="/tags/linux/" style="font-size: 17.14px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">myeclipse插件</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 14.29px;">工具</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 18.57px;">数据库</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 15.71px;">日记</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 14.29px;">杂记</a> <a href="/tags/%E6%A1%86%E6%9E%B6/" style="font-size: 14.29px;">框架</a> <a href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" style="font-size: 11.43px;">生活文化与素养</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 12.86px;">笔记</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/06/16/Hexo-github-%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2-%E6%96%B0%E6%89%8B%E5%85%A5%E9%97%A8/">Hexo+github搭建静态博客(新手入门)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/test/">test</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/20/%E4%BA%94.%20volatile%20%E5%85%B3%E9%94%AE%E5%AD%97/">五. volatile关键字</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/19/%E4%B8%89.%20%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/">三. 垃圾收集器</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Zhutongtong<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

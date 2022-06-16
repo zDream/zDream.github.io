@@ -4,17 +4,19 @@
   <meta charset="utf-8">
   
   
-  <title>Hexo</title>
+  <title>记忆时光</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+  <meta name="description" content="描述">
+<meta property="og:type" content="website">
+<meta property="og:title" content="记忆时光">
 <meta property="og:url" content="http://example.com/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="记忆时光">
+<meta property="og:description" content="描述">
 <meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="Zhutongtong">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="记忆时光" type="application/atom+xml">
   
   
     <link rel="shortcut icon" href="/favicon.png">
@@ -42,7 +44,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
+        <a href="/" id="logo">记忆时光</a>
       </h1>
       
     </div>
@@ -70,6 +72,217 @@
 
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Hexo-github-搭建静态博客-新手入门" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/06/16/Hexo-github-%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2-%E6%96%B0%E6%89%8B%E5%85%A5%E9%97%A8/" class="article-date">
+  <time class="dt-published" datetime="2022-06-16T07:22:10.415Z" itemprop="datePublished">2022-06-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/06/16/Hexo-github-%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2-%E6%96%B0%E6%89%8B%E5%85%A5%E9%97%A8/">Hexo+github搭建静态博客(新手入门)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>能来到这，说明你应该对博客有了些认知。相信你应该熟悉WordPress吧，或者说以前就是用的WordPress搭建的博客。本文针对于初学者，教程十分详细。我已经无法吐槽网上那些建博客教程，不是不能用，就是缺很多东西，到最后装也装不好，也不知道哪错了。在这我把我建博客的步骤写下来。希望能你给你们一些帮助。</p>
+</blockquote>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ul>
+<li>window8.1开发平台 楼主是在window下装的，虽然说是最烂的开发平台，但还是蛮好用的</li>
+<li>安装node.js <a target="_blank" rel="noopener" href="https://nodejs.org/en/">node官网</a>下载最新版本，一路安装就好</li>
+<li>安装git <a target="_blank" rel="noopener" href="http://git-scm.com/download/">get官网</a>下载与你电脑相对应的版本，安装</li>
+<li>github账号，用户名注册之后便不可修改，用来做博客的远程仓库的，</li>
+<li>域名(可不需要也行) 可以通过域名来访问你的博客</li>
+</ul>
+<h3 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h3><p>  打开Git命令行，执行如下命令</p>
+<pre><code>$  npm install -g hexo-cli
+</code></pre>
+<p>  初始化在电脑里建一个空文件夹(不要在C盘),我是在 E 盘建了一个 git 文件夹，然后右键打开 Git Bash Here,键入如下命令</p>
+<pre><code>Dreamer@Dream MINGW64 /d/test
+$ hexo init #初始化文件夹，会在目录下生成一些文件，随后按照提示运行   
+INFO Copying data to D:\test  
+INFO  You are almost done! Don&#39;t forget to run &#39;npm install&#39; before you   start blogging with Hexo!
+ ##按照提示输入
+$ npm install 耐心等待会，不要着急，然后运行下面命令
+$ hexo server`
+INFO  Hexo is running at http://0.0.0.0:4000/. Press Ctrl+C to stop.
+</code></pre>
+<p>表明Hexo Server已经启动了，在浏览器中打开 <a target="_blank" rel="noopener" href="http://localhost:4000/%EF%BC%8C">http://localhost:4000/，</a>  这时可以看到Hexo已为你生成了一篇blog。你可以按Ctrl+C 停止Server。</p>
+<p><strong>安装hexo插件(当时我就是因为没有装这些插件，导致各种失败)</strong></p>
+<pre><code>npm install hexo-generator-index --save
+npm install hexo-generator-archive --save
+npm install hexo-generator-category --save
+npm install hexo-generator-tag --save
+npm install hexo-server --save
+npm install hexo-deployer-git --save
+npm install hexo-deployer-heroku --save
+npm install hexo-deployer-rsync --save
+npm install hexo-deployer-openshift --save
+npm install hexo-renderer-marked@0.2 --save
+npm install hexo-renderer-stylus@0.2 --save
+npm install hexo-generator-feed@1 --save
+npm install hexo-generator-sitemap@1 --save
+</code></pre>
+<p><strong>hexo常用命令</strong></p>
+<pre><code>hexo new &quot;文章名字&quot; #生成一篇文章，在source目录下能看到,可简写  hexo n
+hexo new page&quot;pageName&quot;  #新建页面
+hexo generate  #生成静态页面至public目录   可简写 hexo g
+hexo server    #开启预览访问端口			 可简写 hexo s
+hexo deploy    #将.deploy目录部署到GitHub  可简写  hexo d
+hexo help      # 查看帮助
+hexo version   #查看Hexo的版本
+</code></pre>
+<h3 id="配置并部署到github"><a href="#配置并部署到github" class="headerlink" title="配置并部署到github"></a>配置并部署到github</h3><p>首先登录github，创建你用户名对应的仓库，仓库名必须是如图格式，他们都说是必须，我也不知道为什么，你如果知道了原因告诉我声。</p>
+<p> <img src="http://7xpw00.com1.z0.glb.clouddn.com/image11.png" alt="如图"></p>
+<p>配置ssh密钥参考 <a target="_blank" rel="noopener" href="https://help.github.com/articles/generating-ssh-keys/">官方文档</a>(可能需要翻墙才能访问)如果你英文不错的话可以去看这个，这个写的很详细。</p>
+<p>SSH密钥是一种方法来确定受信任的计算机，而不涉及密码。下面的步骤将引导您完成生成SSH密钥并添加公共密钥到你的GitHub上的帐户。</p>
+<ol>
+<li><p>生成ssh 密钥  </p>
+<p>$ ssh-keygen -t rsa -b 4096 -C “<a href="mailto:&#x79;&#111;&#x75;&#114;&#x5f;&#x65;&#109;&#97;&#x69;&#x6c;&#x40;&#x65;&#120;&#97;&#109;&#112;&#108;&#101;&#46;&#x63;&#111;&#x6d;">&#x79;&#111;&#x75;&#114;&#x5f;&#x65;&#109;&#97;&#x69;&#x6c;&#x40;&#x65;&#120;&#97;&#109;&#112;&#108;&#101;&#46;&#x63;&#111;&#x6d;</a>“</p>
+</li>
+<li><p>输入要保存的文件的路径，保持默认即可 然后 回车</p>
+<p>Enter file in which to save the key (&#x2F;Users&#x2F;you&#x2F;.ssh&#x2F;id_rsa): [Press enter]</p>
+</li>
+<li><p>输入密码，密码是暗文的，输入即可</p>
+<p>Enter passphrase (empty for no passphrase): [Type a passphrase]<br>Enter same passphrase again: [Type passphrase again]</p>
+</li>
+</ol>
+<blockquote>
+<p> 完成以上工作之后 去文件目录应该会有id_rsa  和id_rsa.pub两个官钥<br> id_rsa 是私有的，不可公开<br> id_rsa.put 可公开</p>
+</blockquote>
+<p>去github仓库中把ssh密钥加入进去 打开头像下的 Setting 目录</p>
+<p> <img src="http://7xpw00.com1.z0.glb.clouddn.com/imagessk.png"></p>
+<p> 点 Add SSH key<br> title 随你写<br> key 打开id_rsa.put 粘贴里面全部内容。保存即可</p>
+<p>要配置的ssh-agent程序使用你的SSH密钥</p>
+<ul>
+<li><p>确保ssh 代理已启用</p>
+<p> $ ssh-agent -s</p>
+<p> $ eval $(ssh-agent -s)</p>
+</li>
+<li><p>添加您的SSH密钥对的ssh-agent ，应该会让你输入密码</p>
+<p> $ ssh-add ~&#x2F;.ssh&#x2F;id_rsa (路径要改相应位置)</p>
+</li>
+</ul>
+<p>测试连接</p>
+<pre><code>$ ssh -T git@github.com
+Hi zDream! You&#39;ve successfully authenticated, but GitHub does not provide shell access.
+</code></pre>
+<p> 出现上图所示既表示添加成功</p>
+<h3 id="配置文件并上传到远程仓库中"><a href="#配置文件并上传到远程仓库中" class="headerlink" title="配置文件并上传到远程仓库中"></a>配置文件并上传到远程仓库中</h3><p> 如图是我的配置文件，_config.yml </p>
+<p> <strong>注意： 配置文件语法  xxx: content</strong>  冒号后的空格必不可少</p>
+<pre><code># Hexo Configuration
+## Docs: http://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
+
+# Site
+title: 我的记忆
+subtitle: 点点滴滴
+description: 生命的足迹
+author: Dream
+language:
+timezone:
+
+# URL
+## If your site is put in a subdirectory, set url as &#39;http://yoursite.com/child&#39; and root as &#39;/child/&#39;
+url: http://www.drayy.com
+root: /
+permalink: :year/:month/:day/:title/
+permalink_defaults:
+
+# Directory
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render:
+
+# Writing
+new_post_name: :title.md # File name of new posts
+default_layout: post
+titlecase: false # Transform title into titlecase
+external_link: true # Open external links in new tab
+filename_case: 0
+render_drafts: false
+post_asset_folder: false
+relative_link: false
+future: true
+highlight:
+  enable: true
+  line_number: true
+  auto_detect: true
+  tab_replace:
+
+# Category &amp; Tag
+default_category: uncategorized
+category_map:
+tag_map:
+
+# Date / Time format
+## Hexo uses Moment.js to parse and display date
+## You can customize the date format as defined in
+## http://momentjs.com/docs/#/displaying/format/
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+
+# Pagination
+## Set per_page to 0 to disable pagination
+per_page: 10
+pagination_dir: page
+
+# Extensions
+## Plugins: http://hexo.io/plugins/
+## Themes: http://hexo.io/themes/
+theme: jacman
+stylus:
+     compress: true
+
+# Deployment
+## Docs: http://hexo.io/docs/deployment.html
+deploy:
+  type: git
+  repository: git@github.com:zDream/zDream.github.io.git
+  branch: master
+  message: &#39;站点更新: \&#123;\&#123; now(&quot;YYYY-MM-DD HH:mm:ss&quot;) \&#125;\&#125;&#39;
+</code></pre>
+<hr>
+<p>每次部署都需要执行如下命令，如果不出错可以不clean，</p>
+<pre><code>hexo clean 
+hexo g
+hexo d
+</code></pre>
+<p>注意看命令后的那些代码，看有没有错误，如何上述全部都成功的话，</p>
+<p>去访问你的博客应该就好了 <a target="_blank" rel="noopener" href="http://zdream.github.com/">http://zDream.github.com</a>  ,改成你的名字即可</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/06/16/Hexo-github-%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2-%E6%96%B0%E6%89%8B%E5%85%A5%E9%97%A8/" data-id="cl4gp6u1j000d9cvcd3ivdaac" data-title="Hexo+github搭建静态博客(新手入门)" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
   
     <article id="post-test" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
@@ -160,7 +373,2025 @@
 
 
   
+    <article id="post-五. volatile 关键字" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/04/20/%E4%BA%94.%20volatile%20%E5%85%B3%E9%94%AE%E5%AD%97/" class="article-date">
+  <time class="dt-published" datetime="2018-04-20T08:53:21.000Z" itemprop="datePublished">2018-04-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/04/20/%E4%BA%94.%20volatile%20%E5%85%B3%E9%94%AE%E5%AD%97/">五. volatile关键字</a>
+    </h1>
+  
 
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>关键字volatile主要作用是使变量在多个线程间可见。</p>
+<h2 id="1-数据类型String-的常量池特性"><a href="#1-数据类型String-的常量池特性" class="headerlink" title="1. 数据类型String 的常量池特性"></a>1. 数据类型String 的常量池特性</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/04/20/%E4%BA%94.%20volatile%20%E5%85%B3%E9%94%AE%E5%AD%97/" data-id="cl4gp6u2p00309cvchs5k4jyj" data-title="五. volatile关键字" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-三. 垃圾收集器" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/04/19/%E4%B8%89.%20%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/" class="article-date">
+  <time class="dt-published" datetime="2018-04-19T15:25:02.000Z" itemprop="datePublished">2018-04-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/04/19/%E4%B8%89.%20%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/">三. 垃圾收集器</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="一，概述"><a href="#一，概述" class="headerlink" title="一，概述"></a>一，概述</h2><p>垃圾收集器就是内存回收的具体实现。虚拟机包含的所有收集器如图：<br><img src="http://7xpw00.com1.z0.glb.clouddn.com/650075-8c5080659578032d.jpg"><br>展示了七种作用于不同分代的收集器，如果两个收集器之间存在 连线，说明可以搭配使用。所处的区域，表示属于新生代还是老年代收集器。</p>
+<p>没有最好的收集器，更加没有万能的收集器，要能根据具体应用选取最合适的收集器。</p>
+<h2 id="二，Serial-收集器"><a href="#二，Serial-收集器" class="headerlink" title="二，Serial 收集器"></a>二，Serial 收集器</h2><p>最基本，发展历史最悠久的收集器。是一个单线程的收集器，单线程并不意味着它只会使用一个cpu或一条收集线程去完成垃圾收集工作，更重要的是在它进行垃圾收集时，必须暂停其他所有的工作线程，会经常 Stop TheWorld</p>
+<p>基本上已经被淘汰的收集器，但依然是虚拟机运行在Client模式下的默认新生代收集器，<strong>简单而高效</strong>（与其他收集器的单线程比）</p>
+<p>Stop TheWorld：JVM在后台自动发起和自动完成的，在用户不可见的情况下，把用户正常的工作线程全部停掉，即GC停顿；<br>会带给用户不良的体验；</p>
+<p>从JDK1.3到现在，从Serial收集器-》Parallel收集器-》CMS-》G1，用户线程停顿时间不断缩短，但仍然无法完全消除；</p>
+<h2 id="三，ParNew收集器"><a href="#三，ParNew收集器" class="headerlink" title="三，ParNew收集器"></a>三，ParNew收集器</h2><p>是Serial收集器的多线程版本。</p>
+<h2 id="四，Parallel-Scavenge收集器"><a href="#四，Parallel-Scavenge收集器" class="headerlink" title="四，Parallel Scavenge收集器"></a>四，Parallel Scavenge收集器</h2><h2 id="五，Serial-Old收集器"><a href="#五，Serial-Old收集器" class="headerlink" title="五，Serial Old收集器"></a>五，Serial Old收集器</h2><h2 id="六，Parallel-Old收集器"><a href="#六，Parallel-Old收集器" class="headerlink" title="六，Parallel Old收集器"></a>六，Parallel Old收集器</h2><h2 id="七，CMS收集器"><a href="#七，CMS收集器" class="headerlink" title="七，CMS收集器"></a>七，CMS收集器</h2><h2 id="八，Gl收集器"><a href="#八，Gl收集器" class="headerlink" title="八，Gl收集器"></a>八，Gl收集器</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/04/19/%E4%B8%89.%20%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/" data-id="cl4gp6u2n002t9cvcgose3s6j" data-title="三. 垃圾收集器" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">java虚拟机</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-四. synchronized同步语句块" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/04/19/%E5%9B%9B.%20synchronized%E5%90%8C%E6%AD%A5%E8%AF%AD%E5%8F%A5%E5%9D%97/" class="article-date">
+  <time class="dt-published" datetime="2018-04-19T07:59:21.000Z" itemprop="datePublished">2018-04-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/04/19/%E5%9B%9B.%20synchronized%E5%90%8C%E6%AD%A5%E8%AF%AD%E5%8F%A5%E5%9D%97/">四. synchronized同步语句块</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-数据类型String-的常量池特性"><a href="#1-数据类型String-的常量池特性" class="headerlink" title="1. 数据类型String 的常量池特性"></a>1. 数据类型String 的常量池特性</h2><pre><code>public class ThreadA extends Thread &#123;
+    private Service service;
+    public ThreadA(Service service) &#123;
+        super();
+        this.service = service;
+    &#125;
+
+    @Override
+    public void run() &#123;
+        service.print(&quot;AA&quot;);
+    &#125;
+&#125;
+
+public class ThreadB extends Thread &#123;
+    private Service service;
+    public ThreadB(Service service) &#123;
+        super();
+        this.service = service;
+    &#125;
+
+    @Override
+    public void run() &#123;
+        service.print(&quot;AA&quot;);
+    &#125;
+&#125;
+
+public class Service &#123;
+    public static void print(String stringParam) &#123;
+        try &#123;
+            synchronized (stringParam) &#123;
+                while (true) &#123;
+                    System.out.println(Thread.currentThread().getName());
+                    Thread.sleep(1000);
+                &#125;
+            &#125;
+        &#125; catch (InterruptedException e) &#123;
+            e.printStackTrace();
+        &#125;
+    &#125;
+&#125;
+
+public class Run &#123;
+    public static void main(String[] args) &#123;
+        Service service = new Service();
+
+        ThreadA a = new ThreadA(service);
+        a.setName(&quot;A&quot;);
+        a.start();
+
+        ThreadB b = new ThreadB(service);
+        b.setName(&quot;B&quot;);
+        b.start();
+    &#125;
+&#125;
+运行效果
+A
+A
+A
+出现这样的情况原因是String的两个值都是AA，两个线程持有相同的锁，所以造成了B线程不能执行。因此在大多数情况下，同步sync代码块都不使用String作为锁对象。而改用其他，比如new Object()实例化一个Object对象，但不放入缓存中。
+例子如下：
+public class ThreadA extends Thread &#123;
+    private Service service;
+
+    public ThreadA(Service service) &#123;
+        super();
+        this.service = service;
+    &#125;
+
+    @Override
+    public void run() &#123;
+        service.print(new Object());
+    &#125;
+&#125;
+
+public class ThreadB extends Thread &#123;
+    private Service service;
+
+    public ThreadB(Service service) &#123;
+        super();
+        this.service = service;
+    &#125;
+
+    @Override
+    public void run() &#123;
+        service.print(new Object());
+    &#125;
+&#125;
+
+public class Service &#123;
+    public static void print(Object object) &#123;
+        try &#123;
+            synchronized (object) &#123;
+                while (true) &#123;
+                    System.out.println(Thread.currentThread().getName());
+                    Thread.sleep(1000);
+                &#125;
+            &#125;
+        &#125; catch (InterruptedException e) &#123;
+            e.printStackTrace();
+        &#125;
+    &#125;
+&#125;
+
+public class Run &#123;
+    public static void main(String[] args) &#123;
+        Service service = new Service();
+
+        ThreadA a = new ThreadA(service);
+        a.setName(&quot;A&quot;);
+        a.start();
+
+        ThreadB b = new ThreadB(service);
+        b.setName(&quot;B&quot;);
+        b.start();
+    &#125;
+&#125;
+运行结果如下：
+A
+B
+A
+B
+可以看到交替打印，说明持有的锁不是一个。
+</code></pre>
+<h2 id="2-同步sync方法无限等待与解决"><a href="#2-同步sync方法无限等待与解决" class="headerlink" title="2. 同步sync方法无限等待与解决"></a>2. 同步sync方法无限等待与解决</h2><pre><code>public class ThreadA extends Thread &#123;
+    private Service service;
+
+    public ThreadA(Service service) &#123;
+        super();
+        this.service = service;
+    &#125;
+
+    @Override
+    public void run() &#123;
+        service.methodA();
+    &#125;
+&#125;
+
+public class ThreadB extends Thread &#123;
+    private Service service;
+
+    public ThreadB(Service service) &#123;
+        super();
+        this.service = service;
+    &#125;
+
+    @Override
+    public void run() &#123;
+        service.methodB();
+    &#125;
+&#125;
+
+public class Service &#123;
+    synchronized public void methodA() &#123;
+        System.out.println(&quot;methodA begin&quot;);
+        boolean isContinueRun = true;
+        while (isContinueRun) &#123;
+        &#125;
+        System.out.println(&quot;methodA end&quot;);
+    &#125;
+
+    synchronized public void methodB() &#123;
+        System.out.println(&quot;methodB begin&quot;);
+        System.out.println(&quot;methodB end&quot;);
+    &#125;
+&#125;
+
+public class Run &#123;
+    public static void main(String[] args) &#123;
+        Service service = new Service();
+
+        ThreadA athread = new ThreadA(service);
+        athread.start();
+
+        ThreadB bthread = new ThreadB(service);
+        bthread.start();
+    &#125;
+&#125;	
+运行结果：
+methodA begin
+
+线程B永远得不到运行的机会，锁死了。这时可以用同步块来解决，更改后的如下：
+public class Service &#123;
+    Object object1 = new Object();
+
+    public void methodA() &#123;
+        synchronized (object1) &#123;
+            System.out.println(&quot;methodA begin&quot;);
+            boolean isContinueRun = true;
+            while (isContinueRun) &#123;
+            &#125;
+            System.out.println(&quot;methodA end&quot;);
+        &#125;
+    &#125;
+
+    Object object2 = new Object();
+
+    public void methodB() &#123;
+        synchronized (object2) &#123;
+            System.out.println(&quot;methodB begin&quot;);
+            System.out.println(&quot;methodB end&quot;);
+        &#125;
+    &#125;
+&#125;
+运行结果如下：
+methodA begin
+methodB begin
+methodB end
+</code></pre>
+<h2 id="3-多线程的死锁"><a href="#3-多线程的死锁" class="headerlink" title="3. 多线程的死锁"></a>3. 多线程的死锁</h2><p>死锁是一个经典的多线程问题，因为不同的线程都在等待根本不可能被释放的锁。在多线程技术中，死锁是必须避免的，因为这会造成程序的假死。<br>    例子<br>    public class DealThread implements Runnable {<br>        public String username;<br>        public Object lock1 &#x3D; new Object();<br>        public Object lock2 &#x3D; new Object();</p>
+<pre><code>    public void setFlag(String username) &#123;
+        this.username = username;
+    &#125;
+
+    @Override
+    public void run() &#123;
+        if (username.equals(&quot;a&quot;)) &#123;
+            synchronized (lock1) &#123;
+                try &#123;
+                    System.out.println(&quot;username = &quot; + username);
+                    Thread.sleep(3000);
+                &#125; catch (InterruptedException e) &#123;
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                &#125;
+                synchronized (lock2) &#123;
+                    System.out.println(&quot;按 lock1-&gt;lock2 代码顺序执行了&quot;);
+                &#125;
+            &#125;
+        &#125;
+        if (username.equals(&quot;b&quot;)) &#123;
+            synchronized (lock2) &#123;
+                try &#123;
+                    System.out.println(&quot;username = &quot; + username);
+                    Thread.sleep(3000);
+                &#125; catch (InterruptedException e) &#123;
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                &#125;
+                synchronized (lock1) &#123;
+                    System.out.println(&quot;按 lock2-&gt;lock1代码顺序执行了&quot;);
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+&#125;
+
+public class Run &#123;
+    public static void main(String[] args) &#123;
+        try &#123;
+            DealThread t1 = new DealThread();
+            t1.setFlag(&quot;a&quot;);
+
+            Thread thread1 = new Thread(t1);
+            thread1.start();
+
+            Thread.sleep(100);
+
+            t1.setFlag(&quot;b&quot;);
+            Thread thread2 = new Thread(t1);
+            thread2.start();
+        &#125; catch (InterruptedException e) &#123;
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        &#125;
+    &#125;
+&#125;
+运行结果：
+username = a
+username = b
+结论：死锁是程序的bug，在设计程序的时候要避免双方互相持有对方的锁的情况。
+只要互相等待对方释放锁就有可能出现死锁。
+</code></pre>
+<h2 id="4-内置类与静态内置类"><a href="#4-内置类与静态内置类" class="headerlink" title="4. 内置类与静态内置类"></a>4. 内置类与静态内置类</h2><h3 id="1-内置类与同步-实验1"><a href="#1-内置类与同步-实验1" class="headerlink" title="(1) 内置类与同步:实验1"></a>(1) 内置类与同步:实验1</h3><p>在内置类中有两个同步的方法，但使用的是不同的锁，打印的结果也是异步的。</p>
+<pre><code>public class OutClass &#123;
+    static class Inner &#123;
+        public void method1() &#123;
+            synchronized (&quot;其它的锁&quot;) &#123;
+                for (int i = 1; i &lt;= 10; i++) &#123;
+                    System.out.println(Thread.currentThread().getName() + &quot; i=&quot;
+                            + i);
+                    try &#123;
+                        Thread.sleep(100);
+                    &#125; catch (InterruptedException e) &#123;
+                    &#125;
+                &#125;
+            &#125;
+        &#125;
+
+        public synchronized void method2() &#123;
+            for (int i = 11; i &lt;= 20; i++) &#123;
+                System.out
+                        .println(Thread.currentThread().getName() + &quot; i=&quot; + i);
+                try &#123;
+                    Thread.sleep(100);
+                &#125; catch (InterruptedException e) &#123;
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+&#125;
+
+public class Run &#123;
+    public static void main(String[] args) &#123;
+        final Inner inner = new Inner();
+        Thread t1 = new Thread(new Runnable() &#123;
+            public void run() &#123;
+                inner.method1();
+            &#125;
+        &#125;, &quot;A&quot;);
+
+        Thread t2 = new Thread(new Runnable() &#123;
+            public void run() &#123;
+                inner.method2();
+            &#125;
+        &#125;, &quot;B&quot;);
+
+        t1.start();
+        t2.start();
+    &#125;
+&#125;
+
+运行结果：
+A i=1
+B i=11
+B i=12
+A i=2
+A i=3
+B i=13
+B i=14
+A i=4
+B i=15
+A i=5
+B i=16
+A i=6
+B i=17
+A i=7
+B i=18
+A i=8
+B i=19
+A i=9
+B i=20
+A i=10
+由于持有不同的对象监视器，所以打印结果就是乱序的。
+</code></pre>
+<h3 id="2-静态内置类与同步-实验2"><a href="#2-静态内置类与同步-实验2" class="headerlink" title="(2) 静态内置类与同步:实验2"></a>(2) 静态内置类与同步:实验2</h3><pre><code>public class OutClass &#123;
+    static class InnerClass1 &#123;
+        public void method1(InnerClass2 class2) &#123;
+            String threadName = Thread.currentThread().getName();
+            synchronized (class2) &#123;
+                System.out.println(threadName + &quot; 进入InnerClass1类中的method1方法&quot;);
+                for (int i = 0; i &lt; 10; i++) &#123;
+                    System.out.println(&quot;i=&quot; + i);
+                    try &#123;
+                        Thread.sleep(100);
+                    &#125; catch (InterruptedException e) &#123;
+
+                    &#125;
+                &#125;
+                System.out.println(threadName + &quot; 离开InnerClass1类中的method1方法&quot;);
+            &#125;
+        &#125;
+
+        public synchronized void method2() &#123;
+            String threadName = Thread.currentThread().getName();
+            System.out.println(threadName + &quot; 进入InnerClass1类中的method2方法&quot;);
+            for (int j = 0; j &lt; 10; j++) &#123;
+                System.out.println(&quot;j=&quot; + j);
+                try &#123;
+                    Thread.sleep(100);
+                &#125; catch (InterruptedException e) &#123;
+
+                &#125;
+            &#125;
+            System.out.println(threadName + &quot; 离开InnerClass1类中的method2方法&quot;);
+        &#125;
+    &#125;
+
+    static class InnerClass2 &#123;
+        public synchronized void method1() &#123;
+            String threadName = Thread.currentThread().getName();
+            System.out.println(threadName + &quot; 进入InnerClass2类中的method1方法&quot;);
+            for (int k = 0; k &lt; 10; k++) &#123;
+                System.out.println(&quot;k=&quot; + k);
+                try &#123;
+                    Thread.sleep(100);
+                &#125; catch (InterruptedException e) &#123;
+
+                &#125;
+            &#125;
+            System.out.println(threadName + &quot; 离开InnerClass2类中的method1方法&quot;);
+        &#125;
+    &#125;
+&#125;
+
+public class Run &#123;
+    public static void main(String[] args) &#123;
+        final InnerClass1 in1 = new InnerClass1();
+        final InnerClass2 in2 = new InnerClass2();
+        Thread t1 = new Thread(new Runnable() &#123;
+            public void run() &#123;
+                in1.method1(in2);
+            &#125;
+        &#125;, &quot;T1&quot;);
+        Thread t2 = new Thread(new Runnable() &#123;
+            public void run() &#123;
+                in1.method2();
+            &#125;
+        &#125;, &quot;T2&quot;);
+        // //
+        // //
+        Thread t3 = new Thread(new Runnable() &#123;
+            public void run() &#123;
+                in2.method1();
+            &#125;
+        &#125;, &quot;T3&quot;);
+        t1.start();
+        t2.start();
+        t3.start();
+    &#125;
+&#125;
+运行结果如下：
+T1 进入InnerClass1类中的method1方法
+i=0
+T2 进入InnerClass1类中的method2方法
+j=0
+i=1
+j=1
+i=2
+j=2
+i=3
+j=3
+i=4
+j=4
+i=5
+j=5
+i=6
+j=6
+i=7
+j=7
+i=8
+j=8
+i=9
+j=9
+T1 离开InnerClass1类中的method1方法
+T3 进入InnerClass2类中的method1方法
+k=0
+T2 离开InnerClass1类中的method2方法
+k=1
+k=2
+k=3
+k=4
+k=5
+k=6
+k=7
+k=8
+k=9
+T3 离开InnerClass2类中的method1方法
+结论：
+同步代码块sync(class2)对class2上锁后，其他线程只能以同步的方式调用 class2中的静态同步方法。
+</code></pre>
+<h2 id="5-锁对象的改变"><a href="#5-锁对象的改变" class="headerlink" title="5. 锁对象的改变"></a>5. 锁对象的改变</h2><p>在将任何数据类型作为同步锁时，需要注意的是：是否有多个线程同时持有锁对象，如果同时持有相同的锁对象，则这些线程之间就是同步的；如果分别获得锁对象，这些线程之间就是异步的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/04/19/%E5%9B%9B.%20synchronized%E5%90%8C%E6%AD%A5%E8%AF%AD%E5%8F%A5%E5%9D%97/" data-id="cl4gp6u2t003a9cvc8j3rasvg" data-title="四. synchronized同步语句块" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-二. 垃圾算法和HotSpot算法实现" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/03/21/%E4%BA%8C.%20%E5%9E%83%E5%9C%BE%E7%AE%97%E6%B3%95%E5%92%8CHotSpot%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/" class="article-date">
+  <time class="dt-published" datetime="2018-03-21T15:00:30.000Z" itemprop="datePublished">2018-03-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/03/21/%E4%BA%8C.%20%E5%9E%83%E5%9C%BE%E7%AE%97%E6%B3%95%E5%92%8CHotSpot%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/">二. 垃圾算法和HotSpot算法实现</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="一，对象已死吗"><a href="#一，对象已死吗" class="headerlink" title="一，对象已死吗?"></a>一，对象已死吗?</h2><p>在堆里存放着所有的java对象实例。如下算法判断哪个对象存活，哪个已经死去。</p>
+<h3 id="1-引用计数算法"><a href="#1-引用计数算法" class="headerlink" title="1. 引用计数算法"></a>1. 引用计数算法</h3><p>概念：给对象添加一个引用计数器，每当有一个地方引用它时，计数器值就加1；当引用时，计数器就减1；任何计数器为0的对象就是不可能再被使用的。</p>
+<p>算法实现简单，效率最高。</p>
+<h3 id="2-可达性分析算法"><a href="#2-可达性分析算法" class="headerlink" title="2. 可达性分析算法"></a>2. 可达性分析算法</h3><p>基本思想是通过一系统称为“GC Roots”的对象作为起始点，从这些节点开始向下搜索，搜索所走的路径称为引用链，当一个对象到 GC Roots 没有任何引用链相连时，则证明对象是不可用的。<br>在java语言中，可作为GC Roots的对象包括下面几种：</p>
+<ul>
+<li>虚拟机栈（栈帧中的本地变量表）中引用的对象。</li>
+<li>方法区中的类静态属性引用的对象</li>
+<li>方法区中常量引用的对象</li>
+<li>本地方法栈中JNI(即一般说的Native方法)引用的对象</li>
+</ul>
+<h3 id="3-再谈引用"><a href="#3-再谈引用" class="headerlink" title="3. 再谈引用"></a>3. 再谈引用</h3><p>无论是引用计数还是可达性分析，判定对象是否存活都与<strong>引用</strong>有关。<br>在jdk1.2以前，java对引用的定义：如果reference类型的数据中存储的数值代表的是另外一块内存的起始地址，则称为这块内存代表着一个引用。然尔这样有一些缺点：我们希望能描述这样一种对象：当内存空间还足够时，则能保存在内存这中；如果内存空间在进行垃圾收集后还是非常紧张，则可以抛弃这些对象。很多系统的缓存功能都符合这样的应用场景。</p>
+<p>所以在jdk1.2之后，java对这些引用进行了扩充。分为如下类型，引用强度逐渐减弱：</p>
+<ul>
+<li><strong>强引用</strong>(Strong Reference):<strong>是指在程序代码中普遍存在的</strong>，只要强引用还存在，就永远不会回收到被引用的对象。比如 Object obj &#x3D; new Object();</li>
+<li><strong>软引用</strong>(Soft Reference):<strong>用来描述一些还有用但并非必须的对象</strong>。在发生内存溢出异常之前，将会把这些对象列进回收范围之中进行第二次回收。如果这次还没有足够的内存，才会抛出内存溢出异常</li>
+<li><strong>弱引用</strong>(Weak Reference):<strong>用来描述非必须的对象</strong>。比软引用更弱一些。被弱引用关联的对象只能生存到下一次垃圾收集发生之前。当垃圾收集器工作时，无论当前内存是否足够，都会回收掉只被弱引用关联的对象。</li>
+<li><strong>虚引用</strong>(Phantom Reference):<strong>称为幽灵引用或者幻影引用</strong>，是最弱的一种引用。为一个对象设置虚引用关联的唯一目的就是能在这个对象被收集器回收时收到一个系统通知。</li>
+</ul>
+<h3 id="4-回收方法区"><a href="#4-回收方法区" class="headerlink" title="4. 回收方法区"></a>4. 回收方法区</h3><p>方法区又被人称为永久代</p>
+<p>在方法区中进行垃圾收集的性价比比较低；在堆中尤其是在新生代中，一次垃圾收集一般可以 回收70%-95%的空间。</p>
+<p>永久代垃圾收集主要回收两部分内容：废弃常量和无用的类。判定一个常量是否废弃比较简单。而要判定一个类是否是无用的类的条件相对苛刻许多。类需要满足以下3个条件：</p>
+<ol>
+<li>该类所有的实例都已经被回收，也就是java堆 中不存在该类的任何实例</li>
+<li>加载该类的ClassLoader已经被回收</li>
+<li>该类对应的java.lang.Class对象没有在任何地方被引用，无法在任何地方通过反射访问该类的方法。</li>
+</ol>
+<h2 id="二-垃圾收集算法"><a href="#二-垃圾收集算法" class="headerlink" title="二. 垃圾收集算法"></a>二. 垃圾收集算法</h2><h3 id="1-标记-清除算法"><a href="#1-标记-清除算法" class="headerlink" title="1. 标记-清除算法"></a>1. 标记-清除算法</h3><p>算法分为标记和清除两个阶段：首先标记出需要回收的对象，在标记完成后统一回收所有被标记的对象。</p>
+<p>缺点：  </p>
+<ol>
+<li>效率不高</li>
+<li>空间问题。标记清除后会产生大量不连续的内存碎片，碎片太多可能会导致程序在运行过程中需要分配较大对象时，无法找到足够的连续内存而不得不提前触发一次垃圾收集动作。</li>
+</ol>
+<h3 id="2-复制算法"><a href="#2-复制算法" class="headerlink" title="2. 复制算法"></a>2. 复制算法</h3><p>为解决效率问题，复制算法出现了：将内存按容量划分为大小相等的现场，每次只使用其中的一块，当这一块用完了，就将还存活的对象复制到另外一块上面，然后再把已使用过的内存空间一次清理掉。这样使得每次都是对整个半区进行回收，内存分配时也不用考虑内存碎片等复杂情况，只要移动堆顶指针，按顺序分配内存即可，实现简单，运行高效。只是这种算法的代价将内存缩小为了原来的一半，未免太高了一点。现在的商业模式都采用这种收集算法来回收新生代。</p>
+<h3 id="3-标记-整理算法"><a href="#3-标记-整理算法" class="headerlink" title="3. 标记-整理算法"></a>3. 标记-整理算法</h3><p>复制收集算法在对象存活率较高时就要进行较多我的复制操作，效率将会变低。更关键的是，如果不想浪费50%的空间，就需要额外的空间进行分配担保，以应对被使用的内存中所有对象都100%戚的极端情况，所以在老年代一般不能直接选用这种算法。</p>
+<p>根据老年代的特点，提出了标记-整理算法，与标记清除算法一样，但后续步骤不是直接对可回收对象进行清理，而是让所有对象都向一端移动，然后直接清理掉端边界以外的内存。</p>
+<h3 id="4-分代收集算法"><a href="#4-分代收集算法" class="headerlink" title="4. 分代收集算法"></a>4. 分代收集算法</h3><p>当前商业虚拟机的垃圾收集都采用分代收集算法，没有什么新的思想，一般把java堆分为新生代和老年代，这样就可以 根据各个年代的特点采用合适的收集算法。   在新生代中每次垃圾收集时都发现有大批对象死去，少量存活，就选用<strong>复制算法</strong>。而老年代中因为对象存活率高，没有额外空间对它进行担保，就必须使用 <strong>标记-清理算法</strong>，或者<strong>标记整理算法</strong>。</p>
+<h2 id="三-HotSpot算法实现"><a href="#三-HotSpot算法实现" class="headerlink" title="三. HotSpot算法实现"></a>三. HotSpot算法实现</h2><h3 id="1-枚举根节点"><a href="#1-枚举根节点" class="headerlink" title="1. 枚举根节点"></a>1. 枚举根节点</h3><h3 id="2-安全点"><a href="#2-安全点" class="headerlink" title="2. 安全点"></a>2. 安全点</h3><h3 id="3-安全区域"><a href="#3-安全区域" class="headerlink" title="3. 安全区域"></a>3. 安全区域</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/03/21/%E4%BA%8C.%20%E5%9E%83%E5%9C%BE%E7%AE%97%E6%B3%95%E5%92%8CHotSpot%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/" data-id="cl4gp6u2o002y9cvc46h8037l" data-title="二. 垃圾算法和HotSpot算法实现" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">java虚拟机</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-三. synchronized同步语句块" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/03/21/%E4%B8%89.%20synchronized%E5%90%8C%E6%AD%A5%E8%AF%AD%E5%8F%A5%E5%9D%97/" class="article-date">
+  <time class="dt-published" datetime="2018-03-21T09:48:28.000Z" itemprop="datePublished">2018-03-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/03/21/%E4%B8%89.%20synchronized%E5%90%8C%E6%AD%A5%E8%AF%AD%E5%8F%A5%E5%9D%97/">三. synchronized同步语句块</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-synchronized方法的弊端"><a href="#1-synchronized方法的弊端" class="headerlink" title="1. synchronized方法的弊端"></a>1. synchronized方法的弊端</h2><p>用关键字synchronized声明方法在某些情况下是有弊端的，比如A线程调用同步方法执行一个长时间的任务，那么B线程则必须等待比较长时间，在这种情况下可以使用synchronized同步语句块来解决。</p>
+<p>这句话好理解，demo 略，</p>
+<h2 id="2-用同步代码块解决同步方法的弊端"><a href="#2-用同步代码块解决同步方法的弊端" class="headerlink" title="2. 用同步代码块解决同步方法的弊端"></a>2. 用同步代码块解决同步方法的弊端</h2><pre><code>public class CommonUtils &#123;
+    public static long beginTime1;
+    public static long endTime1;
+    public static long beginTime2;
+    public static long endTime2;
+&#125;
+
+public class Task &#123;
+    private String getData1;
+    private String getData2;
+    public void doLongTimeTask() &#123;
+        try &#123;
+            System.out.println(&quot;begin task&quot;);
+            Thread.sleep(3000);
+
+            String privateGetData1 = &quot;长时间处理任务后的返回的值 1 threadName=&quot;
+                    + Thread.currentThread().getName();
+            String privateGetData2 = &quot;长时间处理任务后的返回的值 2 threadName=&quot;
+                    + Thread.currentThread().getName();
+            synchronized (this) &#123;
+                getData1 = privateGetData1;
+                getData2 = privateGetData2;
+            &#125;
+            System.out.println(getData1);
+            System.out.println(getData2);
+            System.out.println(&quot;end task&quot;);
+        &#125; catch (InterruptedException e) &#123;
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        &#125;
+    &#125;
+&#125;
+
+public class MyThread1 extends Thread &#123;
+    private Task task;
+    public MyThread1(Task task) &#123;
+        super();
+        this.task = task;
+    &#125;
+    @Override
+    public void run() &#123;
+        super.run();
+        CommonUtils.beginTime1 = System.currentTimeMillis();
+        task.doLongTimeTask();
+        CommonUtils.endTime1 = System.currentTimeMillis();
+    &#125;
+&#125;
+
+public class MyThread2 extends Thread &#123;
+    private Task task;
+    public MyThread2(Task task) &#123;
+        super();
+        this.task = task;
+    &#125;
+    @Override
+    public void run() &#123;
+        super.run();
+        CommonUtils.beginTime2 = System.currentTimeMillis();
+        task.doLongTimeTask();
+        CommonUtils.endTime2 = System.currentTimeMillis();
+    &#125;
+&#125;
+
+public class Run &#123;
+
+    public static void main(String[] args) &#123;
+        Task task = new Task();
+
+        MyThread1 thread1 = new MyThread1(task);
+        thread1.start();
+
+        MyThread2 thread2 = new MyThread2(task);
+        thread2.start();
+
+        try &#123;
+            Thread.sleep(10000);
+        &#125; catch (InterruptedException e) &#123;
+            e.printStackTrace();
+        &#125;
+
+        long beginTime = CommonUtils.beginTime1;
+        if (CommonUtils.beginTime2 &lt; CommonUtils.beginTime1) &#123;
+            beginTime = CommonUtils.beginTime2;
+        &#125;
+
+        long endTime = CommonUtils.endTime1;
+        if (CommonUtils.endTime2 &gt; CommonUtils.endTime1) &#123;
+            endTime = CommonUtils.endTime2;
+        &#125;
+
+        System.out.println(&quot;耗时: &quot; + ((endTime - beginTime) / 1000));
+    &#125;
+&#125;
+运行效果:
+begin task
+begin task
+长时间处理任务后的返回的值 1 threadName=Thread-0
+长时间处理任务后的返回的值 2 threadName=Thread-0
+end task
+长时间处理任务后的返回的值 1 threadName=Thread-1
+长时间处理任务后的返回的值 2 threadName=Thread-1
+end task
+耗时: 3
+</code></pre>
+<blockquote>
+<p>通过运行结果可以看出耗时变成了3S. 当一个线程访问object的一个snychronized同步代码块时,另一个线程仍然可以访问该object对象中的非synchronized(this)同步代码块.</p>
+</blockquote>
+<h2 id="3-多个sync代码块间的同步性"><a href="#3-多个sync代码块间的同步性" class="headerlink" title="3. 多个sync代码块间的同步性"></a>3. 多个sync代码块间的同步性</h2><pre><code>public class ObjectService &#123;
+    public void serviceMethodA() &#123;
+        try &#123;
+            synchronized (this) &#123;
+                System.out.println(&quot;A begin time=&quot; + System.currentTimeMillis());
+                Thread.sleep(2000);
+                System.out.println(&quot;A end    end=&quot; + System.currentTimeMillis());
+            &#125;
+        &#125; catch (InterruptedException e) &#123;
+            e.printStackTrace();
+        &#125;
+    &#125;
+
+    public void serviceMethodB() &#123;
+        synchronized (this) &#123;
+            System.out.println(&quot;B begin time=&quot; + System.currentTimeMillis());
+            System.out.println(&quot;B end    end=&quot; + System.currentTimeMillis());
+        &#125;
+    &#125;
+&#125;
+
+public class ThreadA extends Thread &#123;
+
+    private ObjectService service;
+
+    public ThreadA(ObjectService service) &#123;
+        super();
+        this.service = service;
+    &#125;
+    @Override
+    public void run() &#123;
+        super.run();
+        service.serviceMethodA();
+    &#125;
+&#125;
+
+public class ThreadB extends Thread &#123;
+    private ObjectService service;
+
+    public ThreadB(ObjectService service) &#123;
+        super();
+        this.service = service;
+    &#125;
+    @Override
+    public void run() &#123;
+        super.run();
+        service.serviceMethodB();
+    &#125;
+&#125;
+
+public class Run &#123;
+
+    public static void main(String[] args) &#123;
+        ObjectService service = new ObjectService();
+
+        ThreadA a = new ThreadA(service);
+        a.setName(&quot;a&quot;);
+        a.start();
+
+        ThreadB b = new ThreadB(service);
+        b.setName(&quot;b&quot;);
+        b.start();
+    &#125;
+&#125;
+运行结果:
+A begin time=1521628118097
+A end    end=1521628120097
+B begin time=1521628120098
+B end    end=1521628120098
+同步运行,另一个被阻塞
+</code></pre>
+<blockquote>
+<p>当一个线程访问一个对象的sync(this)同步代码块时,其他线程对同一个对象中的其他sync同步代码块的访问将被阻塞.这说明sync使用的是<strong>对象监视器</strong></p>
+</blockquote>
+<h2 id="4-将任意对象作为对象监视器"><a href="#4-将任意对象作为对象监视器" class="headerlink" title="4. 将任意对象作为对象监视器"></a>4. 将任意对象作为对象监视器</h2><p>多个线程调用同一个对象的不同名称的sync同步方法或sync(this)同步代码块时，调用的效果就是按顺序执行，也就是同步，阻塞的。</p>
+<p>sync同步方法或sync(this)同步代码块分别有两种作用：</p>
+<ol>
+<li>sync同步方法<ol>
+<li>对其他sync同步方法或sync(this)同步代码块调用呈阻塞状态。</li>
+<li>同一时间只有一个线程可以执行sync同步方法中的代码。</li>
+</ol>
+</li>
+<li>sync(this)同步代码块<ol>
+<li>对其他sync同步方法或sync(this)同步代码块调用呈阻塞状态。</li>
+<li>同一时间只有一个线程可以执行sync(this)同步代码块中的代码。</li>
+</ol>
+</li>
+</ol>
+<p>根据前面对sync(this)同步代码块的作用总结可知，sycn(非this对象)格式的作用只有一种：sync(非this对象x)同步代码块：</p>
+<ol>
+<li>当多个线程持有对象监视器为同一个对象的前提下，同一时间只有一个线程可以执行sync(this对象x)同步代码块中的代码</li>
+<li>当持有对象监视器为同一个对象的前提下，同一时间只有一个线程可以执行sync(非this对象x)同步代码块中的代码</li>
+</ol>
+<h2 id="5-细化验证3个结论"><a href="#5-细化验证3个结论" class="headerlink" title="5. 细化验证3个结论"></a>5. 细化验证3个结论</h2><p>sync(非this对象x)格式的写法是将x对象本身作为 对象监视器 这样就可以得出以下3个结论：</p>
+<ol>
+<li>当多个线程同时执行sync(x){}同步代码块时呈同步效果</li>
+<li>当其他线程执行x对象中的sync同步方法时呈同步效果</li>
+<li>当其他线程执行x对象方法里面的sync(this)代码块时也呈现同步效果</li>
+</ol>
+<h3 id="1-验证第一个结论"><a href="#1-验证第一个结论" class="headerlink" title="(1) 验证第一个结论"></a>(1) 验证第一个结论</h3><p>当多个线程同时执行sync(x){}同步代码块时呈同步效果</p>
+<pre><code>public class MyObject &#123;
+&#125;
+
+public class ThreadA extends Thread &#123;
+    private Service service;
+    private MyObject object;
+
+    public ThreadA(Service service, MyObject object) &#123;
+        super();
+        this.service = service;
+        this.object = object;
+    &#125;
+
+    @Override
+    public void run() &#123;
+        super.run();
+        service.testMethod1(object);
+    &#125;
+&#125;
+
+public class ThreadB extends Thread &#123;
+    private Service service;
+    private MyObject object;
+
+    public ThreadB(Service service, MyObject object) &#123;
+        super();
+        this.service = service;
+        this.object = object;
+    &#125;
+
+    @Override
+    public void run() &#123;
+        super.run();
+        service.testMethod1(object);
+    &#125;
+&#125;
+
+public class Run1_1 &#123;
+    public static void main(String[] args) &#123;
+        Service service = new Service();
+        MyObject object = new MyObject();
+
+        ThreadA a = new ThreadA(service, object);
+        a.setName(&quot;a&quot;);
+        a.start();
+
+        ThreadB b = new ThreadB(service, object);
+        b.setName(&quot;b&quot;);
+        b.start();
+    &#125;
+&#125;
+
+public class Service &#123;
+    public void testMethod1(MyObject object) &#123;
+        synchronized (object) &#123;
+            try &#123;
+                System.out.println(&quot;testMethod1 ____getLock time=&quot;
+                        + System.currentTimeMillis() + &quot; run ThreadName=&quot;
+                        + Thread.currentThread().getName());
+                Thread.sleep(2000);
+                System.out.println(&quot;testMethod1 releaseLock time=&quot;
+                        + System.currentTimeMillis() + &quot; run ThreadName=&quot;
+                        + Thread.currentThread().getName());
+            &#125; catch (InterruptedException e) &#123;
+                e.printStackTrace();
+            &#125;
+        &#125;
+    &#125;
+&#125;
+运行效果：
+testMethod1 ____getLock time=1523523486828 run ThreadName=a
+testMethod1 releaseLock time=1523523488828 run ThreadName=a
+testMethod1 ____getLock time=1523523488829 run ThreadName=b
+testMethod1 releaseLock time=1523523490829 run ThreadName=b
+由结果可看到同一个对象监视器， 结果同步输出
+
+换不同的对象监视器
+
+public class Run1_2 &#123;
+    public static void main(String[] args) &#123;
+        Service service = new Service();
+        MyObject object1 = new MyObject();
+        MyObject object2 = new MyObject();
+
+        ThreadA a = new ThreadA(service, object1);
+        a.setName(&quot;a&quot;);
+        a.start();
+
+        ThreadB b = new ThreadB(service, object2);
+        b.setName(&quot;b&quot;);
+        b.start();
+    &#125;
+&#125;
+运行结果如下：
+testMethod1 ____getLock time=1523523808562 run ThreadName=a
+testMethod1 ____getLock time=1523523808564 run ThreadName=b
+testMethod1 releaseLock time=1523523810582 run ThreadName=a
+testMethod1 releaseLock time=1523523810637 run ThreadName=b
+结果异步输出
+</code></pre>
+<h3 id="2-验证第二个结论"><a href="#2-验证第二个结论" class="headerlink" title="(2) 验证第二个结论"></a>(2) 验证第二个结论</h3><p>当其他线程执行x对象中的sync同步方法时呈同步效果</p>
+<pre><code>public class MyObject &#123;
+    synchronized public void speedPrintString() &#123;
+        System.out.println(&quot;speedPrintString ____getLock time=&quot;
+                + System.currentTimeMillis() + &quot; run ThreadName=&quot;
+                + Thread.currentThread().getName());
+        System.out.println(&quot;-----------------&quot;);
+        System.out.println(&quot;speedPrintString releaseLock time=&quot;
+                + System.currentTimeMillis() + &quot; run ThreadName=&quot;
+                + Thread.currentThread().getName());
+    &#125;
+&#125;	
+
+public class ThreadA extends Thread &#123;
+    private Service service;
+    private MyObject object;
+
+    public ThreadA(Service service, MyObject object) &#123;
+        super();
+        this.service = service;
+        this.object = object;
+    &#125;
+
+    @Override
+    public void run() &#123;
+        super.run();
+        service.testMethod1(object);
+    &#125;
+&#125;
+
+public class ThreadB extends Thread &#123;
+    private MyObject object;
+
+    public ThreadB(MyObject object) &#123;
+        super();
+        this.object = object;
+    &#125;
+
+    @Override
+    public void run() &#123;
+        super.run();
+        object.speedPrintString();
+    &#125;
+&#125;
+
+public class Service &#123;
+    public void testMethod1(MyObject object) &#123;
+        synchronized (object) &#123;
+            try &#123;
+                System.out.println(&quot;testMethod1 ____getLock time=&quot;
+                        + System.currentTimeMillis() + &quot; run ThreadName=&quot;
+                        + Thread.currentThread().getName());
+                Thread.sleep(5000);
+                System.out.println(&quot;testMethod1 releaseLock time=&quot;
+                        + System.currentTimeMillis() + &quot; run ThreadName=&quot;
+                        + Thread.currentThread().getName());
+            &#125; catch (InterruptedException e) &#123;
+                e.printStackTrace();
+            &#125;
+        &#125;
+    &#125;
+&#125;
+
+public class Run &#123;
+    public static void main(String[] args) throws InterruptedException &#123;
+        Service service = new Service();
+        MyObject object = new MyObject();
+
+        ThreadA a = new ThreadA(service, object);
+        a.setName(&quot;a&quot;);
+        a.start();
+
+        Thread.sleep(100);
+
+        ThreadB b = new ThreadB(object);
+        b.setName(&quot;b&quot;);
+        b.start();
+    &#125;
+&#125;
+运行结果如下：
+testMethod1 ____getLock time=1523524079664 run ThreadName=a
+testMethod1 releaseLock time=1523524084664 run ThreadName=a
+speedPrintString ____getLock time=1523524084664 run ThreadName=b
+-----------------
+speedPrintString releaseLock time=1523524084664 run ThreadName=b
+</code></pre>
+<h3 id="3-验证第3个结论"><a href="#3-验证第3个结论" class="headerlink" title="(3) 验证第3个结论"></a>(3) 验证第3个结论</h3><p>当其他线程执行x对象方法里面的sync(this)代码块时也呈现同步效果</p>
+<p>只需要把上述项目中的MyObject替换一下即可</p>
+<pre><code>public class MyObject &#123;
+    public void speedPrintString() &#123;
+        synchronized (this) &#123;
+            System.out.println(&quot;speedPrintString ____getLock time=&quot;
+                    + System.currentTimeMillis() + &quot; run ThreadName=&quot;
+                    + Thread.currentThread().getName());
+            System.out.println(&quot;-----------------&quot;);
+            System.out.println(&quot;speedPrintString releaseLock time=&quot;
+                    + System.currentTimeMillis() + &quot; run ThreadName=&quot;
+                    + Thread.currentThread().getName());
+        &#125;
+    &#125;
+&#125;
+运行结果如下：
+testMethod1 ____getLock time=1523524445528 run ThreadName=a
+testMethod1 releaseLock time=1523524450529 run ThreadName=a
+speedPrintString ____getLock time=1523524450529 run ThreadName=b
+-----------------
+speedPrintString releaseLock time=1523524450529 run ThreadName=b
+同步输出
+</code></pre>
+<h2 id="6-静态同步sync方法与sync-class-代码块"><a href="#6-静态同步sync方法与sync-class-代码块" class="headerlink" title="6. 静态同步sync方法与sync(class)代码块"></a>6. 静态同步sync方法与sync(class)代码块</h2><h3 id="1-静态同步方法sync"><a href="#1-静态同步方法sync" class="headerlink" title="(1) 静态同步方法sync"></a>(1) 静态同步方法sync</h3><p>关键字sync还可以应用在static静态方法上,如果这样写，那就是对当前*.java文件对应的Class类进行持锁</p>
+<pre><code>public class ThreadA extends Thread &#123;
+    @Override
+    public void run() &#123;
+        Service.printA();
+    &#125;
+&#125;
+
+public class ThreadB extends Thread &#123;
+    @Override
+    public void run() &#123;
+        Service.printB();
+    &#125;
+&#125;
+
+public class Service &#123;
+    synchronized public static void printA() &#123;
+        try &#123;
+            System.out.println(&quot;线程名称为： &quot; + Thread.currentThread().getName()
+                    + &quot; 在 &quot; + System.currentTimeMillis() + &quot; 进入printA&quot;);
+            Thread.sleep(3000);
+            System.out.println(&quot;线程名称为： &quot; + Thread.currentThread().getName()
+                    + &quot; 在 &quot; + System.currentTimeMillis() + &quot; 离开printA&quot;);
+        &#125; catch (InterruptedException e) &#123;
+            e.printStackTrace();
+        &#125;
+    &#125;
+
+    synchronized public static void printB() &#123;
+        System.out.println(&quot;线程名称为： &quot; + Thread.currentThread().getName() + &quot; 在 &quot;
+                + System.currentTimeMillis() + &quot;进入printB&quot;);
+        System.out.println(&quot;线程名称为： &quot; + Thread.currentThread().getName() + &quot; 在 &quot;
+                + System.currentTimeMillis() + &quot;离开printB&quot;);
+    &#125;
+&#125;
+public class Run &#123;
+    public static void main(String[] args) &#123;
+        ThreadA a = new ThreadA();
+        a.setName(&quot;A&quot;);
+        a.start();
+
+        ThreadB b = new ThreadB();
+        b.setName(&quot;B&quot;);
+        b.start();
+    &#125;
+&#125;
+运行结果如下：
+线程名称为： A 在 1523525481258 进入printA
+线程名称为： A 在 1523525484259 离开printA
+线程名称为： B 在 1523525484259 进入printB
+线程名称为： B 在 1523525484259 离开printB
+</code></pre>
+<p>结论：都是同步的效果，和将sync关键字加到非static 方法上的使用效果是一样的。还是有本质的区别，sync加到static静态方法上是给<strong>class类上锁</strong>，而sync关键字加到static静态方法上是给<strong>对象上锁</strong></p>
+<p>例子略，</p>
+<h3 id="2-验证class类锁，和对象锁无关"><a href="#2-验证class类锁，和对象锁无关" class="headerlink" title="(2) 验证class类锁，和对象锁无关"></a>(2) 验证class类锁，和对象锁无关</h3><pre><code>public class Service &#123;
+    synchronized public static void printA() &#123;
+        try &#123;
+            System.out.println(&quot;线程名称为： &quot; + Thread.currentThread().getName()
+                    + &quot; 在 &quot; + System.currentTimeMillis() + &quot;进入printA&quot;);
+            Thread.sleep(3000);
+            System.out.println(&quot;线程名称为： &quot; + Thread.currentThread().getName()
+                    + &quot; 在 &quot; + System.currentTimeMillis() + &quot;离开rintA&quot;);
+        &#125; catch (InterruptedException e) &#123;
+            e.printStackTrace();
+        &#125;
+    &#125;
+
+    synchronized public static void printB() &#123;
+        System.out.println(&quot;线程名称为： &quot; + Thread.currentThread().getName() + &quot; 在 &quot;
+                + System.currentTimeMillis() + &quot;进入printB&quot;);
+        System.out.println(&quot;线程名称为： &quot; + Thread.currentThread().getName() + &quot; 在 &quot;
+                + System.currentTimeMillis() + &quot;离开printB&quot;);
+    &#125;
+&#125;
+
+public class ThreadA extends Thread &#123;
+    private Service service;
+    public ThreadA(Service service) &#123;
+        super();
+        this.service = service;
+    &#125;
+
+    @Override
+    public void run() &#123;
+        service.printA();
+    &#125;
+&#125;
+
+public class ThreadB extends Thread &#123;
+    private Service service;
+    public ThreadB(Service service) &#123;
+        super();
+        this.service = service;
+    &#125;
+
+    @Override
+    public void run() &#123;
+        service.printB();
+    &#125;
+&#125;
+
+public class Run &#123;
+    public static void main(String[] args) &#123;
+        Service service1 = new Service();
+        Service service2 = new Service();
+
+        ThreadA a = new ThreadA(service1);
+        a.setName(&quot;A&quot;);
+        a.start();
+
+        ThreadB b = new ThreadB(service2);
+        b.setName(&quot;B&quot;);
+        b.start();
+    &#125;
+&#125;
+结论：虽说是不同的对象，但sync加在静态方法上是对class上锁，所以还是同步执行。
+</code></pre>
+<h3 id="3-sync-class-代码和sync-static-方法作用一样"><a href="#3-sync-class-代码和sync-static-方法作用一样" class="headerlink" title="(3) sync(class)代码和sync static 方法作用一样"></a>(3) sync(class)代码和sync static 方法作用一样</h3><pre><code>public class Service &#123;
+    public static void printA() &#123;
+        synchronized (Service.class) &#123;
+            try &#123;
+                System.out.println(&quot;线程名称为：&quot; + Thread.currentThread().getName()
+                        + &quot; 在 &quot; + System.currentTimeMillis() + &quot;进入printA&quot;);
+                Thread.sleep(3000);
+                System.out.println(&quot;线程名称为：&quot; + Thread.currentThread().getName()
+                        + &quot; 在 &quot; + System.currentTimeMillis() + &quot;离开printA&quot;);
+            &#125; catch (InterruptedException e) &#123;
+                e.printStackTrace();
+            &#125;
+        &#125;
+    &#125;
+
+    public static void printB() &#123;
+        synchronized (Service.class) &#123;
+            System.out.println(&quot;线程名称为：&quot; + Thread.currentThread().getName()
+                    + &quot; 在 &quot; + System.currentTimeMillis() + &quot;进入printB&quot;);
+            System.out.println(&quot;线程名称为：&quot; + Thread.currentThread().getName()
+                    + &quot; 在 &quot; + System.currentTimeMillis() + &quot;离开printB&quot;);
+        &#125;
+    &#125;
+&#125;
+
+public class ThreadA extends Thread &#123;
+    private Service service;
+
+    public ThreadA(Service service) &#123;
+        super();
+        this.service = service;
+    &#125;
+
+    @Override
+    public void run() &#123;
+        service.printA();
+    &#125;
+&#125;
+
+public class ThreadB extends Thread &#123;
+    private Service service;
+
+    public ThreadB(Service service) &#123;
+        super();
+        this.service = service;
+    &#125;
+
+    @Override
+    public void run() &#123;
+        service.printB();
+    &#125;
+&#125;
+
+public class Run &#123;
+    public static void main(String[] args) &#123;
+        Service service1 = new Service();
+        Service service2 = new Service();
+
+        ThreadA a = new ThreadA(service1);
+        a.setName(&quot;A&quot;);
+        a.start();
+
+        ThreadB b = new ThreadB(service2);
+        b.setName(&quot;B&quot;);
+        b.start();
+    &#125;
+&#125;
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/03/21/%E4%B8%89.%20synchronized%E5%90%8C%E6%AD%A5%E8%AF%AD%E5%8F%A5%E5%9D%97/" data-id="cl4gp6u2m002q9cvcasr44ex8" data-title="三. synchronized同步语句块" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-深入理解java IO的工作机制" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/03/20/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3java%20IO%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6/" class="article-date">
+  <time class="dt-published" datetime="2018-03-20T11:41:59.000Z" itemprop="datePublished">2018-03-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/03/20/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3java%20IO%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6/">深入理解java I/O的工作机制</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-基本架构"><a href="#1-基本架构" class="headerlink" title="1. 基本架构"></a>1. 基本架构</h2><p>java 的io操作类在java.io包下,大概有将近80个类，可大概分为如下四组：</p>
+<ul>
+<li>基于字节操作的io接口：InputStream 和OutputStream</li>
+<li>基于字符操作的io接口：Writer和Reader</li>
+<li>基于磁盘的io接口：File</li>
+<li>基于网络操作的io接口：Socket</li>
+</ul>
+<p>前两组主要是传输数据的<strong>数据格式</strong>，后两组主要是传输数据的<strong>方式</strong>，</p>
+<h3 id="1-1-基于字节的操作接口"><a href="#1-1-基于字节的操作接口" class="headerlink" title="1.1 基于字节的操作接口"></a>1.1 基于字节的操作接口</h3><p>基于字节的输入的输出分别是InputStream和OutputStream</p>
+<p>InputStream子类</p>
+<pre><code>AudioInputStream ， ByteArrayInputStream ， FileInputStream ，  
+FilterInputStream ， InputStream ， ObjectInputStream ，   
+PipedInputStream ， SequenceInputStream ， StringBufferInputStream
+</code></pre>
+<p>OutputStream子类</p>
+<pre><code>ByteArrayOutputStream ， FileOutputStream ， FilterOutputStream ，
+ObjectOutputStream ， OutputStream ， PipedOutputStream 
+</code></pre>
+<h3 id="1-2-基于字符的操作接口"><a href="#1-2-基于字符的操作接口" class="headerlink" title="1.2 基于字符的操作接口"></a>1.2 基于字符的操作接口</h3><p>不管是磁盘还是网络传输，最小的存储单元都是字节，而不是字符。</p>
+<p>写类Writer,读Reader</p>
+<p>Writer</p>
+<pre><code>BufferedWriter ， CharArrayWriter ， FilterWriter ， OutputStreamWriter ，
+PipedWriter ， PrintWriter ， StringWriter 
+</code></pre>
+<p>Reader</p>
+<pre><code>BufferedReader ， CharArrayReader ， FilterReader ， InputStreamReader ，
+PipedReader ， StringReader 
+</code></pre>
+<h3 id="1-3-字节和字符的转化接口"><a href="#1-3-字节和字符的转化接口" class="headerlink" title="1.3 字节和字符的转化接口"></a>1.3 字节和字符的转化接口</h3><p>OutputStreamWriter：是Writer的子类。将输出的字符流变成字节流：即将字符流的输入对象变成字节流输入对象。</p>
+<p>InputStreamReader:是Reader的子类。将输入的字节流变成字符流，即将一个字节流的输入对象变成字符流输入对象。</p>
+<h2 id="2-磁盘io工作机制"><a href="#2-磁盘io工作机制" class="headerlink" title="2. 磁盘io工作机制"></a>2. 磁盘io工作机制</h2><h3 id="2-1-标准访问文件的方式"><a href="#2-1-标准访问文件的方式" class="headerlink" title="2.1 标准访问文件的方式"></a>2.1 标准访问文件的方式</h3><p>读文件方式：当调用read()接口时，先检查缓存，如果存在，则从缓存中返回。如果没有，则从磁盘中读取，然后缓存在操作系统的缓存中。</p>
+<p>写入的方式：用户调用writer()将数据复制到内核地址的缓存中，这时对用户来说已经完成，至于什么 时候再写到磁盘  中由操作系统决定，</p>
+<h3 id="2-2-直接io的方式"><a href="#2-2-直接io的方式" class="headerlink" title="2.2 直接io的方式"></a>2.2 直接io的方式</h3><p>所谓直接io的方式就是应用程序直接访问磁盘  数据，而不经过操作系统内核数据缓冲。这样做的目的就是减少一次从内核缓冲区到用户程序缓存的数据复制。</p>
+<p>但这样也有负面影响，如果访问的数据不在应用程序缓存中，那么每次数据都会直接从磁盘  进行加载，这种直接加载会非常缓慢。通常直接io与异步io结合使用，会得到比较好的性能。</p>
+<h3 id="2-3-同步访问文件的方式"><a href="#2-3-同步访问文件的方式" class="headerlink" title="2.3 同步访问文件的方式"></a>2.3 同步访问文件的方式</h3><p>数据的读取和写入都是同步操作的，它与标准访问文件的方式不同的是，只有当数据被成功写到磁盘  时才返回给应用程序成功的标志。</p>
+<p>这种访问文件的方式性能都比较差，只有在一些对数据安全性要求比较高的场景中才会使用，而且通常这些操作方式的硬件都是定制的。</p>
+<h3 id="2-4-异步访问文件的方式"><a href="#2-4-异步访问文件的方式" class="headerlink" title="2.4 异步访问文件的方式"></a>2.4 异步访问文件的方式</h3><p>异步访问文件的方式就是当访问数据的线程发出请求之后，线程会接着去处理其他事情，而不是阻塞等待。这种可以提高应用程序的效率，但不会改变访问文件的效率。</p>
+<h3 id="2-5-内存映射的方式"><a href="#2-5-内存映射的方式" class="headerlink" title="2.5 内存映射的方式"></a>2.5 内存映射的方式</h3><p>指操作系统将内存中的某一块区域与磁盘中的文件关联起来，当要访问内存中的一段数据时，转换为访问文件的某一段数据。目的同样是减少数据从内核空间缓存到用户空间缓存的数据复制操作，因为这两个空间的数据是 共享的。</p>
+<h3 id="2-6-java序列化技术"><a href="#2-6-java序列化技术" class="headerlink" title="2.6 java序列化技术"></a>2.6 java序列化技术</h3><p>java序列化就是将一个对象转化成一串二进制表示的字节数组，通过保存或者转移这些字节数据来达到持久化的目的。持久化，对象必须继承java.io.Serializable接口，反序列化则是相反的过程，将这个字节数组再重新构造成对象。</p>
+<p>序列化情况总结：</p>
+<ul>
+<li>当父类继承Serializable接口，所有子类都可以被序列化。</li>
+<li>子类实现了Serializable接口，父类没有，父类中的属性不能序列化(不报错，数据会丢失)，但是在子类中属性仍能正确序列化。</li>
+<li>如果序列化的属性是对象，则这个对象也必须实现Serializable接口，否则会报错</li>
+<li>在反序列化时，如果对象的属性有修改或删减，则修改的部分属性会丢失，但不会报错。</li>
+<li>在反序列化时，如果SerialVersionUID被修改，则反序列化时会失败。</li>
+</ul>
+<h2 id="3-网络io工作机制"><a href="#3-网络io工作机制" class="headerlink" title="3. 网络io工作机制"></a>3. 网络io工作机制</h2><h3 id="3-1-TCP状态转化"><a href="#3-1-TCP状态转化" class="headerlink" title="3.1 TCP状态转化"></a>3.1 TCP状态转化</h3><p>暂无详细了解</p>
+<h3 id="3-2-影响网络传的因素"><a href="#3-2-影响网络传的因素" class="headerlink" title="3.2 影响网络传的因素"></a>3.2 影响网络传的因素</h3><ul>
+<li>网络带宽： 所谓带宽就是一条物理链路在1s内能够传输的最大比特数。注意这里比特（bit）而不是字节数，也就是 b&#x2F;s .</li>
+<li>传输距离： 也就是数据在光纤中要走的距离，虽然光的转播速度很快，但也有时间的，由于数据在光纤中的移动并不是走直线的，会有一个折射率，大概是光的2&#x2F;3，这个就是我们说的传输延时。</li>
+<li>TPC拥塞控制： TCP传输是一个 停-等-停-等 的协议。传输方的接受方的步调要一致，要达到步调一致就要通过拥塞控制来调节。</li>
+</ul>
+<h3 id="3-3-java-Socket-的工作机制"><a href="#3-3-java-Socket-的工作机制" class="headerlink" title="3.3 java Socket 的工作机制"></a>3.3 java Socket 的工作机制</h3><p>Socket没有对应到一个具体的实体，它描述计算机之间完成相互通信的一种抽象功能。Socket连接必须由底层 Tcp&#x2F;IP 来建立连接，建立Tcp连接需要底层IP来寻址网络中的主机。</p>
+<h3 id="3-4-建立通信链路"><a href="#3-4-建立通信链路" class="headerlink" title="3.4 建立通信链路"></a>3.4 建立通信链路</h3><p>客户端socket实例创建过程：客户端创建一个socket实例，给实例分配没有使用过的端口号，并创建一个包含本地地址，远程地址和端口号的套接字数据结构，这个数据结构一直保存在系统中直到这个连接关闭，在创建socket构造函数正确返回之前，要进行tcp的3次握手协议，协议完成后socket实例对象将创建完成，否则交付抛出IOException错误。</p>
+<p>服务器：服务器将创建一个ServerSocket实例，只要端口号没被占用，一般都会创建成功，同时操作系统将创建一个底层数据结构，这个数据结构包含指定监听的端口号和包含监听地址的通配符。之后调用acccept方法时，将进入阻塞状态，等待客户端的请求。</p>
+<h3 id="3-5-数据传输"><a href="#3-5-数据传输" class="headerlink" title="3.5 数据传输"></a>3.5 数据传输</h3><p>当连接建立成功时，服务端和客户端都会拥有一个socket实例，每个Socket都有一个InputStream和OutputStream，并通过这两个对象来交换数据。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/03/20/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3java%20IO%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6/" data-id="cl4gp6u2x003m9cvcglxc3399" data-title="深入理解java I/O的工作机制" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-二. 对象及变量的并发访问" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/03/20/%E4%BA%8C.%20%E5%AF%B9%E8%B1%A1%E5%8F%8A%E5%8F%98%E9%87%8F%E7%9A%84%E5%B9%B6%E5%8F%91%E8%AE%BF%E9%97%AE/" class="article-date">
+  <time class="dt-published" datetime="2018-03-20T05:40:35.000Z" itemprop="datePublished">2018-03-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/03/20/%E4%BA%8C.%20%E5%AF%B9%E8%B1%A1%E5%8F%8A%E5%8F%98%E9%87%8F%E7%9A%84%E5%B9%B6%E5%8F%91%E8%AE%BF%E9%97%AE/">对象及变量的并发访问</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="synchronized同步方法"><a href="#synchronized同步方法" class="headerlink" title="synchronized同步方法"></a>synchronized同步方法</h1><blockquote>
+<p>非线程安全的问题主要存在于实例变量中，如果是方法内部的私有变量，则不存在非线程安全问题。</p>
+</blockquote>
+<h2 id="1-实例变量非线程安全"><a href="#1-实例变量非线程安全" class="headerlink" title="1. 实例变量非线程安全"></a>1. 实例变量非线程安全</h2><p>如果多个线程共同访问1个对象中的实例变量则有可能出现非线程安全的问题。<br>demo如下 :</p>
+<pre><code>public class HasSelfPrivateNum &#123;	
+    private int num = 0;	
+    public void addI(String username) &#123;
+        try &#123;
+            if (username.equals(&quot;a&quot;)) &#123;
+                num = 100;
+                System.out.println(&quot;a set over!&quot;);
+                Thread.sleep(2000);
+            &#125; else &#123;
+                num = 200;
+                System.out.println(&quot;b set over!&quot;);
+            &#125;
+            System.out.println(username + &quot; num=&quot; + num);
+        &#125; catch (InterruptedException e) &#123;
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        &#125;
+    &#125;	
+&#125;
+
+public class ThreadA extends Thread &#123;
+    private HasSelfPrivateNum numRef;
+    public ThreadA(HasSelfPrivateNum numRef) &#123;
+        super();
+        this.numRef = numRef;
+    &#125;
+    @Override
+    public void run() &#123;
+        super.run();
+        numRef.addI(&quot;a&quot;);
+    &#125;
+&#125;
+
+public class ThreadB extends Thread &#123;
+    private HasSelfPrivateNum numRef;
+    public ThreadB(HasSelfPrivateNum numRef) &#123;
+        super();
+        this.numRef = numRef;
+    &#125;
+    @Override
+    public void run() &#123;
+        super.run();
+        numRef.addI(&quot;b&quot;);
+    &#125;
+&#125;
+
+public class Run &#123;
+    public static void main(String[] args) &#123;
+        HasSelfPrivateNum numRef = new HasSelfPrivateNum();
+        ThreadA athread = new ThreadA(numRef);
+        athread.start();
+        ThreadB bthread = new ThreadB(numRef);
+        bthread.start();
+    &#125;
+&#125;
+
+运行效果：
+a set over!
+b set over!
+b num=200
+a num=200
+
+解决方法：只需要在addI() 方法前面加synchronized即可。通过用关键字synchronized声
+明的方法一定是排队运行的，只有**共享资源的读写访问**才需要同步化。如果不是，
+则根本没有同步的必要。改过之后的运行效果如下:
+a set over!
+a num=100
+b set over!
+b num=200
+</code></pre>
+<blockquote>
+<p>结论：当两个线程访问同一个对象中的同步方法时一定是线程安全的。</p>
+</blockquote>
+<h2 id="2-多个对象多个锁"><a href="#2-多个对象多个锁" class="headerlink" title="2. 多个对象多个锁"></a>2. 多个对象多个锁</h2><pre><code>public class HasSelfPrivateNum &#123;
+    private int num = 0;
+    synchronized public void addI(String username) &#123;
+        try &#123;
+            if (username.equals(&quot;a&quot;)) &#123;
+                num = 100;
+                System.out.println(&quot;a set over!&quot;);
+                Thread.sleep(2000);
+            &#125; else &#123;
+                num = 200;
+                System.out.println(&quot;b set over!&quot;);
+            &#125;
+            System.out.println(username + &quot; num=&quot; + num);
+        &#125; catch (InterruptedException e) &#123;
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        &#125;
+    &#125;
+&#125;
+
+public class ThreadA extends Thread &#123;
+    private HasSelfPrivateNum numRef;
+    public ThreadA(HasSelfPrivateNum numRef) &#123;
+        super();
+        this.numRef = numRef;
+    &#125;
+    @Override
+    public void run() &#123;
+        super.run();
+        numRef.addI(&quot;a&quot;);
+    &#125;
+&#125;
+
+public class ThreadB extends Thread &#123;
+    private HasSelfPrivateNum numRef;
+    public ThreadB(HasSelfPrivateNum numRef) &#123;
+        super();
+        this.numRef = numRef;
+    &#125;
+    @Override
+    public void run() &#123;
+        super.run();
+        numRef.addI(&quot;b&quot;);
+    &#125;
+&#125;
+
+public class Run &#123;
+    public static void main(String[] args) &#123;
+        HasSelfPrivateNum numRef1 = new HasSelfPrivateNum();
+        HasSelfPrivateNum numRef2 = new HasSelfPrivateNum();
+        ThreadA athread = new ThreadA(numRef1);
+        athread.start();
+        ThreadB bthread = new ThreadB(numRef2);
+        bthread.start();
+    &#125;
+&#125;
+运行效果:
+a set over!
+b set over!
+b num=200
+a num=100
+</code></pre>
+<blockquote>
+<p>结论:上述两个线程分别访问同一个类的两个不同实例的相同名称的同步方法，效果却是以异步的方式进行的。</p>
+<blockquote>
+<p>关键字synchronized取得的锁都是<strong>对象锁</strong>，而不是把一段代码或方法当做锁，所以上面的示例中，哪个线程先执行带synchhronized关键字的方法，哪个线程就持有该方法所属对象的锁Lock，那么其他线程只能呈等待状态，前提是多个对象访问的是同一个对象。<br>如果多个线程访问多个对象，则会创建多个锁。</p>
+</blockquote>
+</blockquote>
+<h2 id="3-synchronized方法与锁对象"><a href="#3-synchronized方法与锁对象" class="headerlink" title="3. synchronized方法与锁对象"></a>3. synchronized方法与锁对象</h2><pre><code>public class MyObject &#123;
+    synchronized public void methodA() &#123;
+        try &#123;
+            System.out.println(&quot;begin methodA threadName=&quot;
+                    + Thread.currentThread().getName());
+            Thread.sleep(5000);
+            System.out.println(&quot;end endTime=&quot; + System.currentTimeMillis());
+        &#125; catch (InterruptedException e) &#123;
+            e.printStackTrace();
+        &#125;
+    &#125;
+    public void methodB() &#123;
+        try &#123;
+            System.out.println(&quot;begin methodB threadName=&quot;
+                    + Thread.currentThread().getName() + &quot; begin time=&quot;
+                    + System.currentTimeMillis());
+            Thread.sleep(5000);
+            System.out.println(&quot;end&quot;);
+        &#125; catch (InterruptedException e) &#123;
+            e.printStackTrace();
+        &#125;
+    &#125;
+&#125;
+
+public class ThreadA extends Thread &#123;
+    private MyObject object;
+    public ThreadA(MyObject object) &#123;
+        super();
+        this.object = object;
+    &#125;
+    @Override
+    public void run() &#123;
+        super.run();
+        object.methodA();
+    &#125;
+&#125;
+
+public class ThreadB extends Thread &#123;
+    private MyObject object;
+    public ThreadB(MyObject object) &#123;
+        super();
+        this.object = object;
+    &#125;
+    @Override
+    public void run() &#123;
+        super.run();
+        object.methodB();
+    &#125;
+&#125;
+
+public class Run &#123;
+    public static void main(String[] args) &#123;
+        MyObject object = new MyObject();
+        ThreadA a = new ThreadA(object);
+        a.setName(&quot;A&quot;);
+        ThreadB b = new ThreadB(object);
+        b.setName(&quot;B&quot;);
+        a.start();
+        b.start();
+    &#125;
+&#125;
+
+运行效果
+begin methodA threadName=A
+begin methodB threadName=B begin time=1521539509210
+end endTime=1521539514210
+end
+
+给methodB()方法加上synchronized类型的方法。
+运行效果如下:
+begin methodA threadName=A
+end endTime=1521539982244
+begin methodB threadName=B begin time=1521539982244
+end
+</code></pre>
+<blockquote>
+<p>结论:</p>
+</blockquote>
+<ol>
+<li>A线程先持有object对象 的Lock锁，B线程可以以异步 的方式调用 object对象 中的非synchronized类型的方法。<blockquote>
+</blockquote>
+</li>
+<li>A线程先持有object对象的Lock锁，B线程如果在这时调用object对象中的synchronized类型的方法则需等待，也就是同步。</li>
+</ol>
+<h2 id="4-脏读"><a href="#4-脏读" class="headerlink" title="4. 脏读"></a>4. 脏读</h2><p>发生脏读的情况是在读取实例变量时，此值已经被其他线程更改过了。</p>
+<pre><code>public class PublicVar &#123;
+    public String username = &quot;A&quot;;
+    public String password = &quot;AA&quot;;
+    synchronized public void setValue(String username, String password) &#123;
+        try &#123;
+            this.username = username;
+            Thread.sleep(5000);
+            this.password = password;
+            System.out.println(&quot;setValue method thread name=&quot;
+                    + Thread.currentThread().getName() + &quot; username=&quot;
+                    + username + &quot; password=&quot; + password);
+        &#125; catch (InterruptedException e) &#123;
+            e.printStackTrace();
+        &#125;
+    &#125;
+     public void getValue() &#123;
+        System.out.println(&quot;getValue method thread name=&quot;
+                + Thread.currentThread().getName() + &quot; username=&quot; + username
+                + &quot; password=&quot; + password);
+    &#125;
+&#125;
+
+public class ThreadA extends Thread &#123;
+    private PublicVar publicVar;
+    public ThreadA(PublicVar publicVar) &#123;
+        super();
+        this.publicVar = publicVar;
+    &#125;
+    @Override
+    public void run() &#123;
+        super.run();
+        publicVar.setValue(&quot;B&quot;, &quot;BB&quot;);
+    &#125;
+&#125;
+
+public class Test &#123;
+    public static void main(String[] args) &#123;
+        try &#123;
+            PublicVar publicVarRef = new PublicVar();
+            ThreadA thread = new ThreadA(publicVarRef);
+            thread.start();
+            Thread.sleep(200);// ��ӡ����ܴ�ֵ��СӰ��
+            publicVarRef.getValue();
+        &#125; catch (InterruptedException e) &#123;
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        &#125;
+    &#125;
+&#125;
+运行结果:
+getValue method thread name=main username=B password=AA
+setValue method thread name=Thread-0 username=B password=BB
+</code></pre>
+<blockquote>
+<p>出现脏读的原因是getValue()方法并不是同步的。所以可以在任意时刻调用。<br>解决办法是加上在getValue()加上synchronized关键字。加上后的运行效果如下：</p>
+</blockquote>
+<pre><code>setValue method thread name=Thread-0 username=B password=BB
+getValue method thread name=main username=B password=BB
+</code></pre>
+<p>脏读一定会出现在操作实例变量的情况下，这就是不同线程争抢实例变量的结果。</p>
+<h2 id="5-synchronized锁重入"><a href="#5-synchronized锁重入" class="headerlink" title="5. synchronized锁重入"></a>5. synchronized锁重入</h2><p>在一个synchronized方法&#x2F;块内部调用本部类的其他synchronized方法&#x2F;块时，是永远可以得到锁的。</p>
+<pre><code>public class MyThread extends Thread &#123;
+    @Override
+    public void run() &#123;
+        Service service = new Service();
+        service.service1();
+    &#125;
+&#125;
+
+public class Service &#123;
+    synchronized public void service1() &#123;
+        System.out.println(&quot;service1&quot;);
+        service2();
+    &#125;
+    synchronized public void service2() &#123;
+        System.out.println(&quot;service2&quot;);
+        service3();
+    &#125;
+    synchronized public void service3() &#123;
+        System.out.println(&quot;service3&quot;);
+    &#125;
+&#125;
+
+public class Run &#123;
+    public static void main(String[] args) &#123;
+        MyThread t = new MyThread();
+        t.start();
+    &#125;
+&#125;
+
+运行效果:
+service1
+service2
+service3
+</code></pre>
+<blockquote>
+<p>可重入锁的概念是:自己可以再次获取自己的内部锁，比如有一条线程获得了某个对象的锁，此时这个对象锁还没有释放，当其再次想要获取这个对象的锁的时候还是可以获取的，如果不可锁重入的话就会造成死锁 。</p>
+</blockquote>
+<p>可重入锁也支持在父子类继承的环境中:</p>
+<pre><code>public class MyThread extends Thread &#123;
+    @Override
+    public void run() &#123;
+        Sub sub = new Sub();
+        sub.operateISubMethod();
+    &#125;
+&#125;
+
+public class Main &#123;
+    public int i = 10;
+    synchronized public void operateIMainMethod() &#123;
+        try &#123;
+            i--;
+            System.out.println(&quot;main print i=&quot; + i);
+            Thread.sleep(100);
+        &#125; catch (InterruptedException e) &#123;
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        &#125;
+    &#125;
+&#125;
+
+public class Sub extends Main &#123;
+    synchronized public void operateISubMethod() &#123;
+        try &#123;
+            while (i &gt; 0) &#123;
+                i--;
+                System.out.println(&quot;sub print i=&quot; + i);
+                Thread.sleep(100);
+                this.operateIMainMethod();
+            &#125;
+        &#125; catch (InterruptedException e) &#123;
+            e.printStackTrace();
+        &#125;
+    &#125;
+&#125;
+
+public class Run &#123;
+    public static void main(String[] args) &#123;
+        MyThread t = new MyThread();
+        t.start();
+    &#125;
+&#125;
+
+运行效果如下：
+sub print i=9
+main print i=8
+sub print i=7
+main print i=6
+sub print i=5
+main print i=4
+sub print i=3
+main print i=2
+sub print i=1
+main print i=0
+</code></pre>
+<blockquote>
+<p>结论：当存在父子类继承关系时，子类是完全可以可重入锁调用父类的同步方法的。</p>
+</blockquote>
+<h2 id="6-出现异常，锁自动释放"><a href="#6-出现异常，锁自动释放" class="headerlink" title="6. 出现异常，锁自动释放"></a>6. 出现异常，锁自动释放</h2><pre><code>public class Service &#123;
+    synchronized public void testMethod() &#123;
+        if (Thread.currentThread().getName().equals(&quot;a&quot;)) &#123;
+            System.out.println(&quot;ThreadName=&quot; + Thread.currentThread().getName()
+                    + &quot; run beginTime=&quot; + System.currentTimeMillis());
+            int i = 1;
+            while (i == 1) &#123;
+                if ((&quot;&quot; + Math.random()).substring(0, 8).equals(&quot;0.123456&quot;)) &#123;
+                    System.out.println(&quot;ThreadName=&quot;
+                            + Thread.currentThread().getName()
+                            + &quot; run   exceptionTime=&quot;
+                            + System.currentTimeMillis());
+                    Integer.parseInt(&quot;a&quot;);
+                &#125;
+            &#125;
+        &#125; else &#123;
+            System.out.println(&quot;Thread B run Time=&quot;
+                    + System.currentTimeMillis());
+        &#125;
+    &#125;
+&#125;
+
+public class ThreadA extends Thread &#123;
+    private Service service;
+    public ThreadA(Service service) &#123;
+        super();
+        this.service = service;
+    &#125;
+    @Override
+    public void run() &#123;
+        service.testMethod();
+    &#125;
+&#125;
+
+public class ThreadB extends Thread &#123;
+    private Service service;
+    public ThreadB(Service service) &#123;
+        super();
+        this.service = service;
+    &#125;
+    @Override
+    public void run() &#123;
+        service.testMethod();
+    &#125;
+&#125;
+
+public class Test &#123;
+    public static void main(String[] args) &#123;
+        try &#123;
+            Service service = new Service();
+            ThreadA a = new ThreadA(service);
+            a.setName(&quot;a&quot;);
+            a.start();
+            Thread.sleep(500);
+            ThreadB b = new ThreadB(service);
+            b.setName(&quot;b&quot;);
+            b.start();
+        &#125; catch (InterruptedException e) &#123;
+            e.printStackTrace();
+        &#125;
+    &#125;
+&#125;
+
+运行效果：
+ThreadName=a run beginTime=1521613028384
+ThreadName=a run   exceptionTime=1521613033721
+Thread B run Time=1521613033722
+Exception in thread &quot;a&quot; java.lang.NumberFormatException: For input string: &quot;a&quot;
+    at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+    at java.lang.Integer.parseInt(Integer.java:580)
+    at java.lang.Integer.parseInt(Integer.java:615)
+    at service.Service.testMethod(Service.java:15)
+    at extthread.ThreadA.run(ThreadA.java:13)
+</code></pre>
+<p>线程a出现异常，线程b进入方法正常打印。结论：出现异步，锁自动释放。</p>
+<h2 id="7-同步不具有继承性"><a href="#7-同步不具有继承性" class="headerlink" title="7. 同步不具有继承性"></a>7. 同步不具有继承性</h2><pre><code>public class Main &#123;
+    synchronized public void serviceMethod() &#123;
+        try &#123;
+            System.out.println(&quot;int main 下一步 sleep begin threadName=&quot;
+                    + Thread.currentThread().getName() + &quot; time=&quot;
+                    + System.currentTimeMillis());
+            Thread.sleep(5000);
+            System.out.println(&quot;int main 下一步 sleep   end threadName=&quot;
+                    + Thread.currentThread().getName() + &quot; time=&quot;
+                    + System.currentTimeMillis());
+        &#125; catch (InterruptedException e) &#123;
+            e.printStackTrace();
+        &#125;
+    &#125;
+&#125;
+
+public class Sub extends Main &#123;
+    @Override
+    public void serviceMethod() &#123;
+        try &#123;
+            System.out.println(&quot;int sub 下一步 sleep begin threadName=&quot;
+                    + Thread.currentThread().getName() + &quot; time=&quot;
+                    + System.currentTimeMillis());
+            Thread.sleep(5000);
+            System.out.println(&quot;int sub 下一步 sleep   end threadName=&quot;
+                    + Thread.currentThread().getName() + &quot; time=&quot;
+                    + System.currentTimeMillis());
+            super.serviceMethod();
+        &#125; catch (InterruptedException e) &#123;
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        &#125;
+    &#125;
+&#125;
+
+public class MyThreadA extends Thread &#123;
+    private Sub sub;
+    public MyThreadA(Sub sub) &#123;
+        super();
+        this.sub = sub;
+    &#125;
+    @Override
+    public void run() &#123;
+        sub.serviceMethod();
+    &#125;
+&#125;
+public class MyThreadB extends Thread &#123;
+    private Sub sub;
+    public MyThreadB(Sub sub) &#123;
+        super();
+        this.sub = sub;
+    &#125;
+    @Override
+    public void run() &#123;
+        sub.serviceMethod();
+    &#125;
+&#125;
+
+public class Test &#123;
+    public static void main(String[] args) &#123;
+        Sub subRef = new Sub();
+        MyThreadA a = new MyThreadA(subRef);
+        a.setName(&quot;A&quot;);
+        a.start();
+        MyThreadB b = new MyThreadB(subRef);
+        b.setName(&quot;B&quot;);
+        b.start();
+    &#125;
+&#125;
+
+运行效果：
+int sub 下一步 sleep begin threadName=A time=1521614488673
+int sub 下一步 sleep begin threadName=B time=1521614488684
+int sub 下一步 sleep   end threadName=A time=1521614493673
+int main 下一步 sleep begin threadName=A time=1521614493673
+int sub 下一步 sleep   end threadName=B time=1521614493684
+int main 下一步 sleep   end threadName=A time=1521614498674
+int main 下一步 sleep begin threadName=B time=1521614498674
+int main 下一步 sleep   end threadName=B time=1521614503674
+
+在子类Sub serviceMethod方法加上synchronized后运行效果如下：
+int sub 下一步 sleep begin threadName=A time=1521614592637
+int sub 下一步 sleep   end threadName=A time=1521614597637
+int main 下一步 sleep begin threadName=A time=1521614597637
+int main 下一步 sleep   end threadName=A time=1521614602638
+int sub 下一步 sleep begin threadName=B time=1521614602638
+int sub 下一步 sleep   end threadName=B time=1521614607638
+int main 下一步 sleep begin threadName=B time=1521614607638
+int main 下一步 sleep   end threadName=B time=1521614612638
+</code></pre>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本节知识点:</p>
+<ol>
+<li>非线程安全的问题主要存在于实例变量中，如果是方法内部的私有变量，则不存在非线程安全问题</li>
+<li>两个线程访问同一个对象中的同步方法时一定是线程安全的</li>
+<li>synchronized关键字是对象锁，多个线程，多个对象会创建多个锁。</li>
+<li>对象内synchronized方法和非synchronized方法的调用情况: 当有对象锁的时候，同步调用synchronized方法，异步调用非synchronized方法</li>
+<li>脏读出现的原因是方法不同步造成的。脏读一定会出现在操作实例变量的情况下，这就是不同线程争抢实例变量的结果。</li>
+<li>可重入锁的两种情况<ol>
+<li>自己可以获取自己的内部锁</li>
+<li>也支持出现在父子类继承的关系中，子类可以通过可重入锁调用父类的同步方法</li>
+</ol>
+</li>
+<li>当出现异常时，锁自动释放</li>
+<li>同步不能继承：当父类在synchronized service()方法时，子类有覆盖service()方法时，子类方法并不能同步，必须要在子类加上synchronized方法才能同步。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/03/20/%E4%BA%8C.%20%E5%AF%B9%E8%B1%A1%E5%8F%8A%E5%8F%98%E9%87%8F%E7%9A%84%E5%B9%B6%E5%8F%91%E8%AE%BF%E9%97%AE/" data-id="cl4gp6u2r00359cvc5wvd1ejc" data-title="对象及变量的并发访问" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+  </nav>
 
 </section>
         
@@ -170,15 +2401,29 @@
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Error/" rel="tag">Error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Extjs/" rel="tag">Extjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerDesigner/" rel="tag">PowerDesigner</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">java虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/" rel="tag">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" rel="tag">myeclipse插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E8%AE%B0/" rel="tag">日记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" rel="tag">生活文化与素养</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Extjs/" style="font-size: 10px;">Extjs</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/PowerDesigner/" style="font-size: 12.86px;">PowerDesigner</a> <a href="/tags/Spring/" style="font-size: 14.29px;">Spring</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 12.86px;">java虚拟机</a> <a href="/tags/linux/" style="font-size: 17.14px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">myeclipse插件</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 14.29px;">工具</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 18.57px;">数据库</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 15.71px;">日记</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 14.29px;">杂记</a> <a href="/tags/%E6%A1%86%E6%9E%B6/" style="font-size: 14.29px;">框架</a> <a href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" style="font-size: 11.43px;">生活文化与素养</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 12.86px;">笔记</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li></ul>
     </div>
   </div>
 
@@ -191,11 +2436,23 @@
       <ul>
         
           <li>
+            <a href="/2022/06/16/Hexo-github-%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2-%E6%96%B0%E6%89%8B%E5%85%A5%E9%97%A8/">Hexo+github搭建静态博客(新手入门)</a>
+          </li>
+        
+          <li>
             <a href="/2022/06/14/test/">test</a>
           </li>
         
           <li>
             <a href="/2022/06/14/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/20/%E4%BA%94.%20volatile%20%E5%85%B3%E9%94%AE%E5%AD%97/">五. volatile关键字</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/19/%E4%B8%89.%20%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/">三. 垃圾收集器</a>
           </li>
         
       </ul>
@@ -211,7 +2468,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       
-      &copy; 2022 John Doe<br>
+      &copy; 2022 Zhutongtong<br>
       Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

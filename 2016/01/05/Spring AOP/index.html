@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Spring AOP | 记忆时光</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="本文来源于官方文档  Aspect Oriented Programming with Spring 面向切面编程简介  面向切面编程（AOP）弥补面向对象编程（OOP）通过提供思考程序结构的另一种方式。在OOP中模块化的关键单元是类，而在AOP模块为单位的切面。面对关注点，如事务管理跨多个类型和对象切模块化。（这些关注经常被称为横切在AOP文学的关注。） Spring的一个关键组件就是AOP框">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring AOP">
+<meta property="og:url" content="http://example.com/2016/01/05/Spring%20AOP/index.html">
+<meta property="og:site_name" content="记忆时光">
+<meta property="og:description" content="本文来源于官方文档  Aspect Oriented Programming with Spring 面向切面编程简介  面向切面编程（AOP）弥补面向对象编程（OOP）通过提供思考程序结构的另一种方式。在OOP中模块化的关键单元是类，而在AOP模块为单位的切面。面对关注点，如事务管理跨多个类型和对象切模块化。（这些关注经常被称为横切在AOP文学的关注。） Spring的一个关键组件就是AOP框">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2016-01-05T05:46:44.000Z">
+<meta property="article:modified_time" content="2022-06-16T07:22:10.417Z">
+<meta property="article:author" content="Zhutongtong">
+<meta property="article:tag" content="Spring">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="记忆时光" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">记忆时光</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Spring AOP" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/01/05/Spring%20AOP/" class="article-date">
+  <time class="dt-published" datetime="2016-01-05T05:46:44.000Z" itemprop="datePublished">2016-01-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Spring AOP
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p><strong>本文来源于官方文档</strong></p>
+</blockquote>
+<h3 id="Aspect-Oriented-Programming-with-Spring-面向切面编程"><a href="#Aspect-Oriented-Programming-with-Spring-面向切面编程" class="headerlink" title="Aspect Oriented Programming with Spring 面向切面编程"></a>Aspect Oriented Programming with Spring 面向切面编程</h3><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><blockquote>
+<ul>
+<li>面向切面编程（AOP）弥补面向对象编程（OOP）通过提供思考程序结构的另一种方式。在OOP中模块化的关键单元是类，而在AOP模块为单位的切面。面对关注点，如事务管理跨多个类型和对象切模块化。（这些关注经常被称为横切在AOP文学的关注。）</li>
+<li>Spring的一个关键组件就是AOP框架。虽然Spring IoC容器并不依赖于AOP，这意味着你不需要使用AOP，如果你不想，AOP补充Spring IoC容器提供了非常强大的中间件解决方案。</li>
+</ul>
+</blockquote>
+<h5 id="AOP概念"><a href="#AOP概念" class="headerlink" title="AOP概念"></a>AOP概念</h5><ul>
+<li><strong>切面(Aspect)</strong>: 横切关注点(跨越应用程序多个模块的功能)被模块化的特殊对象</li>
+<li>**连接点(Join point)**： 一个程序，在执行过程中的一个点，如方法的执行或异常的处理。在Spring AOP中，一个连接点总是 代表一个方法的执行。</li>
+<li>**通知(Advice)<strong>： 在某个特定的一个方面动作的连接点。不同类型的建议包括“around”，“before”和“after”的建议。（advice 的类型将在下面讨论）。许多AOP框架，包括Spring，Model 中的Advice 作为拦截器，保持了拦截器链周围的</strong>连接点(Joinpoint)**。</li>
+<li>**切点(pointcut)**： 每个类都拥有多个连接点：例如 ArithmethicCalculator 的所有方法实际上都是连接点，即连接点是程序类中客观存在的事务。AOP 通过切点定位到特定的连接点。类比：连接点相当于数据库中的记录，切点相当于查询条件。切点和连接点不是一对一的关系，一个切点匹配多个连接点，切点通过 org.springframework.aop.Pointcut 接口进行描述，它使用类和方法作为连接点的查询条件</li>
+<li>**代理(AOP proxy)**： AOP框架，以实现Aspect契约（例如通知方法执行等等）创建的对象。在Spring中，AOP代理可以是JDK动态代理或者CGLIB代理。</li>
+</ul>
+<p><strong>advice的类型</strong> :</p>
+<ul>
+<li>Before advice: 建议一个执行一个 Join point 之前，但它不具有防止执行流程的连接点（除非它抛出一个异常）的能力。</li>
+<li>After returning advice: 连接点(Join point)正常完成后,方法没有抛出异常后执行</li>
+<li>After throwing advice: advice抛出一个异常时执行。</li>
+<li>After (finally) advice: 结果都会执行，</li>
+<li>Around advice: 环绕通知, 围绕着方法执行</li>
+</ul>
+<h5 id="Spring-使用-AspectJ-注解-实现AOP-编程-、"><a href="#Spring-使用-AspectJ-注解-实现AOP-编程-、" class="headerlink" title="Spring 使用 AspectJ 注解 实现AOP 编程#####、"></a>Spring 使用 AspectJ 注解 实现AOP 编程#####、</h5><pre><code>需导入 aop,aspects 相关jar包
+
+AtithmeticCalculatorImpl.java实现类
+package com.dream.apo.impl;
+import org.springframework.stereotype.Component;
+@Component(&quot;atithmeticCalculator1&quot;)
+public class AtithmeticCalculatorImpl implements AtithmeticCalculator &#123;
+@Override
+public int add(int i, int j) &#123;
+    int result=i+j;
+    return result;
+&#125;
+@Override
+public int sub(int i, int j) &#123;
+    int result=i-j;
+    return result;
+&#125;
+@Override
+public int mul(int i, int j) &#123;
+    int result=i*j;
+    return result;
+&#125;
+@Override
+public int div(int i, int j) &#123;
+    int result=i/j;
+    return result;
+&#125;
+&#125;
+
+AOP实现代码 LoginAspect.java 
+package com.dream.apo.impl;
+
+import java.util.Arrays;
+
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.springframework.stereotype.Component;	
+@Aspect
+@Component
+public class LoginAspect &#123;
+@Before(&quot;execution(public int com.dream.apo.impl.AtithmeticCalculator.*(..) )&quot;)
+public void beforeMethod(JoinPoint joinPoint)&#123;
+    String methodName=joinPoint.getSignature().getName();
+    Object []args=joinPoint.getArgs();
+    System.out.println(&quot;the method is &quot;+methodName+&quot;begin with &quot;+Arrays.asList(args));		
+&#125;	
+@After(&quot;execution(public int com.dream.apo.impl.AtithmeticCalculator.*(..) )&quot;)
+public void after(JoinPoint joinPoint)&#123;
+    String methodName=joinPoint.getSignature().getName();
+    System.out.println(&quot;the method is &quot;+methodName+&quot; ends &quot;);		
+&#125;	
+@AfterReturning(value=&quot;execution(public int com.dream.apo.impl.AtithmeticCalculator.*(..) )&quot;,
+        returning=&quot;result&quot;)
+public void afterReturning(JoinPoint joinPoint,Object result)&#123;
+    String methodName=joinPoint.getSignature().getName();
+    System.out.println(&quot;the method is &quot;+methodName+&quot; return ends &quot;+result);
+&#125;	
+@AfterThrowing(value=&quot;execution(public int com.dream.apo.impl.AtithmeticCalculator.*(..) )&quot;,
+        throwing=&quot;ex&quot;)
+public void afterThrowing(JoinPoint joinPoint,Exception ex)&#123;		
+    String methodName=joinPoint.getSignature().getName();
+    System.out.println(&quot;the method is &quot;+methodName+&quot; occurs exception  &quot;+ex);
+&#125;
+&#125;
+
+主方法
+package com.dream.apo.impl;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+public class Main &#123;
+public static void main(String[] args) &#123;
+    ApplicationContext ac=new ClassPathXmlApplicationContext(&quot;applicationContext.xml&quot;);
+    AtithmeticCalculator act= (AtithmeticCalculator) ac.getBean(&quot;atithmeticCalculator1&quot;);
+    
+    int result=act.add(3, 4);
+    System.out.println(&quot;result=&quot;+result);
+    
+    result=act.div(6, 1);
+    System.out.println(&quot;result=&quot;+result);
+&#125;
+&#125;
+
+applicationContext.xml 配置文件 
+&lt;context:component-scan base-package=&quot;com.dream.apo.impl&quot;&gt;&lt;/context:component-scan&gt;
+
+&lt;aop:aspectj-autoproxy&gt;&lt;/aop:aspectj-autoproxy&gt;
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/01/05/Spring%20AOP/" data-id="cl4gp6u1t00109cvc1kllfheg" data-title="Spring AOP" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/01/06/oracle%E4%BA%8B%E5%8A%A1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          oracle事务
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/01/05/Spring%E5%85%A5%E9%97%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Spring入门</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Error/" rel="tag">Error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Extjs/" rel="tag">Extjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerDesigner/" rel="tag">PowerDesigner</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">java虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/" rel="tag">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" rel="tag">myeclipse插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E8%AE%B0/" rel="tag">日记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" rel="tag">生活文化与素养</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Extjs/" style="font-size: 10px;">Extjs</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/PowerDesigner/" style="font-size: 12.86px;">PowerDesigner</a> <a href="/tags/Spring/" style="font-size: 14.29px;">Spring</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 12.86px;">java虚拟机</a> <a href="/tags/linux/" style="font-size: 17.14px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">myeclipse插件</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 14.29px;">工具</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 18.57px;">数据库</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 15.71px;">日记</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 14.29px;">杂记</a> <a href="/tags/%E6%A1%86%E6%9E%B6/" style="font-size: 14.29px;">框架</a> <a href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" style="font-size: 11.43px;">生活文化与素养</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 12.86px;">笔记</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/06/16/Hexo-github-%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2-%E6%96%B0%E6%89%8B%E5%85%A5%E9%97%A8/">Hexo+github搭建静态博客(新手入门)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/test/">test</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/20/%E4%BA%94.%20volatile%20%E5%85%B3%E9%94%AE%E5%AD%97/">五. volatile关键字</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/19/%E4%B8%89.%20%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/">三. 垃圾收集器</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Zhutongtong<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

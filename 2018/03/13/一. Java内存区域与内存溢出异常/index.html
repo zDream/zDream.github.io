@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>一. Java内存区域与内存溢出异常 | 记忆时光</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="一，数据区域java虚拟机在执行java程序的过程中会把它所管理 的内存分为若干个不同的数据区域。这些区域都有各自的用途，以及创建和销毁的时间，有的区域随着虚拟机进程的启动而存在。有些区域则依赖用户线程的启动和结束而建立和销毁。 1. 程序计数器一块较小的内存空间。可以理解为行号指示器，字节码解释器工作就是通过这个计数器的值来决定下一条执行的字节码指令，如分支，循环，跳转，异常处理，线程恢复等 由">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一. Java内存区域与内存溢出异常">
+<meta property="og:url" content="http://example.com/2018/03/13/%E4%B8%80.%20Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8/index.html">
+<meta property="og:site_name" content="记忆时光">
+<meta property="og:description" content="一，数据区域java虚拟机在执行java程序的过程中会把它所管理 的内存分为若干个不同的数据区域。这些区域都有各自的用途，以及创建和销毁的时间，有的区域随着虚拟机进程的启动而存在。有些区域则依赖用户线程的启动和结束而建立和销毁。 1. 程序计数器一块较小的内存空间。可以理解为行号指示器，字节码解释器工作就是通过这个计数器的值来决定下一条执行的字节码指令，如分支，循环，跳转，异常处理，线程恢复等 由">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-03-13T14:59:22.000Z">
+<meta property="article:modified_time" content="2022-06-16T07:22:10.424Z">
+<meta property="article:author" content="Zhutongtong">
+<meta property="article:tag" content="java虚拟机">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="记忆时光" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">记忆时光</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-一. Java内存区域与内存溢出异常" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/03/13/%E4%B8%80.%20Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8/" class="article-date">
+  <time class="dt-published" datetime="2018-03-13T14:59:22.000Z" itemprop="datePublished">2018-03-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      一. Java内存区域与内存溢出异常
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="一，数据区域"><a href="#一，数据区域" class="headerlink" title="一，数据区域"></a>一，数据区域</h2><p>java虚拟机在执行java程序的过程中会把它所管理 的内存分为若干个不同的<strong>数据区域</strong>。这些区域都有各自的<strong>用途</strong>，以及<strong>创建和销毁的时间</strong>，有的区域随着虚拟机进程的启动而存在。有些区域则依赖用户线程的启动和结束而建立和销毁。</p>
+<h3 id="1-程序计数器"><a href="#1-程序计数器" class="headerlink" title="1. 程序计数器"></a>1. 程序计数器</h3><p>一块较小的内存空间。可以理解为行号指示器，字节码解释器工作就是通过这个计数器的值来决定下一条执行的字节码指令，如分支，循环，跳转，异常处理，线程恢复等</p>
+<p>由于java虚拟机的多线程是通过线程输液切换并分配处理器执行时间的方式来实现的，为了保证线程在切换的时候能恢复到正确的执行位置，每条线程都需要有一个独立 的程序计数器，各条线程之间计数器互不影响，独立存储，我们称这类内存区域为“<strong>线程私有</strong>”的内存</p>
+<h3 id="2-java-虚拟机栈"><a href="#2-java-虚拟机栈" class="headerlink" title="2. java 虚拟机栈"></a>2. java 虚拟机栈</h3><p>java虚拟机栈也是<strong>线程私有</strong>的。生命周期和线程相同。虚拟机栈描述 的是java方法执行的内存模型：每个方法在执行的同时都会创建一个栈帧用于存储<strong>局部变量表</strong>，<strong>操作娄栈</strong>，<strong>动态链接</strong>，<strong>方法出口</strong>等。调用到执行的过程就是入栈到出栈的过程。</p>
+<p>局部变量存放了各种数据类型（boolean,byte,char,short,int,float,long,double）,对象引用（reference类型）</p>
+<p>其中64位长度的long 和double类型会占用2个局部变量空间，其他的占一个。当进入一个方法时，在帧中分配的局部变量空间是完全确定的。在方法运行期间不会改变局部变量表的大小。</p>
+<p>这个区域规定了两种情况：</p>
+<ul>
+<li>如果线程请求的栈深度大于虚拟机所允许的深度，将抛出StackOverflowError异常</li>
+<li>如果虚拟机栈可以动态扩展。如果扩展时无法申请到足够的内存将会抛出OutOfMemoryError异常</li>
+</ul>
+<h3 id="3-本地方法栈"><a href="#3-本地方法栈" class="headerlink" title="3. 本地方法栈"></a>3. 本地方法栈</h3><p>与虚拟机栈相似，区别是虚拟栈为虚拟机执行Java方法（也就是字节码）服务，而本地方法栈则为虚拟机使用到的Naive方法服务。</p>
+<p>与虚拟机栈一样，本地方法栈区域也会抛出StackOverflowError和OutOfMemoryError异常</p>
+<h3 id="4-java堆"><a href="#4-java堆" class="headerlink" title="4. java堆"></a>4. java堆</h3><p>是虚拟机所管理的内存中<strong>最大的一块内存</strong>。被所有<strong>线程共享</strong>，在虚拟机创建启动。目的是存放<strong>对象实例</strong>，几乎所有的对象实例都在这里分配内存。</p>
+<p>java堆也是垃圾收集器管理的主要区域，也被称为 GC 堆，从内存回收的角度来看，由于现在收集器基本都采用分代收集算法，所以java堆还可细分为:新生代和老年代，再细致一点的有Eden空间，From Survivor空间，ToSurvivor空间等。从内存分配还可划分出多个线程私有的分配缓冲区</p>
+<p>java堆可以处于物理上不连续的内存空间，只要逻辑上是连续的即可，</p>
+<p>当前主流的虚拟机都是按照可扩展来实现的，如果在堆中没有内存完成实例分配，并且堆也无法再扩展时，将会抛出OutOfMemoryError异常</p>
+<h3 id="5-方法区"><a href="#5-方法区" class="headerlink" title="5. 方法区"></a>5. 方法区</h3><p>与java堆一样，线程共享的区域。用于存储已被虚拟机加载的<strong>类信息</strong>，<strong>常量</strong>，<strong>静态变量</strong>，<strong>即时编译器编译后的代码</strong>等数据。</p>
+<p>很多人习惯把方法区称为”永久代”，两者本质上并不等价。</p>
+<p>当方法区无法满足内存分配的需求时，将抛出OutOfMemoryError异常</p>
+<h3 id="6-运行时常量池"><a href="#6-运行时常量池" class="headerlink" title="6. 运行时常量池"></a>6. 运行时常量池</h3><p>运行时常量池是方法区的一部分。Class文件中除了有类的版本，字段，方法接口等描述信息外，还有常量池，用于存放编译期生成的各种字面量和符号引用。java虚拟机对Class文件的每一部分都严格规定，但对于运行时常量池，没有做任何细节的要求。</p>
+<p>运行时常量池是方法区的一部分，自然也受到方法区内存的限制，当常量池无法申请到内存时会抛出OutMemoryError异常</p>
+<h3 id="7-直接内存"><a href="#7-直接内存" class="headerlink" title="7. 直接内存"></a>7. 直接内存</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/03/13/%E4%B8%80.%20Java%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E4%B8%8E%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E5%BC%82%E5%B8%B8/" data-id="cl4gp6u2c002j9cvc3h8k4jlf" data-title="一. Java内存区域与内存溢出异常" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">java虚拟机</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/14/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B9%A6%E7%B1%8D/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          计算机书籍
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/13/%E4%BA%8C.%20%20java%E9%9B%86%E5%90%88%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">二. java集合源码解析</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Error/" rel="tag">Error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Extjs/" rel="tag">Extjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerDesigner/" rel="tag">PowerDesigner</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">java虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/" rel="tag">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" rel="tag">myeclipse插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E8%AE%B0/" rel="tag">日记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" rel="tag">生活文化与素养</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Extjs/" style="font-size: 10px;">Extjs</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/PowerDesigner/" style="font-size: 12.86px;">PowerDesigner</a> <a href="/tags/Spring/" style="font-size: 14.29px;">Spring</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 12.86px;">java虚拟机</a> <a href="/tags/linux/" style="font-size: 17.14px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">myeclipse插件</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 14.29px;">工具</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 18.57px;">数据库</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 15.71px;">日记</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 14.29px;">杂记</a> <a href="/tags/%E6%A1%86%E6%9E%B6/" style="font-size: 14.29px;">框架</a> <a href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" style="font-size: 11.43px;">生活文化与素养</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 12.86px;">笔记</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/06/16/Hexo-github-%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2-%E6%96%B0%E6%89%8B%E5%85%A5%E9%97%A8/">Hexo+github搭建静态博客(新手入门)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/test/">test</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/20/%E4%BA%94.%20volatile%20%E5%85%B3%E9%94%AE%E5%AD%97/">五. volatile关键字</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/19/%E4%B8%89.%20%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/">三. 垃圾收集器</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Zhutongtong<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

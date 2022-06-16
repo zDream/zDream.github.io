@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>extjs学习 | 记忆时光</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="本文引自李林峰的园子   注：本教程的讲解是基于ExtJs3.0版本Ext3.0下载,Ext3.0API下载。  简介  ExtJS是一种主要用于创建前端用户界面，是一个与后台技术无关的前端ajax框架。功能丰富，无人能出其右无论是界面之美，还是功能之强，ext的表格控件都高居榜首。单选行，多选行，高亮显示选中的行，推拽改变列宽度，按列排序，这些基本功能咱们就不提了。自动生成行号，支持check">
+<meta property="og:type" content="article">
+<meta property="og:title" content="extjs学习">
+<meta property="og:url" content="http://example.com/2016/01/30/extjs%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="记忆时光">
+<meta property="og:description" content="本文引自李林峰的园子   注：本教程的讲解是基于ExtJs3.0版本Ext3.0下载,Ext3.0API下载。  简介  ExtJS是一种主要用于创建前端用户界面，是一个与后台技术无关的前端ajax框架。功能丰富，无人能出其右无论是界面之美，还是功能之强，ext的表格控件都高居榜首。单选行，多选行，高亮显示选中的行，推拽改变列宽度，按列排序，这些基本功能咱们就不提了。自动生成行号，支持check">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://7xpw00.com1.z0.glb.clouddn.com/imageQQ%E6%88%AA%E5%9B%BE20160130160124.png">
+<meta property="article:published_time" content="2016-01-30T05:19:25.000Z">
+<meta property="article:modified_time" content="2022-06-16T07:22:10.418Z">
+<meta property="article:author" content="Zhutongtong">
+<meta property="article:tag" content="Extjs">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://7xpw00.com1.z0.glb.clouddn.com/imageQQ%E6%88%AA%E5%9B%BE20160130160124.png">
+  
+    <link rel="alternate" href="/atom.xml" title="记忆时光" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">记忆时光</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-extjs学习" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/01/30/extjs%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time class="dt-published" datetime="2016-01-30T05:19:25.000Z" itemprop="datePublished">2016-01-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      extjs学习
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>本文引自<a target="_blank" rel="noopener" href="http://www.cnblogs.com/iamlilinfeng/archive/2012/06/18/2553481.html">李林峰的园子</a></p>
+</blockquote>
+<blockquote>
+<p>注：本教程的讲解是基于ExtJs3.0版本<a target="_blank" rel="noopener" href="http://7xpw00.com1.z0.glb.clouddn.com/imageExt3.0.rar">Ext3.0下载</a>,<a target="_blank" rel="noopener" href="http://7xpw00.com1.z0.glb.clouddn.com/imageExt3.0.API.rar">Ext3.0API下载</a>。</p>
+</blockquote>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><a target="_blank" rel="noopener" href="http://7xpw00.com1.z0.glb.clouddn.com/image%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86.txt"></a></p>
+<blockquote>
+<p>ExtJS是一种主要用于创建前端用户界面，是一个与后台技术无关的前端ajax框架。<br>功能丰富，无人能出其右<br>无论是界面之美，还是功能之强，ext的表格控件都高居榜首。<br>单选行，多选行，高亮显示选中的行，推拽改变列宽度，按列排序，这些基本功能咱们就不提了。<br>自动生成行号，支持checkbox全选，动态选择显示哪些列，支持本地以及远程分页，可以对单元格按照自己的想法进行渲染，这些也算可以想到的功能。<br>再加上可编辑grid，添加新行，删除一或多行，提示脏数据，推拽改变grid大小，grid之间推拽一或多行，甚至可以在tree和grid之间进行拖拽，啊，这些功能实在太神奇了。更令人惊叹的是，这些功能竟然都在ext表格控件里实现了。</p>
+</blockquote>
+<h2 id="什么是ext"><a href="#什么是ext" class="headerlink" title="什么是ext"></a>什么是ext</h2><blockquote>
+<ul>
+<li>1、ExtJS可以用来开发RIA也即富客户端的AJAX应用，是一个用javascript写的，主要用于创建前端用户界面，是一个与后台技术无关的前端ajax框架。因此，可以把ExtJS用在.Net、Java、Php等各种开发语言开发的应用中。ExtJs最开始基于YUI技术，由开发人员JackSlocum开发，通过参考JavaSwing等机制来组织可视化组件，无论从UI界面上CSS样式的应用，到数据解析上的异常处理，都可算是一款不可多得的JavaScript客户端技术的精品。</li>
+<li>2、Ext的UI组件模型和开发理念脱胎、成型于Yahoo组件库YUI和Java平台上Swing两者，并为开发者屏蔽了大量跨浏览器方面的处理。相对来说，EXT要比开发者直接针对DOM、W3C对象模型开发UI组件轻松。</li>
+</ul>
+</blockquote>
+<h2 id="Hello-word"><a href="#Hello-word" class="headerlink" title="Hello word"></a>Hello word</h2><p>目录结构，把 Ext 文件夹放入你的项目中<br><img src="http://7xpw00.com1.z0.glb.clouddn.com/imageQQ%E6%88%AA%E5%9B%BE20160130160124.png"></p>
+<p>index.jsp代码</p>
+<pre><code>&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;!--ExtJs框架开始--&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;/Ext/adapter/ext/ext-base.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;/Ext/ext-all.js&quot;&gt;&lt;/script&gt;
+&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/Ext/resources/css/ext-all.css&quot;/&gt;
+&lt;!--ExtJs框架结束--&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+    Ext.onReady(function () &#123;
+        Ext.MessageBox.alert(&#39;标题&#39;, &#39;Hello World!&#39;);
+    &#125;);
+&lt;/script&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;!--
+18 说明：
+19 (1)Ext.onReady():ExtJS Application的入口...就相当于Java或C#的main函数.
+20 (2)Ext.MessageBox.alert()：弹出对话框。
+21 --&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h2 id="Extjs-窗体-：-Window组件"><a href="#Extjs-窗体-：-Window组件" class="headerlink" title="Extjs 窗体 ： Window组件"></a>Extjs 窗体 ： Window组件</h2><h3 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下"></a>代码如下</h3><pre><code>&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;!--ExtJs框架开始--&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;/Ext/adapter/ext/ext-base.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;/Ext/ext-all.js&quot;&gt;&lt;/script&gt;
+&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/Ext/resources/css/ext-all.css&quot;/&gt;
+  &lt;!--ExtJs框架结束--&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+    Ext.onReady(function () &#123;
+      var win = new Ext.Window(&#123;
+        title: &#39;窗口&#39;,
+        width: 476,
+        height: 374,
+        html: &#39;&lt;div&gt;这里显示内容&lt;/div&gt;&#39;,
+        resizable: true,
+        modal: true,
+        closable: true,
+        maximizable: true,
+        minimizable: true
+      &#125;);
+      win.show();
+    &#125;);
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;!--
+说明：
+(1)var win = new Ext.Window(&#123;&#125;):创建一个新的Window窗体对象。
+(2)title: &#39;窗口&#39;：窗体的标题。
+(3)width: 476,height: 374：宽度及高度。
+(4)html: &#39;&lt;div&gt;这里是窗体内容&lt;/div&gt;&#39;：窗体内部显示的html内容。
+(5)resizable: true：是否可以调整窗体的大小，这里设置为 true。
+(6)modal: true：是否为模态窗体[什么是模态窗体？当你打开这个窗体以后，如果不能对其他的窗体进行操作，那么这个窗体就是模态窗体，否则为非模态窗体]。
+(7)closable:true：是否可以关闭，也可以理解为是否显示关闭按钮。
+(8)maximizable: true：是否可以最大化，也可以理解为是否显示最大化按钮。
+(9)minimizable: true：是否可以最小化，也可以理解为是否显示最小化按钮。
+(10)win.show()：窗体展示。
+--&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h3 id="window-组件常用的：属性、方法及事件"><a href="#window-组件常用的：属性、方法及事件" class="headerlink" title="window 组件常用的：属性、方法及事件"></a>window 组件常用的：属性、方法及事件</h3><p>一、属性</p>
+<p>plain：布尔类型，true表示强制与背景色保持协调，默认值为false。<br>resizable：布尔类型，用户是否可以调整窗体大小，默认值为true表示可以调整大小。<br>maxinizable：布尔类型，true表示显示最大化按钮，默认值为false。<br>maximized：布尔类型，true表示显示窗体时将窗体最大化，默认值为false。<br>closable：布尔类型，true表示显示关闭按钮，默认值为true。<br>bodyStyle：与边框的间距，如：bodyStyle:”padding:3px”。<br>buttonAlign：窗体中button的对齐方式(left、center、right)，默认值为right。<br>closeAction：”close”释放窗体所占内存，”hide”隐藏窗体，建议使用”hide”。</p>
+<p>二、方法 </p>
+<p>show：打开窗体。<br>hide：隐藏窗体。<br>close：关闭窗体。</p>
+<p>三、事件 </p>
+<p>show：打开窗体时触法。<br>hide：隐藏窗体时触法。<br>close：关闭窗体时触法。</p>
+<h2 id="Extjs-表单-FormPanel"><a href="#Extjs-表单-FormPanel" class="headerlink" title="Extjs 表单 : FormPanel"></a>Extjs 表单 : FormPanel</h2><h3 id="代码如下-1"><a href="#代码如下-1" class="headerlink" title="代码如下"></a>代码如下</h3><pre><code>&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;&lt;/title&gt;
+&lt;!--ExtJs框架开始--&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;/Ext/adapter/ext/ext-base.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;/Ext/ext-all.js&quot;&gt;&lt;/script&gt;
+ &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/Ext/resources/css/ext-all.css&quot; /&gt;
+&lt;!--ExtJs框架结束--&gt;
+      &lt;script type=&quot;text/javascript&quot;&gt;
+      Ext.onReady(function () &#123;
+            var form = new Ext.form.FormPanel(&#123;
+              frame: true,
+             title: &#39;表单标题&#39;,
+              style: &#39;margin:10px&#39;,
+                html: &#39;&lt;div style=&quot;padding:10px&quot;&gt;这里表单内容&lt;/div&gt;&#39;
+           &#125;);
+          var win = new Ext.Window(&#123;
+                title: &#39;窗口&#39;,
+                width: 476,
+               height: 374,
+                html: &#39;&lt;div&gt;这里是窗体内容&lt;/div&gt;&#39;,
+               resizable: true,
+               modal: true,
+               closable: true,
+               maximizable: true,
+               minimizable: true,
+                items: form
+           &#125;);
+           win.show();
+        &#125;);
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;!--
+36 说明：
+37 (1)var form = new Ext.form.FormPanel(&#123;&#125;):创建一个新的form表单对象。
+38 (2)title: &#39;表单标题&#39;：表单的标题，如果不加的话，不会出现上面的浅色表单标题栏。
+39 (3)style: &#39;margin:10px&#39;:表单的样式，加了个外10px的外边距。
+40 (4)html: &#39;&lt;div style=&quot;padding:10px&quot;&gt;这里表单内容&lt;/div&gt;&#39;：表单内显示html的内容。
+41 --&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h3 id="form-组件常用的：属性、方法及事件"><a href="#form-组件常用的：属性、方法及事件" class="headerlink" title="form 组件常用的：属性、方法及事件"></a>form 组件常用的：属性、方法及事件</h3><p>一、属性</p>
+<p>width:整型，表单宽度。<br>height:整型，表单高度。<br>url:字符串，表单提交地址。</p>
+<p>二、方法</p>
+<p>reset:表单重置。<br>isValid:表单是否验证全部通过。<br>submit:表单提交。</p>
+<h2 id="Extjs-文本框-TextField"><a href="#Extjs-文本框-TextField" class="headerlink" title="Extjs 文本框 : TextField"></a>Extjs 文本框 : TextField</h2><h3 id="代码如下-2"><a href="#代码如下-2" class="headerlink" title="代码如下"></a>代码如下</h3><pre><code>&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;&lt;/title&gt;
+    &lt;!--ExtJs框架开始--&gt;
+    &lt;script type=&quot;text/javascript&quot; src=&quot;/Ext/adapter/ext/ext-base.js&quot;&gt;&lt;/script&gt;
+    &lt;script type=&quot;text/javascript&quot; src=&quot;/Ext/ext-all.js&quot;&gt;&lt;/script&gt;
+    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/Ext/resources/css/ext-all.css&quot;/&gt;
+    &lt;!--ExtJs框架结束--&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+        Ext.onReady(function () &#123;
+            //初始化标签中的Ext:Qtip属性。
+            Ext.QuickTips.init();
+            Ext.form.Field.prototype.msgTarget = &#39;side&#39;;
+            //用户名input
+            var txtusername = new Ext.form.TextField(&#123;
+                width: 140,
+                allowBlank: false,
+                maxLength: 20,
+                name: &#39;username&#39;,
+                fieldLabel: &#39;用户名称&#39;,
+                blankText: &#39;请输入用户名&#39;,
+                maxLengthText: &#39;用户名不能超过20个字符&#39;
+            &#125;);
+            //密码input
+            var txtpassword = new Ext.form.TextField(&#123;
+                width: 140,
+                allowBlank: false,
+                maxLength: 20,
+                inputType: &#39;password&#39;,
+                name: &#39;password&#39;,
+                fieldLabel: &#39;密码&#39;,
+                blankText: &#39;请输入密码&#39;,
+                maxLengthText: &#39;密码不能超过20个字符&#39;
+            &#125;);
+            //表单
+            var form = new Ext.form.FormPanel(&#123;
+                frame: true,
+                title: &#39;表单标题&#39;,
+                style: &#39;margin:10px&#39;,
+                html: &#39;&lt;div style=&quot;padding:10px&quot;&gt;这里表单内容&lt;/div&gt;&#39;,
+                items: [txtusername, txtpassword]
+            &#125;);
+            //窗体
+            var win = new Ext.Window(&#123;
+                title: &#39;窗口&#39;,
+                width: 476,
+                height: 374,
+                html: &#39;&lt;div&gt;这里是窗体内容&lt;/div&gt;&#39;,
+                resizable: true,
+                modal: true,
+                closable: true,
+                maximizable: true,
+                minimizable: true,
+                items: form
+            &#125;);
+            win.show();
+        &#125;);
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;!--
+说明：
+(1)Ext.QuickTips.init()：QuickTips的作用是初始化标签中的Ext:Qtip属性，并为它赋予显示提示的动作。
+(2)Ext.form.Field.prototype.msgTarget = &#39;side&#39;：TextField的提示方式为：在右边缘，如上图所示，参数枚举值为&quot;qtip&quot;,&quot;title&quot;,&quot;under&quot;,&quot;side&quot;,id(元素id)，
+   side方式用的较多，右边出现红色感叹号，鼠标上去出现错误提示。
+(3)var txtusername = new Ext.form.TextField():创建一个新的TextField文本框对象。
+(4)allowBlank: false：不允许文本框为空。
+(5)maxLength: 20：文本框的最大长度为20个字符，当超过20个字符时仍然可以继续输入，但是Ext会提示警告信息。
+(6)name: &#39;password&#39;：表单名称，这个比较重要，因为我们在与服务器交互的时候，服务端是按name接收post的参数值。
+(7)fieldLabel: &#39;用户名&#39;：文本框前面显示的文字标题，如“用户名”，“密码”等。
+(8)blankText: &#39;请输入用户名&#39;：当非空校验没有通过时的提示信息。
+(9) maxLengthText: &#39;用户不能超过20个字符&#39;：当最大长度校验没有通过时的提示信息。
+--&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h3 id="textfield组件常用的：属性、方法及事件"><a href="#textfield组件常用的：属性、方法及事件" class="headerlink" title="textfield组件常用的：属性、方法及事件"></a>textfield组件常用的：属性、方法及事件</h3><p>一、属性</p>
+<p>allowBlank：是否允许为空，默认为true<br>blankText：空验证失败后显示的提示信息<br>emptyText：在一个空字段中默认显示的信息<br>grow：字段是否自动伸展和收缩，默认为false<br>growMin：收缩的最小宽度<br>growMax：伸展的最大宽度<br>inputType：字段类型：默认为text<br>maskRe：用于过滤不匹配字符输入的正则表达式<br>maxLength：字段允许输入的最大长度<br>maxLengthText：最大长度验证失败后显示的提示信息<br>minLength：字段允许输入的最小长度<br>minLengthText：最小长度验证失败后显示的提示信息</p>
+<h2 id="Extjs-按钮-：-Button"><a href="#Extjs-按钮-：-Button" class="headerlink" title="Extjs 按钮 ： Button"></a>Extjs 按钮 ： Button</h2><h3 id="代码如下-3"><a href="#代码如下-3" class="headerlink" title="代码如下"></a>代码如下</h3><pre><code>&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;&lt;/title&gt;
+  &lt;!--ExtJs框架开始--&gt;
+  &lt;script type=&quot;text/javascript&quot; src=&quot;/Ext/adapter/ext/ext-base.js&quot;&gt;&lt;/script&gt;
+  &lt;script type=&quot;text/javascript&quot; src=&quot;/Ext/ext-all.js&quot;&gt;&lt;/script&gt;
+  &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/Ext/resources/css/ext-all.css&quot; /&gt;
+  &lt;!--ExtJs框架结束--&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+    Ext.onReady(function () &#123;
+      //初始化标签中的Ext:Qtip属性。
+      Ext.QuickTips.init();
+      Ext.form.Field.prototype.msgTarget = &#39;side&#39;;
+      //提交按钮处理方法
+      var btnsubmitclick = function () &#123;
+        Ext.MessageBox.alert(&#39;提示&#39;, &#39;你点了确定按钮!&#39;);
+      &#125;
+      //重置按钮&quot;点击时&quot;处理方法
+      var btnresetclick = function () &#123;
+        Ext.MessageBox.alert(&#39;提示&#39;, &#39;你点了重置按钮!&#39;);
+      &#125;
+      //重置按钮&quot;鼠标悬停&quot;处理方法
+      var btnresetmouseover = function () &#123;
+        Ext.MessageBox.alert(&#39;提示&#39;, &#39;你鼠标悬停在重置按钮之上!&#39;);
+      &#125;
+      //提交按钮
+      var btnsubmit = new Ext.Button(&#123;
+        text: &#39;提交&#39;,
+        handler: btnsubmitclick
+      &#125;);
+      //重置按钮
+      var btnreset = new Ext.Button(&#123;
+        text: &#39;重置&#39;,
+        listeners: &#123;
+          &#39;mouseover&#39;: btnresetmouseover,
+          &#39;click&#39;: btnresetclick
+        &#125;
+      &#125;);
+      //用户名input
+      var txtusername = new Ext.form.TextField(&#123;
+        width: 140,
+        allowBlank: false,
+        maxLength: 20,
+        name: &#39;username&#39;,
+        fieldLabel: &#39;用户名称&#39;,
+        blankText: &#39;请输入用户名&#39;,
+        maxLengthText: &#39;用户名不能超过20个字符&#39;
+      &#125;);
+      //密码input
+      var txtpassword = new Ext.form.TextField(&#123;
+        width: 140,
+        allowBlank: false,
+        maxLength: 20,
+        inputType: &#39;password&#39;,
+        name: &#39;password&#39;,
+        fieldLabel: &#39;密码&#39;,
+        blankText: &#39;请输入密码&#39;,
+        maxLengthText: &#39;密码不能超过20个字符&#39;
+      &#125;);
+      //表单
+      var form = new Ext.form.FormPanel(&#123;
+        frame: true,
+        title: &#39;表单标题&#39;,
+        style: &#39;margin:10px&#39;,
+        html: &#39;&lt;div style=&quot;padding:10px&quot;&gt;这里表单内容&lt;/div&gt;&#39;,
+        items: [txtusername, txtpassword],
+        buttons: [btnsubmit, btnreset]
+      &#125;);
+      //窗体
+      var win = new Ext.Window(&#123;
+        title: &#39;窗口&#39;,
+        width: 476,
+        height: 374,
+        html: &#39;&lt;div&gt;这里是窗体内容&lt;/div&gt;&#39;,
+        resizable: true,
+        modal: true,
+        closable: true,
+        maximizable: true,
+        minimizable: true,
+        buttonAlign: &#39;center&#39;,
+        items: form
+      &#125;);
+      win.show();
+    &#125;);
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;!--
+说明：
+(1)var btnsubmit = new Ext.Button():创建一个新的Button按钮对象。
+(2)handler: btnsubmitclick：当用户点击的时候[即js中的onclick事件]执行方法btnsubmitclick。
+(3)listeners: &#123;&#39;mouseover&#39;: btnresetmouseover,&#39;click&#39;: btnresetclick&#125;：当用户点击的时候[即js中的onclick事件]执行方法btnresetclick，
+    鼠标悬停时执行方法btnresetmouseover。
+(4)handler与listeners的区别：
+    handler:执行的是首发事件，click是button这个组件的首发事件。这就是handler的运行方式：被某个组件的首要event所触发。
+            handler是一个特殊的listener。
+    listener：是一个事件名 + 处理函数的组合，事件监听，如上例代码所示，我们监听了两个事件&quot;click&quot;，与&quot;mouseover&quot;事件，并且会顺序执行。
+--&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h3 id="button组件常用的：属性、方法及事件"><a href="#button组件常用的：属性、方法及事件" class="headerlink" title="button组件常用的：属性、方法及事件"></a>button组件常用的：属性、方法及事件</h3><p>一、属性</p>
+<p>text:字符串，显示在按钮上的文字。<br>minWidth: 整型，最小宽度。</p>
+<p>二、事件</p>
+<p>handler:首发方法处理事件。<br>listeners:事件监听。</p>
+<h2 id="Extjs-登录窗体：login"><a href="#Extjs-登录窗体：login" class="headerlink" title="Extjs 登录窗体：login"></a>Extjs 登录窗体：login</h2><h3 id="代码如下-4"><a href="#代码如下-4" class="headerlink" title="代码如下"></a>代码如下</h3><pre><code>&lt;%--
+  Created by IntelliJ IDEA.
+  User: Dreamer
+  Date: 2016/1/30
+  Time: 18:11
+  To change this template use File | Settings | File Templates.
+--%&gt;
+&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;&lt;/title&gt;
+  &lt;!--ExtJs框架开始--&gt;
+  &lt;script type=&quot;text/javascript&quot; src=&quot;/Ext/adapter/ext/ext-base.js&quot;&gt;&lt;/script&gt;
+  &lt;script type=&quot;text/javascript&quot; src=&quot;/Ext/ext-all.js&quot;&gt;&lt;/script&gt;
+  &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/Ext/resources/css/ext-all.css&quot; /&gt;
+  &lt;style type=&quot;text/css&quot;&gt;
+    .loginicon
+    &#123;
+      background-image: url(image/login.gif) !important;
+    &#125;
+  &lt;/style&gt;
+  &lt;!--ExtJs框架结束--&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+    Ext.onReady(function () &#123;
+      //初始化标签中的Ext:Qtip属性。
+      Ext.QuickTips.init();
+      Ext.form.Field.prototype.msgTarget = &#39;side&#39;;
+      //提交按钮处理方法
+      var btnsubmitclick = function () &#123;
+        if (form.getForm().isValid()) &#123;
+          //通常发送到服务器端获取返回值再进行处理，我们在以后的教程中再讲解表单与服务器的交互问题。
+          Ext.Msg.alert(&quot;提示&quot;, &quot;登陆成功!&quot;);
+        &#125;
+      &#125;
+      //重置按钮&quot;点击时&quot;处理方法
+      var btnresetclick = function () &#123;
+        form.getForm().reset();
+      &#125;
+      //提交按钮
+      var btnsubmit = new Ext.Button(&#123;
+        text: &#39;提 交&#39;,
+        handler: btnsubmitclick
+      &#125;);
+      //重置按钮
+      var btnreset = new Ext.Button(&#123;
+        text: &#39;重 置&#39;,
+        handler: btnresetclick
+      &#125;);
+      //用户名input
+      var txtusername = new Ext.form.TextField(&#123;
+        width: 140,
+        allowBlank: false,
+        maxLength: 20,
+        name: &#39;username&#39;,
+        fieldLabel: &#39;用户名&#39;,
+        blankText: &#39;请输入用户名&#39;,
+        maxLengthText: &#39;用户名不能超过20个字符&#39;
+      &#125;);
+      //密码input
+      var txtpassword = new Ext.form.TextField(&#123;
+        width: 140,
+        allowBlank: false,
+        maxLength: 20,
+        inputType: &#39;password&#39;,
+        name: &#39;password&#39;,
+        fieldLabel: &#39;密　码&#39;,
+        blankText: &#39;请输入密码&#39;,
+        maxLengthText: &#39;密码不能超过20个字符&#39;
+      &#125;);
+      //验证码input
+      var txtcheckcode = new Ext.form.TextField(&#123;
+        fieldLabel: &#39;验证码&#39;,
+        id: &#39;checkcode&#39;,
+        allowBlank: false,
+        width: 76,
+        blankText: &#39;请输入验证码！&#39;,
+        maxLength: 4,
+        maxLengthText: &#39;验证码不能超过4个字符!&#39;
+      &#125;);
+      //表单
+      var form = new Ext.form.FormPanel(&#123;
+        url: &#39;******&#39;,
+        labelAlign: &#39;right&#39;,
+        labelWidth: 45,
+        frame: true,
+        cls: &#39;loginform&#39;,
+        buttonAlign: &#39;center&#39;,
+        bodyStyle: &#39;padding:6px 0px 0px 15px&#39;,
+        items: [txtusername, txtpassword, txtcheckcode],
+        buttons: [btnsubmit, btnreset]
+      &#125;);
+      //窗体
+      var win = new Ext.Window(&#123;
+        title: &#39;用户登陆&#39;,
+        iconCls: &#39;loginicon&#39;,
+        plain: true,
+        width: 276,
+        height: 174,
+        resizable: false,
+        shadow: true,
+        modal: true,
+        closable: false,
+        animCollapse: true,
+        items: form
+      &#125;);
+      win.show();
+      //创建验证码
+      var checkcode = Ext.getDom(&#39;checkcode&#39;);
+      var checkimage = Ext.get(checkcode.parentNode);
+      checkimage.createChild(&#123;
+        tag: &#39;img&#39;,
+        src: &#39;image/checkcode.gif&#39;,
+        align: &#39;absbottom&#39;,
+        style: &#39;padding-left:23px;cursor:pointer;&#39;
+      &#125;);
+    &#125;);
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;!--
+说明：
+(1)88行，iconCls: &#39;loginicon&#39;:给窗体加上小图标，样式在第12行定义。
+(2)Ext.getDom(&#39;checkcode&#39;)：根据ID获取Dom。
+(3)Ext.get(checkcode.parentNode)：根据Dom获取父节点。
+(4)checkimage.createChild()：创建子节点，标签为&lt;img src=&#39;image/checkcode.gif&#39;..../&gt;。
+(5)form.getForm().isValid()：校验表单的验证项是否全部通过。
+(6)form.getForm().reset()：重置表单。
+--&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/01/30/extjs%E5%AD%A6%E4%B9%A0/" data-id="cl4gp6u1v00159cvcaq4c73o9" data-title="extjs学习" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Extjs/" rel="tag">Extjs</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/01/30/20160130/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          20160130
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/01/27/web.xml%E8%AF%A6%E8%A7%A3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">web.xml详解</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Error/" rel="tag">Error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Extjs/" rel="tag">Extjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerDesigner/" rel="tag">PowerDesigner</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">java虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/" rel="tag">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" rel="tag">myeclipse插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E8%AE%B0/" rel="tag">日记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" rel="tag">生活文化与素养</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Extjs/" style="font-size: 10px;">Extjs</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/PowerDesigner/" style="font-size: 12.86px;">PowerDesigner</a> <a href="/tags/Spring/" style="font-size: 14.29px;">Spring</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 12.86px;">java虚拟机</a> <a href="/tags/linux/" style="font-size: 17.14px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">myeclipse插件</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 14.29px;">工具</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 18.57px;">数据库</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 15.71px;">日记</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 14.29px;">杂记</a> <a href="/tags/%E6%A1%86%E6%9E%B6/" style="font-size: 14.29px;">框架</a> <a href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" style="font-size: 11.43px;">生活文化与素养</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 12.86px;">笔记</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/06/16/Hexo-github-%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2-%E6%96%B0%E6%89%8B%E5%85%A5%E9%97%A8/">Hexo+github搭建静态博客(新手入门)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/test/">test</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/20/%E4%BA%94.%20volatile%20%E5%85%B3%E9%94%AE%E5%AD%97/">五. volatile关键字</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/19/%E4%B8%89.%20%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/">三. 垃圾收集器</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Zhutongtong<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

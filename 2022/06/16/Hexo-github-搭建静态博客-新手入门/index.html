@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo+github搭建静态博客(新手入门) | 记忆时光</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="前言 能来到这，说明你应该对博客有了些认知。相信你应该熟悉WordPress吧，或者说以前就是用的WordPress搭建的博客。本文针对于初学者，教程十分详细。我已经无法吐槽网上那些建博客教程，不是不能用，就是缺很多东西，到最后装也装不好，也不知道哪错了。在这我把我建博客的步骤写下来。希望能你给你们一些帮助。  准备工作 window8.1开发平台 楼主是在window下装的，虽然说是最烂的开发平">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo+github搭建静态博客(新手入门)">
+<meta property="og:url" content="http://example.com/2022/06/16/Hexo-github-%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2-%E6%96%B0%E6%89%8B%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="记忆时光">
+<meta property="og:description" content="前言 能来到这，说明你应该对博客有了些认知。相信你应该熟悉WordPress吧，或者说以前就是用的WordPress搭建的博客。本文针对于初学者，教程十分详细。我已经无法吐槽网上那些建博客教程，不是不能用，就是缺很多东西，到最后装也装不好，也不知道哪错了。在这我把我建博客的步骤写下来。希望能你给你们一些帮助。  准备工作 window8.1开发平台 楼主是在window下装的，虽然说是最烂的开发平">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://7xpw00.com1.z0.glb.clouddn.com/image11.png">
+<meta property="og:image" content="http://7xpw00.com1.z0.glb.clouddn.com/imagessk.png">
+<meta property="article:published_time" content="2022-06-16T07:22:10.415Z">
+<meta property="article:modified_time" content="2022-06-16T07:22:10.415Z">
+<meta property="article:author" content="Zhutongtong">
+<meta property="article:tag" content="hexo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://7xpw00.com1.z0.glb.clouddn.com/image11.png">
+  
+    <link rel="alternate" href="/atom.xml" title="记忆时光" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">记忆时光</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Hexo-github-搭建静态博客-新手入门" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/06/16/Hexo-github-%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2-%E6%96%B0%E6%89%8B%E5%85%A5%E9%97%A8/" class="article-date">
+  <time class="dt-published" datetime="2022-06-16T07:22:10.415Z" itemprop="datePublished">2022-06-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Hexo+github搭建静态博客(新手入门)
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>能来到这，说明你应该对博客有了些认知。相信你应该熟悉WordPress吧，或者说以前就是用的WordPress搭建的博客。本文针对于初学者，教程十分详细。我已经无法吐槽网上那些建博客教程，不是不能用，就是缺很多东西，到最后装也装不好，也不知道哪错了。在这我把我建博客的步骤写下来。希望能你给你们一些帮助。</p>
+</blockquote>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ul>
+<li>window8.1开发平台 楼主是在window下装的，虽然说是最烂的开发平台，但还是蛮好用的</li>
+<li>安装node.js <a target="_blank" rel="noopener" href="https://nodejs.org/en/">node官网</a>下载最新版本，一路安装就好</li>
+<li>安装git <a target="_blank" rel="noopener" href="http://git-scm.com/download/">get官网</a>下载与你电脑相对应的版本，安装</li>
+<li>github账号，用户名注册之后便不可修改，用来做博客的远程仓库的，</li>
+<li>域名(可不需要也行) 可以通过域名来访问你的博客</li>
+</ul>
+<h3 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h3><p>  打开Git命令行，执行如下命令</p>
+<pre><code>$  npm install -g hexo-cli
+</code></pre>
+<p>  初始化在电脑里建一个空文件夹(不要在C盘),我是在 E 盘建了一个 git 文件夹，然后右键打开 Git Bash Here,键入如下命令</p>
+<pre><code>Dreamer@Dream MINGW64 /d/test
+$ hexo init #初始化文件夹，会在目录下生成一些文件，随后按照提示运行   
+INFO Copying data to D:\test  
+INFO  You are almost done! Don&#39;t forget to run &#39;npm install&#39; before you   start blogging with Hexo!
+ ##按照提示输入
+$ npm install 耐心等待会，不要着急，然后运行下面命令
+$ hexo server`
+INFO  Hexo is running at http://0.0.0.0:4000/. Press Ctrl+C to stop.
+</code></pre>
+<p>表明Hexo Server已经启动了，在浏览器中打开 <a target="_blank" rel="noopener" href="http://localhost:4000/%EF%BC%8C">http://localhost:4000/，</a>  这时可以看到Hexo已为你生成了一篇blog。你可以按Ctrl+C 停止Server。</p>
+<p><strong>安装hexo插件(当时我就是因为没有装这些插件，导致各种失败)</strong></p>
+<pre><code>npm install hexo-generator-index --save
+npm install hexo-generator-archive --save
+npm install hexo-generator-category --save
+npm install hexo-generator-tag --save
+npm install hexo-server --save
+npm install hexo-deployer-git --save
+npm install hexo-deployer-heroku --save
+npm install hexo-deployer-rsync --save
+npm install hexo-deployer-openshift --save
+npm install hexo-renderer-marked@0.2 --save
+npm install hexo-renderer-stylus@0.2 --save
+npm install hexo-generator-feed@1 --save
+npm install hexo-generator-sitemap@1 --save
+</code></pre>
+<p><strong>hexo常用命令</strong></p>
+<pre><code>hexo new &quot;文章名字&quot; #生成一篇文章，在source目录下能看到,可简写  hexo n
+hexo new page&quot;pageName&quot;  #新建页面
+hexo generate  #生成静态页面至public目录   可简写 hexo g
+hexo server    #开启预览访问端口			 可简写 hexo s
+hexo deploy    #将.deploy目录部署到GitHub  可简写  hexo d
+hexo help      # 查看帮助
+hexo version   #查看Hexo的版本
+</code></pre>
+<h3 id="配置并部署到github"><a href="#配置并部署到github" class="headerlink" title="配置并部署到github"></a>配置并部署到github</h3><p>首先登录github，创建你用户名对应的仓库，仓库名必须是如图格式，他们都说是必须，我也不知道为什么，你如果知道了原因告诉我声。</p>
+<p> <img src="http://7xpw00.com1.z0.glb.clouddn.com/image11.png" alt="如图"></p>
+<p>配置ssh密钥参考 <a target="_blank" rel="noopener" href="https://help.github.com/articles/generating-ssh-keys/">官方文档</a>(可能需要翻墙才能访问)如果你英文不错的话可以去看这个，这个写的很详细。</p>
+<p>SSH密钥是一种方法来确定受信任的计算机，而不涉及密码。下面的步骤将引导您完成生成SSH密钥并添加公共密钥到你的GitHub上的帐户。</p>
+<ol>
+<li><p>生成ssh 密钥  </p>
+<p>$ ssh-keygen -t rsa -b 4096 -C “<a href="mailto:&#x79;&#111;&#x75;&#114;&#x5f;&#x65;&#109;&#97;&#x69;&#x6c;&#x40;&#x65;&#120;&#97;&#109;&#112;&#108;&#101;&#46;&#x63;&#111;&#x6d;">&#x79;&#111;&#x75;&#114;&#x5f;&#x65;&#109;&#97;&#x69;&#x6c;&#x40;&#x65;&#120;&#97;&#109;&#112;&#108;&#101;&#46;&#x63;&#111;&#x6d;</a>“</p>
+</li>
+<li><p>输入要保存的文件的路径，保持默认即可 然后 回车</p>
+<p>Enter file in which to save the key (&#x2F;Users&#x2F;you&#x2F;.ssh&#x2F;id_rsa): [Press enter]</p>
+</li>
+<li><p>输入密码，密码是暗文的，输入即可</p>
+<p>Enter passphrase (empty for no passphrase): [Type a passphrase]<br>Enter same passphrase again: [Type passphrase again]</p>
+</li>
+</ol>
+<blockquote>
+<p> 完成以上工作之后 去文件目录应该会有id_rsa  和id_rsa.pub两个官钥<br> id_rsa 是私有的，不可公开<br> id_rsa.put 可公开</p>
+</blockquote>
+<p>去github仓库中把ssh密钥加入进去 打开头像下的 Setting 目录</p>
+<p> <img src="http://7xpw00.com1.z0.glb.clouddn.com/imagessk.png"></p>
+<p> 点 Add SSH key<br> title 随你写<br> key 打开id_rsa.put 粘贴里面全部内容。保存即可</p>
+<p>要配置的ssh-agent程序使用你的SSH密钥</p>
+<ul>
+<li><p>确保ssh 代理已启用</p>
+<p> $ ssh-agent -s</p>
+<p> $ eval $(ssh-agent -s)</p>
+</li>
+<li><p>添加您的SSH密钥对的ssh-agent ，应该会让你输入密码</p>
+<p> $ ssh-add ~&#x2F;.ssh&#x2F;id_rsa (路径要改相应位置)</p>
+</li>
+</ul>
+<p>测试连接</p>
+<pre><code>$ ssh -T git@github.com
+Hi zDream! You&#39;ve successfully authenticated, but GitHub does not provide shell access.
+</code></pre>
+<p> 出现上图所示既表示添加成功</p>
+<h3 id="配置文件并上传到远程仓库中"><a href="#配置文件并上传到远程仓库中" class="headerlink" title="配置文件并上传到远程仓库中"></a>配置文件并上传到远程仓库中</h3><p> 如图是我的配置文件，_config.yml </p>
+<p> <strong>注意： 配置文件语法  xxx: content</strong>  冒号后的空格必不可少</p>
+<pre><code># Hexo Configuration
+## Docs: http://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
+
+# Site
+title: 我的记忆
+subtitle: 点点滴滴
+description: 生命的足迹
+author: Dream
+language:
+timezone:
+
+# URL
+## If your site is put in a subdirectory, set url as &#39;http://yoursite.com/child&#39; and root as &#39;/child/&#39;
+url: http://www.drayy.com
+root: /
+permalink: :year/:month/:day/:title/
+permalink_defaults:
+
+# Directory
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render:
+
+# Writing
+new_post_name: :title.md # File name of new posts
+default_layout: post
+titlecase: false # Transform title into titlecase
+external_link: true # Open external links in new tab
+filename_case: 0
+render_drafts: false
+post_asset_folder: false
+relative_link: false
+future: true
+highlight:
+  enable: true
+  line_number: true
+  auto_detect: true
+  tab_replace:
+
+# Category &amp; Tag
+default_category: uncategorized
+category_map:
+tag_map:
+
+# Date / Time format
+## Hexo uses Moment.js to parse and display date
+## You can customize the date format as defined in
+## http://momentjs.com/docs/#/displaying/format/
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+
+# Pagination
+## Set per_page to 0 to disable pagination
+per_page: 10
+pagination_dir: page
+
+# Extensions
+## Plugins: http://hexo.io/plugins/
+## Themes: http://hexo.io/themes/
+theme: jacman
+stylus:
+     compress: true
+
+# Deployment
+## Docs: http://hexo.io/docs/deployment.html
+deploy:
+  type: git
+  repository: git@github.com:zDream/zDream.github.io.git
+  branch: master
+  message: &#39;站点更新: \&#123;\&#123; now(&quot;YYYY-MM-DD HH:mm:ss&quot;) \&#125;\&#125;&#39;
+</code></pre>
+<hr>
+<p>每次部署都需要执行如下命令，如果不出错可以不clean，</p>
+<pre><code>hexo clean 
+hexo g
+hexo d
+</code></pre>
+<p>注意看命令后的那些代码，看有没有错误，如何上述全部都成功的话，</p>
+<p>去访问你的博客应该就好了 <a target="_blank" rel="noopener" href="http://zdream.github.com/">http://zDream.github.com</a>  ,改成你的名字即可</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/06/16/Hexo-github-%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2-%E6%96%B0%E6%89%8B%E5%85%A5%E9%97%A8/" data-id="cl4gp6u1j000d9cvcd3ivdaac" data-title="Hexo+github搭建静态博客(新手入门)" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/06/14/test/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">test</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Error/" rel="tag">Error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Extjs/" rel="tag">Extjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerDesigner/" rel="tag">PowerDesigner</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">java虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/" rel="tag">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" rel="tag">myeclipse插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E8%AE%B0/" rel="tag">日记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" rel="tag">生活文化与素养</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Extjs/" style="font-size: 10px;">Extjs</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/PowerDesigner/" style="font-size: 12.86px;">PowerDesigner</a> <a href="/tags/Spring/" style="font-size: 14.29px;">Spring</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 12.86px;">java虚拟机</a> <a href="/tags/linux/" style="font-size: 17.14px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">myeclipse插件</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 14.29px;">工具</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 18.57px;">数据库</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 15.71px;">日记</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 14.29px;">杂记</a> <a href="/tags/%E6%A1%86%E6%9E%B6/" style="font-size: 14.29px;">框架</a> <a href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" style="font-size: 11.43px;">生活文化与素养</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 12.86px;">笔记</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/06/16/Hexo-github-%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2-%E6%96%B0%E6%89%8B%E5%85%A5%E9%97%A8/">Hexo+github搭建静态博客(新手入门)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/test/">test</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/20/%E4%BA%94.%20volatile%20%E5%85%B3%E9%94%AE%E5%AD%97/">五. volatile关键字</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/19/%E4%B8%89.%20%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/">三. 垃圾收集器</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Zhutongtong<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

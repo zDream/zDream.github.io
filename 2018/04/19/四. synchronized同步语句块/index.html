@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>四. synchronized同步语句块 | 记忆时光</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="1. 数据类型String 的常量池特性public class ThreadA extends Thread &amp;#123;     private Service service;     public ThreadA(Service service) &amp;#123;         super();         this.service &#x3D; service;     &amp;#125;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="四. synchronized同步语句块">
+<meta property="og:url" content="http://example.com/2018/04/19/%E5%9B%9B.%20synchronized%E5%90%8C%E6%AD%A5%E8%AF%AD%E5%8F%A5%E5%9D%97/index.html">
+<meta property="og:site_name" content="记忆时光">
+<meta property="og:description" content="1. 数据类型String 的常量池特性public class ThreadA extends Thread &amp;#123;     private Service service;     public ThreadA(Service service) &amp;#123;         super();         this.service &#x3D; service;     &amp;#125;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-04-19T07:59:21.000Z">
+<meta property="article:modified_time" content="2022-06-16T07:22:10.427Z">
+<meta property="article:author" content="Zhutongtong">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="记忆时光" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">记忆时光</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-四. synchronized同步语句块" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/04/19/%E5%9B%9B.%20synchronized%E5%90%8C%E6%AD%A5%E8%AF%AD%E5%8F%A5%E5%9D%97/" class="article-date">
+  <time class="dt-published" datetime="2018-04-19T07:59:21.000Z" itemprop="datePublished">2018-04-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      四. synchronized同步语句块
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-数据类型String-的常量池特性"><a href="#1-数据类型String-的常量池特性" class="headerlink" title="1. 数据类型String 的常量池特性"></a>1. 数据类型String 的常量池特性</h2><pre><code>public class ThreadA extends Thread &#123;
+    private Service service;
+    public ThreadA(Service service) &#123;
+        super();
+        this.service = service;
+    &#125;
+
+    @Override
+    public void run() &#123;
+        service.print(&quot;AA&quot;);
+    &#125;
+&#125;
+
+public class ThreadB extends Thread &#123;
+    private Service service;
+    public ThreadB(Service service) &#123;
+        super();
+        this.service = service;
+    &#125;
+
+    @Override
+    public void run() &#123;
+        service.print(&quot;AA&quot;);
+    &#125;
+&#125;
+
+public class Service &#123;
+    public static void print(String stringParam) &#123;
+        try &#123;
+            synchronized (stringParam) &#123;
+                while (true) &#123;
+                    System.out.println(Thread.currentThread().getName());
+                    Thread.sleep(1000);
+                &#125;
+            &#125;
+        &#125; catch (InterruptedException e) &#123;
+            e.printStackTrace();
+        &#125;
+    &#125;
+&#125;
+
+public class Run &#123;
+    public static void main(String[] args) &#123;
+        Service service = new Service();
+
+        ThreadA a = new ThreadA(service);
+        a.setName(&quot;A&quot;);
+        a.start();
+
+        ThreadB b = new ThreadB(service);
+        b.setName(&quot;B&quot;);
+        b.start();
+    &#125;
+&#125;
+运行效果
+A
+A
+A
+出现这样的情况原因是String的两个值都是AA，两个线程持有相同的锁，所以造成了B线程不能执行。因此在大多数情况下，同步sync代码块都不使用String作为锁对象。而改用其他，比如new Object()实例化一个Object对象，但不放入缓存中。
+例子如下：
+public class ThreadA extends Thread &#123;
+    private Service service;
+
+    public ThreadA(Service service) &#123;
+        super();
+        this.service = service;
+    &#125;
+
+    @Override
+    public void run() &#123;
+        service.print(new Object());
+    &#125;
+&#125;
+
+public class ThreadB extends Thread &#123;
+    private Service service;
+
+    public ThreadB(Service service) &#123;
+        super();
+        this.service = service;
+    &#125;
+
+    @Override
+    public void run() &#123;
+        service.print(new Object());
+    &#125;
+&#125;
+
+public class Service &#123;
+    public static void print(Object object) &#123;
+        try &#123;
+            synchronized (object) &#123;
+                while (true) &#123;
+                    System.out.println(Thread.currentThread().getName());
+                    Thread.sleep(1000);
+                &#125;
+            &#125;
+        &#125; catch (InterruptedException e) &#123;
+            e.printStackTrace();
+        &#125;
+    &#125;
+&#125;
+
+public class Run &#123;
+    public static void main(String[] args) &#123;
+        Service service = new Service();
+
+        ThreadA a = new ThreadA(service);
+        a.setName(&quot;A&quot;);
+        a.start();
+
+        ThreadB b = new ThreadB(service);
+        b.setName(&quot;B&quot;);
+        b.start();
+    &#125;
+&#125;
+运行结果如下：
+A
+B
+A
+B
+可以看到交替打印，说明持有的锁不是一个。
+</code></pre>
+<h2 id="2-同步sync方法无限等待与解决"><a href="#2-同步sync方法无限等待与解决" class="headerlink" title="2. 同步sync方法无限等待与解决"></a>2. 同步sync方法无限等待与解决</h2><pre><code>public class ThreadA extends Thread &#123;
+    private Service service;
+
+    public ThreadA(Service service) &#123;
+        super();
+        this.service = service;
+    &#125;
+
+    @Override
+    public void run() &#123;
+        service.methodA();
+    &#125;
+&#125;
+
+public class ThreadB extends Thread &#123;
+    private Service service;
+
+    public ThreadB(Service service) &#123;
+        super();
+        this.service = service;
+    &#125;
+
+    @Override
+    public void run() &#123;
+        service.methodB();
+    &#125;
+&#125;
+
+public class Service &#123;
+    synchronized public void methodA() &#123;
+        System.out.println(&quot;methodA begin&quot;);
+        boolean isContinueRun = true;
+        while (isContinueRun) &#123;
+        &#125;
+        System.out.println(&quot;methodA end&quot;);
+    &#125;
+
+    synchronized public void methodB() &#123;
+        System.out.println(&quot;methodB begin&quot;);
+        System.out.println(&quot;methodB end&quot;);
+    &#125;
+&#125;
+
+public class Run &#123;
+    public static void main(String[] args) &#123;
+        Service service = new Service();
+
+        ThreadA athread = new ThreadA(service);
+        athread.start();
+
+        ThreadB bthread = new ThreadB(service);
+        bthread.start();
+    &#125;
+&#125;	
+运行结果：
+methodA begin
+
+线程B永远得不到运行的机会，锁死了。这时可以用同步块来解决，更改后的如下：
+public class Service &#123;
+    Object object1 = new Object();
+
+    public void methodA() &#123;
+        synchronized (object1) &#123;
+            System.out.println(&quot;methodA begin&quot;);
+            boolean isContinueRun = true;
+            while (isContinueRun) &#123;
+            &#125;
+            System.out.println(&quot;methodA end&quot;);
+        &#125;
+    &#125;
+
+    Object object2 = new Object();
+
+    public void methodB() &#123;
+        synchronized (object2) &#123;
+            System.out.println(&quot;methodB begin&quot;);
+            System.out.println(&quot;methodB end&quot;);
+        &#125;
+    &#125;
+&#125;
+运行结果如下：
+methodA begin
+methodB begin
+methodB end
+</code></pre>
+<h2 id="3-多线程的死锁"><a href="#3-多线程的死锁" class="headerlink" title="3. 多线程的死锁"></a>3. 多线程的死锁</h2><p>死锁是一个经典的多线程问题，因为不同的线程都在等待根本不可能被释放的锁。在多线程技术中，死锁是必须避免的，因为这会造成程序的假死。<br>    例子<br>    public class DealThread implements Runnable {<br>        public String username;<br>        public Object lock1 &#x3D; new Object();<br>        public Object lock2 &#x3D; new Object();</p>
+<pre><code>    public void setFlag(String username) &#123;
+        this.username = username;
+    &#125;
+
+    @Override
+    public void run() &#123;
+        if (username.equals(&quot;a&quot;)) &#123;
+            synchronized (lock1) &#123;
+                try &#123;
+                    System.out.println(&quot;username = &quot; + username);
+                    Thread.sleep(3000);
+                &#125; catch (InterruptedException e) &#123;
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                &#125;
+                synchronized (lock2) &#123;
+                    System.out.println(&quot;按 lock1-&gt;lock2 代码顺序执行了&quot;);
+                &#125;
+            &#125;
+        &#125;
+        if (username.equals(&quot;b&quot;)) &#123;
+            synchronized (lock2) &#123;
+                try &#123;
+                    System.out.println(&quot;username = &quot; + username);
+                    Thread.sleep(3000);
+                &#125; catch (InterruptedException e) &#123;
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                &#125;
+                synchronized (lock1) &#123;
+                    System.out.println(&quot;按 lock2-&gt;lock1代码顺序执行了&quot;);
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+&#125;
+
+public class Run &#123;
+    public static void main(String[] args) &#123;
+        try &#123;
+            DealThread t1 = new DealThread();
+            t1.setFlag(&quot;a&quot;);
+
+            Thread thread1 = new Thread(t1);
+            thread1.start();
+
+            Thread.sleep(100);
+
+            t1.setFlag(&quot;b&quot;);
+            Thread thread2 = new Thread(t1);
+            thread2.start();
+        &#125; catch (InterruptedException e) &#123;
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        &#125;
+    &#125;
+&#125;
+运行结果：
+username = a
+username = b
+结论：死锁是程序的bug，在设计程序的时候要避免双方互相持有对方的锁的情况。
+只要互相等待对方释放锁就有可能出现死锁。
+</code></pre>
+<h2 id="4-内置类与静态内置类"><a href="#4-内置类与静态内置类" class="headerlink" title="4. 内置类与静态内置类"></a>4. 内置类与静态内置类</h2><h3 id="1-内置类与同步-实验1"><a href="#1-内置类与同步-实验1" class="headerlink" title="(1) 内置类与同步:实验1"></a>(1) 内置类与同步:实验1</h3><p>在内置类中有两个同步的方法，但使用的是不同的锁，打印的结果也是异步的。</p>
+<pre><code>public class OutClass &#123;
+    static class Inner &#123;
+        public void method1() &#123;
+            synchronized (&quot;其它的锁&quot;) &#123;
+                for (int i = 1; i &lt;= 10; i++) &#123;
+                    System.out.println(Thread.currentThread().getName() + &quot; i=&quot;
+                            + i);
+                    try &#123;
+                        Thread.sleep(100);
+                    &#125; catch (InterruptedException e) &#123;
+                    &#125;
+                &#125;
+            &#125;
+        &#125;
+
+        public synchronized void method2() &#123;
+            for (int i = 11; i &lt;= 20; i++) &#123;
+                System.out
+                        .println(Thread.currentThread().getName() + &quot; i=&quot; + i);
+                try &#123;
+                    Thread.sleep(100);
+                &#125; catch (InterruptedException e) &#123;
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+&#125;
+
+public class Run &#123;
+    public static void main(String[] args) &#123;
+        final Inner inner = new Inner();
+        Thread t1 = new Thread(new Runnable() &#123;
+            public void run() &#123;
+                inner.method1();
+            &#125;
+        &#125;, &quot;A&quot;);
+
+        Thread t2 = new Thread(new Runnable() &#123;
+            public void run() &#123;
+                inner.method2();
+            &#125;
+        &#125;, &quot;B&quot;);
+
+        t1.start();
+        t2.start();
+    &#125;
+&#125;
+
+运行结果：
+A i=1
+B i=11
+B i=12
+A i=2
+A i=3
+B i=13
+B i=14
+A i=4
+B i=15
+A i=5
+B i=16
+A i=6
+B i=17
+A i=7
+B i=18
+A i=8
+B i=19
+A i=9
+B i=20
+A i=10
+由于持有不同的对象监视器，所以打印结果就是乱序的。
+</code></pre>
+<h3 id="2-静态内置类与同步-实验2"><a href="#2-静态内置类与同步-实验2" class="headerlink" title="(2) 静态内置类与同步:实验2"></a>(2) 静态内置类与同步:实验2</h3><pre><code>public class OutClass &#123;
+    static class InnerClass1 &#123;
+        public void method1(InnerClass2 class2) &#123;
+            String threadName = Thread.currentThread().getName();
+            synchronized (class2) &#123;
+                System.out.println(threadName + &quot; 进入InnerClass1类中的method1方法&quot;);
+                for (int i = 0; i &lt; 10; i++) &#123;
+                    System.out.println(&quot;i=&quot; + i);
+                    try &#123;
+                        Thread.sleep(100);
+                    &#125; catch (InterruptedException e) &#123;
+
+                    &#125;
+                &#125;
+                System.out.println(threadName + &quot; 离开InnerClass1类中的method1方法&quot;);
+            &#125;
+        &#125;
+
+        public synchronized void method2() &#123;
+            String threadName = Thread.currentThread().getName();
+            System.out.println(threadName + &quot; 进入InnerClass1类中的method2方法&quot;);
+            for (int j = 0; j &lt; 10; j++) &#123;
+                System.out.println(&quot;j=&quot; + j);
+                try &#123;
+                    Thread.sleep(100);
+                &#125; catch (InterruptedException e) &#123;
+
+                &#125;
+            &#125;
+            System.out.println(threadName + &quot; 离开InnerClass1类中的method2方法&quot;);
+        &#125;
+    &#125;
+
+    static class InnerClass2 &#123;
+        public synchronized void method1() &#123;
+            String threadName = Thread.currentThread().getName();
+            System.out.println(threadName + &quot; 进入InnerClass2类中的method1方法&quot;);
+            for (int k = 0; k &lt; 10; k++) &#123;
+                System.out.println(&quot;k=&quot; + k);
+                try &#123;
+                    Thread.sleep(100);
+                &#125; catch (InterruptedException e) &#123;
+
+                &#125;
+            &#125;
+            System.out.println(threadName + &quot; 离开InnerClass2类中的method1方法&quot;);
+        &#125;
+    &#125;
+&#125;
+
+public class Run &#123;
+    public static void main(String[] args) &#123;
+        final InnerClass1 in1 = new InnerClass1();
+        final InnerClass2 in2 = new InnerClass2();
+        Thread t1 = new Thread(new Runnable() &#123;
+            public void run() &#123;
+                in1.method1(in2);
+            &#125;
+        &#125;, &quot;T1&quot;);
+        Thread t2 = new Thread(new Runnable() &#123;
+            public void run() &#123;
+                in1.method2();
+            &#125;
+        &#125;, &quot;T2&quot;);
+        // //
+        // //
+        Thread t3 = new Thread(new Runnable() &#123;
+            public void run() &#123;
+                in2.method1();
+            &#125;
+        &#125;, &quot;T3&quot;);
+        t1.start();
+        t2.start();
+        t3.start();
+    &#125;
+&#125;
+运行结果如下：
+T1 进入InnerClass1类中的method1方法
+i=0
+T2 进入InnerClass1类中的method2方法
+j=0
+i=1
+j=1
+i=2
+j=2
+i=3
+j=3
+i=4
+j=4
+i=5
+j=5
+i=6
+j=6
+i=7
+j=7
+i=8
+j=8
+i=9
+j=9
+T1 离开InnerClass1类中的method1方法
+T3 进入InnerClass2类中的method1方法
+k=0
+T2 离开InnerClass1类中的method2方法
+k=1
+k=2
+k=3
+k=4
+k=5
+k=6
+k=7
+k=8
+k=9
+T3 离开InnerClass2类中的method1方法
+结论：
+同步代码块sync(class2)对class2上锁后，其他线程只能以同步的方式调用 class2中的静态同步方法。
+</code></pre>
+<h2 id="5-锁对象的改变"><a href="#5-锁对象的改变" class="headerlink" title="5. 锁对象的改变"></a>5. 锁对象的改变</h2><p>在将任何数据类型作为同步锁时，需要注意的是：是否有多个线程同时持有锁对象，如果同时持有相同的锁对象，则这些线程之间就是同步的；如果分别获得锁对象，这些线程之间就是异步的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/04/19/%E5%9B%9B.%20synchronized%E5%90%8C%E6%AD%A5%E8%AF%AD%E5%8F%A5%E5%9D%97/" data-id="cl4gp6u2t003a9cvc8j3rasvg" data-title="四. synchronized同步语句块" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/19/%E4%B8%89.%20%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          三. 垃圾收集器
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/21/%E4%BA%8C.%20%E5%9E%83%E5%9C%BE%E7%AE%97%E6%B3%95%E5%92%8CHotSpot%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">二. 垃圾算法和HotSpot算法实现</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Error/" rel="tag">Error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Extjs/" rel="tag">Extjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerDesigner/" rel="tag">PowerDesigner</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">java虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/" rel="tag">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" rel="tag">myeclipse插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E8%AE%B0/" rel="tag">日记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" rel="tag">生活文化与素养</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Extjs/" style="font-size: 10px;">Extjs</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/PowerDesigner/" style="font-size: 12.86px;">PowerDesigner</a> <a href="/tags/Spring/" style="font-size: 14.29px;">Spring</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 12.86px;">java虚拟机</a> <a href="/tags/linux/" style="font-size: 17.14px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">myeclipse插件</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 14.29px;">工具</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 18.57px;">数据库</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 15.71px;">日记</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 14.29px;">杂记</a> <a href="/tags/%E6%A1%86%E6%9E%B6/" style="font-size: 14.29px;">框架</a> <a href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" style="font-size: 11.43px;">生活文化与素养</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 12.86px;">笔记</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/06/16/Hexo-github-%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2-%E6%96%B0%E6%89%8B%E5%85%A5%E9%97%A8/">Hexo+github搭建静态博客(新手入门)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/test/">test</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/20/%E4%BA%94.%20volatile%20%E5%85%B3%E9%94%AE%E5%AD%97/">五. volatile关键字</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/19/%E4%B8%89.%20%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/">三. 垃圾收集器</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Zhutongtong<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

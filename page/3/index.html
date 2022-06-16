@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>记忆时光</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="描述">
+<meta property="og:type" content="website">
+<meta property="og:title" content="记忆时光">
+<meta property="og:url" content="http://example.com/page/3/index.html">
+<meta property="og:site_name" content="记忆时光">
+<meta property="og:description" content="描述">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="Zhutongtong">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="记忆时光" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">记忆时光</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-Mybatis代码生成工具" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/03/24/Mybatis%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/" class="article-date">
+  <time class="dt-published" datetime="2016-03-23T16:00:18.000Z" itemprop="datePublished">2016-03-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/03/24/Mybatis%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/">mybatis 实体类，配置文件生成工具</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>注：你如果英文足够好，把工具下下来，在  docs目录下可以去看  index.html官方文档，这才是权威性的文档。</p>
+<blockquote>
+<p>你是否还在为写mybatis实体类，和mybatis配置文件烦恼，那么多的实体类，看得我是头晕眼花，正是因为如此，我一直在找有什么办法可以解决。    自从用了  mybatis-generator生成工具，再也不用担心那些繁多的字段和配置文件了</p>
+</blockquote>
+<h2 id="下面来开始mybatis-generator的学习"><a href="#下面来开始mybatis-generator的学习" class="headerlink" title="下面来开始mybatis-generator的学习"></a>下面来开始mybatis-generator的学习</h2><p>介绍不用我多说了吧，你能来到这，说明你应该有了了解。官方那么破文档我也看不懂，用这个工具，可以生成 实体类和配置文件，当然还有其它的方式。</p>
+<h2 id="准备工具"><a href="#准备工具" class="headerlink" title="准备工具"></a>准备工具</h2><p>先去下载工具 <a target="_blank" rel="noopener" href="https://github.com/mybatis/generator/releases">下载</a> 地址如下<a target="_blank" rel="noopener" href="https://github.com/mybatis/generator/releases">https://github.com/mybatis/generator/releases</a></p>
+<p><img src="http://7xpw00.com1.z0.glb.clouddn.com/imagemybatis2.png"></p>
+<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p><img src="http://7xpw00.com1.z0.glb.clouddn.com/imagemybatis.png"></p>
+<p>在目录文件下加入你要连数据库驱动的jar包和 generatorConfig.xml配置文件</p>
+<p>generatorConfig.xml配置文件如下，可参考配置</p>
+<pre><code>    &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE generatorConfiguration PUBLIC &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot; &quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;
+&lt;generatorConfiguration&gt;
+&lt;!-- classPathEntry:数据库的JDBC驱动,换成你自己的驱动位置 --&gt;
+&lt;classPathEntry location=&quot;E:\app\Administrator\product\11.2.0\dbhome_1\jdbc\lib\ojdbc6.jar&quot; /&gt;
+&lt;context id=&quot;ORATables&quot; targetRuntime=&quot;MyBatis3&quot; defaultModelType=&quot;flat&quot; &gt;
+    &lt;!-- &lt;plugin type=&quot;com.nova.his.core.mybatis.plugin.DeleteLogicByIdsPlugin&quot;&gt;
+    &lt;/plugin&gt; --&gt;
+    &lt;!-- 去除自动生成的注释 --&gt;
+    &lt;commentGenerator&gt;
+        &lt;property name=&quot;suppressDate&quot; value=&quot;true&quot; /&gt;
+        &lt;property name=&quot;suppressAllComments&quot; value=&quot;true&quot; /&gt;
+    &lt;/commentGenerator&gt;
+    
+     &lt;!-- 配置连接数据信息 --&gt;
+    &lt;jdbcConnection driverClass=&quot;oracle.jdbc.driver.OracleDriver&quot; connectionURL=&quot;jdbc:oracle:thin:@192.168.88.98:1521:orcl&quot; userId=&quot;nova_his&quot; password=&quot;admin&quot;&gt; 
+    &lt;/jdbcConnection&gt;
+    &lt;javaTypeResolver &gt;
+        &lt;property name=&quot;forceBigDecimals&quot; value=&quot;false&quot; /&gt;
+    &lt;/javaTypeResolver&gt;
+    
+    &lt;!-- 配置自动生成的Model的保存路径与其它参数 --&gt;
+    &lt;javaModelGenerator targetPackage=&quot;com.nova.his.medicalworkstation.model&quot; targetProject=&quot;src\main\java&quot;  &gt;
+        &lt;property name=&quot;enableSubPackages&quot; value=&quot;false&quot;/&gt; 
+        &lt;property name=&quot;trimStrings&quot; value=&quot;true&quot;/&gt; 
+    &lt;/javaModelGenerator&gt; 
+    
+    &lt;!-- 配置自动生成的Mappper.xml映射的保存路径与其它参数 --&gt; 
+    &lt;sqlMapGenerator targetPackage=&quot;com.nova.his.medicalworkstation.dao.mappings&quot; targetProject=&quot;src\main\java&quot;&gt; 
+        &lt;property name=&quot;enableSubPackages&quot; value=&quot;false&quot;/&gt; 
+    &lt;/sqlMapGenerator&gt;
+    
+    &lt;!-- 配置自动生成的Mappper.java接口的保存路径与其它参数 --&gt; 
+    &lt;javaClientGenerator type=&quot;XMLMAPPER&quot; targetPackage=&quot;com.nova.his.medicalworkstation.dao&quot; targetProject=&quot;src\main\java&quot;&gt;
+        &lt;property name=&quot;enableSubPackages&quot; value=&quot;false&quot;/&gt; 
+    &lt;/javaClientGenerator&gt;
+    
+    &lt;!-- 生成表对应的操作与实体对象 --&gt;
+    &lt;!--tableName和domainObjectName为必选项，分别代表数据库表名和生成的实力类名，其余的可以自定义去选择（一般情况下均为false）。--&gt;
+    &lt;table  tableName=&quot;jy_bgd_dwo&quot; domainObjectName=&quot;Jybgd&quot; enableCountByExample=&quot;false&quot; enableUpdateByExample=&quot;false&quot; enableDeleteByExample=&quot;false&quot; enableSelectByExample=&quot;false&quot; selectByExampleQueryId=&quot;false&quot;&gt; 
+        &lt;property name=&quot;useActualColumnNames&quot; value=&quot;false&quot;/&gt; 
+    &lt;/table&gt;
+    
+&lt;/context&gt;
+&lt;/generatorConfiguration&gt;
+</code></pre>
+<h2 id="运行，生成代码，配置文件"><a href="#运行，生成代码，配置文件" class="headerlink" title="运行，生成代码，配置文件"></a>运行，生成代码，配置文件</h2><p>打开 cmd 命令行，运行如下代码即可生成相应的代码	</p>
+<pre><code>java -jar mybatis-generator-core-1.3.2.jar -configfile generatorConfig.xml -overwrite
+</code></pre>
+<p><img src="http://7xpw00.com1.z0.glb.clouddn.com/imagemybatiss01.png"></p>
+<p><strong>注意，不要把mybatis-generator-core-1.3.2这个生成工具放到中文路径下。</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/03/24/Mybatis%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/" data-id="cl4gp6u1q000s9cvc54xa4zg4" data-title="mybatis 实体类，配置文件生成工具" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-oracle表空间管理" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/03/16/oracle%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86/" class="article-date">
+  <time class="dt-published" datetime="2016-03-16T08:26:16.000Z" itemprop="datePublished">2016-03-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/03/16/oracle%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86/">oracle表空间</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="表空间的分类"><a href="#表空间的分类" class="headerlink" title="表空间的分类"></a>表空间的分类</h2><p><strong>永久表空间</strong>  存放永久性数据，如表，索引等。</p>
+<p><strong>临时表空间</strong>  不能存放永久性对象，用于保存数据库排序，分组时产生的临时数据。</p>
+<p><strong>UNDO表空间</strong>  保存数据修改前的镜象。</p>
+<h2 id="表空间信息"><a href="#表空间信息" class="headerlink" title="表空间信息"></a>表空间信息</h2><p>如何查看数据库有哪些表空间？如何查看表空间对应的数据文件？</p>
+<p>查看表空间：</p>
+<p>查看表空间可以通过下面几个系统视图查看基本信息</p>
+<p>–包含数据库中所有表空间的描述信息</p>
+<pre><code>SELECT * FROM DBA_TABLESPACES
+</code></pre>
+<p>–包含当前用户的表空间的描叙信息</p>
+<pre><code>SELECT * FROM USER_TABLESPACES
+</code></pre>
+<p>–包含从控制文件中获取的表空间名称和编号信息</p>
+<pre><code>SELECT * FROM V$TABLESPACE;
+</code></pre>
+<hr>
+<p>查看数据文件</p>
+<p>–包含数据文件以及所属的表空间的描述信息</p>
+<pre><code>SELECT * FROM DBA_DATA_FILES
+</code></pre>
+<p>–包含临时数据文件以及所属的表空间的描述信息</p>
+<pre><code>SELECT * FROM DBA_TEMP_FILES
+</code></pre>
+<p>–包含从控制文件中获取的数据文件的基本信息，包括它所属的表空间名称、编号等</p>
+<pre><code>SELECT * FROM V$DATAFILE
+</code></pre>
+<p>–包含所有临时数据文件的基本信息</p>
+<pre><code>SELECT * FROM V$TEMPFILE
+</code></pre>
+<p>–查看用户所属的表空间</p>
+<pre><code>select username,default_tablespace from dba_users  where username=&#39;用户名&#39;;
+用户名需大写
+</code></pre>
+<h2 id="创建空间并创建用户指定该空间"><a href="#创建空间并创建用户指定该空间" class="headerlink" title="创建空间并创建用户指定该空间"></a>创建空间并创建用户指定该空间</h2><h3 id="第1步：创建临时表空间"><a href="#第1步：创建临时表空间" class="headerlink" title="第1步：创建临时表空间"></a>第1步：创建临时表空间</h3><pre><code>create temporary tablespace tv_temp  
+tempfile &#39;D:\orcldata\tv\temp.dbf&#39; 
+size 20480M  
+autoextend on  
+next 500M maxsize 30720M
+extent management local; 
+</code></pre>
+<h3 id="第2步：创建数据表空间"><a href="#第2步：创建数据表空间" class="headerlink" title="第2步：创建数据表空间"></a>第2步：创建数据表空间</h3><pre><code>create tablespace tv_data  
+nologging
+datafile &#39;D:\orcldata\tv\data.dbf&#39; 
+size 4096M  
+autoextend on  
+next 200M maxsize 20480m
+extent management local;
+</code></pre>
+<h3 id="第3步：创建用户并指定表空间"><a href="#第3步：创建用户并指定表空间" class="headerlink" title="第3步：创建用户并指定表空间"></a>第3步：创建用户并指定表空间</h3><pre><code>create user tv identified by tv
+default tablespace tv_data
+temporary tablespace tv_temp;
+</code></pre>
+<h3 id="第4步：给用户授予权限"><a href="#第4步：给用户授予权限" class="headerlink" title="第4步：给用户授予权限"></a>第4步：给用户授予权限</h3><pre><code>grant connect,resource,dba to username;
+
+grant create session,create table,unlimited tablespace to tv;
+</code></pre>
+<h3 id="1、查看表空间"><a href="#1、查看表空间" class="headerlink" title="1、查看表空间"></a>1、查看表空间</h3><pre><code>select tv.tablespace_name &quot;TABLESPACE_NAME&quot;,totalspace &quot;TOTALSPACE/M&quot;,freespace &quot;FREESPACE/M&quot;,round((1-freespace/totalspace)*100,2) &quot;USED%&quot;
+from 
+(select tablespace_name,round(sum(bytes)/1024/1024) totalspace from    dba_data_files group by tablespace_name) tv,
+         (select tablespace_name,round(sum(bytes)/1024/1024) freespace from dba_free_space group by tablespace_name) fs
+where tv.tablespace_name=fs.tablespace_name;
+
+TABLESPACE_NAME                TOTALSPACE/M FREESPACE/M      USED%
+------------------------------ ------------ ----------- ----------
+KB                                          1024        1023                          .1
+SYSAUX                                    320             3                      99.06
+SYSTEM                                    450             9                           98
+TV                                           4096         128                     96.88
+UNDOTBS1                               5760        5670                      1.56
+USERS                                         5              5                            0
+
+6 rows selected.
+</code></pre>
+<h3 id="2、查看临时表空间"><a href="#2、查看临时表空间" class="headerlink" title="2、查看临时表空间"></a>2、查看临时表空间</h3><pre><code>SQL&gt; select tablespace_name from dba_tablespaces;
+
+TABLESPACE_NAME
+------------------------------
+SYSTEM
+UNDOTBS1
+SYSAUX
+TEMP
+USERS
+TV
+KB
+
+7 rows selected.
+
+
+SQL&gt; select tablespace_name,file_name,bytes/1024/1024 file_size,autoextensible from dba_temp_files;
+
+TABLESPACE_NAME      FILE_NAME                             FILE_SIZE      AUT
+---------------------------------------------------------------------------
+TEMP                           E:\ORCLDATA\TV\TEMP01.DBF    1834          YES
+</code></pre>
+<h3 id="3、增加表空间大小"><a href="#3、增加表空间大小" class="headerlink" title="3、增加表空间大小"></a>3、增加表空间大小</h3><pre><code>alter tablespace tv add datafile &#39;E:\orcldata\tv\data1.dbf&#39; size 4096M;
+</code></pre>
+<h3 id="4、增加临时表空间大小"><a href="#4、增加临时表空间大小" class="headerlink" title="4、增加临时表空间大小"></a>4、增加临时表空间大小</h3><pre><code>SQL&gt; alter database tempfile &#39;E:\orcldata\tv\temp01.dbf&#39; resize 8192M;
+
+Database altered.
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/03/16/oracle%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86/" data-id="cl4gp6u29002a9cvc7max9fe7" data-title="oracle表空间" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-看过的书，随心旅行" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/03/14/%E7%9C%8B%E8%BF%87%E7%9A%84%E4%B9%A6%EF%BC%8C%E9%9A%8F%E5%BF%83%E6%97%85%E8%A1%8C/" class="article-date">
+  <time class="dt-published" datetime="2016-03-14T06:58:10.000Z" itemprop="datePublished">2016-03-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/03/14/%E7%9C%8B%E8%BF%87%E7%9A%84%E4%B9%A6%EF%BC%8C%E9%9A%8F%E5%BF%83%E6%97%85%E8%A1%8C/">看过的书，随心旅行</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="富爸爸，穷爸爸"><a href="#富爸爸，穷爸爸" class="headerlink" title="富爸爸，穷爸爸"></a>富爸爸，穷爸爸</h2><h3 id="感言，感悟"><a href="#感言，感悟" class="headerlink" title="感言，感悟"></a>感言，感悟</h3><p>前几天买了这本书，看着还不错，一场随心的旅行</p>
+<p>不错的句子</p>
+<blockquote>
+<ul>
+<li>如果人们能够灵活一些，保持开放的头脑不断学习。他们将在时代的变化中一天天地富有起来。如果人们认为钱能解决一切问题，恐怕他们的日子就不会太好过。只有知识才能解决问题并创造财富，那些不是靠财务知识挣来的钱也不会长久</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>用资产项中的剩余现金进行再投资，注入资产项的钱越多，资产就增加的越块；资产增加的越快，现金流进来的就越多，只要我把支出控制在资产项能够产生的现金之下，我就会越来越富有，也会有越来越多的非劳动收入</li>
+<li>富人买入资产，穷人只有支出。中产阶级购买自以为是资产的负债。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>富人与穷人一个重要的区别是：富人最后才买入奢侈品，而穷人和中产阶级会先买下诸如大房子，珠宝，皮衣，宝石等奢侈品，因为他们想让自己看上去很富有 。他们看上去的确很富有，但实际上他们已深陷贷款的陷阱之中。那些能给子孙留下遗产的人和那些能长期富有的人，就是先构筑资产项，然后才用资产所产生的收入购买奢侈品的，而穷人和中产阶级则用他们的血汗钱和本应该留给子孙的遗产来购买奢侈品。</li>
+<li>真正的奢侈品是对投资和积累真正资产的奖励。</li>
+<li>精于计算你就不会被别人牵着走</li>
+<li>我更喜欢变化而不是害怕变化</li>
+</ul>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/03/14/%E7%9C%8B%E8%BF%87%E7%9A%84%E4%B9%A6%EF%BC%8C%E9%9A%8F%E5%BF%83%E6%97%85%E8%A1%8C/" data-id="cl4gp6u2x003p9cvc0w9c5czk" data-title="看过的书，随心旅行" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" rel="tag">生活文化与素养</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-20160314" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/03/14/20160314/" class="article-date">
+  <time class="dt-published" datetime="2016-03-14T00:32:23.000Z" itemprop="datePublished">2016-03-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/03/14/20160314/">3/14/2016</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>安于现状，不思进取。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/03/14/20160314/" data-id="cl4gp6u1c00059cvc07ztbz98" data-title="3/14/2016" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-maven学习" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/03/10/maven%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time class="dt-published" datetime="2016-03-10T02:15:49.000Z" itemprop="datePublished">2016-03-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/03/10/maven%E5%AD%A6%E4%B9%A0/">maven学习</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="Maven介绍"><a href="#Maven介绍" class="headerlink" title="Maven介绍"></a>Maven介绍</h3><p>Maven是一个软件项目管理和综合工具。根据项目对象模型（POM）的概念，Maven的可以从中央一条信息管理项目的构建，报告和文件。</p>
+<h3 id="maven项目构建过程"><a href="#maven项目构建过程" class="headerlink" title="maven项目构建过程"></a>maven项目构建过程</h3><blockquote>
+<p>清理，编译，测试，打包，集成测试，验证，部署</p>
+</blockquote>
+<h3 id="maven生命周期"><a href="#maven生命周期" class="headerlink" title="maven生命周期"></a>maven生命周期</h3><h4 id="clean-清理项目"><a href="#clean-清理项目" class="headerlink" title="clean 清理项目"></a>clean 清理项目</h4><p>pre-clean 执行清理前的工作<br>clean 清理上一次构建生成的所有文件<br>post-clean 执行清理后的文件</p>
+<h4 id="default-构建项目-核心"><a href="#default-构建项目-核心" class="headerlink" title="default 构建项目(核心)"></a>default 构建项目(核心)</h4><p>compile test package install</p>
+<h4 id="site-生成项目站点"><a href="#site-生成项目站点" class="headerlink" title="site 生成项目站点"></a>site 生成项目站点</h4><p>pre-site 在生成项目站点前要完成的工作<br>site 生成项目的站点文档<br>post-site 在生成项目站点后要完成的工作<br>site-deploy 发布生成的站点到服务器上  </p>
+<h3 id="pox文件解析"><a href="#pox文件解析" class="headerlink" title="pox文件解析"></a>pox文件解析</h3><ol start="0">
+<li></li>
+</ol>
+<pre><code>&lt;!-- 指定了当前 pom 的版本 --&gt;
+&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+&lt;!-- 反写的公司网址+项目名 --&gt;
+&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+
+&lt;!-- 项目名+模块名 --&gt;
+&lt;artifactId&gt;maven-source-plugin&lt;/artifactId&gt;
+
+&lt;!-- 
+    第一个0表示大版本号
+    第二个0表示分支版本号
+    第三个0表示小版本号
+    0.0.1
+    snapshot 快照
+    alpha 内部测试
+    beta 公测
+    release 稳定
+    ga 正式发布
+ --&gt;
+&lt;version&gt;2.4&lt;/version&gt;
+&lt;executions&gt;
+        &lt;execution&gt;
+            &lt;phase&gt;package&lt;/phase&gt;
+                &lt;goals&gt;
+                    &lt;goal&gt;jar-no-fork&lt;/goal&gt;
+                &lt;/goals&gt;
+        &lt;/execution&gt;
+&lt;/executions&gt;
+</code></pre>
+<h3 id="maven-依赖"><a href="#maven-依赖" class="headerlink" title="maven 依赖"></a>maven 依赖</h3><h4 id="依赖-短路优先"><a href="#依赖-短路优先" class="headerlink" title="依赖  短路优先"></a>依赖  短路优先</h4><pre><code>A -&gt; B -&gt; C -&gt; X(jar)
+
+A -&gt; D -&gt;  X(jar)
+</code></pre>
+<h4 id="先声明-先优先"><a href="#先声明-先优先" class="headerlink" title="先声明 先优先"></a>先声明 先优先</h4><p>如果路径长度相同，则谁先声明，先解析谁</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/03/10/maven%E5%AD%A6%E4%B9%A0/" data-id="cl4gp6u23001q9cvcdj5r9t92" data-title="maven学习" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/maven/" rel="tag">maven</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-20160309" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/03/09/20160309/" class="article-date">
+  <time class="dt-published" datetime="2016-03-09T01:53:06.000Z" itemprop="datePublished">2016-03-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/03/09/20160309/">3/9/2016</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="http://7xpw00.com1.z0.glb.clouddn.com/image20160309095520.jpg"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/03/09/20160309/" data-id="cl4gp6u1700029cvchem3e4j2" data-title="3/9/2016" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%97%A5%E8%AE%B0/" rel="tag">日记</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-mongodb" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/03/07/mongodb/" class="article-date">
+  <time class="dt-published" datetime="2016-03-07T07:24:44.000Z" itemprop="datePublished">2016-03-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/03/07/mongodb/">mongodb</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="NoSql简介"><a href="#NoSql简介" class="headerlink" title="NoSql简介"></a>NoSql简介</h2><blockquote>
+<p>是非关系型的数据库<br>关系型数据库中的表都是存储一些结构化的数据，每条记录的字段的组成都一样，即使不是每条记录都需要所有的字段，但数据库会为每条数据分配所有的字段。而非关系型数据库以键值对(key-value)存储，它的结构不固定，每一条记录可以有不一样的键，每条记录可以根据需要增加一些自己的键值对，这样就不会局限于固定的结构，可以减少一些时间和空间的开销。 </p>
+</blockquote>
+<h2 id="常见的非关系型数据库"><a href="#常见的非关系型数据库" class="headerlink" title="常见的非关系型数据库"></a>常见的非关系型数据库</h2><ul>
+<li>Redis </li>
+<li>MongoDB</li>
+<li>CouchDB </li>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<h2 id="NoSql优缺点"><a href="#NoSql优缺点" class="headerlink" title="NoSql优缺点"></a>NoSql优缺点</h2><p>优点</p>
+<ul>
+<li>简单的扩展</li>
+<li>快速的读写</li>
+<li>低廉的成本</li>
+<li>灵活的数据模型</li>
+</ul>
+<p>缺点</p>
+<ul>
+<li>不提供对SQL的支持</li>
+<li>支持的特性不够丰富</li>
+<li>现有的产品不够成熟</li>
+</ul>
+<h2 id="MongoDB简介"><a href="#MongoDB简介" class="headerlink" title="MongoDB简介"></a>MongoDB简介</h2><blockquote>
+<p>MongoDB是用C++语言编写的非关系型数据库。特点是高性能、易部署、易使用，存储数据十分方便，<br>主要特性有：<br>面向集合存储，易于存储对象类型的数据<br>模式自由<br>支持动态查询<br>支持完全索引，包含内部对象<br>支持复制和故障恢复<br>使用高效的二进制数据存储，包括大型对象<br>文件存储格式为BSON(一种JSON的扩展)</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/03/07/mongodb/" data-id="cl4gp6u20001n9cvcb3qp8lnb" data-title="mongodb" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-git学习" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/03/01/git%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time class="dt-published" datetime="2016-03-01T01:32:58.000Z" itemprop="datePublished">2016-03-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/03/01/git%E5%AD%A6%E4%B9%A0/">git分布式学习</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="git分布式"><a href="#git分布式" class="headerlink" title="git分布式"></a>git分布式</h3><pre><code>跳转到gitwork空目录 
+Dreamer@Dream MINGW64 /e/gitwork
+$ git init  ##初如化git目录
+Initialized empty Git repository in E:/gitwork/.git/
+
+Dreamer@Dream MINGW64 /e/gitwork (master)
+</code></pre>
+<h3 id="把文件添加到git-仓库"><a href="#把文件添加到git-仓库" class="headerlink" title="把文件添加到git 仓库"></a>把文件添加到git 仓库</h3><pre><code>先把文件添加到仓库
+$ git add readme.txt
+
+把文件提交到仓库
+$ git commit -m &quot;write a readme file&quot;
+[master (root-commit) 5dc3355] write a readme file
+ 1 file changed, 2 insertions(+)
+ create mode 100644 readme.txt
+</code></pre>
+<hr>
+<p>查看仓库当前的状态</p>
+<pre><code>git status
+</code></pre>
+<p>查看当前文件具体详细情况</p>
+<pre><code>git diff readme.txt 
+</code></pre>
+<p>显示提交日志</p>
+<pre><code>git log
+
+commit d1b6a7db84b59c263e9e2435f5506f4b16e79ce9
+Author: dream &lt;zttongdeyx@126.com&gt;
+Date:   Tue Mar 1 10:26:32 2016 +0800
+
+    second
+
+commit 89090c7d0b47bcd9f672f2f5f38f289036eb5791
+Author: dream &lt;zttongdeyx@126.com&gt;
+Date:   Tue Mar 1 10:25:57 2016 +0800
+
+    second
+
+commit 95bbe5de7cee7658879cef2c32c208006060f531
+Author: dream &lt;zttongdeyx@126.com&gt;
+Date:   Tue Mar 1 10:21:59 2016 +0800
+
+    first
+
+commit 70a86aa447ad9a626dcd63895d0505199e1e1980
+Author: dream &lt;zttongdeyx@126.com&gt;
+Date:   Tue Mar 1 09:55:06 2016 +0800
+
+    init
+
+最上边的为最后提交的
+</code></pre>
+<p>版本回退</p>
+<pre><code>git reset --hard head^ #回退到上一个版本
+
+head表示当前版本 上一个版本上 head^ ，上上一个就是head^^,可以写成 head~10
+
+git  reset --hard 3628164(版本号，不用写全，写一部分就好，会根据前几位自动去找)
+</code></pre>
+<p>用来记录你的每一次命令：</p>
+<pre><code>git reflog
+</code></pre>
+<h3 id="撤销修改命令"><a href="#撤销修改命令" class="headerlink" title="撤销修改命令"></a>撤销修改命令</h3><pre><code>git checkout -- test.txt
+</code></pre>
+<blockquote>
+<p>把工作区的修改全部撤销<br>这里撤销分两种情况</p>
+</blockquote>
+<ol>
+<li>修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；</li>
+<li>已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。</li>
+</ol>
+<p>就是让这个文件回到最近一次git commit或git add时的状态。</p>
+<blockquote>
+<p>如果已经添加到工作区又想回退到之前的状态，需要两个步骤</p>
+</blockquote>
+<ol>
+<li>命令 <code>git reset HEAD file</code>，就回退到没有添加到工作区之前</li>
+<li>然后再 <code>git check -- text.txt</code></li>
+</ol>
+<blockquote>
+<p>如果已经添加到版本库的话则回退版本</p>
+</blockquote>
+<pre><code>git reset --hard head^ 
+</code></pre>
+<h3 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h3><p>当你删除一个文件之后会有两种情况</p>
+<ol>
+<li><p>的确要从版本库中删除文件</p>
+<p>git rm test.txt<br>git commit -m “remove test.txt”</p>
+</li>
+<li><p>另一种是删错了，版本库中还有，可以回退</p>
+<p>git checkout – test.txt<br>其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。</p>
+</li>
+</ol>
+<h3 id="ssh密钥"><a href="#ssh密钥" class="headerlink" title="ssh密钥"></a>ssh密钥</h3><pre><code> ssh-keygen -t rsa -C &quot;youremail@example.com&quot;
+</code></pre>
+<p>你需要把邮件地址换成你自己的邮件地址，然后一路回车，使用默认值即可，由于这个Key也不是用于军事目的，所以也无需设置密码。</p>
+<h3 id="往远程库中推送代码"><a href="#往远程库中推送代码" class="headerlink" title="往远程库中推送代码"></a>往远程库中推送代码</h3><p>创建好库之后根据提示推送代码</p>
+<pre><code>git remote add origin git@github.com:zDream/demo.git
+git push -u origin master
+</code></pre>
+<p>使用如上命令即可推送代码，git会默认从本地  默认扫描 ~&#x2F;.ssh&#x2F;id_pub  ssh，从而和github上的ssh关联起来，所以才能推送成功。</p>
+<pre><code>git push origin master
+</code></pre>
+<p>推送最新修改的代码</p>
+<h3 id="克隆远程库代码"><a href="#克隆远程库代码" class="headerlink" title="克隆远程库代码"></a>克隆远程库代码</h3><pre><code>git clone git@github.com:zDream/second.git
+</code></pre>
+<p>克隆支持多种协议 https 和ssh 。默认使用ssh</p>
+<p>使用https除了速度慢以外，还有个最大的麻烦是每次推送都必须输入口令，但是在某些只开放http端口的公司内部就无法使用ssh协议而只能用https。</p>
+<p>通过ssh支持的git协议速度最快</p>
+<h3 id="git-log显示问题"><a href="#git-log显示问题" class="headerlink" title="git log显示问题"></a>git log显示问题</h3><p>当 显示日志过多的时候会显示不完整，会出现如图情况，上下箭头可上下翻，按 q 退出显示日志<br><img src="http://7xpw00.com1.z0.glb.clouddn.com/imagegit1.png"></p>
+<h3 id="git分支管理"><a href="#git分支管理" class="headerlink" title="git分支管理"></a>git分支管理</h3><p>首先，我们创建dev分支，然后切换到dev分支：</p>
+<pre><code>$ git checkout -b dev
+Switched to a new branch &#39;dev&#39;
+
+以上命令相当于以下两条命令  git checkout命令加上-b参数表示创建并切换
+
+$ git branch dev
+$ git checkout dev
+Switched to branch &#39;dev&#39;
+</code></pre>
+<p>查看当前分支，当前分支前面会标一个 * 号，然后可以去分支进行修改，提交</p>
+<pre><code>$ git branch
+* dev
+  master
+</code></pre>
+<p>切换分支</p>
+<pre><code>$ git checkout master
+Switched to branch &#39;master&#39;
+</code></pre>
+<p>合并分支</p>
+<pre><code>$ git merge dev
+Updating d17efd8..fec145a
+Fast-forward
+ readme.txt |    1 +
+ 1 file changed, 1 insertion(+)
+</code></pre>
+<p>删除分支</p>
+<pre><code>$ git branch -d dev
+Deleted branch dev (was fec145a).
+</code></pre>
+<h3 id="远程库"><a href="#远程库" class="headerlink" title="远程库"></a>远程库</h3><p>远程仓库的默认名称是origin  </p>
+<p>查看远程库的信息</p>
+<pre><code>$ git remote
+origin
+</code></pre>
+<p>显示更详细信息</p>
+<pre><code>$ git remote -v
+origin  git@github.com:zDream/first.git (fetch)
+origin  git@github.com:zDream/first.git (push)
+</code></pre>
+<p>推送分支 需要指定本分支，即可推送到远程库中</p>
+<pre><code>$ git push origin master	
+</code></pre>
+<p>如果要推送其它分支</p>
+<pre><code>$ git push origin dev
+</code></pre>
+<h3 id="标签管理"><a href="#标签管理" class="headerlink" title="标签管理"></a>标签管理</h3><p>Git中打标签非常简单，首先，切换到需要打标签的分支上：	</p>
+<p>打标签</p>
+<pre><code>git tag v1.0
+</code></pre>
+<p>查看所有标签</p>
+<pre><code>$ git tag
+v1.0
+</code></pre>
+<p>找到历史提交的 id </p>
+<pre><code>git log --pretty=oneline --abbrev-commit
+6a5819e merged bug fix 101
+cc17032 fix bug 101
+7825a50 merge with no-ff
+6224937 add merge
+59bc1cb conflict fixed
+400b400 &amp; simple
+75a857c AND simple
+fec145a branch test
+d17efd8 remove test.txt
+...
+</code></pre>
+<p>显示出历史信息时可以用如下命令打标签</p>
+<pre><code>$ git tag v0.9 6224937
+</code></pre>
+<p>查看标签信息</p>
+<pre><code>$ git show v0.9
+</code></pre>
+<p>还可以创建带有说明的标签，用-a指定标签名，-m指定说明文字：</p>
+<pre><code>$ git tag -a v0.1 -m &quot;version 0.1 released&quot; 3628164
+</code></pre>
+<p>删除标签</p>
+<pre><code>$ git tag -d v0.1
+Deleted tag &#39;v0.1&#39; (was e078af9)
+</code></pre>
+<p>推送标签到远程</p>
+<pre><code>$ git push origin v1.0
+Total 0 (delta 0), reused 0 (delta 0)
+To git@github.com:michaelliao/learngit.git
+ * [new tag]         v1.0 -&gt; v1.0
+</code></pre>
+<p>推送全部尚未推送到远程的本地标签：</p>
+<pre><code>$ git push origin --tags
+Counting objects: 1, done.
+Writing objects: 100% (1/1), 554 bytes, done.
+Total 1 (delta 0), reused 0 (delta 0)
+To git@github.com:michaelliao/learngit.git
+ * [new tag]         v0.2 -&gt; v0.2
+ * [new tag]         v0.9 -&gt; v0.9
+</code></pre>
+<p>如果标签已经推送到远程，要删除远程标签就麻烦一点，先从本地删除：</p>
+<pre><code>$ git tag -d v0.9
+Deleted tag &#39;v0.9&#39; (was 6224937)
+</code></pre>
+<p>然后，从远程删除。删除命令也是push，但是格式如下：</p>
+<pre><code>$ git push origin :refs/tags/v0.9
+To git@github.com:michaelliao/learngit.git
+ - [deleted]         v0.9
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/03/01/git%E5%AD%A6%E4%B9%A0/" data-id="cl4gp6u1w00199cvc7q4r0bxr" data-title="git分布式学习" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-笔记" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/02/29/%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time class="dt-published" datetime="2016-02-29T02:03:03.000Z" itemprop="datePublished">2016-02-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/02/29/%E7%AC%94%E8%AE%B0/">笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="英特尔CPU型号后面的字母"><a href="#英特尔CPU型号后面的字母" class="headerlink" title="英特尔CPU型号后面的字母"></a>英特尔CPU型号后面的字母</h3><pre><code>M代表标准电压cpu；
+U代表低电压节能的；；
+H是高电压的；
+X代表高性能；；
+Q代表至高性能级别；
+Y代表超低电压的；
+以上两个字母组合的，含义分别是字母的组合；
+K代表不锁倍频的处理器。
+</code></pre>
+<h3 id="框架笔记"><a href="#框架笔记" class="headerlink" title="框架笔记"></a>框架笔记</h3><h4 id="mybatis配置文件"><a href="#mybatis配置文件" class="headerlink" title="mybatis配置文件"></a>mybatis配置文件</h4><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE mapper PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot; 
+&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
+&lt;mapper namespace=&quot;com.mapper.UserMapper&quot;&gt;
+    &lt;!-- 解决表名与字段不匹配 --&gt;
+    &lt;resultMap type=&quot;User&quot; id=&quot;userResultMap&quot;&gt;
+        &lt;id property=&quot;id&quot; column=&quot;user_id&quot;/&gt;
+        &lt;result property=&quot;username&quot; column=&quot;user_name&quot;/&gt;
+        &lt;result property=&quot;age&quot; column=&quot;user_age&quot;/&gt;
+    &lt;/resultMap&gt;
+    
+    &lt;select id=&quot;findAllUser&quot; resultMap=&quot;userResultMap&quot; resultType=&quot;User&quot;&gt;
+        select * from d_user
+    &lt;/select&gt;
+&lt;/mapper&gt;
+</code></pre>
+<p>mybatis配置文件会自动和bean相对应，如果不对应可通过如上配置解决</p>
+<h4 id="mybatis-context-xml"><a href="#mybatis-context-xml" class="headerlink" title="mybatis-context.xml"></a>mybatis-context.xml</h4>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/02/29/%E7%AC%94%E8%AE%B0/" data-id="cl4gp6u2y003r9cvc5n9ndzxl" data-title="笔记" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-IDEA使用" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/02/25/IDEA%E4%BD%BF%E7%94%A8/" class="article-date">
+  <time class="dt-published" datetime="2016-02-25T02:41:22.000Z" itemprop="datePublished">2016-02-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/02/25/IDEA%E4%BD%BF%E7%94%A8/">IDEA使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="IntelliJ-Idea-常用快捷键"><a href="#IntelliJ-Idea-常用快捷键" class="headerlink" title="IntelliJ Idea 常用快捷键"></a>IntelliJ Idea 常用快捷键</h3><pre><code>Ctrl+N   查找类
+Ctrl+Shift+N 查找文件
+Ctrl+Alt+L  格式化代码
+Ctrl+R 替换文本
+Ctrl+F 查找文本
+Ctrl+Shift+Space 自动补全代码
+Ctrl+空格 代码提示
+Ctrl+Alt+Space 类名或接口名提示
+Ctrl+P 方法参数提示
+Ctrl+Shift+Alt+N 查找类中的方法或变量
+Alt+Shift+C 对比最近修改的代码
+
+Shift+F6  重构-重命名
+Ctrl+Shift+先上键
+Ctrl+X 删除行
+Ctrl+D 复制行
+Ctrl+/ 或 Ctrl+Shift+/  注释（// 或者/*...*/ ）
+Ctrl+J  自动代码
+Ctrl+E 最近打开的文件
+Ctrl+H 显示类结构图
+Ctrl+Q 显示注释文档
+Alt+F1 查找代码所在位置
+Alt+1 快速打开或隐藏工程面板
+Ctrl+Alt+ left/right 返回至上次浏览的位置
+Alt+ left/right 切换代码视图
+Alt+ Up/Down 在方法间快速移动定位
+Ctrl+Shift+Up/Down 代码向上/下移动。
+F2 或Shift+F2 高亮错误或警告快速定位
+ 
+代码标签输入完成后，按Tab，生成代码。
+选中文本，按Ctrl+Shift+F7 ，高亮显示所有该文本，按Esc高亮消失。
+Ctrl+W 选中代码，连续按会有其他效果
+选中文本，按Alt+F3 ，逐个往下查找相同文本，并高亮显示。
+Ctrl+Up/Down 光标跳转到第一行或最后一行下
+Ctrl+B 快速打开光标处的类或方法 
+</code></pre>
+<h3 id="idea工具的使用"><a href="#idea工具的使用" class="headerlink" title="idea工具的使用"></a>idea工具的使用</h3><p>idea总算折腾好了，从当初的小白，到现在的熟练运用，真是苦不堪言。当时只是听说了idea是公认最好用的编译环境，因为不熟悉，各种不习惯，还有不会用，然后就放下了，就没再用过，直到这几日，又重新用起了idea，</p>
+<p>下面说一下我的使用心得，希望对你们有所帮助</p>
+<p>idea不同于eclipse，myeclipse，全新的编译方式，工作方式，都和eclipse不大一样，idea如果在mac上用最好了，在windows上也行，感觉有点不搭配的意思。很多快捷键都是针对mac用户的，mac用户也有很好的用户体验。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/02/25/IDEA%E4%BD%BF%E7%94%A8/" data-id="cl4gp6u1o000m9cvcgjrl21k9" data-title="IDEA使用" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Error/" rel="tag">Error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Extjs/" rel="tag">Extjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerDesigner/" rel="tag">PowerDesigner</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">java虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/" rel="tag">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" rel="tag">myeclipse插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E8%AE%B0/" rel="tag">日记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" rel="tag">生活文化与素养</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Extjs/" style="font-size: 10px;">Extjs</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/PowerDesigner/" style="font-size: 12.86px;">PowerDesigner</a> <a href="/tags/Spring/" style="font-size: 14.29px;">Spring</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 12.86px;">java虚拟机</a> <a href="/tags/linux/" style="font-size: 17.14px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">myeclipse插件</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 14.29px;">工具</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 18.57px;">数据库</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 15.71px;">日记</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 14.29px;">杂记</a> <a href="/tags/%E6%A1%86%E6%9E%B6/" style="font-size: 14.29px;">框架</a> <a href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" style="font-size: 11.43px;">生活文化与素养</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 12.86px;">笔记</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/06/16/Hexo-github-%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2-%E6%96%B0%E6%89%8B%E5%85%A5%E9%97%A8/">Hexo+github搭建静态博客(新手入门)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/test/">test</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/20/%E4%BA%94.%20volatile%20%E5%85%B3%E9%94%AE%E5%AD%97/">五. volatile关键字</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/19/%E4%B8%89.%20%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/">三. 垃圾收集器</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Zhutongtong<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

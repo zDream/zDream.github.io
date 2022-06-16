@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>web.xml详解 | 记忆时光</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="web.xml的作用web.xml，一个Tomcat工程中最重要的配置文件。web.xml没有其实也可以—-只要你确定你的项目里面不需要任何过滤器、监听器、Servlet等等。我试了一下，没有web.xml对那些已经编译成Servlet的jsp页面来说，是不影响正常显示的，但是那些没有编译成Servlet的jsp页面，访问的时候就会报500的错误了。下面逐一看一下web.xml里常用标签的作用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web.xml详解">
+<meta property="og:url" content="http://example.com/2016/01/27/web.xml%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="记忆时光">
+<meta property="og:description" content="web.xml的作用web.xml，一个Tomcat工程中最重要的配置文件。web.xml没有其实也可以—-只要你确定你的项目里面不需要任何过滤器、监听器、Servlet等等。我试了一下，没有web.xml对那些已经编译成Servlet的jsp页面来说，是不影响正常显示的，但是那些没有编译成Servlet的jsp页面，访问的时候就会报500的错误了。下面逐一看一下web.xml里常用标签的作用。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2016-01-27T06:11:54.000Z">
+<meta property="article:modified_time" content="2022-06-16T07:22:10.423Z">
+<meta property="article:author" content="Zhutongtong">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="记忆时光" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">记忆时光</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-web.xml详解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/01/27/web.xml%E8%AF%A6%E8%A7%A3/" class="article-date">
+  <time class="dt-published" datetime="2016-01-27T06:11:54.000Z" itemprop="datePublished">2016-01-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      web.xml详解
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="web-xml的作用"><a href="#web-xml的作用" class="headerlink" title="web.xml的作用"></a>web.xml的作用</h3><p>web.xml，一个Tomcat工程中最重要的配置文件。web.xml没有其实也可以—-只要你确定你的项目里面不需要任何过滤器、监听器、Servlet等等。我试了一下，没有web.xml对那些已经编译成Servlet的jsp页面来说，是不影响正常显示的，但是那些没有编译成Servlet的jsp页面，访问的时候就会报500的错误了。下面逐一看一下web.xml里常用标签的作用。</p>
+<h3 id="welcome-file-list"><a href="#welcome-file-list" class="headerlink" title="welcome-file-list"></a>welcome-file-list</h3><p>这个标签是用来配置首页用的：</p>
+<pre><code>&lt;welcome-file-list&gt;
+    &lt;welcome-file&gt;index1.jsp&lt;/welcome-file&gt;
+    &lt;welcome-file&gt;index2.jsp&lt;/welcome-file&gt;
+    &lt;welcome-file&gt;index3.jsp&lt;/welcome-file&gt;
+    &lt;welcome-file&gt;index4.jsp&lt;/welcome-file&gt;
+    &lt;welcome-file&gt;/target/redirectAndFoward.jsp&lt;/welcome-file&gt;
+&lt;/welcome-file-list&gt;
+</code></pre>
+<p>这么配置的意思，就是当用户访问<a href="http://ip:port/工程名的时候，会根据welcome-file-list配置的页面列表，从项目的根目录开始找页面：">http://ip:port/工程名的时候，会根据welcome-file-list配置的页面列表，从项目的根目录开始找页面：</a></p>
+<ul>
+<li>第一个配置的index1.jsp能找到，就展示index1.jsp</li>
+<li>找不到index1.jsp，则去找第二个index2.jsp，index2.jsp能找到就展示index2.jsp，</li>
+<li>找不到index3.jsp，则去找第三个index3.jsp，以此类推，如果所有的页面都找不到则报HTTP Status 404即页面找不到</li>
+</ul>
+<p><strong>注意一下</strong>，像配置的最后一个welcome-file这种写法也是支持的，我试了一下最前面的那个”&#x2F;“可加可不加</p>
+<h3 id="error-page"><a href="#error-page" class="headerlink" title="error-page"></a>error-page</h3><p>error-page表示当HTTP返回指定状态码的时候，容器将此次请求转发到配置的指定页面： </p>
+<pre><code>&lt;error-page&gt;
+    &lt;error-code&gt;400&lt;/error-code&gt;
+    &lt;location&gt;/filter/error.jsp&lt;/location&gt;
+&lt;/error-page&gt;
+  
+&lt;error-page&gt;
+    &lt;error-code&gt;404&lt;/error-code&gt;
+    &lt;location&gt;/filter/error.jsp&lt;/location&gt;
+&lt;/error-page&gt;
+  
+&lt;error-page&gt;
+    &lt;error-code&gt;500&lt;/error-code&gt;
+    &lt;location&gt;/filter/error.jsp&lt;/location&gt;
+&lt;/error-page&gt;
+</code></pre>
+<p>这表示HTTP状态码为400、404、500的时候，此次请求都会被转发到<a href="http://ip:port/工程名/filter/error.jsp这个页面上去。注意一下这里是error-code，所以如果是200的话，是没有效果的">http://ip:port/工程名/filter/error.jsp这个页面上去。注意一下这里是error-code，所以如果是200的话，是没有效果的</a></p>
+<h3 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h3><p>走filter的顺序就是filter定义的顺序</p>
+<h3 id="servlet"><a href="#servlet" class="headerlink" title="servlet"></a>servlet</h3><p>servlet开发者比较熟悉，先匹配规则，匹配到路径后走相应的Servlet类，就不说了。下面配一个相对不那么常用的，只是相对而已，这种servlet的写法很常见：</p>
+<pre><code>&lt;servlet&gt;
+    &lt;servlet-name&gt;startUpServlet&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;com.xrq.servlet.StartUpServlet&lt;/servlet-class&gt;
+    &lt;init-param&gt;
+        &lt;param-name&gt;Name&lt;/param-name&gt;
+        &lt;param-value&gt;123&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    &lt;init-param&gt;
+        &lt;param-name&gt;Age&lt;/param-name&gt;
+        &lt;param-value&gt;456&lt;/param-value&gt;
+    &lt;/init-param&gt;
+    &lt;load-on-startup&gt;8&lt;/load-on-startup&gt;
+&lt;/servlet&gt;
+</code></pre>
+<p>这是一个启动servlet，表示容器启动的时候servlet启动，调用其init()方法，所以首先第一个标签load-on-start，分几点说：</p>
+<ul>
+<li>load-on-startup元素标记容器是否在启动的时候就加载这个servlet（实例化并调用其init方法）</li>
+<li>它的值必须是一个整数，表示servlet应该被载入的顺序</li>
+<li>当值为0或者大于0时，表示容器在应用启动时就加载并初始化这个servlet</li>
+<li>当值小于0或者没有指定时，表示这个容器在该servlet被选择时才会去加载</li>
+<li>正数值越小，该servlet的优先级就越高，应用启动时就越先加载</li>
+<li>当值相同时，容器自己选择顺序来加载</li>
+</ul>
+<p>所以，load-on-startup中配置了一个大于等于0的正整数时，该servlet可以当作一个普通的servlet来用，无非是这个servlet启动的时候会加载其init()方法罢了。</p>
+<p>另外一个就是init-param了，表示一个键值对，只能在本servlet里面被使用，通过ServletConfig获取，StartUpServlet的写法是：</p>
+<pre><code>public class StartUpServlet extends HttpServlet&#123;
+    /**
+     * 序列化
+     */
+    private static final long serialVersionUID = 1L;
+    
+    public void init() throws ServletException
+    &#123;
+        System.out.println(&quot;StartUpServlet.init()&quot;);
+        System.out.println(&quot;Name：&quot; + getServletConfig().getInitParameter(&quot;Name&quot;));
+        System.out.println(&quot;Age：&quot; + getServletConfig().getInitParameter(&quot;Age&quot;));
+    &#125;
+    
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException
+    &#123;
+        
+    &#125;
+    
+    public void destroy()
+    &#123;
+        System.out.println(&quot;StartUpServlet.destory()&quot;);
+    &#125;
+&#125;
+</code></pre>
+<p>servlet只能取到配置在自己的<servlet>标签内的<init-param></p>
+<h3 id="listener"><a href="#listener" class="headerlink" title="listener"></a>listener</h3><p>listener即监听器，是Servlet的监听器，它可以监听客户端的请求、服务器端的操作等，在事情发生前后做一些必要的处理。通过监听器，可以自动激发一些操作，比如监听在线用户数量，下面就写一个监听用户数量的监听器，首先web.xml配置很简单：</p>
+<pre><code>&lt;listener&gt;
+    &lt;listener-class&gt;com.xrq.listener.UserCounterListener&lt;/listener-class&gt;
+&lt;/listener&gt;
+</code></pre>
+<p>写一个监听器，监听用户数量一般都是以session创建和session失效为依据的，所以实现HttpSessionListener：</p>
+<pre><code>public class UserCounterListener implements HttpSessionListener&#123;
+    private AtomicInteger ai = new AtomicInteger(0);
+    
+    public void sessionCreated(HttpSessionEvent se)
+    &#123;
+        ai.incrementAndGet();
+    &#125;
+    
+    public void sessionDestroyed(HttpSessionEvent se)
+    &#123;
+        ai.decrementAndGet();
+    &#125;
+    
+    public int getUserCount()
+    &#123;
+        return ai.get();
+    &#125;
+&#125;
+</code></pre>
+<p>除了监听session的监听器外，再介绍一些别的监听器接口：</p>
+<h4 id="ServletContextListener"><a href="#ServletContextListener" class="headerlink" title="ServletContextListener"></a>ServletContextListener</h4><p>用于监听WEB引用启动和销毁的事件，SevletContextListener是ServletContext的监听者，如果ServletContext发生变化，如服务器启动、服务器关闭，都会被ServletContextListener监听到。监听事件为ServletContextEvent</p>
+<h4 id="ServletContextAttributeListener"><a href="#ServletContextAttributeListener" class="headerlink" title="ServletContextAttributeListener"></a>ServletContextAttributeListener</h4><p>用于监听WEB应用属性改变的事件，包括添加属性、删除属性、修改属性。监听时间为ServletContextAttributeEvent</p>
+<h4 id="HttpSessionBindingListener"><a href="#HttpSessionBindingListener" class="headerlink" title="HttpSessionBindingListener"></a>HttpSessionBindingListener</h4><p>HttpSessionBindingListener是唯一一个不需要在web.xml中配置的Listener，当我们的类实现了HttpSessionBindListener接口后，只要对象加入session或者从session中移除，容器会分别自动调用以下两个方法：</p>
+<ul>
+<li>void valueBound(HttpSesssionBindEvent event)</li>
+<li>void valueUnbound(HttpSessionBindingEvent event)</li>
+</ul>
+<p><strong>注意</strong>，这个监听器的触发是针对于实现了该监听器的类的，只有把实现了该监听器的类set进session或从session中remove才会触发这个监听器</p>
+<h4 id="HttpSessionAttributeListener"><a href="#HttpSessionAttributeListener" class="headerlink" title="HttpSessionAttributeListener"></a>HttpSessionAttributeListener</h4><p>用于监听HttpSession中的属性的操作，当session里面增加一个属性时，触发attributeAdded(HttpSessionBindEvent se)方法；当在session中删除一个属性时，触发attributeRemoved(HttpSessionBindEvent se)方法；当session属性被重新设置时，触发attributeReplaced(HttpSessionBindingEvent se)方法。</p>
+<p><strong>注意</strong>，这个监听器的触发是针对所有的session的，只要session的属性发生变化，都会触发这个监听器</p>
+<h4 id="HttpSessionListener"><a href="#HttpSessionListener" class="headerlink" title="HttpSessionListener"></a>HttpSessionListener</h4><p>这个上面已经写过了，监听HttpSession。当创建一个session时，触发sessionCreated(HttpSessionEvent se)方法；当销毁一个session时，会触发sessionDestoryed(HttpSessionEvent se)方法</p>
+<h4 id="HttpSessionActivationListener"><a href="#HttpSessionActivationListener" class="headerlink" title="HttpSessionActivationListener"></a>HttpSessionActivationListener</h4><p>这个用得不太多，主要监听同一个session转移至不同的JVM的情形</p>
+<h4 id="ServletRequestListener和ServletRequestAttributeListener"><a href="#ServletRequestListener和ServletRequestAttributeListener" class="headerlink" title="ServletRequestListener和ServletRequestAttributeListener"></a>ServletRequestListener和ServletRequestAttributeListener</h4><p>和ServletContextListener和ServletContextAttributeListener类似，前者监听Request的创建和销毁、后者监听Request中属性的增删改</p>
+<h3 id="context-param"><a href="#context-param" class="headerlink" title="context-param"></a>context-param</h3><p>context-param里面配置的键值对是全局共享的，整个web项目都能取到这个上下文，比方说我在web.xml里面配置了一个HTTP端口和一个HTTPS端口：</p>
+<pre><code>&lt;context-param&gt;
+    &lt;param-name&gt;NotSSLPort&lt;/param-name&gt;
+    &lt;param-value&gt;8080&lt;/param-value&gt;
+&lt;/context-param&gt;
+&lt;context-param&gt;
+    &lt;param-name&gt;SSLPort&lt;/param-name&gt;
+    &lt;param-value&gt;8443&lt;/param-value&gt;
+&lt;/context-param&gt;
+</code></pre>
+<p>servlet可以这么取：</p>
+<pre><code>protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException
+&#123;
+    System.out.println(&quot;NotSSLPort：&quot; + getServletContext().getInitParameter(&quot;NotSSLPort&quot;));
+    System.out.println(&quot;SSLPort：&quot; + getServletContext().getInitParameter(&quot;SSLPort&quot;));
+&#125;
+</code></pre>
+<p>filter可以这么取：</p>
+<pre><code>public void doFilter(ServletRequest request, ServletResponse response,
+        FilterChain chain) throws IOException, ServletException
+&#123;
+    HttpServletRequest req = (HttpServletRequest)request;
+    ServletContext sc = req.getSession().getServletContext();
+    System.out.println(&quot;NotSSLPort：&quot; + sc.getInitParameter(&quot;NotSSLPort&quot;));
+    System.out.println(&quot;SSLPort：&quot; + sc.getInitParameter(&quot;SSLPort&quot;));
+    chain.doFilter(request, response);
+&#125;
+</code></pre>
+<p>listener可以这么取，以ServletContextListener为例：</p>
+<pre><code>public void contextInitialized(ServletContextEvent sce)
+&#123;
+    System.out.println(&quot;Enter SCListener.contextInitialized&quot;);
+    System.out.println(&quot;NotSSLPort：&quot; + sce.getServletContext().getInitParameter(&quot;NotSSLPort&quot;));
+    System.out.println(&quot;SSLPort：&quot; + sce.getServletContext().getInitParameter(&quot;SSLPort&quot;));
+&#125;
+</code></pre>
+<p>反正最终的目的就是取到一个ServletContext就对了。是不是感觉ServletContext很熟悉呢？没错，看一下jsp默认的内置对象，随便打开一个转换成Servlet的jsp页面，里面都有内置对象的定义：</p>
+<pre><code>PageContext pageContext = null;
+HttpSession session = null;
+ServletContext application = null;
+ServletConfig config = null;
+JspWriter out = null;
+Object page = this;
+JspWriter _jspx_out = null;
+PageContext _jspx_page_context = null;
+</code></pre>
+<p>ServletContext也就是我们常说的Application</p>
+<h3 id=""><a href="#" class="headerlink" title=""></a><mime-mapping></h3><p><mime-mapping>可能不太常见，这个标签是用来指定对应的格式的浏览器处理方式的，添加mime-type的映射，就可以避免某些类型的文件直接在浏览器中打开了。</p>
+<p>举个例子：</p>
+<pre><code>&lt;mime-mapping&gt;
+    &lt;extension&gt;doc&lt;/extension&gt;
+    &lt;mime-type&gt;application/msword&lt;/mime-type&gt;
+&lt;/mime-mapping&gt;
+&lt;mime-mapping&gt;
+    &lt;extension&gt;pdf&lt;/extension&gt;
+    &lt;mime-type&gt;application/pdf&lt;/mime-type&gt;
+&lt;/mime-mapping&gt;
+&lt;mime-mapping&gt;
+    &lt;extension&gt;rar&lt;/extension&gt;
+    &lt;mime-type&gt;application/x-rar-compressed&lt;/mime-type&gt;
+&lt;/mime-mapping&gt;
+&lt;mime-mapping&gt;
+    &lt;extension&gt;txt&lt;/extension&gt;
+    &lt;mime-type&gt;text/plain&lt;/mime-type&gt;
+&lt;/mime-mapping&gt;
+&lt;mime-mapping&gt;
+    &lt;extension&gt;xls&lt;/extension&gt;
+    &lt;mime-type&gt;application/vnd.ms-excel&lt;/mime-type&gt;
+&lt;/mime-mapping&gt;
+</code></pre>
+<h3 id="session-config"><a href="#session-config" class="headerlink" title="session-config"></a>session-config</h3><p>session-config是用来配置session失效时间的，因为session-config里面只有一个子标签：</p>
+<pre><code>&lt;session-config&gt;
+    &lt;session-timeout&gt;30&lt;/session-timeout&gt;
+&lt;/session-config&gt;
+</code></pre>
+<p>以分钟为单位。当然，代码里面也可以设置：</p>
+<p>“request.getSession.setMaxInactiveInterval(30 * 60);”就可以了，单位为秒</p>
+<h3 id="元素加载顺序"><a href="#元素加载顺序" class="headerlink" title="元素加载顺序"></a>元素加载顺序</h3><p>首先可以肯定，加载顺序与它们在web.xml文件中的先后顺序无关，即不会因为filter写在listener前面就先加载filter。最终得出的结论是listener-&gt;filter-&gt;servlet。</p>
+<p>然后是context-param，用于向ServletContext提供键值对，即应用程序上下文信息，listener、filter、servlet都可能会用到这些上下文中的信息，那么context-param是否应该写在listener、filter、servlet前面呢？未必，context-param可以写在任何位置，因此真正的加载顺序应该是：context-param-&gt;listener-&gt;filter-&gt;servlet。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/01/27/web.xml%E8%AF%A6%E8%A7%A3/" data-id="cl4gp6u2b002f9cvc4nq15vp5" data-title="web.xml详解" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/01/30/extjs%E5%AD%A6%E4%B9%A0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          extjs学习
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/01/27/Listener%20%E7%9B%91%E5%90%AC%E5%99%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Listener 监听器</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Error/" rel="tag">Error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Extjs/" rel="tag">Extjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerDesigner/" rel="tag">PowerDesigner</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">java虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/" rel="tag">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" rel="tag">myeclipse插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E8%AE%B0/" rel="tag">日记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" rel="tag">生活文化与素养</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Extjs/" style="font-size: 10px;">Extjs</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/PowerDesigner/" style="font-size: 12.86px;">PowerDesigner</a> <a href="/tags/Spring/" style="font-size: 14.29px;">Spring</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 12.86px;">java虚拟机</a> <a href="/tags/linux/" style="font-size: 17.14px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">myeclipse插件</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 14.29px;">工具</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 18.57px;">数据库</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 15.71px;">日记</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 14.29px;">杂记</a> <a href="/tags/%E6%A1%86%E6%9E%B6/" style="font-size: 14.29px;">框架</a> <a href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" style="font-size: 11.43px;">生活文化与素养</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 12.86px;">笔记</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/06/16/Hexo-github-%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2-%E6%96%B0%E6%89%8B%E5%85%A5%E9%97%A8/">Hexo+github搭建静态博客(新手入门)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/test/">test</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/20/%E4%BA%94.%20volatile%20%E5%85%B3%E9%94%AE%E5%AD%97/">五. volatile关键字</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/19/%E4%B8%89.%20%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/">三. 垃圾收集器</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Zhutongtong<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

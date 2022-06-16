@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>oracle事务 | 记忆时光</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="事务隔离 一个未提交的事务所做的修改不能被其它事务所看到。只有当事务提交成功后，在该事务之后执行的其它事务才可能看到该事务所做的改变。 在该事务提交之前已经执行了一部分而另一部分在该事务提交后执行的剩余部分同样也看不到该事务做出的改变。这是另一个Oracle特性：读一致和快照。 在该事务提交同时进行的其它事务同样也看不到该事务所做的改变  语句级回滚 当一个SQL语句在执行期间因为发生的任何错误而">
+<meta property="og:type" content="article">
+<meta property="og:title" content="oracle事务">
+<meta property="og:url" content="http://example.com/2016/01/06/oracle%E4%BA%8B%E5%8A%A1/index.html">
+<meta property="og:site_name" content="记忆时光">
+<meta property="og:description" content="事务隔离 一个未提交的事务所做的修改不能被其它事务所看到。只有当事务提交成功后，在该事务之后执行的其它事务才可能看到该事务所做的改变。 在该事务提交之前已经执行了一部分而另一部分在该事务提交后执行的剩余部分同样也看不到该事务做出的改变。这是另一个Oracle特性：读一致和快照。 在该事务提交同时进行的其它事务同样也看不到该事务所做的改变  语句级回滚 当一个SQL语句在执行期间因为发生的任何错误而">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2016-01-06T00:54:18.000Z">
+<meta property="article:modified_time" content="2022-06-16T07:22:10.421Z">
+<meta property="article:author" content="Zhutongtong">
+<meta property="article:tag" content="数据库">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="记忆时光" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">记忆时光</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-oracle事务" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/01/06/oracle%E4%BA%8B%E5%8A%A1/" class="article-date">
+  <time class="dt-published" datetime="2016-01-06T00:54:18.000Z" itemprop="datePublished">2016-01-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      oracle事务
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="事务隔离"><a href="#事务隔离" class="headerlink" title="事务隔离"></a>事务隔离</h2><ol>
+<li>一个未提交的事务所做的修改不能被其它事务所看到。只有当事务提交成功后，在该事务之后执行的其它事务才可能看到该事务所做的改变。</li>
+<li>在该事务提交之前已经执行了一部分而另一部分在该事务提交后执行的剩余部分同样也看不到该事务做出的改变。这是另一个Oracle特性：读一致和快照。</li>
+<li>在该事务提交同时进行的其它事务同样也看不到该事务所做的改变</li>
+</ol>
+<h2 id="语句级回滚"><a href="#语句级回滚" class="headerlink" title="语句级回滚"></a>语句级回滚</h2><ol>
+<li>当一个SQL语句在执行期间因为发生的任何错误而中断时，将产生一个“语句级回滚”。该回滚的后果就像这个SQL语句根本没有执行过一样。</li>
+<li>注意回滚是发生在“执行”阶段的，如果是在SQL语句的解析阶段因为语法问题而无法执行。因为没有产生任何影响而不会出现“回滚”。</li>
+</ol>
+<h2 id="Oracle事务控制的分割"><a href="#Oracle事务控制的分割" class="headerlink" title="Oracle事务控制的分割"></a>Oracle事务控制的分割</h2><p> 如果一个事务中包含了DML语句和DDL语句，那么该事务会被分解成多个事务。首先在DDL之前的所有DML语句会被作为一个事务而一次性提交。然后Oracle会为这个DDL创建一个新的，单语句的事务。如果DDL语句执行失败了，那么DML事务依然成功。 每个DDL语句单独成为一个事务，也就是说DDL语句不能回退。</p>
+<h2 id="不同情况下的Oracle事务控制"><a href="#不同情况下的Oracle事务控制" class="headerlink" title="不同情况下的Oracle事务控制"></a>不同情况下的Oracle事务控制</h2><p> 请注意：用户从Oracle服务器断开连接和用户进程强行中断的后果是不同的。</p>
+<ol>
+<li>前者典型的例子是Oracle服务器关闭或重启，此时所有未提交事务会被提交。</li>
+<li>后者典型的例子用户通过进程管理器强行kill掉进程，此时所有未提交事务所做的操作被回滚。</li>
+</ol>
+<h2 id="事务提交前要做的事情"><a href="#事务提交前要做的事情" class="headerlink" title="事务提交前要做的事情"></a>事务提交前要做的事情</h2><p> Oracle提交一个事务之前，必须做以下几件事情：</p>
+<ol>
+<li>记住数据被修改前是什么样子的</li>
+<li>记住数据即将要被改成什么样子</li>
+<li>记住redo log和undo log的关联</li>
+<li>将SGA中已读取到内存的数据修改为新的值(此时并未真正保存到数据文件)</li>
+</ol>
+<p> 其中第一步是通过在undo表空间中记录undo日志来完成的。第二步、第三步是通过向SGA中的redo日志缓冲区写记录来完成的。这样当事务回滚时就可以从redo日志找到对应的undo日志，从而找回之前的数据</p>
+<ul>
+<li><strong>要特别注意的是：此时不一定会触发DBWn进程。</strong></li>
+<li><strong>要特别注意的另一个地方是：第2步记录事务操作的改变是内存中进行的，还未写到磁盘上的redo日志文件</strong></li>
+</ul>
+<h2 id="事务提交时所做的事情"><a href="#事务提交时所做的事情" class="headerlink" title="事务提交时所做的事情"></a>事务提交时所做的事情</h2><ol>
+<li>记录SCN值(System Change Number)</li>
+<li>将在线重做日志记录(位于SGA的redo日志缓冲区中)持久化到redo日志文件</li>
+<li>Oracle释放资源和锁</li>
+<li>Oracle将事务标记为已结束</li>
+</ol>
+<p> 注意：只有在commit指令被发出后，才会将SGA中重做日志缓冲区的内容刷新到磁盘的redo日志文件。在LGWR进程执行前，重做日志一直存在于内存中，也被称为在线重做日志。</p>
+<h2 id="savepoint回滚和整个事务的回滚"><a href="#savepoint回滚和整个事务的回滚" class="headerlink" title="savepoint回滚和整个事务的回滚"></a>savepoint回滚和整个事务的回滚</h2><p> 注意当Oracle事务回滚到某个savepoint时，在savepoint之后的所有后续savepoint将失效。但此时Transaction还是活跃且可继续的。这一点不同于整个事务的回滚。</p>
+<h2 id="自治事务"><a href="#自治事务" class="headerlink" title="自治事务"></a>自治事务</h2><p> 从传统上来说，一个事务只有在完整执行成功或回滚之后，才会进行下一个事务。而自治事务允许在一个事务中调用运行另一个事务，被调用事务执行完成后，调用事务继续执行之前未完成的操作直至事务结束<br> 自治事务在被调用后，将和外围事务完全独立。彼此之间并不共享任何资源或者锁，外围事务所有未提交的改变对自治事务来说都是不可见。自治事务提交后外围事务将可以看到改变。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/01/06/oracle%E4%BA%8B%E5%8A%A1/" data-id="cl4gp6u25001x9cvcd4vkg0pd" data-title="oracle事务" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/01/06/oracle%E8%AF%AD%E5%8F%A5%E7%9A%84%E5%88%86%E7%B1%BB/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          oracle语句的分类
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/01/05/Spring%20AOP/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Spring AOP</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Error/" rel="tag">Error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Extjs/" rel="tag">Extjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerDesigner/" rel="tag">PowerDesigner</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">java虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/" rel="tag">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" rel="tag">myeclipse插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E8%AE%B0/" rel="tag">日记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" rel="tag">生活文化与素养</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Extjs/" style="font-size: 10px;">Extjs</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/PowerDesigner/" style="font-size: 12.86px;">PowerDesigner</a> <a href="/tags/Spring/" style="font-size: 14.29px;">Spring</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 12.86px;">java虚拟机</a> <a href="/tags/linux/" style="font-size: 17.14px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">myeclipse插件</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 14.29px;">工具</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 18.57px;">数据库</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 15.71px;">日记</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 14.29px;">杂记</a> <a href="/tags/%E6%A1%86%E6%9E%B6/" style="font-size: 14.29px;">框架</a> <a href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" style="font-size: 11.43px;">生活文化与素养</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 12.86px;">笔记</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/06/16/Hexo-github-%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2-%E6%96%B0%E6%89%8B%E5%85%A5%E9%97%A8/">Hexo+github搭建静态博客(新手入门)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/test/">test</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/20/%E4%BA%94.%20volatile%20%E5%85%B3%E9%94%AE%E5%AD%97/">五. volatile关键字</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/19/%E4%B8%89.%20%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/">三. 垃圾收集器</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Zhutongtong<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

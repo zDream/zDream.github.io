@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>oracle表空间 | 记忆时光</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="表空间的分类永久表空间  存放永久性数据，如表，索引等。 临时表空间  不能存放永久性对象，用于保存数据库排序，分组时产生的临时数据。 UNDO表空间  保存数据修改前的镜象。 表空间信息如何查看数据库有哪些表空间？如何查看表空间对应的数据文件？ 查看表空间： 查看表空间可以通过下面几个系统视图查看基本信息 –包含数据库中所有表空间的描述信息 SELECT * FROM DBA_TABLESPAC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="oracle表空间">
+<meta property="og:url" content="http://example.com/2016/03/16/oracle%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86/index.html">
+<meta property="og:site_name" content="记忆时光">
+<meta property="og:description" content="表空间的分类永久表空间  存放永久性数据，如表，索引等。 临时表空间  不能存放永久性对象，用于保存数据库排序，分组时产生的临时数据。 UNDO表空间  保存数据修改前的镜象。 表空间信息如何查看数据库有哪些表空间？如何查看表空间对应的数据文件？ 查看表空间： 查看表空间可以通过下面几个系统视图查看基本信息 –包含数据库中所有表空间的描述信息 SELECT * FROM DBA_TABLESPAC">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2016-03-16T08:26:16.000Z">
+<meta property="article:modified_time" content="2022-06-16T07:22:10.422Z">
+<meta property="article:author" content="Zhutongtong">
+<meta property="article:tag" content="数据库">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="记忆时光" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">记忆时光</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-oracle表空间管理" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/03/16/oracle%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86/" class="article-date">
+  <time class="dt-published" datetime="2016-03-16T08:26:16.000Z" itemprop="datePublished">2016-03-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      oracle表空间
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="表空间的分类"><a href="#表空间的分类" class="headerlink" title="表空间的分类"></a>表空间的分类</h2><p><strong>永久表空间</strong>  存放永久性数据，如表，索引等。</p>
+<p><strong>临时表空间</strong>  不能存放永久性对象，用于保存数据库排序，分组时产生的临时数据。</p>
+<p><strong>UNDO表空间</strong>  保存数据修改前的镜象。</p>
+<h2 id="表空间信息"><a href="#表空间信息" class="headerlink" title="表空间信息"></a>表空间信息</h2><p>如何查看数据库有哪些表空间？如何查看表空间对应的数据文件？</p>
+<p>查看表空间：</p>
+<p>查看表空间可以通过下面几个系统视图查看基本信息</p>
+<p>–包含数据库中所有表空间的描述信息</p>
+<pre><code>SELECT * FROM DBA_TABLESPACES
+</code></pre>
+<p>–包含当前用户的表空间的描叙信息</p>
+<pre><code>SELECT * FROM USER_TABLESPACES
+</code></pre>
+<p>–包含从控制文件中获取的表空间名称和编号信息</p>
+<pre><code>SELECT * FROM V$TABLESPACE;
+</code></pre>
+<hr>
+<p>查看数据文件</p>
+<p>–包含数据文件以及所属的表空间的描述信息</p>
+<pre><code>SELECT * FROM DBA_DATA_FILES
+</code></pre>
+<p>–包含临时数据文件以及所属的表空间的描述信息</p>
+<pre><code>SELECT * FROM DBA_TEMP_FILES
+</code></pre>
+<p>–包含从控制文件中获取的数据文件的基本信息，包括它所属的表空间名称、编号等</p>
+<pre><code>SELECT * FROM V$DATAFILE
+</code></pre>
+<p>–包含所有临时数据文件的基本信息</p>
+<pre><code>SELECT * FROM V$TEMPFILE
+</code></pre>
+<p>–查看用户所属的表空间</p>
+<pre><code>select username,default_tablespace from dba_users  where username=&#39;用户名&#39;;
+用户名需大写
+</code></pre>
+<h2 id="创建空间并创建用户指定该空间"><a href="#创建空间并创建用户指定该空间" class="headerlink" title="创建空间并创建用户指定该空间"></a>创建空间并创建用户指定该空间</h2><h3 id="第1步：创建临时表空间"><a href="#第1步：创建临时表空间" class="headerlink" title="第1步：创建临时表空间"></a>第1步：创建临时表空间</h3><pre><code>create temporary tablespace tv_temp  
+tempfile &#39;D:\orcldata\tv\temp.dbf&#39; 
+size 20480M  
+autoextend on  
+next 500M maxsize 30720M
+extent management local; 
+</code></pre>
+<h3 id="第2步：创建数据表空间"><a href="#第2步：创建数据表空间" class="headerlink" title="第2步：创建数据表空间"></a>第2步：创建数据表空间</h3><pre><code>create tablespace tv_data  
+nologging
+datafile &#39;D:\orcldata\tv\data.dbf&#39; 
+size 4096M  
+autoextend on  
+next 200M maxsize 20480m
+extent management local;
+</code></pre>
+<h3 id="第3步：创建用户并指定表空间"><a href="#第3步：创建用户并指定表空间" class="headerlink" title="第3步：创建用户并指定表空间"></a>第3步：创建用户并指定表空间</h3><pre><code>create user tv identified by tv
+default tablespace tv_data
+temporary tablespace tv_temp;
+</code></pre>
+<h3 id="第4步：给用户授予权限"><a href="#第4步：给用户授予权限" class="headerlink" title="第4步：给用户授予权限"></a>第4步：给用户授予权限</h3><pre><code>grant connect,resource,dba to username;
+
+grant create session,create table,unlimited tablespace to tv;
+</code></pre>
+<h3 id="1、查看表空间"><a href="#1、查看表空间" class="headerlink" title="1、查看表空间"></a>1、查看表空间</h3><pre><code>select tv.tablespace_name &quot;TABLESPACE_NAME&quot;,totalspace &quot;TOTALSPACE/M&quot;,freespace &quot;FREESPACE/M&quot;,round((1-freespace/totalspace)*100,2) &quot;USED%&quot;
+from 
+(select tablespace_name,round(sum(bytes)/1024/1024) totalspace from    dba_data_files group by tablespace_name) tv,
+         (select tablespace_name,round(sum(bytes)/1024/1024) freespace from dba_free_space group by tablespace_name) fs
+where tv.tablespace_name=fs.tablespace_name;
+
+TABLESPACE_NAME                TOTALSPACE/M FREESPACE/M      USED%
+------------------------------ ------------ ----------- ----------
+KB                                          1024        1023                          .1
+SYSAUX                                    320             3                      99.06
+SYSTEM                                    450             9                           98
+TV                                           4096         128                     96.88
+UNDOTBS1                               5760        5670                      1.56
+USERS                                         5              5                            0
+
+6 rows selected.
+</code></pre>
+<h3 id="2、查看临时表空间"><a href="#2、查看临时表空间" class="headerlink" title="2、查看临时表空间"></a>2、查看临时表空间</h3><pre><code>SQL&gt; select tablespace_name from dba_tablespaces;
+
+TABLESPACE_NAME
+------------------------------
+SYSTEM
+UNDOTBS1
+SYSAUX
+TEMP
+USERS
+TV
+KB
+
+7 rows selected.
+
+
+SQL&gt; select tablespace_name,file_name,bytes/1024/1024 file_size,autoextensible from dba_temp_files;
+
+TABLESPACE_NAME      FILE_NAME                             FILE_SIZE      AUT
+---------------------------------------------------------------------------
+TEMP                           E:\ORCLDATA\TV\TEMP01.DBF    1834          YES
+</code></pre>
+<h3 id="3、增加表空间大小"><a href="#3、增加表空间大小" class="headerlink" title="3、增加表空间大小"></a>3、增加表空间大小</h3><pre><code>alter tablespace tv add datafile &#39;E:\orcldata\tv\data1.dbf&#39; size 4096M;
+</code></pre>
+<h3 id="4、增加临时表空间大小"><a href="#4、增加临时表空间大小" class="headerlink" title="4、增加临时表空间大小"></a>4、增加临时表空间大小</h3><pre><code>SQL&gt; alter database tempfile &#39;E:\orcldata\tv\temp01.dbf&#39; resize 8192M;
+
+Database altered.
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/03/16/oracle%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86/" data-id="cl4gp6u29002a9cvc7max9fe7" data-title="oracle表空间" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/03/24/Mybatis%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          mybatis 实体类，配置文件生成工具
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/14/%E7%9C%8B%E8%BF%87%E7%9A%84%E4%B9%A6%EF%BC%8C%E9%9A%8F%E5%BF%83%E6%97%85%E8%A1%8C/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">看过的书，随心旅行</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Error/" rel="tag">Error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Extjs/" rel="tag">Extjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerDesigner/" rel="tag">PowerDesigner</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">java虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/" rel="tag">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" rel="tag">myeclipse插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E8%AE%B0/" rel="tag">日记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" rel="tag">生活文化与素养</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Extjs/" style="font-size: 10px;">Extjs</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/PowerDesigner/" style="font-size: 12.86px;">PowerDesigner</a> <a href="/tags/Spring/" style="font-size: 14.29px;">Spring</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 12.86px;">java虚拟机</a> <a href="/tags/linux/" style="font-size: 17.14px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">myeclipse插件</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 14.29px;">工具</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 18.57px;">数据库</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 15.71px;">日记</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 14.29px;">杂记</a> <a href="/tags/%E6%A1%86%E6%9E%B6/" style="font-size: 14.29px;">框架</a> <a href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" style="font-size: 11.43px;">生活文化与素养</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 12.86px;">笔记</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/06/16/Hexo-github-%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2-%E6%96%B0%E6%89%8B%E5%85%A5%E9%97%A8/">Hexo+github搭建静态博客(新手入门)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/test/">test</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/20/%E4%BA%94.%20volatile%20%E5%85%B3%E9%94%AE%E5%AD%97/">五. volatile关键字</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/19/%E4%B8%89.%20%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/">三. 垃圾收集器</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Zhutongtong<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

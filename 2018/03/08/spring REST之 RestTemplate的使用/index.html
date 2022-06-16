@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>spring REST之 RestTemplate的使用 | 记忆时光</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="一. 基础知识REST就是将资源的状态以最适合客户端或服务端的形式从服务器端转移到客户端（或者反过来） 在REST中是通过URL进行识别一定位。是通过HTTP方法来定义。也就是GET,POST，PUT，DELETE，PATCH等。这些HTTP方法通常会匹配如下的CRUD操作。  Create:POST Read: GET Update: PUT或PATCH Delete： Delete  二. 基">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring REST之 RestTemplate的使用">
+<meta property="og:url" content="http://example.com/2018/03/08/spring%20REST%E4%B9%8B%20RestTemplate%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="记忆时光">
+<meta property="og:description" content="一. 基础知识REST就是将资源的状态以最适合客户端或服务端的形式从服务器端转移到客户端（或者反过来） 在REST中是通过URL进行识别一定位。是通过HTTP方法来定义。也就是GET,POST，PUT，DELETE，PATCH等。这些HTTP方法通常会匹配如下的CRUD操作。  Create:POST Read: GET Update: PUT或PATCH Delete： Delete  二. 基">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://7xpw00.com1.z0.glb.clouddn.com/restTemplateObject.png">
+<meta property="article:published_time" content="2018-03-08T03:28:23.000Z">
+<meta property="article:modified_time" content="2022-06-16T07:22:10.423Z">
+<meta property="article:author" content="Zhutongtong">
+<meta property="article:tag" content="框架">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://7xpw00.com1.z0.glb.clouddn.com/restTemplateObject.png">
+  
+    <link rel="alternate" href="/atom.xml" title="记忆时光" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">记忆时光</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-spring REST之 RestTemplate的使用" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/03/08/spring%20REST%E4%B9%8B%20RestTemplate%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-date">
+  <time class="dt-published" datetime="2018-03-08T03:28:23.000Z" itemprop="datePublished">2018-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      spring REST之 RestTemplate的使用
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="一-基础知识"><a href="#一-基础知识" class="headerlink" title="一. 基础知识"></a>一. 基础知识</h2><p>REST就是将资源的状态以最适合客户端或服务端的形式从服务器端转移到客户端（或者反过来）</p>
+<p>在REST中是通过URL进行识别一定位。是通过HTTP方法来定义。也就是GET,POST，PUT，DELETE，PATCH等。这些HTTP方法通常会匹配如下的CRUD操作。</p>
+<ul>
+<li>Create:POST</li>
+<li>Read: GET</li>
+<li>Update: PUT或PATCH</li>
+<li>Delete： Delete</li>
+</ul>
+<h2 id="二-基本使用"><a href="#二-基本使用" class="headerlink" title="二. 基本使用"></a>二. 基本使用</h2><p>在RestTemplate提供了对应于每个的六个主要的HTTP方法</p>
+<p>表1. RestTemplate方法的概述</p>
+<p>RestTemplate定义了36个与REST资源交互的方法，其中的大多数都对应于HTTP的方法。<br>其实，这里面只有11个独立的方法，其中有十个有三种重载形式，而第十一个则重载了六次，这样一共形成了36个方法</p>
+<ul>
+<li>delete() 在特定的URL上对资源执行HTTP DELETE操作</li>
+<li>exchange() 在URL上执行特定的HTTP方法，返回包含对象的ResponseEntity，这个对象是从响应体中映射得到的</li>
+<li>execute() 在URL上执行特定的HTTP方法，返回一个从响应体映射得到的对象</li>
+<li><strong>getForEntity()</strong> 发送一个HTTP GET请求，返回的ResponseEntity包含了响应体所映射成的对象</li>
+<li><strong>getForObject()</strong> 发送一个HTTP GET请求，返回的请求体将映射为一个对象</li>
+<li><strong>postForEntity()</strong>  POST 数据到一个URL，返回包含一个对象的ResponseEntity，这个对象是从响应体中映射得到的</li>
+<li><strong>postForObject()</strong> POST 数据到一个URL，返回根据响应体匹配形成的对象</li>
+<li>headForHeaders() 发送HTTP HEAD请求，返回包含特定资源URL的HTTP头</li>
+<li>optionsForAllow() 发送HTTP OPTIONS请求，返回对特定URL的Allow头信息</li>
+<li>postForLocation() POST 数据到一个URL，返回新创建资源的URL</li>
+<li>put() PUT 资源到特定的URL</li>
+</ul>
+<h2 id="Rest服务-模拟提供Rest数据"><a href="#Rest服务-模拟提供Rest数据" class="headerlink" title="Rest服务,模拟提供Rest数据"></a>Rest服务,模拟提供Rest数据</h2><pre><code>@RestController
+public class DataController &#123;
+    @RequestMapping(value = &quot;getAll&quot;)
+    public List&lt;UserEntity&gt; getUser() &#123;
+        List&lt;UserEntity&gt; list = new ArrayList&lt;&gt;();
+        list.add(new UserEntity(&quot;zhangsan&quot;,&quot;123456&quot;,&quot;man&quot;));
+        list.add(new UserEntity(&quot;lisi&quot;,&quot;321654&quot;,&quot;woman&quot;));
+        list.add(new UserEntity(&quot;wangfer&quot;,&quot;741258&quot;,&quot;man&quot;));
+        return list;
+    &#125;
+
+    @RequestMapping(&quot;get/&#123;id&#125;&quot;)
+    public UserEntity getById(@PathVariable(name = &quot;id&quot;) String id) &#123;
+        UserEntity userEntity = new UserEntity(&quot;zhangsan&quot;, &quot;34524&quot;, &quot;man&quot;);
+        return userEntity;
+    &#125;
+
+    @RequestMapping(value = &quot;save&quot;)
+    public String save(UserEntity userEntity) &#123;
+        return userEntity.toString()+&quot;保存成功&quot;;
+    &#125;
+
+    @RequestMapping(value = &quot;saveByType/&#123;type&#125;&quot;)
+    public String saveByType(UserEntity userEntity,@PathVariable(&quot;type&quot;)String type) &#123;
+        return &quot;保存成功,type=&quot;+type;
+    &#125;
+&#125;
+</code></pre>
+<h2 id="1-GET请求"><a href="#1-GET请求" class="headerlink" title="1. GET请求"></a>1. GET请求</h2><h3 id="1-getForEntity使用方法"><a href="#1-getForEntity使用方法" class="headerlink" title="(1)getForEntity使用方法"></a>(1)getForEntity使用方法</h3><p>无参数的getForEntity</p>
+<pre><code>@RequestMapping(&quot;getForEntity&quot;)
+public List&lt;UserEntity&gt; getAll2() &#123;
+    ResponseEntity&lt;List&gt; responseEntity = restTemplate.getForEntity(&quot;http://localhost:8080/getAll&quot;, List.class);
+    HttpHeaders headers = responseEntity.getHeaders();
+    HttpStatus statusCode = responseEntity.getStatusCode();
+    int code = statusCode.value();
+    List&lt;UserEntity&gt; list = responseEntity.getBody();
+    System.out.println(list.toString());
+    return list;
+
+&#125;
+</code></pre>
+<p>有参数的 getForEntity 请求,参数列表 如下才是参数的正确使用方式,曾在这踩了一个坑,浪费了好长时间,</p>
+<pre><code>@RequestMapping(&quot;getForEntity/&#123;id&#125;&quot;)
+public UserEntity getById2(@PathVariable(name = &quot;id&quot;) String id) &#123;
+    String url = &quot;http://localhost:8080/get/&#123;id&#125;?username=&#123;username&#125;&amp;password=&#123;password&#125;&amp;sex=&#123;sex&#125;&quot;;
+    Map&lt;String,String&gt; map = new HashMap&lt;&gt;();
+    map.put(&quot;id&quot;,&quot;11&quot;);
+    map.put(&quot;username&quot;,&quot;lisi&quot;);
+    map.put(&quot;password&quot;,&quot;12345&quot;);
+    map.put(&quot;sex&quot;,&quot;man&quot;);
+    ResponseEntity&lt;UserEntity&gt; responseEntity = restTemplate.getForEntity(url, UserEntity.class, map );
+    UserEntity userEntity = responseEntity.getBody();
+    return userEntity;
+&#125;
+</code></pre>
+<blockquote>
+<p>但是,通常情况下我们并不想要Http请求的全部信息,只需要相应体即可.对于这种情况,RestTemplate提供了 getForObject() 方法用来只获取 响应体信息.<br>getForObject 和 getForEntity 用法几乎相同,指示返回值返回的是 响应体,省去了我们 再去 getBody() </p>
+</blockquote>
+<h3 id="2-getForObject使用方法"><a href="#2-getForObject使用方法" class="headerlink" title="(2)getForObject使用方法"></a>(2)getForObject使用方法</h3><p>无参数的getForEntity</p>
+<pre><code>@RequestMapping(&quot;getAll2&quot;)
+public List&lt;UserEntity&gt; getAll() &#123;
+    List&lt;UserEntity&gt; list = restTemplate.getForObject(&quot;http://localhost:8080/getAll&quot;, List.class);
+    System.out.println(list.toString());
+    return list;
+&#125;
+</code></pre>
+<p>有参数的 get 请求,使用map封装请求参数</p>
+<pre><code>@RequestMapping(&quot;get3/&#123;id&#125;&quot;)
+public UserEntity getById3(@PathVariable(name = &quot;id&quot;) String id) &#123;
+    HashMap&lt;String, String&gt; map = new HashMap&lt;&gt;();
+    map.put(&quot;id&quot;,id);
+    UserEntity userEntity = restTemplate.getForObject(&quot;http://localhost:8080/get/&#123;id&#125;&quot;, UserEntity.class, map);
+    return userEntity;
+&#125;
+</code></pre>
+<h2 id="2-Post请求"><a href="#2-Post请求" class="headerlink" title="2. Post请求"></a>2. Post请求</h2><p>post 请求,提交 UserEntity 对像</p>
+<pre><code>@RequestMapping(&quot;saveUser&quot;)
+public String save(UserEntity userEntity) &#123;
+    ResponseEntity&lt;String&gt; responseEntity = restTemplate.postForEntity(&quot;http://localhost:8080/save&quot;, userEntity, String.class);
+    String body = responseEntity.getBody();
+    return body;
+&#125;
+</code></pre>
+<p>有参数的 postForEntity 请求,使用map封装</p>
+<pre><code>@RequestMapping(&quot;saveUserByType2/&#123;type&#125;&quot;)
+public String save3(UserEntity userEntity,@PathVariable(&quot;type&quot;)String type) &#123;
+    HashMap&lt;String, String&gt; map = new HashMap&lt;&gt;();
+    map.put(&quot;type&quot;, type);
+    ResponseEntity&lt;String&gt; responseEntity = restTemplate.postForEntity(&quot;http://localhost:8080/saveByType/&#123;type&#125;&quot;, userEntity, String.class,map);
+    String body = responseEntity.getBody();
+    return body;
+&#125;
+</code></pre>
+<p>以上get 和post 两个 请求基本上可以满足我们的大部分需求,如果不满足可以使用 **exchange()**或者 <strong>execute()</strong> 来实现,通过看源代码,可以发现,getForEntity() 和postForEntity()是对这两个方法的封装.</p>
+<h2 id="三-手动指定转换器-HttpMessageConverter"><a href="#三-手动指定转换器-HttpMessageConverter" class="headerlink" title="三. 手动指定转换器(HttpMessageConverter)"></a>三. 手动指定转换器(HttpMessageConverter)</h2><p>我们知道 ,reseful接口传递的数据内容和响应都是json格式的字符串.而postForObject方法请求和返回的参数都是java类,是RestTemplate通过HttpMessageConverter帮我们做了转换的操作.</p>
+<p>通过查看restTemplate实例对象,</p>
+<p><img src="http://7xpw00.com1.z0.glb.clouddn.com/restTemplateObject.png"></p>
+<p>默认情况下RestTemplate自动帮我们注册了一组HttpMessageConverter用来处理一些不同的contextType的请求.如:</p>
+<ul>
+<li>StringHttpMessageConverter来处理text&#x2F;plain; </li>
+<li>MappingJackson2HttpMessageConverter来处理application&#x2F;json;</li>
+<li>Jaxb2RootElementHttpMessageConverter来处理application&#x2F;xml,text&#x2F;xml。</li>
+<li>AllEncompassingFormHttpMessageConverter来处理application&#x2F;x-www-form-urlencoded。</li>
+</ul>
+<p>这些可满足大部分的需求,如果这些都不能满足.你可以实现org.springframework.http.converter.HttpMessageConverter接口自己写一个。详情参考官方api。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/03/08/spring%20REST%E4%B9%8B%20RestTemplate%E7%9A%84%E4%BD%BF%E7%94%A8/" data-id="cl4gp6u2a002c9cvc1qhg95jd" data-title="spring REST之 RestTemplate的使用" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/12/%E4%B8%80.%20%20java%E9%9B%86%E5%90%88%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          一. java集合
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/05/Http%E8%A7%A3%E6%9E%90/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">HTTP解析</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Error/" rel="tag">Error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Extjs/" rel="tag">Extjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerDesigner/" rel="tag">PowerDesigner</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">java虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/" rel="tag">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" rel="tag">myeclipse插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E8%AE%B0/" rel="tag">日记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" rel="tag">生活文化与素养</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Extjs/" style="font-size: 10px;">Extjs</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/PowerDesigner/" style="font-size: 12.86px;">PowerDesigner</a> <a href="/tags/Spring/" style="font-size: 14.29px;">Spring</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 12.86px;">java虚拟机</a> <a href="/tags/linux/" style="font-size: 17.14px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">myeclipse插件</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 14.29px;">工具</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 18.57px;">数据库</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 15.71px;">日记</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 14.29px;">杂记</a> <a href="/tags/%E6%A1%86%E6%9E%B6/" style="font-size: 14.29px;">框架</a> <a href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" style="font-size: 11.43px;">生活文化与素养</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 12.86px;">笔记</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/06/16/Hexo-github-%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2-%E6%96%B0%E6%89%8B%E5%85%A5%E9%97%A8/">Hexo+github搭建静态博客(新手入门)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/test/">test</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/20/%E4%BA%94.%20volatile%20%E5%85%B3%E9%94%AE%E5%AD%97/">五. volatile关键字</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/19/%E4%B8%89.%20%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/">三. 垃圾收集器</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Zhutongtong<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

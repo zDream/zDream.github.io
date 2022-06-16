@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>PowerDesigner概念模型详解 | 记忆时光</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="概念模型的重要性 数据库设计的基本步骤： 需求分析 从系统需求中寻找一些概念性名词，并甄选，并对这些名词相关属性做了解，这部分是人工的，PD做不了什么 概念结构设计 针对甄选的名词进行分心，找出其中的关系（独立的、一对一、一对多、多对多、继承五种关系），并用E-R图描述出来，这是大学课本的做法。在PD中，这个过程可以用CDM（概念模型）来描述，PDM中实体概念模型表示方式比E-R更清晰，更好 逻辑">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PowerDesigner概念模型详解">
+<meta property="og:url" content="http://example.com/2016/01/13/PowerDesigner%E6%A6%82%E5%BF%B5%E6%A8%A1%E5%9E%8B%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="记忆时光">
+<meta property="og:description" content="概念模型的重要性 数据库设计的基本步骤： 需求分析 从系统需求中寻找一些概念性名词，并甄选，并对这些名词相关属性做了解，这部分是人工的，PD做不了什么 概念结构设计 针对甄选的名词进行分心，找出其中的关系（独立的、一对一、一对多、多对多、继承五种关系），并用E-R图描述出来，这是大学课本的做法。在PD中，这个过程可以用CDM（概念模型）来描述，PDM中实体概念模型表示方式比E-R更清晰，更好 逻辑">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2016-01-13T05:31:06.000Z">
+<meta property="article:modified_time" content="2022-06-16T07:22:10.417Z">
+<meta property="article:author" content="Zhutongtong">
+<meta property="article:tag" content="PowerDesigner">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="记忆时光" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">记忆时光</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-PowerDesigner概念模型详解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/01/13/PowerDesigner%E6%A6%82%E5%BF%B5%E6%A8%A1%E5%9E%8B%E8%AF%A6%E8%A7%A3/" class="article-date">
+  <time class="dt-published" datetime="2016-01-13T05:31:06.000Z" itemprop="datePublished">2016-01-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      PowerDesigner概念模型详解
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="概念模型的重要性"><a href="#概念模型的重要性" class="headerlink" title="概念模型的重要性"></a>概念模型的重要性</h2><p> 数据库设计的基本步骤：</p>
+<h3 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h3><p> 从系统需求中寻找一些概念性名词，并甄选，并对这些名词相关属性做了解，这部分是人工的，PD做不了什么</p>
+<h3 id="概念结构设计"><a href="#概念结构设计" class="headerlink" title="概念结构设计"></a>概念结构设计</h3><p> 针对甄选的名词进行分心，找出其中的关系（独立的、一对一、一对多、多对多、继承五种关系），并用E-R图描述出来，这是大学课本的做法。在PD中，这个过程可以用CDM（概念模型）来描述，PDM中实体概念模型表示方式比E-R更清晰，更好</p>
+<h3 id="逻辑结构设计"><a href="#逻辑结构设计" class="headerlink" title="逻辑结构设计"></a>逻辑结构设计</h3><p> 实际上就是设计表的结构和表之间的主外关系等。这部分在PD中对应的是PDM（物理模型），而PD中的物理模型一般都是直接从概念模型生成的。也就是说，只要你做好概念模型，物理模型就可以自动生成。当然，这种生成结果一般都需要做一些调整和优化。</p>
+<h3 id="物理结构设计"><a href="#物理结构设计" class="headerlink" title="物理结构设计"></a>物理结构设计</h3><p> 有了PDM，数据库的物理设计将不费吹灰之力，直接可以从PDM导出各种数据库系统的建库脚本。</p>
+<h3 id="数据库的建立和测试"><a href="#数据库的建立和测试" class="headerlink" title="数据库的建立和测试"></a>数据库的建立和测试</h3><p> 这个过程也很简单，看看建库脚本的执行就知道了。不合理了重新修改PDM，然后生成sql再来</p>
+<h3 id="数据库运行和维护"><a href="#数据库运行和维护" class="headerlink" title="数据库运行和维护"></a>数据库运行和维护</h3><p> 这个一般是DBA的事情了，比如时间长了，数据量大了，在某些列上加上索引，调优等等。</p>
+<p> 从中可以看到，一上来就建PDM，是不合理的。实际上要求对概念模型有个透彻理解了才去做PDM，这种理解可以不画图，但至少是心中有图。</p>
+<h2 id="使用PD建立数据库概念模型"><a href="#使用PD建立数据库概念模型" class="headerlink" title="使用PD建立数据库概念模型"></a>使用PD建立数据库概念模型</h2><h3 id="一对一CDM"><a href="#一对一CDM" class="headerlink" title="一对一CDM"></a>一对一CDM</h3><h3 id="一对多CDM"><a href="#一对多CDM" class="headerlink" title="一对多CDM"></a>一对多CDM</h3><h3 id="多对多CDM"><a href="#多对多CDM" class="headerlink" title="多对多CDM"></a>多对多CDM</h3><h3 id="继承关系CDM"><a href="#继承关系CDM" class="headerlink" title="继承关系CDM"></a>继承关系CDM</h3><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>数据库建模是系统设计中最重要一步，概念模型能很好的描述数据间的关系，还可以从概念模型精确生成符合一定标准范式的物理模型。</li>
+<li>CDM能描述出更细微的数据关系，比如是0-n还1-n，这直接影响到数据业务上的约束，但是用PDM无法描述。CDM为业务交流节约了沟通成本。</li>
+<li>CDM也为后来了解底层业务数据关系提供了依据，尤其是表很多很多时候，如果没有CDM，那只有设计数据库的人知道底层的关系了。</li>
+<li>如果表很多，分模块的情况，还可以讲CDM分包来管理，这样可以避免将所有的实体关系画到一张图中所带来阅读上烦恼。</li>
+<li>PD还有其他很多很强悍的功能，比如数据库反响到PDM，PDM导出脚本，PDM导出Java模型对象、XML模型。还可以生成DAO层的持久化代码，甚至hbm文件，还可以做业务流程建模、生成数据字典报表等等。但PD最擅长的就是CDM–&gt;PDM–&gt;SQL，数据库反向工程，报表功能，用好这些就不错了。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/01/13/PowerDesigner%E6%A6%82%E5%BF%B5%E6%A8%A1%E5%9E%8B%E8%AF%A6%E8%A7%A3/" data-id="cl4gp6u1r000w9cvc8be04owq" data-title="PowerDesigner概念模型详解" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PowerDesigner/" rel="tag">PowerDesigner</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/01/13/oracle%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          oracle常用命令
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/01/12/myeclipse%E6%8F%92%E4%BB%B6%E7%9A%84%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">myeclipse插件的安装方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Error/" rel="tag">Error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Extjs/" rel="tag">Extjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerDesigner/" rel="tag">PowerDesigner</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">java虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/" rel="tag">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" rel="tag">myeclipse插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E8%AE%B0/" rel="tag">日记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" rel="tag">生活文化与素养</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Extjs/" style="font-size: 10px;">Extjs</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/PowerDesigner/" style="font-size: 12.86px;">PowerDesigner</a> <a href="/tags/Spring/" style="font-size: 14.29px;">Spring</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 12.86px;">java虚拟机</a> <a href="/tags/linux/" style="font-size: 17.14px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">myeclipse插件</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 14.29px;">工具</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 18.57px;">数据库</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 15.71px;">日记</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 14.29px;">杂记</a> <a href="/tags/%E6%A1%86%E6%9E%B6/" style="font-size: 14.29px;">框架</a> <a href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" style="font-size: 11.43px;">生活文化与素养</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 12.86px;">笔记</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/06/16/Hexo-github-%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2-%E6%96%B0%E6%89%8B%E5%85%A5%E9%97%A8/">Hexo+github搭建静态博客(新手入门)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/test/">test</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/20/%E4%BA%94.%20volatile%20%E5%85%B3%E9%94%AE%E5%AD%97/">五. volatile关键字</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/19/%E4%B8%89.%20%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/">三. 垃圾收集器</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Zhutongtong<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

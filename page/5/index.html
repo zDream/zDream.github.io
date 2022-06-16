@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>记忆时光</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="描述">
+<meta property="og:type" content="website">
+<meta property="og:title" content="记忆时光">
+<meta property="og:url" content="http://example.com/page/5/index.html">
+<meta property="og:site_name" content="记忆时光">
+<meta property="og:description" content="描述">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="Zhutongtong">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="记忆时光" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">记忆时光</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-抽象类和接口" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/01/21/%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/" class="article-date">
+  <time class="dt-published" datetime="2016-01-21T06:22:11.000Z" itemprop="datePublished">2016-01-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/01/21/%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/">抽象类和接口</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>接口和内部类为我们提供了一种将接口与实现分离的更加结构化的方法。</p>
+</blockquote>
+<p>抽象类与接口是java语言中对抽象概念进行定义的两种机制，正是由于他们的存在才赋予java强大的面向对象的能力。他们两者之间对抽象概念的支持有很大的相似，甚至可以互换，但是也有区别。</p>
+<h3 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h3><blockquote>
+<p>我们都知道在面向对象的领域一切都是对象，同时所有的对象都是通过类来描述的，但是并不是所有的类都是来描述对象的。如果一个类没有足够的信息来描述一个具体的对象，而需要其他具体的类来支撑它，那么这样的类我们称它为抽象类。比如new Animal()，我们都知道这个是产生一个动物Animal对象，但是这个Animal具体长成什么样子我们并不知道，它没有一个具体动物的概念，所以他就是一个抽象类，需要一个具体的动物，如狗、猫来对它进行特定的描述，我们才知道它长成啥样。在面向对象领域由于抽象的概念在问题领域没有对应的具体概念，所以用以表征抽象概念的抽象类是不能实例化的。同时，抽象类体现了数据抽象的思想，是实现多态的一种机制。它定义了一组抽象的方法，至于这组抽象方法的具体表现形式有派生类来实现。<strong>同时抽象类提供了继承的概念，它的出发点就是为了继承，否则它没有存在的任何意义。所以说定义的抽象类一定是用来继承的，同时在一个以抽象类为节点的继承关系等级链中，叶子节点一定是具体的实现类。（不知这样理解是否有错!!!高手指点….）</strong></p>
+</blockquote>
+<p> 在使用抽象类时需要注意几点：</p>
+<ul>
+<li>抽象类不能被实例化，实例化的工作应该交由它的子类来完成，它只需要有一个引用即可。</li>
+<li>抽象方法必须由子类来进行重写。</li>
+<li>只要包含一个抽象方法的抽象类，该方法必须要定义成抽象类，不管是否还包含有其他方法。</li>
+<li>抽象类中可以包含具体的方法，当然也可以不包含抽象方法。</li>
+<li>子类中的抽象方法不能与父类的抽象方法同名。</li>
+<li>abstract不能与final并列修饰同一个类。</li>
+<li>abstract 不能与private、static、final或native并列修饰同一个方法。</li>
+</ul>
+<p><strong>实例</strong><br>定义一个抽象动物类Animal，提供抽象方法叫cry()，猫、狗都是动物类的子类，由于cry()为抽象方法，所以Cat、Dog必须要实现cry()方法。如下：</p>
+<pre><code>public abstract class Animal &#123;  
+public abstract void cry();  
+&#125;  
+  
+public class Cat extends Animal&#123;  
+  
+@Override  
+public void cry() &#123;  
+    System.out.println(&quot;猫叫：喵喵...&quot;);  
+&#125;  
+&#125;  
+  
+public class Dog extends Animal&#123;  
+  
+@Override  
+public void cry() &#123;  
+    System.out.println(&quot;狗叫:汪汪...&quot;);  
+&#125;  
+
+&#125;  
+  
+public class Test &#123;  
+  
+public static void main(String[] args) &#123;  
+    Animal a1 = new Cat();  
+    Animal a2 = new Dog();  
+      
+    a1.cry();  
+    a2.cry();  
+&#125;  
+ 
+
+--------------------------------------------------------------------  
+Output:  
+猫叫：喵喵...  
+狗叫:汪汪...  
+</code></pre>
+<p>创建抽象类和抽象方法非常有用,因为他们可以使类的抽象性明确起来,并告诉用户和编译器打算怎样使用他们.抽象类还是有用的重构器,因为它们使我们可以很容易地将公共方法沿着继承层次结构向上移动。</p>
+<h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><blockquote>
+<p>接口是一种比抽象类更加抽象的“类”。这里给“类”加引号是我找不到更好的词来表示，但是我们要明确一点就是，接口本身就不是类，从我们不能实例化一个接口就可以看出。如new Runnable();肯定是错误的，我们只能new它的实现类。接口是用来建立类与类之间的协议，它所提供的只是一种形式，而没有具体的实现。同时实现该接口的实现类必须要实现该接口的所有方法，通过使用implements关键字，他表示该类在遵循某个或某组特定的接口，同时也表示着“interface只是它的外貌，但是现在需要声明它是如何工作的”。接口是抽象类的延伸，java了保证数据安全是不能多重继承的，也就是说继承只能存在一个父类，但是接口不同，一个类可以同时实现多个接口，不管这些接口之间有没有关系，所以接口弥补了抽象类不能多重继承的缺陷，但是推荐继承和接口共同使用，因为这样既可以保证数据安全性又可以实现多重继承。</p>
+</blockquote>
+<p>在使用接口过程中需要注意如下几个问题：</p>
+<ul>
+<li>Interface的方所有法访问权限自动被声明为public。确切的说只能为public，当然你可以显示的声明为protected、private，但是编译会出错！</li>
+<li>接口中可以定义“成员变量”，或者说是不可变的常量，因为接口中的“成员变量”会自动变为为public static final。可以通过类命名直接访问：ImplementClass.name。</li>
+<li>接口中不存在实现的方法</li>
+<li>实现接口的非抽象类必须要实现该接口的所有方法。抽象类可以不用实现</li>
+<li>不能使用new操作符实例化一个接口，但可以声明一个接口变量，该变量必须引用（refer to)一个实现该接口的类的对象。可以使用 instanceof 检查一个对象是否实现了某个特定的接口。例如：if(anObject instanceof Comparable){}</li>
+<li>在实现多接口的时候一定要避免方法名的重复</li>
+</ul>
+<h3 id="抽象类与接口的区别"><a href="#抽象类与接口的区别" class="headerlink" title="抽象类与接口的区别"></a>抽象类与接口的区别</h3><blockquote>
+<p>尽管抽象类和接口之间存在较大的相同点，甚至有时候还可以互换，但这样并不能弥补他们之间的差异之处。下面将从语法层次和设计层次两个方面对抽象类和接口进行阐述。</p>
+</blockquote>
+<h4 id="语法层次"><a href="#语法层次" class="headerlink" title="语法层次"></a>语法层次</h4><p> 在语法层次，java语言对于抽象类和接口分别给出了不同的定义。下面已Demo类来说明他们之间的不同之处。  </p>
+<p> 使用抽象类来实现:</p>
+<pre><code>public abstract class Demo &#123;  
+abstract void method1();  
+  
+  
+void method2()&#123;  
+    //实现  
+&#125;  
+&#125;  
+</code></pre>
+<p>使用接口来实现：</p>
+<pre><code>interface Demo &#123;  
+    void method1();  
+    void method2();  
+&#125;  
+</code></pre>
+<p>抽象类方式中，抽象类可以拥有任意范围的成员数据，同时也可以拥有自己的非抽象方法，但是接口方式中，它仅能够有静态、不能修改的成员数据（但是我们一般是不会在接口中使用成员数据），同时它所有的方法都必须是抽象的。在某种程度上来说，接口是抽象类的特殊化。  </p>
+<p> 对子类而言，它只能继承一个抽象类（这是java为了数据安全而考虑的），但是却可以实现多个接口。</p>
+<h4 id="设计层次"><a href="#设计层次" class="headerlink" title="设计层次"></a>设计层次</h4><blockquote>
+<p>上面只是从语法层次和编程角度来区分它们之间的关系，这些都是低层次的，要真正使用好抽象类和接口，我们就必须要从较高层次来区分了。只有从设计理念的角度才能看出它们的本质所在。一般来说他们存在如下三个不同点：</p>
+</blockquote>
+<h5 id="抽象层次不同"><a href="#抽象层次不同" class="headerlink" title="抽象层次不同"></a>抽象层次不同</h5><p>抽象类是对类抽象，而接口是对行为的抽象。抽象类是对整个类整体进行抽象，包括属性、行为，但是接口却是对类局部（行为）进行抽象。</p>
+<h5 id="跨域不同"><a href="#跨域不同" class="headerlink" title="跨域不同"></a>跨域不同</h5><p>抽象类所跨域的是具有相似特点的类，而接口却可以跨域不同的类。我们知道抽象类是从子类中发现公共部分，然后泛化成抽象类，子类继承该父类即可，但是接口不同。实现它的子类可以不存在任何关系，共同之处。例如猫、狗可以抽象成一个动物类抽象类，具备叫的方法。鸟、飞机可以实现飞Fly接口，具备飞的行为，这里我们总不能将鸟、飞机共用一个父类吧！所以说抽象类所体现的是一种继承关系，要想使得继承关系合理，父类和派生类之间必须存在”is-a” 关系，即父类和派生类在概念本质上应该是相同的。对于接口则不然，并不要求接口的实现者和接口定义在概念本质上是一致的， 仅仅是实现了接口定义的契约而已。</p>
+<h5 id="设计层次不同"><a href="#设计层次不同" class="headerlink" title="设计层次不同"></a>设计层次不同</h5><p>对于抽象类而言，它是自下而上来设计的，我们要先知道子类才能抽象出父类，而接口则不同，它根本就不需要知道子类的存在，只需要定义一个规则即可，至于什么子类、什么时候怎么实现它一概不知。比如我们只有一个猫类在这里，如果你这是就抽象成一个动物类，是不是设计有点儿过度？我们起码要有两个动物类，猫、狗在这里，我们在抽象他们的共同点形成动物抽象类吧！所以说抽象类往往都是通过重构而来的！但是接口就不同，比如说飞，我们根本就不知道会有什么东西来实现这个飞接口，怎么实现也不得而知，我们要做的就是事前定义好飞的行为接口。所以说抽象类是自底向上抽象而来的，接口是自顶向下设计出来的。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li>抽象类在java语言中所表示的是一种继承关系，一个子类只能存在一个父类，但是可以存在多个接口。</li>
+<li>在抽象类中可以拥有自己的成员变量和非抽象类方法，但是接口中只能存在静态的不可变的成员数据（不过一般都不在接口中定义成员数据），而且它的所有方法都是抽象的。</li>
+<li>抽象类和接口所反映的设计理念是不同的，抽象类所代表的是“is-a”的关系，而接口所代表的是“like-a”的关系。</li>
+</ol>
+<p> 抽象类和接口是java语言中两种不同的抽象概念，他们的存在对多态提供了非常好的支持，虽然他们之间存在很大的相似性。但是对于他们的选择往往反应了您对问题域的理解。只有对问题域的本质有良好的理解，才能做出正确、合理的设计。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/01/21/%E6%8A%BD%E8%B1%A1%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3/" data-id="cl4gp6u2v003h9cvcd2sdbttr" data-title="抽象类和接口" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-linux(centos)上git的安装" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/01/20/linux(centos)%E4%B8%8Agit%E7%9A%84%E5%AE%89%E8%A3%85/" class="article-date">
+  <time class="dt-published" datetime="2016-01-20T10:08:24.000Z" itemprop="datePublished">2016-01-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/01/20/linux(centos)%E4%B8%8Agit%E7%9A%84%E5%AE%89%E8%A3%85/">linux（centos）上git的安装</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>我是在centos的环境下以源码的形式装的</p>
+</blockquote>
+<h2 id="先去下源码包"><a href="#先去下源码包" class="headerlink" title="先去下源码包"></a>先去下源码包</h2><h3 id="下载源码"><a href="#下载源码" class="headerlink" title="下载源码"></a>下载源码</h3><p><a target="_blank" rel="noopener" href="http://git-scm.com/downloads">git</a>在这去下源码包 git-2.7.0.tar.gz</p>
+<p><img src="http://7xpw00.com1.z0.glb.clouddn.com/imageQQ%E6%88%AA%E5%9B%BE20160120175303.png"></p>
+<p><img src="http://7xpw00.com1.z0.glb.clouddn.com/imagegit.png"></p>
+<p>下好之后上传到linux服务器上,</p>
+<h3 id="解压，配置安装"><a href="#解压，配置安装" class="headerlink" title="解压，配置安装"></a>解压，配置安装</h3><pre><code>[root@drayy git-2.7.0]# cd git-2.7.0
+[root@drayy git-2.7.0]# ./configure
+[root@drayy git-2.7.0]# make
+[root@drayy git-2.7.0]# make install
+</code></pre>
+<p>但在执行make操作时报错：缺少gcc，yum安装gcc</p>
+<pre><code>[root@drayy git-2.7.0]# yum -y install gcc
+</code></pre>
+<p>重新执行make操作，还报错，缺少zlib.h。我们可以查看是否存在zlib.h</p>
+<pre><code>[root@drayy git-2.7.0]# whereis zlib
+</code></pre>
+<p>如果存在则会输出zlib路径。不存在则输出空白，以下是安装详情：</p>
+<ul>
+<li><p>从<a target="_blank" rel="noopener" href="http://www.zlib.net/">下载zlib</a>下载zlib最新版：zlib-1.2.8.tar.gz</p>
+<p> [root@drayy git-2.7.0]# tar -zxvf zlib-1.2.8.tar.gz<br> [root@drayy git-2.7.0]# cd zlib-1.2.8<br> [root@drayy git-2.7.0]# .&#x2F;configure<br> [root@drayy git-2.7.0]# make<br> [root@drayy git-2.7.0]# make install</p>
+<p> 再执行<br> [root@drayy git-2.7.0]# git –version<br> git version 2.7.0</p>
+</li>
+</ul>
+<p>安装成功</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/01/20/linux(centos)%E4%B8%8Agit%E7%9A%84%E5%AE%89%E8%A3%85/" data-id="cl4gp6u1x001d9cvc91mp3rvn" data-title="linux（centos）上git的安装" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-struts2 Result Type" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/01/19/struts2%20Result%20Type/" class="article-date">
+  <time class="dt-published" datetime="2016-01-19T01:15:33.000Z" itemprop="datePublished">2016-01-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/01/19/struts2%20Result%20Type/">struts2返回结果类型</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="Result-Types"><a href="#Result-Types" class="headerlink" title="Result Types"></a>Result Types</h2><h3 id="Chain-Result"><a href="#Chain-Result" class="headerlink" title="Chain Result"></a>Chain Result</h3><p>用来处理Action链，被跳转的action中仍能获取上个页面的值</p>
+<pre><code>配置文件
+&lt;package name=&quot;public&quot; extends=&quot;struts-default&quot;&gt;
+    &lt;!-- Chain creatAccount to login, using the default parameter --&gt;
+    &lt;action name=&quot;createAccount&quot; class=&quot;com.dream.struts.ResultAction&quot; method=&quot;createAccount&quot;&gt;
+        &lt;result type=&quot;chain&quot;&gt;login&lt;/result&gt;
+    &lt;/action&gt;
+
+    &lt;action name=&quot;login&quot; class=&quot;com.dream.struts.ResultAction&quot; method=&quot;login&quot;&gt;
+        &lt;!-- Chain to another namespace --&gt;
+        &lt;result type=&quot;chain&quot;&gt;
+            &lt;param name=&quot;actionName&quot;&gt;dashboard&lt;/param&gt;
+            &lt;param name=&quot;namespace&quot;&gt;/secure&lt;/param&gt;
+        &lt;/result&gt;
+    &lt;/action&gt;
+&lt;/package&gt;
+
+&lt;package name=&quot;secure&quot; extends=&quot;struts-default&quot; namespace=&quot;/secure&quot;&gt;
+    &lt;action name=&quot;dashboard&quot; class=&quot;com.dream.struts.ResultAction&quot; method=&quot;dashboard&quot;&gt;
+        &lt;result&gt;/dashboard.jsp&lt;/result&gt;
+    &lt;/action&gt;
+&lt;/package&gt;
+
+ResultAction.java
+public class ResultAction &#123;
+public String createAccount()&#123;
+    System.out.println(&quot;ceate account&quot;);
+    return &quot;success&quot;;
+&#125;
+
+public String login()&#123;
+    System.out.println(&quot;login&quot;);
+    return &quot;success&quot;;
+&#125;
+public String dashboard()&#123;
+    System.out.println(&quot;dashboard&quot;);
+    return &quot;success&quot;;
+&#125;
+&#125;
+</code></pre>
+<h3 id="Dispatcher-Result"><a href="#Dispatcher-Result" class="headerlink" title="Dispatcher Result"></a>Dispatcher Result</h3><p> 缺省值，如果没有配置类型默认就是dispatcher，包括或转发到一个视图(通常是一个jsp)。在后台Struts2将使用一个RequestDispatcher,目标servlet&#x2F;JSP接收相同的request&#x2F;response对象作为原始的servlet或JSP。 因此,可以使用request.setAttribute()传递数据- - - Struts的action是可用的。如果请求action会找不到资源。 </p>
+<pre><code>&lt;result name=&quot;success&quot; type=&quot;dispatcher&quot;&gt;
+  &lt;param name=&quot;location&quot;&gt;/foo.jsp&lt;/param&gt;
+&lt;/result&gt;
+</code></pre>
+<h3 id="Redirect-Result"><a href="#Redirect-Result" class="headerlink" title="Redirect Result"></a>Redirect Result</h3><p> 重定向到一个资源，唯一的传参方法是通过会话或用OGNL表达式，url参数(url ?名称&#x3D;值)。 </p>
+<ul>
+<li><p><strong>parse：</strong> true by default. If set to false, the location param will not be parsed for Ognl expressions.  </p>
+  <package name="passingRequestParameters" extends="struts-default" namespace="/passingRequestParameters">
+     <-- Pass parameters (reportType, width and height) -->
+     <!--
+     The redirect url generated will be - the namespace of current acction will be appended as location doesn&#39;t start with "/":
+     /passingRequestParameters/generateReport.jsp?reportType=pie&width=100&height=100#summary
+     -->
+     <action name="gatherReportInfo" class="...">
+        <result name="showReportResult" type="redirect">
+           <param name="location">generateReport.jsp</param>
+           <param name="reportType">pie</param>
+           <param name="width">100</param>
+           <param name="height">100</param>
+           <param name="parse">false</param>
+           <param name="anchor">summary</param>
+        </result>
+     </action>
+  </package</li>
+</ul>
+<h3 id="Redirect-Action-Result"><a href="#Redirect-Action-Result" class="headerlink" title="Redirect Action Result"></a>Redirect Action Result</h3><h3 id="HttpHeader-Result"><a href="#HttpHeader-Result" class="headerlink" title="HttpHeader Result"></a>HttpHeader Result</h3><h3 id="Stream-Result"><a href="#Stream-Result" class="headerlink" title="Stream Result"></a>Stream Result</h3><h3 id="Velocity-Result"><a href="#Velocity-Result" class="headerlink" title="Velocity Result"></a>Velocity Result</h3><h3 id="XSL-Result"><a href="#XSL-Result" class="headerlink" title="XSL Result"></a>XSL Result</h3><h3 id="PlainText-Result"><a href="#PlainText-Result" class="headerlink" title="PlainText Result"></a>PlainText Result</h3><h3 id="Tiles-2-Plugin"><a href="#Tiles-2-Plugin" class="headerlink" title="Tiles 2 Plugin"></a>Tiles 2 Plugin</h3><h3 id="Tiles-3-Result"><a href="#Tiles-3-Result" class="headerlink" title="Tiles 3 Result"></a>Tiles 3 Result</h3><h3 id="Postback-Result"><a href="#Postback-Result" class="headerlink" title="Postback Result"></a>Postback Result</h3><h3 id="FreeMarker-Result"><a href="#FreeMarker-Result" class="headerlink" title="FreeMarker Result"></a>FreeMarker Result</h3><p> 返回一个视图使用FreeMarker模板引擎。</p>
+<pre><code>&lt;result name=&quot;success&quot; type=&quot;freemarker&quot;&gt;foo.ftl&lt;/result&gt;
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/01/19/struts2%20Result%20Type/" data-id="cl4gp6u2c002g9cvcgktg5ltd" data-title="struts2返回结果类型" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-开发笔记" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/01/18/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time class="dt-published" datetime="2016-01-18T11:30:17.000Z" itemprop="datePublished">2016-01-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/01/18/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/">开发笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h4 id="将用户信息保存到Session中"><a href="#将用户信息保存到Session中" class="headerlink" title="将用户信息保存到Session中"></a>将用户信息保存到Session中</h4><pre><code>ServletActionContext.getRequest().getSession().setAttribute(Constant.USER, user);
+</code></pre>
+<h4 id="清除session中的保存信息"><a href="#清除session中的保存信息" class="headerlink" title="清除session中的保存信息"></a>清除session中的保存信息</h4><pre><code>ServletActionContext.getRequest().getSession().removeAttribute(Constant.USER);
+</code></pre>
+<h4 id="登录过滤器"><a href="#登录过滤器" class="headerlink" title="登录过滤器"></a>登录过滤器</h4><pre><code>public class LoginFilter implements Filter &#123;
+@Override
+public void init(FilterConfig filterConfig) throws ServletException &#123;&#125;
+@Override
+public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+        throws IOException, ServletException &#123;
+    // TODO Auto-generated method stub
+    HttpServletResponse rep= (HttpServletResponse) response;
+    HttpServletRequest req=  (HttpServletRequest) request;
+    String uri=req.getRequestURI();
+    //判断当前请求地址是否是登录的请求地址
+    if(!uri.contains(&quot;sys/login_&quot;))&#123;
+        //非登录请求
+        if(req.getSession().getAttribute(Constant.USER) != null)&#123;
+            //说明已经登录过，放行
+            chain.doFilter(req, rep);
+        &#125;else &#123;
+            //没有登录过，跳转到登录界面
+            rep.sendRedirect(req.getContextPath()+&quot;/sys/login_toLoginUI.action&quot;);
+        &#125;
+    &#125;else &#123;
+        //登录请求，直接放行
+        chain.doFilter(req, rep);
+    &#125;
+&#125;
+@Override
+public void destroy() &#123;&#125;
+&#125;
+
+web.xml
+    &lt;!-- 登录过滤器，配置在struts2的前面  --&gt;
+  &lt;filter&gt;
+    &lt;filter-name&gt;loginFilter&lt;/filter-name&gt;
+    &lt;filter-class&gt;com.dream.core.filter.LoginFilter&lt;/filter-class&gt;
+  &lt;/filter&gt;
+  &lt;filter-mapping&gt;
+    &lt;filter-name&gt;loginFilter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;*.action&lt;/url-pattern&gt;
+  &lt;/filter-mapping&gt;
+</code></pre>
+<h4 id="获取spring中的bean"><a href="#获取spring中的bean" class="headerlink" title="获取spring中的bean"></a>获取spring中的bean</h4><pre><code>WebApplicationContext webApplicationContext = WebApplicationContextUtils.getWebApplicationContext(req.getSession().getServletContext());
+                PermissionCheck pc=(PermissionCheck) webApplicationContext.getBean(&quot;permissionCheck&quot;);
+                
+</code></pre>
+<h4 id="解决子框架嵌套的问题"><a href="#解决子框架嵌套的问题" class="headerlink" title="解决子框架嵌套的问题"></a>解决子框架嵌套的问题</h4><pre><code>if(window != window.parent)&#123;
+    window.parent.location.reload(true);
+&#125; 
+</code></pre>
+<h4 id="struts2-指定日期格式标签"><a href="#struts2-指定日期格式标签" class="headerlink" title="struts2 指定日期格式标签"></a>struts2 指定日期格式标签</h4><pre><code>&lt;s:date name=&quot;createTime&quot; format=&quot;yyyy-MM-dd HH:mm&quot;/&gt;
+</code></pre>
+<h4 id="struts2-if标签，jq替换标签内容"><a href="#struts2-if标签，jq替换标签内容" class="headerlink" title="struts2 if标签，jq替换标签内容"></a>struts2 if标签，jq替换标签内容</h4><pre><code>//异步发布信息,信息的id及将要改成的信息状态
+  	function doPublic(infoId, state)&#123;
+  		//1、更新信息状态
+  		$.ajax(&#123;
+  			url:&quot;$&#123;basePath&#125;nsfw/info_publicInfo.action&quot;,
+  			data:&#123;&quot;info.infoId&quot;:infoId, &quot;info.state&quot;:state&#125;,
+  			type:&quot;post&quot;,
+  			success: function(msg)&#123;
+  				//2、更新状态栏、操作栏的显示值
+  				if(&quot;更新状态成功&quot; == msg)&#123;
+  					if(state == 1)&#123;//说明信息状态已经被改成 发布，状态栏显示 发布，操作栏显示 停用
+  						$(&quot;#show_&quot;+infoId).html(&quot;发布&quot;);
+  						$(&quot;#oper_&quot;+infoId).html(&#39;&lt;a href=&quot;javascript:doPublic(\&#39;&#39;+infoId+&#39;\&#39;,0)&quot;&gt;停用&lt;/a&gt;&#39;);
+  					&#125; else &#123;
+  						$(&quot;#show_&quot;+infoId).html(&quot;停用&quot;);
+  						$(&quot;#oper_&quot;+infoId).html(&#39;&lt;a href=&quot;javascript:doPublic(\&#39;&#39;+infoId+&#39;\&#39;,1)&quot;&gt;发布&lt;/a&gt;&#39;);
+  					&#125;
+  				&#125; else &#123;alert(&quot;更新信息状态失败！&quot;);&#125;
+  			&#125;,
+  			error: function()&#123;
+  				alert(&quot;更新信息状态失败！&quot;);
+  			&#125;
+  		&#125;);
+  	&#125;
+
+&lt;td id=&quot;show_&lt;s:property value=&#39;infoId&#39;/&gt;&quot; align=&quot;center&quot;&gt;&lt;s:property 	value=&quot;state==1?&#39;发布&#39;:&#39;停用&#39;&quot;/&gt;&lt;/td&gt;
+&lt;td align=&quot;center&quot;&gt;
+    &lt;span  id=&quot;oper_&lt;s:property value=&#39;infoId&#39;/&gt;&quot;&gt;
+        &lt;s:if test=&quot;state==1&quot;&gt;
+            &lt;a href=&quot;javascript:doPublic(&#39;&lt;s:property value=&#39;infoId&#39;/&gt;&#39;,0)&quot;&gt;停用&lt;/a&gt;
+        &lt;/s:if&gt;&lt;s:else&gt;
+            &lt;a href=&quot;javascript:doPublic(&#39;&lt;s:property value=&#39;infoId&#39;/&gt;&#39;,1)&quot;&gt;发布&lt;/a&gt;
+         &lt;/s:else&gt;
+    &lt;/span&gt;
+         &lt;a href=&quot;javascript:doEdit(&#39;&lt;s:property value=&#39;infoId&#39;/&gt;&#39;)&quot;&gt;编辑&lt;/a&gt;
+        &lt;a href=&quot;javascript:doDelete(&#39;&lt;s:property value=&#39;infoId&#39;/&gt;&#39;)&quot;&gt;删除&lt;/a&gt;
+ &lt;/td&gt;
+</code></pre>
+<h4 id="框架整合：在web-xml中注册spring监听器，启动spring容器："><a href="#框架整合：在web-xml中注册spring监听器，启动spring容器：" class="headerlink" title="框架整合：在web.xml中注册spring监听器，启动spring容器："></a>框架整合：在web.xml中注册spring监听器，启动spring容器：</h4><pre><code>先整合  struts 和spring
+然后    spring 和hibernate
+最后		struts spring hibernate 
+
+&lt;listener&gt;
+   &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
+&lt;/listener&gt;
+&lt;context-param&gt;
+    &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+    &lt;param-value&gt;classpath:applicationContext.xml&lt;/param-value&gt;
+&lt;/context-param&gt;
+</code></pre>
+<h4 id="final关键字修饰一个变量时"><a href="#final关键字修饰一个变量时" class="headerlink" title="final关键字修饰一个变量时"></a>final关键字修饰一个变量时</h4><p>final关键字修饰一个变量时，是指引用变量不能变，引用变量所指向的对象中的内容还是可以改变的</p>
+<h4 id="写struts2的核心过滤器的时候可以这样写"><a href="#写struts2的核心过滤器的时候可以这样写" class="headerlink" title="写struts2的核心过滤器的时候可以这样写"></a>写struts2的核心过滤器的时候可以这样写</h4><p>去引入jar包驱动下依次找到org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter类</p>
+<pre><code>  &lt;filter&gt;
+    &lt;filter-name&gt;struts2&lt;/filter-name&gt;
+    &lt;filter-class&gt;org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter&lt;/filter-class&gt;
+  &lt;/filter&gt;
+  &lt;filter-mapping&gt;
+    &lt;filter-name&gt;struts2&lt;/filter-name&gt;
+    &lt;url-pattern&gt;*.action&lt;/url-pattern&gt;
+  &lt;/filter-mapping&gt;
+</code></pre>
+<p>可以在项目struts总文件中包含 struts子文件</p>
+<pre><code>&lt;include file=&quot;com/dream/nsfw/complain/conf/complain-struts.xml&quot;&gt;&lt;/include&gt; 
+</code></pre>
+<h4 id="Spring配置文件"><a href="#Spring配置文件" class="headerlink" title="Spring配置文件"></a>Spring配置文件</h4><p>配置 Spring 核心监听器</p>
+<pre><code>&lt;listener&gt;
+    &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
+&lt;/listener&gt;
+监听器默认会加载 /WEB-INF/applicationContext.xml 配置文件 通常不会放在这个地主所以还需配置路径
+
+如果不是配置在src根目录下，则需要这么写
+&lt;context-param&gt;
+    &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+    &lt;param-value&gt;WEB-INF/classes/com/dream/nsfw/user/conf/user-spring.xml&lt;/param-value&gt;
+&lt;/context-param&gt;
+
+如果是配置在src根目录下，则需要这么写 
+&lt;context-param&gt;
+    &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+    &lt;param-value&gt;WEB-INF/classes/user-spring.xml&lt;/param-value&gt;
+&lt;/context-param&gt;
+ 
+的确是简单了不少，但这样写还是麻烦所以有了如下写法
+&lt;context-param&gt;
+    &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+    &lt;param-value&gt;classpath:user-spring.xml&lt;/param-value&gt;
+&lt;/context-param&gt;
+这样看起来爽多了
+</code></pre>
+<h4 id="3-x2F-16-x2F-2016-项目笔记"><a href="#3-x2F-16-x2F-2016-项目笔记" class="headerlink" title="3&#x2F;16&#x2F;2016 项目笔记"></a>3&#x2F;16&#x2F;2016 项目笔记</h4><p>onchange事件触发条件需满足：  </p>
+<pre><code>1、输入框的值发生改变；2 、输入框失去焦点。事件触发发生在2，而不是1的过程中。
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/01/18/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/" data-id="cl4gp6u2u003c9cvc7fr2dday" data-title="开发笔记" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-何去何从" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/01/18/%E4%BD%95%E5%8E%BB%E4%BD%95%E4%BB%8E/" class="article-date">
+  <time class="dt-published" datetime="2016-01-18T09:21:59.000Z" itemprop="datePublished">2016-01-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/01/18/%E4%BD%95%E5%8E%BB%E4%BD%95%E4%BB%8E/">何去何从</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p> <img src="http://7xpw00.com1.z0.glb.clouddn.com/image173035329288354.jpg"></p>
+<p> 对与错，坚持与放弃，
+ </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/01/18/%E4%BD%95%E5%8E%BB%E4%BD%95%E4%BB%8E/" data-id="cl4gp6u2q00329cvc96698ji2" data-title="何去何从" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-画界面原型的工具" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/01/14/%E7%94%BB%E7%95%8C%E9%9D%A2%E5%8E%9F%E5%9E%8B%E7%9A%84%E5%B7%A5%E5%85%B7/" class="article-date">
+  <time class="dt-published" datetime="2016-01-14T07:54:48.000Z" itemprop="datePublished">2016-01-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/01/14/%E7%94%BB%E7%95%8C%E9%9D%A2%E5%8E%9F%E5%9E%8B%E7%9A%84%E5%B7%A5%E5%85%B7/">设计工具</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p> 引言</p>
+<blockquote>
+<p>最近一直在搞概要设计，需要画界面原型，经朋友推荐，知道了一个非常好用的工具，这里也推荐给大家，希望对你有所帮助。</p>
+</blockquote>
+<p> 工具：Balsamiq Mockups_2.2.5<br> 地址：<a target="_blank" rel="noopener" href="http://softfinder.com/balsamiq-mockups"></a></p>
+<p> 这个工具用的还是比较顺手的</p>
+<p> 拖入，双击，全选，都是非常方便的， Very Good </p>
+<p> 界面如下</p>
+<p> <img src="http://7xpw00.com1.z0.glb.clouddn.com/imageBalsamiqMo.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/01/14/%E7%94%BB%E7%95%8C%E9%9D%A2%E5%8E%9F%E5%9E%8B%E7%9A%84%E5%B7%A5%E5%85%B7/" data-id="cl4gp6u2w003k9cvcesus8t19" data-title="设计工具" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-PowerDesigner生成sql语句中表和字段带引号的问题" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/01/14/PowerDesigner%E7%94%9F%E6%88%90sql%E8%AF%AD%E5%8F%A5%E4%B8%AD%E8%A1%A8%E5%92%8C%E5%AD%97%E6%AE%B5%E5%B8%A6%E5%BC%95%E5%8F%B7%E7%9A%84%E9%97%AE%E9%A2%98/" class="article-date">
+  <time class="dt-published" datetime="2016-01-13T16:14:05.000Z" itemprop="datePublished">2016-01-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/01/14/PowerDesigner%E7%94%9F%E6%88%90sql%E8%AF%AD%E5%8F%A5%E4%B8%AD%E8%A1%A8%E5%92%8C%E5%AD%97%E6%AE%B5%E5%B8%A6%E5%BC%95%E5%8F%B7%E7%9A%84%E9%97%AE%E9%A2%98/">pd生成sql语句带引号</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p> 最近在用Powerdesigner生成oracle数据库sql语句时，发现表和字段名中都带有引号。例如：</p>
+<pre><code>create table &quot;authorISBN&quot;  (
+&quot;authorID&quot;           INTEGER        not null,
+&quot;tit_isbn&quot;           VARCHAR2(20),
+&quot;aut_authorID&quot;       INTEGER,
+&quot;isbn&quot;               VARCHAR2(20),
+constraint PK_AUTHORISBN primary key (&quot;authorID&quot;)
+);
+</code></pre>
+<p>  如果这样生成表的话，那么你查询或者插入数据都会显示table or view does not exist(表或视图不存在)，然后让你郁闷的事情来了，这些表中oracle数据库中是存在的(我是建立在scott用户中的)，但是你去删除这些表(drop table 表名，或者drop table “表名”)都是无法删除的，经过自己查找资料和研究发现，说明scott用户的权限不够。解决的方法是：你先连接到system用户下，使用命令 grant select any table to scott;(这句命令的意思是，授权给scott用户选择任何的表),这样你在连接到scott用户下，发现可以查询出这张表(select * from “表名”) 但是表名上要加引号。删除这张表(drop table “表名”) 表名上同样要加引号。</p>
+<p>  那么为什么用PowerDesigner生成的oracle数据库sql语句的表名和字段名上会出现引号呢？<br>  <strong>因为,Oracle创建表的一条规则为：</strong>在命名表的时候可以使用大写或小写字母。只要表名或字段名没有用双引号括住，Oracle 对大小写就不敏感。Oracle 支持使用双引号的语法。但是，最好不要直接使用双引号。</p>
+<p>   那么怎么让这些引号不出现呢？<br>  在PowerDesiger中，在<strong>physical data model</strong> 中找到菜单中的<strong>Database</strong>下的<strong>Edit current DBMS</strong>中,选择<strong>Script-&gt;Sql-&gt;Format</strong>，有一项CaseSensitivityUsingQuote，它的comment为“Determines if the case sensitivity for identifiers is managed using double quotes”，表示是否适用双引号来规定标识符的大小写，可以看到右边的values默认值为“YES”,改为“No”，点击【应用】按钮。<br>   这样再生成sql语句时，表和字段名上是没有引号了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/01/14/PowerDesigner%E7%94%9F%E6%88%90sql%E8%AF%AD%E5%8F%A5%E4%B8%AD%E8%A1%A8%E5%92%8C%E5%AD%97%E6%AE%B5%E5%B8%A6%E5%BC%95%E5%8F%B7%E7%9A%84%E9%97%AE%E9%A2%98/" data-id="cl4gp6u1s000y9cvcgujcdemi" data-title="pd生成sql语句带引号" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PowerDesigner/" rel="tag">PowerDesigner</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-oracle常用命令" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/01/13/oracle%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="article-date">
+  <time class="dt-published" datetime="2016-01-13T15:04:13.000Z" itemprop="datePublished">2016-01-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/01/13/oracle%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">oracle常用命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="解锁-scott用户"><a href="#解锁-scott用户" class="headerlink" title="解锁 scott用户"></a>解锁 scott用户</h2><pre><code>Cmd 命令下输入 sqlplus / as sysdba  进入 特权模式，然后更改 用户权限
+alter user scott account unlock;
+
+解锁scott用户时设置密码
+alter user SCOTT account unlock identified by 123456;
+</code></pre>
+<h2 id="创建用户，授权"><a href="#创建用户，授权" class="headerlink" title="创建用户，授权"></a>创建用户，授权</h2><p>创建用户tom 密码为13456</p>
+<pre><code>create user tom identified by 123456
+</code></pre>
+<p>授权tom登录权限 </p>
+<pre><code>grant connect to tom
+</code></pre>
+<p>授权resource建表权限  </p>
+<pre><code> grant  resource to tom;
+</code></pre>
+<p>授权用户DBA权限</p>
+<pre><code>grant dba to testuser ;
+</code></pre>
+<p>授权创建视图权限</p>
+<pre><code>grant create any view to test;
+</code></pre>
+<p>给一个用户赋权限使用命令grant,回收权限使用命令 revoke</p>
+<p>删除用户tom</p>
+<pre><code>drop user tom
+</code></pre>
+<p>删除带数据的tom </p>
+<pre><code>drop user tom cascade
+</code></pre>
+<p>查询scott 下的表</p>
+<pre><code>select  *  from  tab;
+</code></pre>
+<p>删除表</p>
+<pre><code>select &#39;drop table &#39;||table_name||&#39;;&#39; 
+from cat 
+where table_type=&#39;TABLE&#39;
+</code></pre>
+<p>EXP数据库导出命令</p>
+<pre><code>exp 用户名/密码@localhost:1521/orcl file=E:/test.dmp full=y
+</code></pre>
+<p>DMP文件导入命令</p>
+<pre><code>imp 用户名/密码@localhost:1521/orcl file=E:/test.dmp full=y
+</code></pre>
+<p>删除数据为空的表数据</p>
+<pre><code>delete from cs_jsjd where cjdw is null; 
+</code></pre>
+<h2 id="聚合函数的使用"><a href="#聚合函数的使用" class="headerlink" title="聚合函数的使用"></a>聚合函数的使用</h2><p>聚合函数包含如下函数</p>
+<pre><code>avg count dense_rank rank first last max min sum grouping
+</code></pre>
+<p>group by 用于对查询结果分组统计<br>having子句用于限制分组显示结果</p>
+<p>如何显示每个部门的平均工资和最高工资</p>
+<pre><code>SQL&gt; select deptno,avg(sal),max(sal) from emp group by deptno;
+</code></pre>
+<p>显示每个部门的每种岗位的平均工资和最低工资</p>
+<pre><code>SQL&gt; select deptno,job,avg(sal),max(sal) from emp group by deptno,job;
+</code></pre>
+<p>显示平均工资in低于2000的部门号和它的平均工资 </p>
+<pre><code>SQL&gt; select deptno,avg(sal),max(sal) from emp group by deptno having avg(sal)&gt;2000;
+</code></pre>
+<blockquote>
+<p>对数据分组的总结  </p>
+<ul>
+<li>分组函数只能出现在选择列表、having、order by 子句中  </li>
+<li>如果在select语句中同时包含group by,having,order by 那么它们的顺序是group by , having ,order by</li>
+</ul>
+</blockquote>
+<p>在选择列中如果有列,表达式和分组函数,那么这些列和表达式必须有一个出现在group by 子句中,否则就会出错</p>
+<pre><code>select deptno,avg(sal),max(sal) from emp group by deptno having avg(sal)&lt;2000; 这里deptno就一定要出现在group by中
+</code></pre>
+<p>用decode 加统计行</p>
+<pre><code>表结构如下
+CREATE TABLE &quot;USER_CSCS&quot;.&quot;CS_JKRB&quot; 
+(	&quot;JKRB_ID&quot; VARCHAR2(32 BYTE) DEFAULT sys_guid(), 
+&quot;KMDM&quot; VARCHAR2(32 BYTE), 
+&quot;KMMC&quot; VARCHAR2(32 BYTE), 
+&quot;BRFSE&quot; VARCHAR2(32 BYTE), 
+&quot;BSZQ&quot; VARCHAR2(32 BYTE), 
+&quot;ZJR&quot; VARCHAR2(32 BYTE), 
+&quot;ZJSJ&quot; VARCHAR2(32 BYTE) DEFAULT to_char(sysdate,&#39;yyyy-mm-dd hh24:mi:ss&#39;), 
+&quot;XGR&quot; VARCHAR2(32 BYTE), 
+&quot;XGSJ&quot; VARCHAR2(32 BYTE)
+)
+
+with aa as
+(
+select kmdm,kmmc from cs_jkrb
+)
+select decode (grouping(t.kmdm),1,&#39;合计&#39;,t.kmdm) kmdm,
+decode (grouping(t.kmdm),1,&#39; &#39;,max(r.kmmc)) kmmc,
+sum(t.brfse) 
+from cs_jkrb t left join aa r on t.kmdm=r.kmdm
+group by rollup(t.kmdm) 
+order by t.kmdm;
+
+
+select  decode (grouping(kmdm),1,&#39;合计&#39;,kmdm) kmdm,kmmc,sum(brfse) from cs_jkrb group by rollup(kmdm,kmmc);
+
+select  decode (grouping(kmdm),1,&#39;合计&#39;,kmdm) kmdm,sum(brfse) from cs_jkrb group by rollup(kmdm);
+
+
+with ds as
+(select nsrsbh,rkrq,shuie from cs_drkxx),--地税
+gs as (select nsrsbh,rkrq,shuie from cs_grkxx)--国税
+select ds.nsrsbh,ds.rkrq,ds.shuie,gs.rkrq,gs.shuie from ds,gs
+where ds.nsrsbh=gs.nsrsbh;
+</code></pre>
+<h2 id="oracle合并查询"><a href="#oracle合并查询" class="headerlink" title="oracle合并查询"></a>oracle合并查询</h2><p>有时在实际应用中,为了合并多个select语句的结果可以使用集合操作符号 union,union all,intersect,minus</p>
+<ul>
+<li><p>union 该操作符用于取得两个结果集的并集,使用该操作符时,会自动去掉结果集中重复行</p>
+<p> select ename,sal,job from emp where sal&gt;2500 union select ename,sal,job from emp where job&#x3D;’manager’</p>
+</li>
+<li><p>union all 该操作符与union相似，但不会取消重复行，而且不会排序</p>
+<p> select ename ,sal,job from emp where sal&gt;2500 union all select ename,sal,job from where job&#x3D;’manager’</p>
+</li>
+<li><p>intersect 使用该运算符取得两个结果集的交集</p>
+<p> select ename,sal,job from emp where sal&gt;2500 intersect select ename,sal,job form emp where job&#x3D;’manager’</p>
+</li>
+<li><p>minus 使用该操作符用于取得两个结果集的差集,它只会显示存在第一个集合中,而不存在第二个集合中的数据</p>
+<p> select ename,sal,job from emp where sal&gt;2500 minus select ename,sal,job form emp where job&#x3D;’manager’</p>
+</li>
+</ul>
+<h2 id="复杂查询，子查询"><a href="#复杂查询，子查询" class="headerlink" title="复杂查询，子查询"></a>复杂查询，子查询</h2><p>如何显示高于自己部门的平均工资的员工的信息</p>
+<pre><code>第一步
+1.	先求各个部门的平均工资和部门号
+select deptno ,avg(sal) mysql from emp group by deptno;
+2.	把上面的子查询看作一张子表
+select a2.ename,a2.deptno,a2.sal,a1.mysql from emp a2 ,(select deptno,avg(sal) mysql from emp by deptno) a1 where a1.deptno=a2.deptno and a2.sal&gt;a1.mysal;
+</code></pre>
+<p>查询与smith的部门和岗位完全相同的所有雇员</p>
+<pre><code>select  * from emp where (deptno,job)=(select deptno,job from emp where ename=&#39;SMITH&#39;);
+</code></pre>
+<p><strong>在多行子查询中使用all操作符</strong><br>如何显示工资比部门30的所有员工的工资高的员工的姓名、工资和部门号</p>
+<pre><code>select ename,job,sal from emp where sal&gt;all(select sal from emp where deptno=30);
+或是
+select ename,job,sal from emp where sal&gt;(select max(sal) from emp where deptno =30)
+后者效率更高
+</code></pre>
+<p><strong>在多行子查询中使用any操作符</strong></p>
+<p>如何显示工资比部门30的任意一个员工的工资高的员工的姓名、工资和部门号</p>
+<pre><code>select ename,sal,job from emp where sal&gt;any(select sal from emp where deptno=30);
+或者
+select ename,job,sal from emp where sal&gt; (select min(sal) from emp where deptno=30);
+</code></pre>
+<h2 id="with-as用法"><a href="#with-as用法" class="headerlink" title="with as用法"></a>with as用法</h2><p>Oracle数据库中，使用with语句可以实现子查询，提高语句执行的效率，当查询中多次用到某一部分时，可以用Oracle with语句创建一个公共临时表。因为子查询在内存临时表中，避免了重复解析，所以执行效率会提高不少。临时表在一次查询结束自动清除。</p>
+<pre><code>例子1
+with 
+q1 as (select 3+5 S from dual),
+q2 as (select 3*5 M from dual),
+q3 as (select S,M,S+M,S*M from q2,q1)
+select * from q3;
+
+例子2
+with tt as(
+select &#39;aaa&#39; id, &#39;高&#39; value from dual union all
+  select &#39;bbb&#39; id, &#39;低&#39; value from dual union all
+  select &#39;aaa&#39; id, &#39;低&#39; value from dual union all
+  select &#39;aaa&#39; id, &#39;高&#39; value from dual union all
+  select &#39;bbb&#39; id, &#39;低&#39; value from dual union all
+  select &#39;bbb&#39; id, &#39;高&#39; value from dual)
+select id, 
+count(decode(value,&#39;高&#39;，1))高，
+count(decode(value,&#39;高&#39;，1))低
+from tt
+group by id
+
+例子3
+with aa as
+     (select zbbh, zbmc, dept_code,dept_name, bssj, #&#123;bszq&#125; bszqq from cs_zbinfo)
+    select a.dept_name,
+           a.zbmc,
+           decode(b.log_date, &#39;&#39;, &#39;否&#39;, &#39;是&#39;) sfbs,
+           a.bszqq || &#39;-&#39; || a.bssj ybssj,
+           b.log_date,
+           case
+             when b.log_date is not null and to_char(b.log_date,&#39;yyyy-mm-dd&#39;)&gt;a.bszqq || &#39;-&#39; || a.bssj then
+                &#39;超期完成&#39;
+             when b.log_date is not null and to_char(b.log_date,&#39;yyyy-mm-dd&#39;)&lt;a.bszqq || &#39;-&#39; || a.bssj then 
+                &#39;准时完成&#39;
+             when b.log_date is null and to_char(sysdate,&#39;yyyy-mm-dd&#39;)&lt;=a.bszqq || &#39;-&#39; || a.bssj then
+                 &#39;未到期&#39;
+             when b.log_date is null and to_char(sysdate,&#39;yyyy-mm-dd&#39;)&gt;a.bszqq || &#39;-&#39; || a.bssj then
+                  &#39;超期未完成&#39;
+           end bszt
+      from aa a, cs_zblog b
+     where a.zbbh = b.zbbh(+)
+       and a.bszqq = b.bszq(+)
+</code></pre>
+<p> ORACLE 11G listener.ora配置文件</p>
+<pre><code># listener.ora Network Configuration File: E:\app\Dreamer\product\11.2.0\dbhome_1\network\admin\listener.ora
+# Generated by Oracle configuration tools.
+
+SID_LIST_LISTENER =
+  (SID_LIST =
+    (SID_DESC =
+      (SID_NAME = CLRExtProc)
+      (ORACLE_HOME = E:\app\Dreamer\product\11.2.0\dbhome_1)
+      (PROGRAM = extproc)
+      (ENVS = &quot;EXTPROC_DLLS=ONLY:E:\app\Dreamer\product\11.2.0\dbhome_1\bin\oraclr11.dll&quot;)
+    )
+    (SID_DESC =
+      (SID_NAME = ORCL)
+      (ORACLE_HOME = E:\app\Dreamer\product\11.2.0\dbhome_1)
+      (GLOBAL_DBNAME = ORCL)
+      (ENVS = &quot;EXTPROC_DLLS=ONLY:E:\app\Dreamer\product\11.2.0\dbhome_1\bin\oraclr11.dll&quot;)
+    )
+  )
+
+LISTENER =
+  (DESCRIPTION_LIST =
+    (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = Dream)(PORT = 1521))
+    )
+  )
+
+ADR_BASE_LISTENER = E:\app\Dreamer
+</code></pre>
+<h2 id="建表，默认值，注释"><a href="#建表，默认值，注释" class="headerlink" title="建表，默认值，注释"></a>建表，默认值，注释</h2><pre><code>create  table CS_QYYD(
+obj_id VARCHAR2(32) default sys_guid(),
+yhmc   VARCHAR2(300),
+yhdz   VARCHAR2(300),
+tjsjq  VARCHAR2(32),
+tjsjz  VARCHAR2(32),
+bqs    NUMBER(18,2),
+bnlj   NUMBER(18,2),
+bszq   VARCHAR2(32),
+zjr    VARCHAR2(32),
+zjsj   VARCHAR2(32) default to_char(sysdate,&#39;yyyy-mm-dd hh24:mi:ss&#39;),
+xgr    VARCHAR2(32),
+xgsj   VARCHAR2(32)
+)
+--给表加注释信息
+comment on table CS_QYYD is &#39;缴纳社保信息&#39;;
+
+--给字段加注释信息
+comment on column CS_QYYD.obj_id is &#39;ID&#39;;
+comment on column CS_QYYD.yhmc  is &#39;用户名称&#39;;
+comment on column CS_QYYD.yhdz is &#39;	用户地址	&#39;;
+comment on column CS_QYYD.tjsjq is &#39;统计时间起&#39;;
+comment on column CS_QYYD.tjsjz is &#39;	统计时间止	&#39;;
+comment on column CS_QYYD.bqs is &#39;本期数	&#39;;
+comment on column CS_QYYD.bnlj is &#39;本年累计数&#39;;
+comment on column CS_QYYD.bszqm is &#39;报送所属期&#39;;
+comment on column CS_QYYD.zjr  is &#39;增加人&#39;;
+comment on column CS_QYYD.zjsj is &#39;增加时间&#39;;
+comment on column CS_QYYD.xgr is &#39;修改人&#39;;
+comment on column CS_QYYD.xgsj  is &#39;修改时间&#39;;
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/01/13/oracle%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" data-id="cl4gp6u2700249cvc98qn6mwh" data-title="oracle常用命令" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-PowerDesigner概念模型详解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/01/13/PowerDesigner%E6%A6%82%E5%BF%B5%E6%A8%A1%E5%9E%8B%E8%AF%A6%E8%A7%A3/" class="article-date">
+  <time class="dt-published" datetime="2016-01-13T05:31:06.000Z" itemprop="datePublished">2016-01-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/01/13/PowerDesigner%E6%A6%82%E5%BF%B5%E6%A8%A1%E5%9E%8B%E8%AF%A6%E8%A7%A3/">PowerDesigner概念模型详解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="概念模型的重要性"><a href="#概念模型的重要性" class="headerlink" title="概念模型的重要性"></a>概念模型的重要性</h2><p> 数据库设计的基本步骤：</p>
+<h3 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h3><p> 从系统需求中寻找一些概念性名词，并甄选，并对这些名词相关属性做了解，这部分是人工的，PD做不了什么</p>
+<h3 id="概念结构设计"><a href="#概念结构设计" class="headerlink" title="概念结构设计"></a>概念结构设计</h3><p> 针对甄选的名词进行分心，找出其中的关系（独立的、一对一、一对多、多对多、继承五种关系），并用E-R图描述出来，这是大学课本的做法。在PD中，这个过程可以用CDM（概念模型）来描述，PDM中实体概念模型表示方式比E-R更清晰，更好</p>
+<h3 id="逻辑结构设计"><a href="#逻辑结构设计" class="headerlink" title="逻辑结构设计"></a>逻辑结构设计</h3><p> 实际上就是设计表的结构和表之间的主外关系等。这部分在PD中对应的是PDM（物理模型），而PD中的物理模型一般都是直接从概念模型生成的。也就是说，只要你做好概念模型，物理模型就可以自动生成。当然，这种生成结果一般都需要做一些调整和优化。</p>
+<h3 id="物理结构设计"><a href="#物理结构设计" class="headerlink" title="物理结构设计"></a>物理结构设计</h3><p> 有了PDM，数据库的物理设计将不费吹灰之力，直接可以从PDM导出各种数据库系统的建库脚本。</p>
+<h3 id="数据库的建立和测试"><a href="#数据库的建立和测试" class="headerlink" title="数据库的建立和测试"></a>数据库的建立和测试</h3><p> 这个过程也很简单，看看建库脚本的执行就知道了。不合理了重新修改PDM，然后生成sql再来</p>
+<h3 id="数据库运行和维护"><a href="#数据库运行和维护" class="headerlink" title="数据库运行和维护"></a>数据库运行和维护</h3><p> 这个一般是DBA的事情了，比如时间长了，数据量大了，在某些列上加上索引，调优等等。</p>
+<p> 从中可以看到，一上来就建PDM，是不合理的。实际上要求对概念模型有个透彻理解了才去做PDM，这种理解可以不画图，但至少是心中有图。</p>
+<h2 id="使用PD建立数据库概念模型"><a href="#使用PD建立数据库概念模型" class="headerlink" title="使用PD建立数据库概念模型"></a>使用PD建立数据库概念模型</h2><h3 id="一对一CDM"><a href="#一对一CDM" class="headerlink" title="一对一CDM"></a>一对一CDM</h3><h3 id="一对多CDM"><a href="#一对多CDM" class="headerlink" title="一对多CDM"></a>一对多CDM</h3><h3 id="多对多CDM"><a href="#多对多CDM" class="headerlink" title="多对多CDM"></a>多对多CDM</h3><h3 id="继承关系CDM"><a href="#继承关系CDM" class="headerlink" title="继承关系CDM"></a>继承关系CDM</h3><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>数据库建模是系统设计中最重要一步，概念模型能很好的描述数据间的关系，还可以从概念模型精确生成符合一定标准范式的物理模型。</li>
+<li>CDM能描述出更细微的数据关系，比如是0-n还1-n，这直接影响到数据业务上的约束，但是用PDM无法描述。CDM为业务交流节约了沟通成本。</li>
+<li>CDM也为后来了解底层业务数据关系提供了依据，尤其是表很多很多时候，如果没有CDM，那只有设计数据库的人知道底层的关系了。</li>
+<li>如果表很多，分模块的情况，还可以讲CDM分包来管理，这样可以避免将所有的实体关系画到一张图中所带来阅读上烦恼。</li>
+<li>PD还有其他很多很强悍的功能，比如数据库反响到PDM，PDM导出脚本，PDM导出Java模型对象、XML模型。还可以生成DAO层的持久化代码，甚至hbm文件，还可以做业务流程建模、生成数据字典报表等等。但PD最擅长的就是CDM–&gt;PDM–&gt;SQL，数据库反向工程，报表功能，用好这些就不错了。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/01/13/PowerDesigner%E6%A6%82%E5%BF%B5%E6%A8%A1%E5%9E%8B%E8%AF%A6%E8%A7%A3/" data-id="cl4gp6u1r000w9cvc8be04owq" data-title="PowerDesigner概念模型详解" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PowerDesigner/" rel="tag">PowerDesigner</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-myeclipse插件的安装方法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/01/12/myeclipse%E6%8F%92%E4%BB%B6%E7%9A%84%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95/" class="article-date">
+  <time class="dt-published" datetime="2016-01-12T14:18:32.000Z" itemprop="datePublished">2016-01-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/01/12/myeclipse%E6%8F%92%E4%BB%B6%E7%9A%84%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95/">myeclipse插件的安装方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="先去下载你要装的插件包"><a href="#先去下载你要装的插件包" class="headerlink" title="先去下载你要装的插件包"></a>先去下载你要装的插件包</h2><p> 我把插件放到myeclipse 安装路径下一个myPlogins文件夹，<br> <img src="http://7xpw00.com1.z0.glb.clouddn.com/imageQQ%E6%88%AA%E5%9B%BE20160112222022.png"></p>
+<h2 id="建立链接"><a href="#建立链接" class="headerlink" title="建立链接"></a>建立链接</h2><p> 然后在myeclipse 安装路径会会有个dropins 文件夹</p>
+<p> <img src="http://7xpw00.com1.z0.glb.clouddn.com/image1111115.png"><br> 保存，重启，myeclispe，在window —&gt;perference下应该能看到你装的插件</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/01/12/myeclipse%E6%8F%92%E4%BB%B6%E7%9A%84%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95/" data-id="cl4gp6u24001v9cvc3eco4alr" data-title="myeclipse插件的安装方法" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" rel="tag">myeclipse插件</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Error/" rel="tag">Error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Extjs/" rel="tag">Extjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerDesigner/" rel="tag">PowerDesigner</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">java虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/" rel="tag">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" rel="tag">myeclipse插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E8%AE%B0/" rel="tag">日记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" rel="tag">生活文化与素养</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Extjs/" style="font-size: 10px;">Extjs</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/PowerDesigner/" style="font-size: 12.86px;">PowerDesigner</a> <a href="/tags/Spring/" style="font-size: 14.29px;">Spring</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 12.86px;">java虚拟机</a> <a href="/tags/linux/" style="font-size: 17.14px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">myeclipse插件</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 14.29px;">工具</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 18.57px;">数据库</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 15.71px;">日记</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 14.29px;">杂记</a> <a href="/tags/%E6%A1%86%E6%9E%B6/" style="font-size: 14.29px;">框架</a> <a href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" style="font-size: 11.43px;">生活文化与素养</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 12.86px;">笔记</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/06/16/Hexo-github-%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2-%E6%96%B0%E6%89%8B%E5%85%A5%E9%97%A8/">Hexo+github搭建静态博客(新手入门)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/test/">test</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/20/%E4%BA%94.%20volatile%20%E5%85%B3%E9%94%AE%E5%AD%97/">五. volatile关键字</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/19/%E4%B8%89.%20%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/">三. 垃圾收集器</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Zhutongtong<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

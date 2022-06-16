@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>记忆时光</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="描述">
+<meta property="og:type" content="website">
+<meta property="og:title" content="记忆时光">
+<meta property="og:url" content="http://example.com/page/6/index.html">
+<meta property="og:site_name" content="记忆时光">
+<meta property="og:description" content="描述">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="Zhutongtong">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="记忆时光" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">记忆时光</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-linux之centos安装svn服务器" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/01/12/linux%E4%B9%8Bcentos%E5%AE%89%E8%A3%85svn%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="article-date">
+  <time class="dt-published" datetime="2016-01-12T13:36:00.000Z" itemprop="datePublished">2016-01-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/01/12/linux%E4%B9%8Bcentos%E5%AE%89%E8%A3%85svn%E6%9C%8D%E5%8A%A1%E5%99%A8/">cent os 安装svn服务器</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="yum-安装-svn"><a href="#yum-安装-svn" class="headerlink" title="yum 安装 svn"></a>yum 安装 svn</h2><pre><code># yum install -y subversion
+</code></pre>
+<p> 等待一会,出现 complete 安装完成</p>
+<h2 id="验证是否安装完成"><a href="#验证是否安装完成" class="headerlink" title="验证是否安装完成"></a>验证是否安装完成</h2><pre><code># svnserve --version  
+</code></pre>
+<h2 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h2><pre><code># svnadmin  create  svn
+</code></pre>
+<h2 id="修改目录下的三个文件"><a href="#修改目录下的三个文件" class="headerlink" title="修改目录下的三个文件"></a>修改目录下的三个文件</h2><h3 id="svnserve-conf"><a href="#svnserve-conf" class="headerlink" title="svnserve.conf"></a>svnserve.conf</h3><pre><code>anon-access = none #没有登录的用户不能访问  
+auth-access = write #登录的用户可以写入  
+password-db = passwd #密码文件为当前目录下的passwd    
+authz-db = authz #验证文件为当前目录下的authz 
+</code></pre>
+<p> <strong>注意</strong>前边不能有空格有 # 号</p>
+<h3 id="修改-passwd-文件"><a href="#修改-passwd-文件" class="headerlink" title="修改 passwd 文件"></a>修改 passwd 文件</h3><pre><code>[users]
+admin = 123456 # 用户 和 密码
+user = 123456  # 用户 和 密码
+</code></pre>
+<h3 id="修改authz文件"><a href="#修改authz文件" class="headerlink" title="修改authz文件"></a>修改authz文件</h3><pre><code>[groups]
+team1 = admin
+team2 = user   #将上面创建的分成两个组 
+
+ [/]
+@team1 = rw 
+@team2 = r
+# 第一个小组只有读写的权限，第二个小组有读取的权限  
+</code></pre>
+<h2 id="启动svn"><a href="#启动svn" class="headerlink" title="启动svn"></a>启动svn</h2><pre><code># svnserve -d -r svn/ 
+</code></pre>
+<h2 id="关闭svn"><a href="#关闭svn" class="headerlink" title="关闭svn"></a>关闭svn</h2><pre><code># ps -aux |grep svn
+Warning: bad syntax, perhaps a bogus &#39;-&#39;? See /usr/share/doc/procps-3.2.7/FAQ
+root       854  0.0  0.2  80252  1128 ?        Ss   08:54   0:00 svnserve -d -r /home/svn
+root      1353  0.0  0.1   7208   820 pts/0    S+   16:56   0:00 grep svn
+
+# kill -9 854(进程 id)
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/01/12/linux%E4%B9%8Bcentos%E5%AE%89%E8%A3%85svn%E6%9C%8D%E5%8A%A1%E5%99%A8/" data-id="cl4gp6u1y001g9cvc8phd765d" data-title="cent os 安装svn服务器" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-开发错误笔记" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/01/12/%E5%BC%80%E5%8F%91%E9%94%99%E8%AF%AF%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time class="dt-published" datetime="2016-01-12T10:58:59.000Z" itemprop="datePublished">2016-01-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/01/12/%E5%BC%80%E5%8F%91%E9%94%99%E8%AF%AF%E7%AC%94%E8%AE%B0/">错误笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="spring-struts-整合问题"><a href="#spring-struts-整合问题" class="headerlink" title="spring + struts 整合问题"></a>spring + struts 整合问题</h2><p> 一定不要忘记了加struts2-spring-plugin-2.3.24.jar  插件包，因为没有加包，导致一天都没做好。</p>
+<h2 id="Spring版本不兼容问题"><a href="#Spring版本不兼容问题" class="headerlink" title="Spring版本不兼容问题"></a>Spring版本不兼容问题</h2><pre><code>org.springframework.transaction.CannotCreateTransactionException: Could not open Hibernate Session for transaction; nested exception is java.lang.NoClassDefFoundError: org/hibernate/engine/transaction/spi/TransactionContext
+</code></pre>
+<p>错误为  版本不兼容，</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/01/12/%E5%BC%80%E5%8F%91%E9%94%99%E8%AF%AF%E7%AC%94%E8%AE%B0/" data-id="cl4gp6u2u003f9cvce29bd1go" data-title="错误笔记" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-PowerDesigner使用教程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/01/11/PowerDesigner%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="article-date">
+  <time class="dt-published" datetime="2016-01-11T11:26:54.000Z" itemprop="datePublished">2016-01-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/01/11/PowerDesigner%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/">PowerDesigner使用教程</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>PowerDesigner是一款功能非常强大的建模工具软件，足以与Rose比肩，同样是当今最著名的建模软件之一。Rose是专攻UML对象模型的建模工具，之后才向数据库建模发展，而PowerDesigner则与其正好相反，它是以数据库建模起家，后来才发展为一款综合全面的Case工具。</p>
+</blockquote>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p> 打开 power designer ；如果发现概念模型中的下面属性无法选择；则需要设置相关属性如下。<br> <img src="http://7xpw00.com1.z0.glb.clouddn.com/imagepd.png"><br> 则需要改如下设置</p>
+<p> 打开“Tools”——“Model Options…”配置窗口，将 “Notation” 中的值设置为“E&#x2F;R+Merise”，之后点击“Set As Default”， 再点击“OK”。</p>
+<p> <img src="http://7xpw00.com1.z0.glb.clouddn.com/imagepd1.png"></p>
+<p> 如果点击创建模型出现类似 打印机 相关的弹出窗口错误；则可以在系统服务中开启对应的服务。例如：在win 7 中，可以在开始菜单搜索 服务，之后打开服务窗口；开启<br> <img src="http://7xpw00.com1.z0.glb.clouddn.com/imagepd3.png"></p>
+<h2 id="PowerDesigner主要分为7种建模文件"><a href="#PowerDesigner主要分为7种建模文件" class="headerlink" title="PowerDesigner主要分为7种建模文件"></a>PowerDesigner主要分为7种建模文件</h2><h3 id="1-概念数据模型-CDM"><a href="#1-概念数据模型-CDM" class="headerlink" title="1.  概念数据模型 (CDM)"></a>1.  概念数据模型 (CDM)</h3><p> 对数据和信息进行建模，利用实体-关系图（E-R图）的形式组织数据，检验数据设计的有效性和合理性。</p>
+<h3 id="2-逻辑数据模型-LDM"><a href="#2-逻辑数据模型-LDM" class="headerlink" title="2.  逻辑数据模型 (LDM)"></a>2.  逻辑数据模型 (LDM)</h3><p> PowerDesigner 15 新增的模型。逻辑模型是概念模型的延伸，表示概念之间的逻辑次序，是一个属于方法层次的模型。具体来说，逻辑模型中一方面显示了实体、实体的属性和实体之间的关系，另一方面又将继承、实体关系中的引用等在实体的属性中进行展示。逻辑模型介于概念模型和物理模型之间，具有物理模型方面的特性，在概念模型中的多对多关系，在逻辑模型中将会以增加中间实体的一对多关系的方式来实现。<br> 逻辑模型主要是使得整个概念模型更易于理解，同时又不依赖于具体的数据库实现，使用逻辑模型可以生成针对具体数据库管理系统的物理模型。逻辑模型并不是在整个步骤中必须的，可以直接通过概念模型来生成物理模型。</p>
+<h3 id="3-物理数据模型-PDM"><a href="#3-物理数据模型-PDM" class="headerlink" title="3.  物理数据模型 (PDM)"></a>3.  物理数据模型 (PDM)</h3><p> 基于特定DBMS，在概念数据模型、逻辑数据模型的基础上进行设计。由物理数据模型生成数据库，或对数据库进行逆向工程得到物理数据模型。</p>
+<h3 id="4-面向对象模型-OOM"><a href="#4-面向对象模型-OOM" class="headerlink" title="4.  面向对象模型 (OOM)"></a>4.  面向对象模型 (OOM)</h3><p> 包含UML常见的所有的图形：类图、对象图、包图、用例图、时序图、协作图、交互图、活动图、状态图、组件图、复合结构图、部署图（配置图）。OOM 本质上是软件系统的一个静态的概念模型。</p>
+<h3 id="5-业务程序模型-BPM"><a href="#5-业务程序模型-BPM" class="headerlink" title="5.  业务程序模型 (BPM)"></a>5.  业务程序模型 (BPM)</h3><p> BPM 描述业务的各种不同内在任务和内在流程，而且客户如何以这些任务和流程互相影响。 BPM 是从业务合伙人的观点来看业务逻辑和规则的概念模型，使用一个图表描述程序，流程，信息和合作协议之间的交互作用。</p>
+<h3 id="6-信息流模型（ILM）"><a href="#6-信息流模型（ILM）" class="headerlink" title="6.  信息流模型（ILM）"></a>6.  信息流模型（ILM）</h3><p> ILM是一个高层的信息流模型，主要用于分布式数据库之间的数据复制。</p>
+<h3 id="7-企业架构模型（EAM）"><a href="#7-企业架构模型（EAM）" class="headerlink" title="7.  企业架构模型（EAM）"></a>7.  企业架构模型（EAM）</h3><p> 从业务层、应用层以及技术层的对企业的体系架构进行全方面的描述。包括：组织结构图、业务通信图、进程图、城市规划图、应用架构图、面向服务图、技术基础框架图。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/01/11/PowerDesigner%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" data-id="cl4gp6u1q000u9cvca7i4b9cm" data-title="PowerDesigner使用教程" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PowerDesigner/" rel="tag">PowerDesigner</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-20160111" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/01/11/20160111/" class="article-date">
+  <time class="dt-published" datetime="2016-01-11T11:26:01.000Z" itemprop="datePublished">2016-01-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/01/11/20160111/">1/11/2016</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p> 好冷，入冬以来第一次感觉到冷，</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/01/11/20160111/" data-id="cl4gp6u1b00049cvcd2efev0u" data-title="1/11/2016" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%97%A5%E8%AE%B0/" rel="tag">日记</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-20160110" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/01/10/20160110/" class="article-date">
+  <time class="dt-published" datetime="2016-01-09T16:52:49.000Z" itemprop="datePublished">2016-01-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/01/10/20160110/">1/10/2016</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p> 当你迷茫时，就去学习吧，她会给你指引方向。</p>
+<p> 坚守本心，去找寻自己的路。不一样的人生，不一样的精彩。</p>
+<p> 任时光匆匆，我心依然</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/01/10/20160110/" data-id="cl4gp6u1400019cvc739sc4u1" data-title="1/10/2016" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%97%A5%E8%AE%B0/" rel="tag">日记</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-linux解压命令" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/01/09/linux%E8%A7%A3%E5%8E%8B%E5%91%BD%E4%BB%A4/" class="article-date">
+  <time class="dt-published" datetime="2016-01-09T15:20:46.000Z" itemprop="datePublished">2016-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/01/09/linux%E8%A7%A3%E5%8E%8B%E5%91%BD%E4%BB%A4/">linux解压命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="解压命令-tar-gz-tar-bz2-zip"><a href="#解压命令-tar-gz-tar-bz2-zip" class="headerlink" title="解压命令 tar.gz tar bz2 zip"></a>解压命令 tar.gz tar bz2 zip</h2><p>基本介绍  </p>
+<p>tar </p>
+<blockquote>
+<p> -c: 建立压缩档案<br> -x：解压<br> -t：查看内容<br> -r：向压缩归档文件末尾追加文件<br> -u：更新原压缩包中的文件 </p>
+</blockquote>
+<pre><code># tar -cf all.tar *.jpg 
+</code></pre>
+<p> 这条命令是将所有.jpg的文件打成一个名为all.tar的包。-c是表示产生新的包<br>，-f指定包的文件名。</p>
+<pre><code># tar -rf all.tar *.gif 
+</code></pre>
+<p> 这条命令是将所有.gif的文件增加到all.tar的包里面去。-r是表示增加文件的<br>意思。</p>
+<pre><code># tar -uf all.tar logo.gif 
+</code></pre>
+<p> 这条命令是更新原来tar包all.tar中logo.gif文件，-u是表示更新文件的意思。</p>
+<pre><code># tar -tf all.tar 
+</code></pre>
+<p> 这条命令是列出all.tar包中所有文件，-t是列出文件的意思 </p>
+<pre><code># tar -xf all.tar
+</code></pre>
+<p> 这条命令是解出all.tar包中所有文件，-x是解开的意思 </p>
+<h3 id="tar调用gzip"><a href="#tar调用gzip" class="headerlink" title="tar调用gzip"></a>tar调用gzip</h3><blockquote>
+<p>gzip是GNU组织开发的一个压缩程序，.gz结尾的文件就是gzip压缩的结果。与gzip<br>相对的解压程序是gunzip。tar中使用-z这个参数来调用gzip</p>
+</blockquote>
+<pre><code># tar -czf all.tar.gz *.jpg 
+</code></pre>
+<p> 这条命令是将所有.jpg的文件打成一个tar包，并且将其用gzip压缩，生成一个<br>gzip压缩过的包，包名为all.tar.gz </p>
+<pre><code># tar -xzf all.tar.gz 
+</code></pre>
+<p> 这条命令是将上面产生的包解开。 </p>
+<h3 id="tar调用bzip2"><a href="#tar调用bzip2" class="headerlink" title="tar调用bzip2"></a>tar调用bzip2</h3><blockquote>
+<p>bzip2是一个压缩能力更强的压缩程序，.bz2结尾的文件就是bzip2压缩的结果。<br>与bzip2相对的解压程序是bunzip2。tar中使用-j这个参数来调用gzip</p>
+</blockquote>
+<pre><code># tar -cjf all.tar.bz2 *.jpg
+</code></pre>
+<p> 这条命令是将所有.jpg的文件打成一个tar包，并且将其用bzip2压缩，生成一个<br>bzip2压缩过的包，包名为all.tar.bz2 </p>
+<pre><code># tar -xjf all.tar.bz2 
+</code></pre>
+<p> 这条命令是将上面产生的包解开。 </p>
+<h3 id="tar调用compress"><a href="#tar调用compress" class="headerlink" title="tar调用compress"></a>tar调用compress</h3><blockquote>
+<p>compress也是一个压缩程序，但是好象使用compress的人不如gzip和bzip2的人<br>多。.Z结尾的文件就是bzip2压缩的结果。与 compress相对的解压程序是uncompress<br>。tar中使用-Z这个参数来调用compress。</p>
+</blockquote>
+<pre><code># tar -cZf all.tar.Z *.jpg
+</code></pre>
+<p> 这条命令是将所有.jpg的文件打成一个tar包，并且将其用compress压缩，生成<br>一个uncompress压缩过的包，包名为all.tar.Z </p>
+<pre><code># tar -xZf all.tar.Z 
+</code></pre>
+<p> 这条命令是将上面产生的包解开 </p>
+<p> <strong>针对以上命令小结</strong></p>
+<pre><code>1）对于.tar结尾的文件 
+tar -xf all.tar 
+2)对于.gz结尾的文件 
+gzip -d all.gz 
+gunzip all.gz 
+3)对于.tgz或.tar.gz结尾的文件 
+tar -xzf all.tar.gz 
+tar -xzf all.tgz 
+4)对于.bz2结尾的文件 
+bzip2 -d all.bz2 
+bunzip2 all.bz2 
+5)对于tar.bz2结尾的文件 
+tar -xjf all.tar.bz2 
+6)对于.Z结尾的文件 
+uncompress all.Z 
+7)对于.tar.Z结尾的文件 
+tar -xZf all.tar.z 
+</code></pre>
+<h3 id="对于-zip"><a href="#对于-zip" class="headerlink" title="对于.zip"></a>对于.zip</h3><blockquote>
+<p>linux下提供了zip和unzip程序，zip是压缩程序，unzip是解压程序。它们的参<br>数选项很多，这里只做简单介绍，依旧举例说明一下其用法：</p>
+</blockquote>
+<pre><code># zip all.zip *.jpg 
+</code></pre>
+<p> 这条命令是将所有.jpg的文件压缩成一个zip包</p>
+<pre><code># unzip all.zip 
+</code></pre>
+<p> 这条命令是将all.zip中的所有文件解压出来 </p>
+<h3 id="对于-rar"><a href="#对于-rar" class="headerlink" title="对于.rar"></a>对于.rar</h3><blockquote>
+<p>要在linux下处理.rar文件，需要安装RAR for Linux，可以从网上下载，但要记住，RAR for Linux 不是免费的；可从<a target="_blank" rel="noopener" href="http://www.rarsoft.com/download.htm%E4%B8%8B%E8%BD%BDRARfor">http://www.rarsoft.com/download.htm下载RARfor</a> Linux 3.2.0，然后安装：<br>　　# tar -xzpvf rarlinux-3.2.0.tar.gz<br>　　# cd rar<br>　　# make<br>　　这样就安装好了，安装后就有了rar和unrar这两个程序，rar是压缩程序，unrar 是解压程序。它们的参数选项很多，这里只做简单介绍，</p>
+</blockquote>
+<pre><code># rar a all *.jpg 
+</code></pre>
+<p> 这条命令是将所有.jpg的文件压缩成一个rar包，名为all.rar，该程序会将.rar<br>扩展名将自动附加到包名后</p>
+<pre><code># unrar e all.rar 
+</code></pre>
+<p> 这条命令是将all.rar中的所有文件解压出来 </p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><strong>解压</strong></p>
+<pre><code>tar –xvf file.tar //解压 tar包 
+tar -xzvf file.tar.gz //解压tar.gz 
+tar -xjvf file.tar.bz2 //解压 tar.bz2 
+tar –xZvf file.tar.Z //解压tar.Z 
+unrar e file.rar //解压rar 
+unzip file.zip //解压zip 
+
+
+1、*.tar 用 tar –xvf 解压 
+2、*.gz 用 gzip -d或者gunzip 解压 
+3、*.tar.gz和*.tgz 用 tar –xzf 解压 
+4、*.bz2 用 bzip2 -d或者用bunzip2 解压 
+5、*.tar.bz2用tar –xjf 解压 
+6、*.Z 用 uncompress 解压 
+7、*.tar.Z 用tar –xZf 解压 
+8、*.rar 用 unrar e解压 
+9、*.zip 用 unzip 解压
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/01/09/linux%E8%A7%A3%E5%8E%8B%E5%91%BD%E4%BB%A4/" data-id="cl4gp6u20001l9cvc7add7plj" data-title="linux解压命令" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-CentOS目录结构详细版" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/01/09/CentOS%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E8%AF%A6%E7%BB%86%E7%89%88/" class="article-date">
+  <time class="dt-published" datetime="2016-01-09T13:59:07.000Z" itemprop="datePublished">2016-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/01/09/CentOS%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E8%AF%A6%E7%BB%86%E7%89%88/">CentOS目录结构详细版</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="CentOS目录结构详细版"><a href="#CentOS目录结构详细版" class="headerlink" title="CentOS目录结构详细版"></a>CentOS目录结构详细版</h3><p> <img src="http://7xpw00.com1.z0.glb.clouddn.com/imageQQ%E6%88%AA%E5%9B%BE20160109220251.png"></p>
+<ul>
+<li><strong>&#x2F;：</strong> 根目录，一般根目录下只存放目录，不要存放文件，&#x2F;etc、&#x2F;bin、&#x2F;dev、&#x2F;lib、&#x2F;sbin应该和根目录放置在一个分区中</li>
+<li><strong>&#x2F;bin:</strong> &#x2F;usr&#x2F;bin: 可执行二进制文件的目录，如常用的命令ls、tar、mv、cat等。</li>
+<li><strong>&#x2F;boot</strong>： 放置linux系统启动时用到的一些文件。&#x2F;boot&#x2F;vmlinuz为linux的内核文件，以及&#x2F;boot&#x2F;gurb。建议单独分区，分区大小100M即可</li>
+<li><strong>&#x2F;dev</strong>： 存放linux系统下的设备文件，访问该目录下某个文件，相当于访问某个设备，常用的是挂载光驱mount &#x2F;dev&#x2F;cdrom &#x2F;mnt。</li>
+<li><strong>&#x2F;etc</strong>： 系统配置文件存放的目录，不建议在此目录下存放可执行文件，重要的配置文件有&#x2F;etc&#x2F;inittab、&#x2F;etc&#x2F;fstab、&#x2F;etc&#x2F;init.d、&#x2F;etc&#x2F;X11、&#x2F;etc&#x2F;sysconfig、&#x2F;etc&#x2F;xinetd.d修改配置文件之前记得备份。注：&#x2F;etc&#x2F;X11存放与x windows有关的设置。</li>
+<li><strong>&#x2F;home</strong>： 系统默认的用户家目录，新增用户账号时，用户的家目录都存放在此目录下，<del>表示当前用户的家目录，</del>test表示用户test的家目录。建议单独分区，并设置较大的磁盘空间，方便用户存放数据</li>
+<li><strong>&#x2F;lib</strong>:&#x2F;usr&#x2F;lib:&#x2F;usr&#x2F;local&#x2F;lib： 系统使用的函数库的目录，程序在执行过程中，需要调用一些额外的参数时需要函数库的协助，比较重要的目录为&#x2F;lib&#x2F;modules。</li>
+<li><strong>&#x2F;lost+fount</strong>： 系统异常产生错误时，会将一些遗失的片段放置于此目录下，通常这个目录会自动出现在装置目录下。如加载硬盘于&#x2F;disk 中，此目录下就会自动产生目录&#x2F;disk&#x2F;lost+found</li>
+<li><strong>&#x2F;mnt</strong>:&#x2F;media： 光盘默认挂载点，通常光盘挂载于&#x2F;mnt&#x2F;cdrom下，也不一定，可以选择任意位置进行挂载。</li>
+<li><strong>&#x2F;opt</strong>： 给主机额外安装软件所摆放的目录。如：FC4使用的Fedora 社群开发软件，如果想要自行安装新的KDE 桌面软件，可以将该软件安装在该目录下。以前的 Linux 系统中，习惯放置在 &#x2F;usr&#x2F;local 目录下</li>
+<li><strong>&#x2F;proc</strong>： 此目录的数据都在内存中，如系统核心，外部设备，网络状态，由于数据都存放于内存中，所以不占用磁盘空间，比较重要的目录有&#x2F;proc&#x2F;cpuinfo、&#x2F;proc&#x2F;interrupts、&#x2F;proc&#x2F;dma、&#x2F;proc&#x2F;ioports、&#x2F;proc&#x2F;net&#x2F;*等</li>
+<li><strong>&#x2F;root</strong>： 系统管理员root的家目录，系统第一个启动的分区为&#x2F;，所以最好将&#x2F;root和&#x2F;放置在一个分区下。</li>
+<li><strong>&#x2F;sbin</strong>:&#x2F;usr&#x2F;sbin:&#x2F;usr&#x2F;local&#x2F;sbin： 放置系统管理员使用的可执行命令，如fdisk、shutdown、mount等。与&#x2F;bin不同的是，这几个目录是给系统管理员root使用的命令，一般用户只能”查看”而不能设置和使用。</li>
+<li><strong>&#x2F;tmp</strong>： 一般用户或正在执行的程序临时存放文件的目录,任何人都可以访问,重要数据不可放置在此目录下</li>
+<li><strong>&#x2F;srv</strong>： 服务启动之后需要访问的数据目录，如www服务需要访问的网页数据存放在&#x2F;srv&#x2F;www内</li>
+<li><strong>&#x2F;usr</strong>： 应用程序存放目录，&#x2F;usr&#x2F;bin 存放应用程序， &#x2F;usr&#x2F;share 存放共享数据，&#x2F;usr&#x2F;lib 存放不能直接运行的，却是许多程序运行所必需的一些函数库文件。&#x2F;usr&#x2F;local:存放软件升级包。&#x2F;usr&#x2F;share&#x2F;doc: 系统说明文件存放目录。&#x2F;usr&#x2F;share&#x2F;man: 程序说明文件存放目录，使用 man ls时会查询&#x2F;usr&#x2F;share&#x2F;man&#x2F;man1&#x2F;ls.1.gz的内容建议单独分区，设置较大的磁盘空间</li>
+<li><strong>&#x2F;var</strong>： 放置系统执行过程中经常变化的文件，如随时更改的日志文件 &#x2F;var&#x2F;log，&#x2F;var&#x2F;log&#x2F;message： 所有的登录文件存放目录，&#x2F;var&#x2F;spool&#x2F;mail： 邮件存放的目录， &#x2F;var&#x2F;run: 程序或服务启动</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/01/09/CentOS%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E8%AF%A6%E7%BB%86%E7%89%88/" data-id="cl4gp6u1k000f9cvc5rhl5yv4" data-title="CentOS目录结构详细版" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-CentOS 6.4 搭建PPTP 点对点隧道VPN Server" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/01/08/CentOS%206.4%20%E6%90%AD%E5%BB%BAPPTP%20%E7%82%B9%E5%AF%B9%E7%82%B9%E9%9A%A7%E9%81%93VPN%20Server/" class="article-date">
+  <time class="dt-published" datetime="2016-01-08T06:55:54.000Z" itemprop="datePublished">2016-01-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/01/08/CentOS%206.4%20%E6%90%AD%E5%BB%BAPPTP%20%E7%82%B9%E5%AF%B9%E7%82%B9%E9%9A%A7%E9%81%93VPN%20Server/">CentOS 6.4 搭建PPTP 点对点隧道VPN Server</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/01/08/CentOS%206.4%20%E6%90%AD%E5%BB%BAPPTP%20%E7%82%B9%E5%AF%B9%E7%82%B9%E9%9A%A7%E9%81%93VPN%20Server/" data-id="cl4gp6u1d00069cvcfax5b4b7" data-title="CentOS 6.4 搭建PPTP 点对点隧道VPN Server" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-java代理模式(proxy)" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/01/08/java%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F(proxy)/" class="article-date">
+  <time class="dt-published" datetime="2016-01-08T02:09:53.000Z" itemprop="datePublished">2016-01-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/01/08/java%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F(proxy)/">java代理模式（proxy）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p> <strong>代理模式的应用场景</strong></p>
+<blockquote>
+<p>如果已有的方法在使用的时候需要对原有的方法进行改进，此时有两种办法：</p>
+</blockquote>
+<blockquote>
+<p>1、修改原有的方法来适应。这样违反了“对扩展开放，对修改关闭”的原则。</p>
+<p>2、就是采用一个代理类调用原有的方法，且对产生的结果进行控制。这种方法就是代理模式。</p>
+<p>使用代理模式，可以将功能划分的更加清晰，有助于后期维护！</p>
+</blockquote>
+<p> <strong>关系图如下</strong></p>
+<p> <img src="http://7xpw00.com1.z0.glb.clouddn.com/imageQQ%E6%88%AA%E5%9B%BE20160108101216.png" alt="关系"></p>
+<p> <strong>实现代码</strong><br>    Proxy.java 代理类<br>    public class Proxy implements Sourceable{</p>
+<pre><code> private Source source;
+ 
+ public Proxy()&#123;  
+        super();  
+        this.source = new Source();  
+ &#125;  
+
+@Override
+public void method() &#123;
+    // TODO Auto-generated method stub
+      before();  
+      System.out.println(&quot;111&quot;);
+      source.method();  
+      
+      atfer();  
+&#125;
+
+private void atfer() &#123;  
+    System.out.println(&quot;after proxy!&quot;);  
+&#125;  
+private void before() &#123;  
+    System.out.println(&quot;before proxy!&quot;);  
+&#125;  
+&#125;
+
+Sourceable.java 父接口
+public interface Sourceable &#123;
+
+    public void method();
+&#125;
+
+Source.java 实现类
+public class Source implements Sourceable &#123;
+@Override
+public void method() &#123;
+    // TODO Auto-generated method stub
+     System.out.println(&quot;the original method!&quot;);
+&#125;
+&#125;
+
+ProxyTest.java 测试类
+public class ProxyTest &#123;
+
+public static void main(String[] args) &#123;
+    // TODO Auto-generated method stub
+
+     Sourceable source = new Proxy();  
+     source.method();  
+&#125;
+&#125;
+
+输入如下：
+before proxy!
+the original method!
+after proxy!
+</code></pre>
+<p> 总结：代理没有直接实现你要调用的方法，通过代理类来调用，在通过代理类的时候做一些其他的操作</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/01/08/java%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F(proxy)/" data-id="cl4gp6u1x001b9cvc8fh0bpt3" data-title="java代理模式（proxy）" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-20160127" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/01/06/20160127/" class="article-date">
+  <time class="dt-published" datetime="2016-01-06T10:18:46.000Z" itemprop="datePublished">2016-01-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/01/06/20160127/">20160127</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="http://7xpw00.com1.z0.glb.clouddn.com/image45.jpg"></p>
+<p>  入职了，在工作了。我不知道该写些什么才能表达此刻的心情，激情无限，有时候觉得写代码挺爽的，按照你的思想，意愿，写出自己的风格，性情。</p>
+<p>  有时心情十分平静，工作，什么都不用想，可有时又有许多忧愁，</p>
+<p> 没事的时候写写博客，虽然大多都是copy的，但还是对我有帮助的，写了一遍，就有了印象。</p>
+<p><img src="http://7xpw00.com1.z0.glb.clouddn.com/image612edf3ajw1dq5mdg3i2oj.jpg"></p>
+<p> 计算机也蛮好玩的，玩玩linux,看看那些底层，知晓下原理，玩玩服务器，累了就看看视频做做项目，</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2016/01/06/20160127/" data-id="cl4gp6u1g000a9cvc8i293q0p" data-title="20160127" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%97%A5%E8%AE%B0/" rel="tag">日记</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Error/" rel="tag">Error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Extjs/" rel="tag">Extjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerDesigner/" rel="tag">PowerDesigner</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">java虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/" rel="tag">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" rel="tag">myeclipse插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E8%AE%B0/" rel="tag">日记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" rel="tag">生活文化与素养</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Extjs/" style="font-size: 10px;">Extjs</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/PowerDesigner/" style="font-size: 12.86px;">PowerDesigner</a> <a href="/tags/Spring/" style="font-size: 14.29px;">Spring</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 12.86px;">java虚拟机</a> <a href="/tags/linux/" style="font-size: 17.14px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">myeclipse插件</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 14.29px;">工具</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 18.57px;">数据库</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 15.71px;">日记</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 14.29px;">杂记</a> <a href="/tags/%E6%A1%86%E6%9E%B6/" style="font-size: 14.29px;">框架</a> <a href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" style="font-size: 11.43px;">生活文化与素养</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 12.86px;">笔记</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/06/16/Hexo-github-%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2-%E6%96%B0%E6%89%8B%E5%85%A5%E9%97%A8/">Hexo+github搭建静态博客(新手入门)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/test/">test</a>
+          </li>
+        
+          <li>
+            <a href="/2022/06/14/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/20/%E4%BA%94.%20volatile%20%E5%85%B3%E9%94%AE%E5%AD%97/">五. volatile关键字</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/19/%E4%B8%89.%20%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/">三. 垃圾收集器</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 Zhutongtong<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
