@@ -4,19 +4,19 @@
   <meta charset="utf-8">
   
   
-  <title>linux学习(ubuntu) | 记忆时光</title>
+  <title>Spring中的事务 | 记忆时光</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="cd命令用于切换当前目录，参数是要切换的目录的路径，可以是绝对路径，也可以是相对路径 cd &#x2F;root&#x2F;Docements # 切换到目录 &#x2F;root&#x2F;Documents cd .&#x2F;path          # 切换到当前目录下的path目录中 .表示当前目录 cd ..&#x2F;path         # 切换到上层目录中的path目录中 ..表示上一层目录  ls命令1. -l ：列出长数据串，包">
+  <meta name="description" content="先抛问题看以下示例1 @Service public class TeacherServiceImpl extends ServiceImpl&lt;TeacherMapper, Teacher&gt; implements TeacherService &amp;#123;      @Resource     TeacherMapper teacherMapper;      @Override">
 <meta property="og:type" content="article">
-<meta property="og:title" content="linux学习(ubuntu)">
-<meta property="og:url" content="http://example.com/2016/01/04/linux%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:title" content="Spring中的事务">
+<meta property="og:url" content="http://example.com/2022/06/16/Spring%E4%B8%AD%E7%9A%84%E4%BA%8B%E5%8A%A1/index.html">
 <meta property="og:site_name" content="记忆时光">
-<meta property="og:description" content="cd命令用于切换当前目录，参数是要切换的目录的路径，可以是绝对路径，也可以是相对路径 cd &#x2F;root&#x2F;Docements # 切换到目录 &#x2F;root&#x2F;Documents cd .&#x2F;path          # 切换到当前目录下的path目录中 .表示当前目录 cd ..&#x2F;path         # 切换到上层目录中的path目录中 ..表示上一层目录  ls命令1. -l ：列出长数据串，包">
+<meta property="og:description" content="先抛问题看以下示例1 @Service public class TeacherServiceImpl extends ServiceImpl&lt;TeacherMapper, Teacher&gt; implements TeacherService &amp;#123;      @Resource     TeacherMapper teacherMapper;      @Override">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2016-01-04T13:39:04.000Z">
-<meta property="article:modified_time" content="2022-06-16T07:22:10.420Z">
+<meta property="article:published_time" content="2022-06-16T07:29:49.000Z">
+<meta property="article:modified_time" content="2022-06-17T07:39:39.685Z">
 <meta property="article:author" content="Zhutongtong">
-<meta property="article:tag" content="linux">
+<meta property="article:tag" content="Sprring">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="记忆时光" type="application/atom+xml">
@@ -74,10 +74,10 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-linux基本命令" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-Spring中的事务" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2016/01/04/linux%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/" class="article-date">
-  <time class="dt-published" datetime="2016-01-04T13:39:04.000Z" itemprop="datePublished">2016-01-04</time>
+    <a href="/2022/06/16/Spring%E4%B8%AD%E7%9A%84%E4%BA%8B%E5%8A%A1/" class="article-date">
+  <time class="dt-published" datetime="2022-06-16T07:29:49.000Z" itemprop="datePublished">2022-06-16</time>
 </a>
     
   </div>
@@ -88,7 +88,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      linux学习(ubuntu)
+      Spring中的事务
     </h1>
   
 
@@ -96,53 +96,91 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="cd命令"><a href="#cd命令" class="headerlink" title="cd命令"></a>cd命令</h2><p>用于切换当前目录，参数是要切换的目录的路径，可以是绝对路径，也可以是相对路径</p>
-<pre><code>cd /root/Docements # 切换到目录 /root/Documents
-cd ./path          # 切换到当前目录下的path目录中 .表示当前目录
-cd ../path         # 切换到上层目录中的path目录中 ..表示上一层目录
-</code></pre>
-<h2 id="ls命令"><a href="#ls命令" class="headerlink" title="ls命令"></a>ls命令</h2><pre><code>1. -l ：列出长数据串，包含文件的属性与权限数据等 
-2. -a ：列出全部的文件，连同隐藏文件（开头为.的文件）一起列出来（常用）
-3. -d ：仅列出目录本身，而不是列出目录的文件数据 
-4. -h ：将文件容量以较易读的方式（GB，kB等）列出来
-5. -R ：连同子目录的内容一起列出（递归列出），等于该目录下的所有文件都会显示出来  
+        <h2 id="先抛问题"><a href="#先抛问题" class="headerlink" title="先抛问题"></a>先抛问题</h2><p>看以下示例1</p>
+<pre><code>@Service
+public class TeacherServiceImpl extends ServiceImpl&lt;TeacherMapper, Teacher&gt; implements TeacherService &#123;
 
-上面的命令也可以组合使用
-1. ls -l #以长数据串的形式列出当前目录下的数据文件和目录 
-2. ls -lR #以长数据串的形式列出当前目录下的所有文件  
+    @Resource
+    TeacherMapper teacherMapper;
+
+    @Override
+    @Transactional
+    public void insertTeacher() &#123;
+        teacherMapper.insert(new Teacher(1L,&quot;张三&quot;));
+        throw new RuntimeException(&quot;抛异常测试&quot;);
+    &#125;
+
+    @Override
+    public void method()&#123;
+        insertTeacher();
+    &#125;
+&#125;
+
+@SpringBootTest
+class TeacherServiceImplTest &#123;
+
+    @Resource
+    TeacherService teacherService;
+
+    @Test
+    void method() &#123;
+        teacherService.method();
+    &#125;
+&#125;
 </code></pre>
-<h2 id="文件命令"><a href="#文件命令" class="headerlink" title="文件命令"></a>文件命令</h2><p> 创建一文件夹的话可以用mkdir 命令</p>
-<pre><code>mkdir /tmp/test
+<p>是否会插入？</p>
+<p>会插入，因为 method()方法没有事务注解，导致 insertTeacher方法事务不生效</p>
+<p>###示例2</p>
+<pre><code>@Service
+public class TeacherServiceImpl extends ServiceImpl&lt;TeacherMapper, Teacher&gt; implements TeacherService &#123;
+
+    @Resource
+    TeacherMapper teacherMapper;
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void insertTeacher() &#123;
+        teacherMapper.insert(new Teacher(1L,&quot;张三&quot;));
+        throw new RuntimeException(&quot;抛异常测试&quot;);
+    &#125;
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void method()&#123;
+        teacherMapper.insert(new Teacher(2L,&quot;李四&quot;));
+        try &#123;
+            insertTeacher();
+        &#125;catch (Exception e)&#123;
+            e.printStackTrace();
+        &#125;
+    &#125;
+&#125;
+
+@SpringBootTest
+class TeacherServiceImplTest &#123;
+
+    @Resource
+    TeacherService teacherService;
+    @Resource
+    StudentService studentService;
+
+    @Test
+    void method() &#123;
+        teacherService.method();
+    &#125;
+&#125;
 </code></pre>
-<p>创建文件<br>    touch &#x2F;tmp&#x2F;a.txt</p>
-<h2 id="删除命令"><a href="#删除命令" class="headerlink" title="删除命令"></a>删除命令</h2><pre><code>rm -f /var/log/httpd/access.log
-</code></pre>
-<p> 将会强制删除&#x2F;var&#x2F;log&#x2F;httpd&#x2F;access.log这个文件 ，-f 就是直接强行删除</p>
-<pre><code>rm -rf /var/log/httpd/access
-</code></pre>
-<p> 将会删除&#x2F;var&#x2F;log&#x2F;httpd&#x2F;access目录以及其下所有文件、文件夹</p>
-<p> <strong>注意</strong></p>
-<p> 使用这个rm -rf的时候一定要格外小心，linux没有回收站的 </p>
-<h2 id="关机"><a href="#关机" class="headerlink" title="关机"></a>关机</h2><pre><code>shutdown -h now 
-halt 
-halt -p
--r 表示重启
--h 表示关机
-halt命令的&quot;-p&quot; 选项表示终止系统后中断电源（需主板硬件支持）
-</code></pre>
-<h2 id="重启"><a href="#重启" class="headerlink" title="重启"></a>重启</h2><pre><code>shutdown -r now 
-shutdown -r +15 系统将于15分钟后重启
-reboot
-</code></pre>
+<p>是否会回滚？</p>
+<p>两者都插入</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2016/01/04/linux%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/" data-id="cl4gp6u1z001i9cvc7cjfejd4" data-title="linux学习(ubuntu)" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/06/16/Spring%E4%B8%AD%E7%9A%84%E4%BA%8B%E5%8A%A1/" data-id="cl4i5g1jd0000zwvc39n2ergs" data-title="Spring中的事务" class="article-share-link">Share</a>
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sprring/" rel="tag">Sprring</a></li></ul>
 
     </footer>
   </div>
@@ -150,15 +188,11 @@ reboot
     
 <nav id="article-nav">
   
-    <a href="/2016/01/05/Spring%E5%85%A5%E9%97%A8/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Spring入门
-        
-      </div>
-    </a>
   
+    <a href="/2022/06/16/Hexo-github-%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2-%E6%96%B0%E6%89%8B%E5%85%A5%E9%97%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hexo+github搭建静态博客(新手入门)</div>
+    </a>
   
 </nav>
 

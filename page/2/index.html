@@ -73,6 +73,614 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-二. 对象及变量的并发访问" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/03/20/%E4%BA%8C.%20%E5%AF%B9%E8%B1%A1%E5%8F%8A%E5%8F%98%E9%87%8F%E7%9A%84%E5%B9%B6%E5%8F%91%E8%AE%BF%E9%97%AE/" class="article-date">
+  <time class="dt-published" datetime="2018-03-20T05:40:35.000Z" itemprop="datePublished">2018-03-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/03/20/%E4%BA%8C.%20%E5%AF%B9%E8%B1%A1%E5%8F%8A%E5%8F%98%E9%87%8F%E7%9A%84%E5%B9%B6%E5%8F%91%E8%AE%BF%E9%97%AE/">对象及变量的并发访问</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="synchronized同步方法"><a href="#synchronized同步方法" class="headerlink" title="synchronized同步方法"></a>synchronized同步方法</h1><blockquote>
+<p>非线程安全的问题主要存在于实例变量中，如果是方法内部的私有变量，则不存在非线程安全问题。</p>
+</blockquote>
+<h2 id="1-实例变量非线程安全"><a href="#1-实例变量非线程安全" class="headerlink" title="1. 实例变量非线程安全"></a>1. 实例变量非线程安全</h2><p>如果多个线程共同访问1个对象中的实例变量则有可能出现非线程安全的问题。<br>demo如下 :</p>
+<pre><code>public class HasSelfPrivateNum &#123;	
+    private int num = 0;	
+    public void addI(String username) &#123;
+        try &#123;
+            if (username.equals(&quot;a&quot;)) &#123;
+                num = 100;
+                System.out.println(&quot;a set over!&quot;);
+                Thread.sleep(2000);
+            &#125; else &#123;
+                num = 200;
+                System.out.println(&quot;b set over!&quot;);
+            &#125;
+            System.out.println(username + &quot; num=&quot; + num);
+        &#125; catch (InterruptedException e) &#123;
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        &#125;
+    &#125;	
+&#125;
+
+public class ThreadA extends Thread &#123;
+    private HasSelfPrivateNum numRef;
+    public ThreadA(HasSelfPrivateNum numRef) &#123;
+        super();
+        this.numRef = numRef;
+    &#125;
+    @Override
+    public void run() &#123;
+        super.run();
+        numRef.addI(&quot;a&quot;);
+    &#125;
+&#125;
+
+public class ThreadB extends Thread &#123;
+    private HasSelfPrivateNum numRef;
+    public ThreadB(HasSelfPrivateNum numRef) &#123;
+        super();
+        this.numRef = numRef;
+    &#125;
+    @Override
+    public void run() &#123;
+        super.run();
+        numRef.addI(&quot;b&quot;);
+    &#125;
+&#125;
+
+public class Run &#123;
+    public static void main(String[] args) &#123;
+        HasSelfPrivateNum numRef = new HasSelfPrivateNum();
+        ThreadA athread = new ThreadA(numRef);
+        athread.start();
+        ThreadB bthread = new ThreadB(numRef);
+        bthread.start();
+    &#125;
+&#125;
+
+运行效果：
+a set over!
+b set over!
+b num=200
+a num=200
+
+解决方法：只需要在addI() 方法前面加synchronized即可。通过用关键字synchronized声
+明的方法一定是排队运行的，只有**共享资源的读写访问**才需要同步化。如果不是，
+则根本没有同步的必要。改过之后的运行效果如下:
+a set over!
+a num=100
+b set over!
+b num=200
+</code></pre>
+<blockquote>
+<p>结论：当两个线程访问同一个对象中的同步方法时一定是线程安全的。</p>
+</blockquote>
+<h2 id="2-多个对象多个锁"><a href="#2-多个对象多个锁" class="headerlink" title="2. 多个对象多个锁"></a>2. 多个对象多个锁</h2><pre><code>public class HasSelfPrivateNum &#123;
+    private int num = 0;
+    synchronized public void addI(String username) &#123;
+        try &#123;
+            if (username.equals(&quot;a&quot;)) &#123;
+                num = 100;
+                System.out.println(&quot;a set over!&quot;);
+                Thread.sleep(2000);
+            &#125; else &#123;
+                num = 200;
+                System.out.println(&quot;b set over!&quot;);
+            &#125;
+            System.out.println(username + &quot; num=&quot; + num);
+        &#125; catch (InterruptedException e) &#123;
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        &#125;
+    &#125;
+&#125;
+
+public class ThreadA extends Thread &#123;
+    private HasSelfPrivateNum numRef;
+    public ThreadA(HasSelfPrivateNum numRef) &#123;
+        super();
+        this.numRef = numRef;
+    &#125;
+    @Override
+    public void run() &#123;
+        super.run();
+        numRef.addI(&quot;a&quot;);
+    &#125;
+&#125;
+
+public class ThreadB extends Thread &#123;
+    private HasSelfPrivateNum numRef;
+    public ThreadB(HasSelfPrivateNum numRef) &#123;
+        super();
+        this.numRef = numRef;
+    &#125;
+    @Override
+    public void run() &#123;
+        super.run();
+        numRef.addI(&quot;b&quot;);
+    &#125;
+&#125;
+
+public class Run &#123;
+    public static void main(String[] args) &#123;
+        HasSelfPrivateNum numRef1 = new HasSelfPrivateNum();
+        HasSelfPrivateNum numRef2 = new HasSelfPrivateNum();
+        ThreadA athread = new ThreadA(numRef1);
+        athread.start();
+        ThreadB bthread = new ThreadB(numRef2);
+        bthread.start();
+    &#125;
+&#125;
+运行效果:
+a set over!
+b set over!
+b num=200
+a num=100
+</code></pre>
+<blockquote>
+<p>结论:上述两个线程分别访问同一个类的两个不同实例的相同名称的同步方法，效果却是以异步的方式进行的。</p>
+<blockquote>
+<p>关键字synchronized取得的锁都是<strong>对象锁</strong>，而不是把一段代码或方法当做锁，所以上面的示例中，哪个线程先执行带synchhronized关键字的方法，哪个线程就持有该方法所属对象的锁Lock，那么其他线程只能呈等待状态，前提是多个对象访问的是同一个对象。<br>如果多个线程访问多个对象，则会创建多个锁。</p>
+</blockquote>
+</blockquote>
+<h2 id="3-synchronized方法与锁对象"><a href="#3-synchronized方法与锁对象" class="headerlink" title="3. synchronized方法与锁对象"></a>3. synchronized方法与锁对象</h2><pre><code>public class MyObject &#123;
+    synchronized public void methodA() &#123;
+        try &#123;
+            System.out.println(&quot;begin methodA threadName=&quot;
+                    + Thread.currentThread().getName());
+            Thread.sleep(5000);
+            System.out.println(&quot;end endTime=&quot; + System.currentTimeMillis());
+        &#125; catch (InterruptedException e) &#123;
+            e.printStackTrace();
+        &#125;
+    &#125;
+    public void methodB() &#123;
+        try &#123;
+            System.out.println(&quot;begin methodB threadName=&quot;
+                    + Thread.currentThread().getName() + &quot; begin time=&quot;
+                    + System.currentTimeMillis());
+            Thread.sleep(5000);
+            System.out.println(&quot;end&quot;);
+        &#125; catch (InterruptedException e) &#123;
+            e.printStackTrace();
+        &#125;
+    &#125;
+&#125;
+
+public class ThreadA extends Thread &#123;
+    private MyObject object;
+    public ThreadA(MyObject object) &#123;
+        super();
+        this.object = object;
+    &#125;
+    @Override
+    public void run() &#123;
+        super.run();
+        object.methodA();
+    &#125;
+&#125;
+
+public class ThreadB extends Thread &#123;
+    private MyObject object;
+    public ThreadB(MyObject object) &#123;
+        super();
+        this.object = object;
+    &#125;
+    @Override
+    public void run() &#123;
+        super.run();
+        object.methodB();
+    &#125;
+&#125;
+
+public class Run &#123;
+    public static void main(String[] args) &#123;
+        MyObject object = new MyObject();
+        ThreadA a = new ThreadA(object);
+        a.setName(&quot;A&quot;);
+        ThreadB b = new ThreadB(object);
+        b.setName(&quot;B&quot;);
+        a.start();
+        b.start();
+    &#125;
+&#125;
+
+运行效果
+begin methodA threadName=A
+begin methodB threadName=B begin time=1521539509210
+end endTime=1521539514210
+end
+
+给methodB()方法加上synchronized类型的方法。
+运行效果如下:
+begin methodA threadName=A
+end endTime=1521539982244
+begin methodB threadName=B begin time=1521539982244
+end
+</code></pre>
+<blockquote>
+<p>结论:</p>
+</blockquote>
+<ol>
+<li>A线程先持有object对象 的Lock锁，B线程可以以异步 的方式调用 object对象 中的非synchronized类型的方法。<blockquote>
+</blockquote>
+</li>
+<li>A线程先持有object对象的Lock锁，B线程如果在这时调用object对象中的synchronized类型的方法则需等待，也就是同步。</li>
+</ol>
+<h2 id="4-脏读"><a href="#4-脏读" class="headerlink" title="4. 脏读"></a>4. 脏读</h2><p>发生脏读的情况是在读取实例变量时，此值已经被其他线程更改过了。</p>
+<pre><code>public class PublicVar &#123;
+    public String username = &quot;A&quot;;
+    public String password = &quot;AA&quot;;
+    synchronized public void setValue(String username, String password) &#123;
+        try &#123;
+            this.username = username;
+            Thread.sleep(5000);
+            this.password = password;
+            System.out.println(&quot;setValue method thread name=&quot;
+                    + Thread.currentThread().getName() + &quot; username=&quot;
+                    + username + &quot; password=&quot; + password);
+        &#125; catch (InterruptedException e) &#123;
+            e.printStackTrace();
+        &#125;
+    &#125;
+     public void getValue() &#123;
+        System.out.println(&quot;getValue method thread name=&quot;
+                + Thread.currentThread().getName() + &quot; username=&quot; + username
+                + &quot; password=&quot; + password);
+    &#125;
+&#125;
+
+public class ThreadA extends Thread &#123;
+    private PublicVar publicVar;
+    public ThreadA(PublicVar publicVar) &#123;
+        super();
+        this.publicVar = publicVar;
+    &#125;
+    @Override
+    public void run() &#123;
+        super.run();
+        publicVar.setValue(&quot;B&quot;, &quot;BB&quot;);
+    &#125;
+&#125;
+
+public class Test &#123;
+    public static void main(String[] args) &#123;
+        try &#123;
+            PublicVar publicVarRef = new PublicVar();
+            ThreadA thread = new ThreadA(publicVarRef);
+            thread.start();
+            Thread.sleep(200);// ��ӡ����ܴ�ֵ��СӰ��
+            publicVarRef.getValue();
+        &#125; catch (InterruptedException e) &#123;
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        &#125;
+    &#125;
+&#125;
+运行结果:
+getValue method thread name=main username=B password=AA
+setValue method thread name=Thread-0 username=B password=BB
+</code></pre>
+<blockquote>
+<p>出现脏读的原因是getValue()方法并不是同步的。所以可以在任意时刻调用。<br>解决办法是加上在getValue()加上synchronized关键字。加上后的运行效果如下：</p>
+</blockquote>
+<pre><code>setValue method thread name=Thread-0 username=B password=BB
+getValue method thread name=main username=B password=BB
+</code></pre>
+<p>脏读一定会出现在操作实例变量的情况下，这就是不同线程争抢实例变量的结果。</p>
+<h2 id="5-synchronized锁重入"><a href="#5-synchronized锁重入" class="headerlink" title="5. synchronized锁重入"></a>5. synchronized锁重入</h2><p>在一个synchronized方法&#x2F;块内部调用本部类的其他synchronized方法&#x2F;块时，是永远可以得到锁的。</p>
+<pre><code>public class MyThread extends Thread &#123;
+    @Override
+    public void run() &#123;
+        Service service = new Service();
+        service.service1();
+    &#125;
+&#125;
+
+public class Service &#123;
+    synchronized public void service1() &#123;
+        System.out.println(&quot;service1&quot;);
+        service2();
+    &#125;
+    synchronized public void service2() &#123;
+        System.out.println(&quot;service2&quot;);
+        service3();
+    &#125;
+    synchronized public void service3() &#123;
+        System.out.println(&quot;service3&quot;);
+    &#125;
+&#125;
+
+public class Run &#123;
+    public static void main(String[] args) &#123;
+        MyThread t = new MyThread();
+        t.start();
+    &#125;
+&#125;
+
+运行效果:
+service1
+service2
+service3
+</code></pre>
+<blockquote>
+<p>可重入锁的概念是:自己可以再次获取自己的内部锁，比如有一条线程获得了某个对象的锁，此时这个对象锁还没有释放，当其再次想要获取这个对象的锁的时候还是可以获取的，如果不可锁重入的话就会造成死锁 。</p>
+</blockquote>
+<p>可重入锁也支持在父子类继承的环境中:</p>
+<pre><code>public class MyThread extends Thread &#123;
+    @Override
+    public void run() &#123;
+        Sub sub = new Sub();
+        sub.operateISubMethod();
+    &#125;
+&#125;
+
+public class Main &#123;
+    public int i = 10;
+    synchronized public void operateIMainMethod() &#123;
+        try &#123;
+            i--;
+            System.out.println(&quot;main print i=&quot; + i);
+            Thread.sleep(100);
+        &#125; catch (InterruptedException e) &#123;
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        &#125;
+    &#125;
+&#125;
+
+public class Sub extends Main &#123;
+    synchronized public void operateISubMethod() &#123;
+        try &#123;
+            while (i &gt; 0) &#123;
+                i--;
+                System.out.println(&quot;sub print i=&quot; + i);
+                Thread.sleep(100);
+                this.operateIMainMethod();
+            &#125;
+        &#125; catch (InterruptedException e) &#123;
+            e.printStackTrace();
+        &#125;
+    &#125;
+&#125;
+
+public class Run &#123;
+    public static void main(String[] args) &#123;
+        MyThread t = new MyThread();
+        t.start();
+    &#125;
+&#125;
+
+运行效果如下：
+sub print i=9
+main print i=8
+sub print i=7
+main print i=6
+sub print i=5
+main print i=4
+sub print i=3
+main print i=2
+sub print i=1
+main print i=0
+</code></pre>
+<blockquote>
+<p>结论：当存在父子类继承关系时，子类是完全可以可重入锁调用父类的同步方法的。</p>
+</blockquote>
+<h2 id="6-出现异常，锁自动释放"><a href="#6-出现异常，锁自动释放" class="headerlink" title="6. 出现异常，锁自动释放"></a>6. 出现异常，锁自动释放</h2><pre><code>public class Service &#123;
+    synchronized public void testMethod() &#123;
+        if (Thread.currentThread().getName().equals(&quot;a&quot;)) &#123;
+            System.out.println(&quot;ThreadName=&quot; + Thread.currentThread().getName()
+                    + &quot; run beginTime=&quot; + System.currentTimeMillis());
+            int i = 1;
+            while (i == 1) &#123;
+                if ((&quot;&quot; + Math.random()).substring(0, 8).equals(&quot;0.123456&quot;)) &#123;
+                    System.out.println(&quot;ThreadName=&quot;
+                            + Thread.currentThread().getName()
+                            + &quot; run   exceptionTime=&quot;
+                            + System.currentTimeMillis());
+                    Integer.parseInt(&quot;a&quot;);
+                &#125;
+            &#125;
+        &#125; else &#123;
+            System.out.println(&quot;Thread B run Time=&quot;
+                    + System.currentTimeMillis());
+        &#125;
+    &#125;
+&#125;
+
+public class ThreadA extends Thread &#123;
+    private Service service;
+    public ThreadA(Service service) &#123;
+        super();
+        this.service = service;
+    &#125;
+    @Override
+    public void run() &#123;
+        service.testMethod();
+    &#125;
+&#125;
+
+public class ThreadB extends Thread &#123;
+    private Service service;
+    public ThreadB(Service service) &#123;
+        super();
+        this.service = service;
+    &#125;
+    @Override
+    public void run() &#123;
+        service.testMethod();
+    &#125;
+&#125;
+
+public class Test &#123;
+    public static void main(String[] args) &#123;
+        try &#123;
+            Service service = new Service();
+            ThreadA a = new ThreadA(service);
+            a.setName(&quot;a&quot;);
+            a.start();
+            Thread.sleep(500);
+            ThreadB b = new ThreadB(service);
+            b.setName(&quot;b&quot;);
+            b.start();
+        &#125; catch (InterruptedException e) &#123;
+            e.printStackTrace();
+        &#125;
+    &#125;
+&#125;
+
+运行效果：
+ThreadName=a run beginTime=1521613028384
+ThreadName=a run   exceptionTime=1521613033721
+Thread B run Time=1521613033722
+Exception in thread &quot;a&quot; java.lang.NumberFormatException: For input string: &quot;a&quot;
+    at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+    at java.lang.Integer.parseInt(Integer.java:580)
+    at java.lang.Integer.parseInt(Integer.java:615)
+    at service.Service.testMethod(Service.java:15)
+    at extthread.ThreadA.run(ThreadA.java:13)
+</code></pre>
+<p>线程a出现异常，线程b进入方法正常打印。结论：出现异步，锁自动释放。</p>
+<h2 id="7-同步不具有继承性"><a href="#7-同步不具有继承性" class="headerlink" title="7. 同步不具有继承性"></a>7. 同步不具有继承性</h2><pre><code>public class Main &#123;
+    synchronized public void serviceMethod() &#123;
+        try &#123;
+            System.out.println(&quot;int main 下一步 sleep begin threadName=&quot;
+                    + Thread.currentThread().getName() + &quot; time=&quot;
+                    + System.currentTimeMillis());
+            Thread.sleep(5000);
+            System.out.println(&quot;int main 下一步 sleep   end threadName=&quot;
+                    + Thread.currentThread().getName() + &quot; time=&quot;
+                    + System.currentTimeMillis());
+        &#125; catch (InterruptedException e) &#123;
+            e.printStackTrace();
+        &#125;
+    &#125;
+&#125;
+
+public class Sub extends Main &#123;
+    @Override
+    public void serviceMethod() &#123;
+        try &#123;
+            System.out.println(&quot;int sub 下一步 sleep begin threadName=&quot;
+                    + Thread.currentThread().getName() + &quot; time=&quot;
+                    + System.currentTimeMillis());
+            Thread.sleep(5000);
+            System.out.println(&quot;int sub 下一步 sleep   end threadName=&quot;
+                    + Thread.currentThread().getName() + &quot; time=&quot;
+                    + System.currentTimeMillis());
+            super.serviceMethod();
+        &#125; catch (InterruptedException e) &#123;
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        &#125;
+    &#125;
+&#125;
+
+public class MyThreadA extends Thread &#123;
+    private Sub sub;
+    public MyThreadA(Sub sub) &#123;
+        super();
+        this.sub = sub;
+    &#125;
+    @Override
+    public void run() &#123;
+        sub.serviceMethod();
+    &#125;
+&#125;
+public class MyThreadB extends Thread &#123;
+    private Sub sub;
+    public MyThreadB(Sub sub) &#123;
+        super();
+        this.sub = sub;
+    &#125;
+    @Override
+    public void run() &#123;
+        sub.serviceMethod();
+    &#125;
+&#125;
+
+public class Test &#123;
+    public static void main(String[] args) &#123;
+        Sub subRef = new Sub();
+        MyThreadA a = new MyThreadA(subRef);
+        a.setName(&quot;A&quot;);
+        a.start();
+        MyThreadB b = new MyThreadB(subRef);
+        b.setName(&quot;B&quot;);
+        b.start();
+    &#125;
+&#125;
+
+运行效果：
+int sub 下一步 sleep begin threadName=A time=1521614488673
+int sub 下一步 sleep begin threadName=B time=1521614488684
+int sub 下一步 sleep   end threadName=A time=1521614493673
+int main 下一步 sleep begin threadName=A time=1521614493673
+int sub 下一步 sleep   end threadName=B time=1521614493684
+int main 下一步 sleep   end threadName=A time=1521614498674
+int main 下一步 sleep begin threadName=B time=1521614498674
+int main 下一步 sleep   end threadName=B time=1521614503674
+
+在子类Sub serviceMethod方法加上synchronized后运行效果如下：
+int sub 下一步 sleep begin threadName=A time=1521614592637
+int sub 下一步 sleep   end threadName=A time=1521614597637
+int main 下一步 sleep begin threadName=A time=1521614597637
+int main 下一步 sleep   end threadName=A time=1521614602638
+int sub 下一步 sleep begin threadName=B time=1521614602638
+int sub 下一步 sleep   end threadName=B time=1521614607638
+int main 下一步 sleep begin threadName=B time=1521614607638
+int main 下一步 sleep   end threadName=B time=1521614612638
+</code></pre>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本节知识点:</p>
+<ol>
+<li>非线程安全的问题主要存在于实例变量中，如果是方法内部的私有变量，则不存在非线程安全问题</li>
+<li>两个线程访问同一个对象中的同步方法时一定是线程安全的</li>
+<li>synchronized关键字是对象锁，多个线程，多个对象会创建多个锁。</li>
+<li>对象内synchronized方法和非synchronized方法的调用情况: 当有对象锁的时候，同步调用synchronized方法，异步调用非synchronized方法</li>
+<li>脏读出现的原因是方法不同步造成的。脏读一定会出现在操作实例变量的情况下，这就是不同线程争抢实例变量的结果。</li>
+<li>可重入锁的两种情况<ol>
+<li>自己可以获取自己的内部锁</li>
+<li>也支持出现在父子类继承的关系中，子类可以通过可重入锁调用父类的同步方法</li>
+</ol>
+</li>
+<li>当出现异常时，锁自动释放</li>
+<li>同步不能继承：当父类在synchronized service()方法时，子类有覆盖service()方法时，子类方法并不能同步，必须要在子类加上synchronized方法才能同步。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/03/20/%E4%BA%8C.%20%E5%AF%B9%E8%B1%A1%E5%8F%8A%E5%8F%98%E9%87%8F%E7%9A%84%E5%B9%B6%E5%8F%91%E8%AE%BF%E9%97%AE/" data-id="cl4gp6u2r00359cvc5wvd1ejc" data-title="对象及变量的并发访问" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/" rel="tag">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-计算机书籍" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2018/03/14/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B9%A6%E7%B1%8D/" class="article-date">
@@ -1284,315 +1892,6 @@ Mythread2 run priority=7
 
 
   
-    <article id="post-oracle decode grouping统计分组查询" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2016/04/12/oracle%20decode%20grouping%E7%BB%9F%E8%AE%A1%E5%88%86%E7%BB%84%E6%9F%A5%E8%AF%A2/" class="article-date">
-  <time class="dt-published" datetime="2016-04-12T05:43:49.000Z" itemprop="datePublished">2016-04-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2016/04/12/oracle%20decode%20grouping%E7%BB%9F%E8%AE%A1%E5%88%86%E7%BB%84%E6%9F%A5%E8%AF%A2/">oracle decode grouping rollup cube统计分组查询</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>学习所用表为</p>
-<pre><code>create table student(
-nianji varchar(20),
-banji varchar(20),
-math varchar(20),
-english varchar(20)
-);
-
-插入测试数据
-insert into  student values (&#39;1&#39;,&#39;1&#39;,&#39;100&#39;,&#39;87&#39;); 
-insert into  student values (&#39;1&#39;,&#39;2&#39;,&#39;100&#39;,&#39;76&#39;); 
-insert into  student values (&#39;1&#39;,&#39;3&#39;,&#39;48&#39;,&#39;26&#39;); 
-insert into  student values (&#39;2&#39;,&#39;1&#39;,&#39;75&#39;,&#39;86&#39;); 
-insert into  student values (&#39;2&#39;,&#39;2&#39;,&#39;67&#39;,&#39;87&#39;); 
-insert into  student values (&#39;2&#39;,&#39;3&#39;,&#39;96&#39;,&#39;65&#39;); 
-
-insert into  student values (&#39;1&#39;,&#39;1&#39;,&#39;100&#39;,&#39;100&#39;); 
-insert into  student values (&#39;1&#39;,&#39;2&#39;,&#39;100&#39;,&#39;100&#39;); 
-insert into  student values (&#39;1&#39;,&#39;3&#39;,&#39;100&#39;,&#39;100&#39;); 
-insert into  student values (&#39;2&#39;,&#39;1&#39;,&#39;100&#39;,&#39;100&#39;); 
-insert into  student values (&#39;2&#39;,&#39;2&#39;,&#39;100&#39;,&#39;100&#39;); 
-insert into  student values (&#39;2&#39;,&#39;3&#39;,&#39;100&#39;,&#39;100&#39;); 
-</code></pre>
-<h3 id="oracle-rollup和cube-，grouping-sets-函数的使用"><a href="#oracle-rollup和cube-，grouping-sets-函数的使用" class="headerlink" title="oracle rollup和cube ，grouping sets 函数的使用"></a>oracle rollup和cube ，grouping sets 函数的使用</h3><p><strong>rollup</strong></p>
-<h4 id="向ROLLUP传递一列"><a href="#向ROLLUP传递一列" class="headerlink" title="向ROLLUP传递一列"></a>向ROLLUP传递一列</h4><pre><code>select banji,sum(english) from student group by rollup(banji);
-
-1	373
-2	363
-3	291
-    1027
-</code></pre>
-<p>通过用rollup可以自动加一列，最后一列为自动加上的</p>
-<h4 id="向ROLLUP传递多列"><a href="#向ROLLUP传递多列" class="headerlink" title="向ROLLUP传递多列"></a>向ROLLUP传递多列</h4><pre><code>select nianji,banji,sum(english) from student group by rollup(nianji,banji);
-
-1	1	187
-1	2	176
-1	3	126
-1		489
-2	1	186
-2	2	187
-2	3	165
-2		538
-        1027
-
-可以看到，除了在最后有一个求和记录外，每个 jianji,banji 分组也会有一个求和记录。
-</code></pre>
-<p>那么我们现在交换一下ROLLUP中数据列的顺序，看看结果怎样</p>
-<pre><code>select nianji,banji,sum(english) from student group by rollup(banji,nianji);
-
-1	1	187
-2	1	186
-    1	373
-1	2	176
-2	2	187
-    2	363
-1	3	126
-2	3	165
-    3	291
-        1027
-两者效果很显示，不用我多说了吧
-</code></pre>
-<p>rollup 原理如下，也只不过是用了 union all 运算符而已</p>
-<blockquote>
-<p>假设有一个表test，有A、B、C、D、E5列。<br>如果使用group by rollup(A,B,C)，首先会对(A、B、C)进行GROUP BY，然后对(A、B)进行GROUP BY，然后是(A)进行GROUP BY，最后对全表进行GROUP BY操作。roll up的意思是“卷起”，这也可以帮助我们理解group by rollup就是对选择的列从右到左以一次少一列的方式进行grouping直到所有列都去掉后的grouping(也就是全表grouping)，对于n个参数的rollup，有n+1次的grouping。以下2个sql的结果集是一样的：</p>
-</blockquote>
-<pre><code>Select A,B,C,sum(E) from test group by rollup(A,B,C)
-与
-Select A,B,C,sum(E) from test group by A,B,C
-union all
-Select A,B,null,sum(E) from test group by A,B
-union all
-Select A,null,null,sum(E) from test group by A
-union all
-Select null,null,null,sum(E) from test
-</code></pre>
-<p>和下列代码一样的效果</p>
-<pre><code>select nianji,banji,sum(english) from student group by nianji,banji union all
-select nianji,null,sum(english) from student group by nianji union all
-select null,null,sum(english) from student order by nianji
-
-1	3	126
-1		489
-1	1	187
-1	2	176
-2	1	186
-2	2	187
-2	3	165
-2		538
-        1027
-</code></pre>
-<h4 id="向CUBE传递一列"><a href="#向CUBE传递一列" class="headerlink" title="向CUBE传递一列"></a>向CUBE传递一列</h4><pre><code>select banji,sum(math) from student group by cube(banji) order by banji;
-
-1	373
-2	323
-3	344
-    1040
-</code></pre>
-<p>好像没什么不一样，别急，往下看</p>
-<h4 id="向CUBE传递多列"><a href="#向CUBE传递多列" class="headerlink" title="向CUBE传递多列"></a>向CUBE传递多列</h4><pre><code>select nianji,banji,sum(english) from student group by cube(nianji,banji) order by nianji,banji;
-
-1	1	187
-1	2	176
-1	3	126
-1		489
-2	1	186
-2	2	187
-2	3	165
-2		538
-    1	373
-    2	363
-    3	291
-        1027
-大家看出有什么不一样了吗，看最后一列.根据nianji统计分数，根据banji统计分数，
-</code></pre>
-<p>cube原理如下</p>
-<blockquote>
-<p>cube的意思是立方，对cube的每个参数，都可以理解为取值为参与grouping和不参与grouping两个值的一个维度，然后所有维度取值组合的集合就是grouping的集合，对于n个参数的cube，有2^n次的grouping。如果使用group by cube(A,B,C),，则首先会对(A、B、C)进行GROUP BY，然后依次是(A、B)，(A、C)，(A)，(B、C)，(B)，(C)，最后对全表进行GROUP BY操作，一共是2^3&#x3D;8次grouping。同rollup一样，也可以用基本的group by加上结果集的union all写出一个与group by cube结果集相同的sql：</p>
-</blockquote>
-<pre><code>Select A,B,C,sum(E) from test group by cube(A,B,C);
-与
-Select A,B,C,sum(E) from test group by A,B,C
-union all
-Select A,B,null,sum(E) from test group by A,B
-union all
-Select A,null,C,sum(E) from test group by A,C
-union all
-Select A,null,null,sum(E) from test group by A
-union all
-Select null,B,C,sum(E) from test group by B,C
-union all
-Select null,B,null,sum(E) from test group by B
-union all
-Select null,null,C,sum(E) from test group by C
-union all
-Select null,null,null,sum(E) from test;
-</code></pre>
-<p>和下列代码产生一样的效果 </p>
-<pre><code>select nianji,banji,sum(english) from student group by nianji,banji union all
-select nianji,null,sum(english) from student group by nianji union all
-select null,banji,sum(english) from student group by banji union all
-select null,null,sum(english) from student ;
-
-1	1	187
-2	2	187
-2	1	186
-1	2	176
-2	3	165
-1	3	126
-1		489
-2		538
-    1	373
-    3	291
-    2	363
-        1027
-</code></pre>
-<h4 id="grouping-sets"><a href="#grouping-sets" class="headerlink" title="grouping sets"></a>grouping sets</h4><blockquote>
-<p>grouping sets就是对参数中的每个参数做grouping，也就是有几个参数做几次grouping,例如使用group by grouping sets(A,B,C)，则对(A),(B),(C)进行group by，如果使用group by grouping sets((A,B),C),则对(A,B),(C)进行group by。甚至grouping by grouping set(A,A)都是语法允许的，也就是对(A)进行2次group by,grouping sets的参数允许重复</p>
-</blockquote>
-<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><ul>
-<li><strong>机制不同</strong> – 在rollup和cube的说明中分别给出了用基本group by加结果集union all给出了结果集相同的sql，但这只是为了理解的方便而给出的sql，并不说明rollup和cube与基本group by加结果集union all等价。实际上两者的内部机制是安全不一样的，前者除了写法简洁以外，运行时不需多次扫描表，效率远比后者高。</li>
-<li><strong>集合可运算</strong> –3种扩展用法的参数可以是源表中的某一个具体的列，也可以是若干列经过计算而形成的一个新列（比如说A+B，A||B），也可以是这两种列的一个集合（例如（A+B，C）），对于grouping set更是特殊，可以是空集合()，表示对全表进行group by。</li>
-<li><strong>group by 与 rollup, cube组合使用</strong> –</li>
-</ul>
-<h3 id="oracle-grouping-函数的使用"><a href="#oracle-grouping-函数的使用" class="headerlink" title="oracle grouping 函数的使用"></a>oracle grouping 函数的使用</h3><h4 id="grouping"><a href="#grouping" class="headerlink" title="grouping()"></a>grouping()</h4><p>参数只有一个，而且必须为group by中出现的某一列，表示结果集的一行是否对该列做了grouping。对于对该列做了grouping的行而言，grouping()&#x3D;0，反之为1；</p>
-<blockquote>
-<p>GROUPING函数可以接受一列，返回0或者1。如果列值为空，那么GROUPING()返回1；如果列值非空，那么返回0。GROUPING只能在使用ROLLUP或CUBE的查询中使用。当需要在返回空值的地方显示某个值时，GROUPING()就非常有用。</p>
-</blockquote>
-<h4 id="grouping-id"><a href="#grouping-id" class="headerlink" title="grouping_id()"></a>grouping_id()</h4><p>参数可以是多个，但必须为group by中出现的列。Grouping_id()的返回值其实就是参数中的每列的grouping()值的二进制向量，例如如果grouping(A)&#x3D;1，grouping(B)&#x3D;0，则grouping_id(A,B)的返回值就是二进制的10，转成10进制就是2。</p>
-<h4 id="group-id"><a href="#group-id" class="headerlink" title="group_id()"></a>group_id()</h4><p>无参数。见上面的说明3），group by对某些列的集合会进行重复的grouping，而实际上绝大多数情况下对结果集中的这些重复行是不需要的，那就必须有办法剔出这些重复grouping的行。当结果集中有n条重复grouping而形成的行时，每行的group_id()分别是0,1,…,n，这样我们在条件中加入一个group_id()&lt;1就可以剔出这些重复grouping的行了。</p>
-<h4 id="在ROLLUP中对单列使用GROUPING"><a href="#在ROLLUP中对单列使用GROUPING" class="headerlink" title="在ROLLUP中对单列使用GROUPING()"></a>在ROLLUP中对单列使用GROUPING()</h4><pre><code>select grouping(banji),banji,sum(english) from student group by rollup(banji);
-
-0	1	373
-0	2	363
-0	3	291
-1		1027
-</code></pre>
-<h4 id="使用CASE转换GROUPING-的返回值"><a href="#使用CASE转换GROUPING-的返回值" class="headerlink" title="使用CASE转换GROUPING()的返回值"></a>使用CASE转换GROUPING()的返回值</h4><pre><code>select case grouping(banji) when 1 then &#39;总计&#39; else banji end as div ,sum(english) from student group by rollup(banji);
-
-1	373
-2	363
-3	291
-总计	1027
-</code></pre>
-<h3 id="oracle中的decode-函数的使用"><a href="#oracle中的decode-函数的使用" class="headerlink" title="oracle中的decode 函数的使用"></a>oracle中的decode 函数的使用</h3><p>上次是用case来转换值 ，这次来使用decode，</p>
-<pre><code>select decode (grouping(banji),1,&#39;总计&#39;,banji), sum(english) from student group by rollup(banji);
-
-1	373
-2	363
-3	291
-总计	1027
-
-看到了吧，效果是一样的，用这个函数更好些
-
-
-select decode (grouping(banji),1,&#39;总计&#39;,&#39;0&#39;,banji), sum(english) from student group by rollup(banji);
-
-1	373
-2	363
-3	291
-总计	1027
-
-我如果这样写效果是一样的
-</code></pre>
-<p>我们继续往下走</p>
-<pre><code>select grouping(nianji),grouping(banji), sum(english) from student group by rollup(banji,nianji);
-
-0	0	187
-0	0	176
-0	0	126
-0	1	489
-0	0	186
-0	0	187
-0	0	165
-0	1	538
-1	1	1027
-
-你发现了什么，是不是有什么规律呢
-
-
-select decode(grouping(nianji),0,nianji,1,&#39;总计&#39;),decode(grouping(banji),0,banji,1,&#39;总计&#39;), sum(english) from student group by rollup(nianji,banji);
-
-1	1	187
-1	2	176
-1	3	126
-1	总计	489
-2	1	186
-2	2	187
-2	3	165
-2	总计	538
-总计	总计	1027
-
-到这你是不是已经知道decode怎么用了，不过这还不是我想要的，
-
-select  decode(grouping(nianji)+grouping(banji),1,&#39;年级总分&#39;,2,&#39;总计&#39;,nianji) 年级,
-decode(grouping(banji)+grouping(nianji),1,&#39;班级总计&#39;,2,&#39;总计&#39;,banji) 班级,sum(math) 数学成绩,sum(english ) 英语成绩
-from student
-group by rollup(nianji,banji) ;
-
-1	1	198	187
-1	2	156	176
-1	3	148	126
-年级总分	班级总计	502	489
-2	1	175	186
-2	2	167	187
-2	3	196	165
-年级总分	班级总计	538	538
-总计	总计	1040	1027
-
-好了，到这就结束了，这就是我要的效果，是不是感觉sql很强大，用法就是这么写的，下面来看下语法 
-</code></pre>
-<p>结合上面的sql，你再看语法将会变得非常简单，通俗易懂。</p>
-<p><strong>decode语法</strong></p>
-<pre><code>decode(条件,值1,返回值1,值2,返回值2,...值n,返回值n,缺省值)
-该函数的含义如下：
-IF 条件=值1 THEN
-　　　　RETURN(翻译值1)
-ELSIF 条件=值2 THEN
-　　　　RETURN(翻译值2)
-　　　　......
-ELSIF 条件=值n THEN
-　　　　RETURN(翻译值n)
-ELSE
-　　　　RETURN(缺省值)
-END IF
-decode(字段或字段的运算，值1，值2，值3）
-</code></pre>
-<p> 这个函数运行的结果是，当字段或字段的运算的值等于值1时，该函数返回值2，否则返回值3<br>当然值1，值2，值3也可以是表达式，这个函数使得某些sql语句简单了许多，结合上面的例子，是不是变得简单明了。</p>
-<p>爱学习，爱编程，爱挑战，爱钻研。</p>
-<p>如果你觉的好，对你有帮助就，捐助1分钱吧，以资鼓励<br><img src="http://7xpw00.com1.z0.glb.clouddn.com/1460449579392.jpg"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2016/04/12/oracle%20decode%20grouping%E7%BB%9F%E8%AE%A1%E5%88%86%E7%BB%84%E6%9F%A5%E8%AF%A2/" data-id="cl4gp6u2600209cvcd8nd33bm" data-title="oracle decode grouping rollup cube统计分组查询" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -1611,7 +1910,7 @@ decode(字段或字段的运算，值1，值2，值3）
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Error/" rel="tag">Error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Extjs/" rel="tag">Extjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerDesigner/" rel="tag">PowerDesigner</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">java虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/" rel="tag">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" rel="tag">myeclipse插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E8%AE%B0/" rel="tag">日记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" rel="tag">生活文化与素养</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Error/" rel="tag">Error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Extjs/" rel="tag">Extjs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IDEA/" rel="tag">IDEA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerDesigner/" rel="tag">PowerDesigner</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sprring/" rel="tag">Sprring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag">java虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/" rel="tag">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" rel="tag">myeclipse插件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E8%AE%B0/" rel="tag">日记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%AE%B0/" rel="tag">杂记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A1%86%E6%9E%B6/" rel="tag">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" rel="tag">生活文化与素养</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
     </div>
   </div>
 
@@ -1621,7 +1920,7 @@ decode(字段或字段的运算，值1，值2，值3）
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Extjs/" style="font-size: 10px;">Extjs</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/PowerDesigner/" style="font-size: 12.86px;">PowerDesigner</a> <a href="/tags/Spring/" style="font-size: 14.29px;">Spring</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 12.86px;">java虚拟机</a> <a href="/tags/linux/" style="font-size: 17.14px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">myeclipse插件</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 14.29px;">工具</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 18.57px;">数据库</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 15.71px;">日记</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 14.29px;">杂记</a> <a href="/tags/%E6%A1%86%E6%9E%B6/" style="font-size: 14.29px;">框架</a> <a href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" style="font-size: 11.43px;">生活文化与素养</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 12.86px;">笔记</a>
+      <a href="/tags/Error/" style="font-size: 10px;">Error</a> <a href="/tags/Extjs/" style="font-size: 10px;">Extjs</a> <a href="/tags/IDEA/" style="font-size: 10px;">IDEA</a> <a href="/tags/PowerDesigner/" style="font-size: 12.86px;">PowerDesigner</a> <a href="/tags/Spring/" style="font-size: 14.29px;">Spring</a> <a href="/tags/Sprring/" style="font-size: 10px;">Sprring</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/java%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 12.86px;">java虚拟机</a> <a href="/tags/linux/" style="font-size: 17.14px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/myeclipse%E6%8F%92%E4%BB%B6/" style="font-size: 10px;">myeclipse插件</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 14.29px;">工具</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 18.57px;">数据库</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 15.71px;">日记</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 14.29px;">杂记</a> <a href="/tags/%E6%A1%86%E6%9E%B6/" style="font-size: 14.29px;">框架</a> <a href="/tags/%E7%94%9F%E6%B4%BB%E6%96%87%E5%8C%96%E4%B8%8E%E7%B4%A0%E5%85%BB/" style="font-size: 11.43px;">生活文化与素养</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 12.86px;">笔记</a>
     </div>
   </div>
 
@@ -1643,6 +1942,10 @@ decode(字段或字段的运算，值1，值2，值3）
       <ul>
         
           <li>
+            <a href="/2022/06/16/Spring%E4%B8%AD%E7%9A%84%E4%BA%8B%E5%8A%A1/">Spring中的事务</a>
+          </li>
+        
+          <li>
             <a href="/2022/06/16/Hexo-github-%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2-%E6%96%B0%E6%89%8B%E5%85%A5%E9%97%A8/">Hexo+github搭建静态博客(新手入门)</a>
           </li>
         
@@ -1656,10 +1959,6 @@ decode(字段或字段的运算，值1，值2，值3）
         
           <li>
             <a href="/2018/04/20/%E4%BA%94.%20volatile%20%E5%85%B3%E9%94%AE%E5%AD%97/">五. volatile关键字</a>
-          </li>
-        
-          <li>
-            <a href="/2018/04/19/%E4%B8%89.%20%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/">三. 垃圾收集器</a>
           </li>
         
       </ul>
